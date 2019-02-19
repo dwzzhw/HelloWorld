@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HelloWorld</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_surface">Hello SurfaceView!</string>
+    <string name="hello_table">Hello Table!</string>
+    <string name="action_settings">Settings</string>
+</resources>

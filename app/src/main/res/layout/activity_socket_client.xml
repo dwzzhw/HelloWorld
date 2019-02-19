@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <!-- 定义一个文本框，它用于接受用户的输入 -->
+        <EditText
+            android:id="@+id/host_ip"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/btn_connect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClicked"
+            android:paddingLeft="8px"
+            android:text="Connect"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        >
+        <!-- 定义一个文本框，它用于接受用户的输入 -->
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/bnt_send"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onBtnClicked"
+            android:paddingLeft="8px"
+            android:text="Send"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffff"
+        android:gravity="top"
+        android:textColor="#f000"
+        android:textSize="14dp"
+        />
+</LinearLayout>

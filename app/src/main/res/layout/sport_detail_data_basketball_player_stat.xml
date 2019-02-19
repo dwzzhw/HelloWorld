@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <!--<include-->
+    <!--android:id="@+id/sport_deatail_player_stat_name_column"-->
+    <!--layout="@layout/sport_detail_data_player_stat_name_column"-->
+    <!--/>-->
+    <TextView
+        android:id="@+id/table_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/table_title"
+        android:layout_marginTop="10dp"
+        />
+
+</RelativeLayout>

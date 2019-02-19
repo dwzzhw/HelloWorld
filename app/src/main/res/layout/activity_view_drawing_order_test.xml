@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.loading.helloworld.view.DrawOrderLinearLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="Text 1"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-40dp"
+        android:background="#00ff00"
+        android:gravity="center"
+        android:text="Text 2"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-40dp"
+        android:background="#0000ff"
+        android:gravity="center"
+        android:text="Text 3"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-40dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="Text 4"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-40dp"
+        android:background="#00ff00"
+        android:gravity="center"
+        android:text="Text 5"
+        android:textColor="#ffffff"
+        android:textSize="30dp"/>
+</com.example.loading.helloworld.view.DrawOrderLinearLayout>
