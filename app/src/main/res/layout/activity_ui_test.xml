@@ -12,50 +12,57 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"/>
+        android:text="UI Related Test Page"/>
 
-    <Button
-        android:id="@+id/btn_sports_test"
+    <com.example.loading.helloworld.CountDownCircleBar
+        android:id="@+id/counting_bar"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/title"/>
+
+    <EditText
+        android:id="@+id/text_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClicked"
-        android:text="Sports Test"/>
+        android:layout_below="@id/counting_bar"
+        android:layout_marginTop="20dp"
+        android:text="@string/hello_world"
+        android:textSize="20dp"/>
 
     <Button
-        android:id="@+id/btn_ui_test"
+        android:id="@+id/btn_surface_view_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_sports_test"
+        android:layout_below="@id/text_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="UI Test"/>
+        android:text="SurfaceView Test"/>
 
     <Button
-        android:id="@+id/btn_misc_test"
+        android:id="@+id/btn_lottie_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_ui_test"
+        android:layout_below="@id/btn_surface_view_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Misc Test"/>
+        android:text="Lottie Test"/>
 
     <Button
-        android:id="@+id/socket_server"
+        android:id="@+id/btn_view_draw_order_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_misc_test"
+        android:layout_below="@id/btn_lottie_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Socket Server"/>
+        android:text="View Draw Order Test"/>
 
     <Button
-        android:id="@+id/socket_client"
+        android:id="@+id/btn_memory_monitor_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/socket_server"
+        android:layout_below="@id/btn_view_draw_order_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Socket Client"/>
+        android:text="Memory Monitor Test"/>
+
 </RelativeLayout>

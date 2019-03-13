@@ -59,6 +59,24 @@
             android:name=".ViewDrawingOrderTestActivity"
             android:label="Hello Drawing Order"/>
 
+        <activity
+            android:name=".activity.SportsTestActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".activity.UITestActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".activity.MiscTestActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            />
+
         <service android:name=".MemoryMonitorService"/>
 
         <activity
