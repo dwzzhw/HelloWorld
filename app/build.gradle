@@ -14,7 +14,6 @@ apply plugin: 'plugin.test'
 
 android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
-    buildToolsVersion rootProject.ext.global_buildToolsVersion
 
     defaultConfig {
         applicationId "com.example.loading.helloworld"
@@ -33,10 +32,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':robustgson_2.8')
-    compile deps.design
-    compile(deps.lottie) {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':robustgson_2.8')
+    implementation deps.design
+    implementation(deps.lottie) {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'appcompat-v7'
