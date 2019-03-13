@@ -1,18 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"/>
+        android:text="@string/hello_world" />
 
     <Button
         android:id="@+id/btn_sports_test"
@@ -21,7 +21,7 @@
         android:layout_below="@id/title"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Sports Test"/>
+        android:text="Sports Test" />
 
     <Button
         android:id="@+id/btn_ui_test"
@@ -30,7 +30,7 @@
         android:layout_below="@id/btn_sports_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="UI Test"/>
+        android:text="UI Test" />
 
     <Button
         android:id="@+id/btn_misc_test"
@@ -39,7 +39,7 @@
         android:layout_below="@id/btn_ui_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Misc Test"/>
+        android:text="Misc Test" />
 
     <Button
         android:id="@+id/socket_server"
@@ -48,7 +48,7 @@
         android:layout_below="@id/btn_misc_test"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Socket Server"/>
+        android:text="Socket Server" />
 
     <Button
         android:id="@+id/socket_client"
@@ -57,5 +57,14 @@
         android:layout_below="@id/socket_server"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Socket Client"/>
+        android:text="Socket Client" />
+
+    <Button
+        android:id="@+id/bnt_open_flutter_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/socket_client"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Flutter Test" />
 </RelativeLayout>

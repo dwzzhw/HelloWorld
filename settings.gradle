@@ -1,1 +1,8 @@
-include ':app', ':robustgson_2.8', ':mygroovy'
+include ':app'
+include ':robustgson_2.8'
+include ':mygroovy'
+setBinding(new Binding([gradle: this]))                                 // new
+evaluate(new File(                                                      // new
+        ".",                                               // new
+        'lib_flutter/.android/include_flutter.groovy'                          // new
+))

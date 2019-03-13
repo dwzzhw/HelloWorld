@@ -1,21 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-ext{
+ext {
     global_buildToolsVersion = "27.0.3"
     global_minSdkVersion = 16
     global_compileSdkVersion = 26
     global_targetSdkVersion = 25
-    support_version = "25.+"
+    support_version = "27.+"
 }
 ext.deps = [
-        design : "com.android.support:design:$support_version",
-        lottie : 'com.airbnb.android:lottie:2.5.1',]
+        design: "com.android.support:design:$support_version",
+        lottie: 'com.airbnb.android:lottie:2.5.1',]
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
+//        maven {
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
+//        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
     }
     dependencies {
@@ -29,9 +30,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven {
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
+//        }
         google()
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
     }
 }

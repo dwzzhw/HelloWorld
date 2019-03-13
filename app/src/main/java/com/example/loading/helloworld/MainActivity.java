@@ -3,8 +3,10 @@ package com.example.loading.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.example.loading.helloworld.activity.FlutterTestActivity;
 import com.example.loading.helloworld.activity.MiscTestActivity;
 import com.example.loading.helloworld.activity.SportsTestActivity;
 import com.example.loading.helloworld.activity.UITestActivity;
@@ -24,52 +26,31 @@ public class MainActivity extends Activity {
 
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
+        Class targetClass = null;
         switch (view.getId()) {
             case R.id.socket_server:
-                startSocketServer();
+                targetClass = SocketServerActivity.class;
                 break;
             case R.id.socket_client:
-                startSocketClient();
+                targetClass = SocketClientActivity.class;
                 break;
             case R.id.btn_sports_test:
-                startSportsTestPage();
+                targetClass = SportsTestActivity.class;
                 break;
             case R.id.btn_ui_test:
-                startUITestPage();
+                targetClass = UITestActivity.class;
                 break;
             case R.id.btn_misc_test:
-                startMiscTestPage();
+                targetClass = MiscTestActivity.class;
+                break;
+            case R.id.bnt_open_flutter_page:
+                targetClass = FlutterTestActivity.class;
                 break;
         }
-    }
-
-    private void startSocketServer() {
-        Loger.d(TAG, "-->startSocketServer()");
-        Intent intent = new Intent(this, SocketServerActivity.class);
-        startActivity(intent);
-    }
-
-    private void startSocketClient() {
-        Loger.d(TAG, "-->startSocketClient()");
-        Intent intent = new Intent(this, SocketClientActivity.class);
-        startActivity(intent);
-    }
-
-    private void startSportsTestPage() {
-        Loger.d(TAG, "-->startSportsTestPage()");
-        Intent intent = new Intent(this, SportsTestActivity.class);
-        startActivity(intent);
-    }
-
-    private void startUITestPage() {
-        Loger.d(TAG, "-->startUITestPage()");
-        Intent intent = new Intent(this, UITestActivity.class);
-        startActivity(intent);
-    }
-
-    private void startMiscTestPage() {
-        Loger.d(TAG, "-->startMiscTestPage()");
-        Intent intent = new Intent(this, MiscTestActivity.class);
-        startActivity(intent);
+        if (targetClass != null) {
+            Log.d(TAG, "onBtnClicked: target class=" + targetClass);
+            Intent intent = new Intent(this, targetClass);
+            startActivity(intent);
+        }
     }
 }
