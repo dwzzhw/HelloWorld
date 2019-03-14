@@ -77,7 +77,8 @@ public class FlutterTestActivity extends FragmentActivity {
 //        addContentView(flutterView, layout);
 
         View testView = new View(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 900);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         mViewContainer.addView(flutterView, lp);
     }
 }
