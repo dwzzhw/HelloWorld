@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print("dwz Hello, enter build function, route is " + window.defaultRouteName);
+    print("dwz Hello 2019-0314 11:04, enter build function, route is " + window.defaultRouteName);
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Page: 0314 11:19'),
     );
   }
 }
