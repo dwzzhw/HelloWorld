@@ -1,4 +1,7 @@
+import 'package:css_colors/css_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/utils/Loger.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DemoAddItemToList extends StatefulWidget {
   @override
@@ -22,11 +25,14 @@ class _AddItemToListState extends State<DemoAddItemToList> {
     return new GestureDetector(
       child: new Padding(
         padding: new EdgeInsets.all(10),
-        child: new Text("Row $i"),
+//        child: new Text("Row $i"),
+        child: _getRowContent(i),
       ),
       onTap: () {
         setState(() {
-          if (i % 2 == 0) {
+          if (i == 0 && widgets.length > 2) {
+            launchFlutterHomePage();
+          } else if (i % 2 == 0) {
             widgets.add(getRow(widgets.length));
             debugPrint('Click single row $i, add one more line');
           } else {
@@ -36,6 +42,24 @@ class _AddItemToListState extends State<DemoAddItemToList> {
         });
       },
     );
+  }
+
+  Widget _getRowContent(int rowNum) {
+    if (rowNum == 0) {
+      return new Text("Jump to flutter home page");
+    } else if (rowNum % 2 == 0) {
+      return new Text("Row no BG $rowNum");
+    } else {
+      return new Container(
+        child: new Text("Row with BG $rowNum"),
+        color: CSSColors.orange,
+      );
+    }
+  }
+
+  void launchFlutterHomePage() {
+    logd('-->launchFlutterHomePage()');
+    launch('https://flutterchina.club/');
   }
 
   @override

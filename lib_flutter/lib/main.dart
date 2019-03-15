@@ -21,13 +21,13 @@ import 'demo/demo_counter_display.dart';
 //void main() => runApp(new DemoLoadJsonFromNetApp());
 //void main() => runApp(new DemoLifecycleWatcherApp());
 //void main() => runApp(new DemoListItemClickApp());
-void main() {
-  print("dwz Hello 2019-0314 23:59, enter build function, route is " + window.defaultRouteName);
-
-  runApp(new DemoLakeApp());
-}
-//void main() => runApp(new MaterialApp(
-//      home:
-////    new LifecycleWatcher(),
-//          new DemoAddItemToList(),
-//    ));
+//void main() {
+//  print("dwz Hello 2019-0314 23:59, enter build function, route is " + window.defaultRouteName);
+//
+//  runApp(new DemoLakeApp());
+//}
+void main() => runApp(new MaterialApp(
+      home:
+//    new LifecycleWatcher(),
+          new DemoAddItemToList(),
+    ));
