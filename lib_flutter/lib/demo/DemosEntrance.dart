@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/demo/demo_custom_scroll_view.dart';
+import 'package:lib_flutter/demo/demo_fetch_data_from_net.dart';
 import 'package:lib_flutter/demo/demo_handle_text_field_change.dart';
 import 'package:lib_flutter/demo/demo_lake.dart';
 import 'package:lib_flutter/demo/demo_lifecycle_watcher.dart';
 import 'package:lib_flutter/demo/demo_list_item_click.dart';
+import 'package:lib_flutter/demo/demo_parse_json_background.dart';
 import 'package:lib_flutter/demo/demo_random_words.dart';
 import 'package:lib_flutter/demo/demo_shopping_list.dart';
 import 'package:lib_flutter/demo/demo_tab_layout.dart';
@@ -36,6 +38,10 @@ class DemoManager {
 
   void initRouteWidgetList() {
     demoItemList = new List();
+    demoItemList.add(DemoItem(DemoParseJsonBackground.routeName,
+        DemoParseJsonBackground.pageName, DemoParseJsonBackground()));
+    demoItemList.add(DemoItem(DemoFetchDataFromNet.routeName,
+        DemoFetchDataFromNet.pageName, DemoFetchDataFromNet()));
     demoItemList.add(DemoItem(DemoCustomScrollView.routeName,
         DemoCustomScrollView.pageName, DemoCustomScrollView()));
     demoItemList.add(DemoItem(DemoHandleTextFieldChange.routeName,
