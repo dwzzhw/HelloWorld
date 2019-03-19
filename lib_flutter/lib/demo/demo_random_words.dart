@@ -2,6 +2,9 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 class DemoRandomWordsApp extends StatelessWidget {
+  static final routeName = 'random_words';
+  static final pageName = 'RandomWords';
+
   @override
   Widget build(BuildContext context) {
     final wordPair = new WordPair.random();

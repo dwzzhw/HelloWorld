@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DemoLakeApp extends StatelessWidget {
+  static final routeName = 'lake';
+  static final pageName = 'LakeApp';
+
   @override
   Widget build(BuildContext context) {
     //...

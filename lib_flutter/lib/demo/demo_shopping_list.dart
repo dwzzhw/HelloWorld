@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DemoShoppingListApp extends StatelessWidget {
+  static final routeName = 'shop_list';
+  static final pageName = 'ShoppingList';
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(

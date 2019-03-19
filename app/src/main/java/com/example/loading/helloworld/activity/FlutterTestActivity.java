@@ -1,13 +1,12 @@
 package com.example.loading.helloworld.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.loading.helloworld.R;
@@ -18,6 +17,7 @@ import io.flutter.facade.Flutter;
 public class FlutterTestActivity extends FragmentActivity {
     public static final String TAG = "FlutterTestActivity";
     private LinearLayout mViewContainer;
+    private EditText mRouteNameView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class FlutterTestActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_flutter_test);
         mViewContainer = findViewById(R.id.view_container);
+        mRouteNameView = findViewById(R.id.route_name);
     }
 
     public void onBtnClicked(View view) {
@@ -68,7 +69,7 @@ public class FlutterTestActivity extends FragmentActivity {
 //                    }
 //                },
 //        null,
-                "route1"
+                mRouteNameView.getText().toString()
         );
 //        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(600, 800);
 //        layout.leftMargin = 100;
@@ -79,6 +80,7 @@ public class FlutterTestActivity extends FragmentActivity {
         View testView = new View(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
+        mViewContainer.removeAllViews();
         mViewContainer.addView(flutterView, lp);
     }
 }

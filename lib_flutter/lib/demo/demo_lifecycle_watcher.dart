@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class LifecycleWatcher extends StatefulWidget {
+class DemoLifecycleWatcher extends StatefulWidget {
+  static final routeName = 'life_cycle_watch';
+  static final pageName = 'LifecycleWatcher';
   @override
   State<StatefulWidget> createState() {
-    return new _LifecycleWatcherState();
+    return new _DemoLifecycleWatcherState();
   }
 }
 
-class _LifecycleWatcherState extends State<LifecycleWatcher>
+class _DemoLifecycleWatcherState extends State<DemoLifecycleWatcher>
     with WidgetsBindingObserver {
   AppLifecycleState _lastLifecycleState;
 
