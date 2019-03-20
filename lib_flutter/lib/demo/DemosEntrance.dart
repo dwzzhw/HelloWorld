@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/demo/demo_camera_preview.dart';
 import 'package:lib_flutter/demo/demo_custom_scroll_view.dart';
 import 'package:lib_flutter/demo/demo_fetch_data_from_net.dart';
 import 'package:lib_flutter/demo/demo_handle_text_field_change.dart';
@@ -11,6 +12,7 @@ import 'package:lib_flutter/demo/demo_parse_json_background.dart';
 import 'package:lib_flutter/demo/demo_random_words.dart';
 import 'package:lib_flutter/demo/demo_shopping_list.dart';
 import 'package:lib_flutter/demo/demo_tab_layout.dart';
+import 'package:lib_flutter/demo/demo_video_player.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 //void main() => runApp(new DemoCounterDisplayApp());
@@ -38,6 +40,10 @@ class DemoManager {
 
   void initRouteWidgetList() {
     demoItemList = new List();
+    demoItemList.add(DemoItem(DemoTakePictureApp.routeName,
+        DemoTakePictureApp.pageName, DemoTakePictureApp()));
+    demoItemList.add(DemoItem(DemoVideoPlayerApp.routeName,
+        DemoVideoPlayerApp.pageName, DemoVideoPlayerApp()));
     demoItemList.add(DemoItem(DemoParseJsonBackground.routeName,
         DemoParseJsonBackground.pageName, DemoParseJsonBackground()));
     demoItemList.add(DemoItem(DemoFetchDataFromNet.routeName,
