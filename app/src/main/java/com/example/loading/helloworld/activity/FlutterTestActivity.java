@@ -8,16 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.utils.Loger;
+import com.example.loading.helloworld.utils.UiThreadUtil;
 
 import io.flutter.facade.Flutter;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.view.FlutterView;
 
 public class FlutterTestActivity extends FragmentActivity {
-    public static final String TAG = "FlutterTestActivity";
+    public static final String TAG = "FlutterTestActivity_dwz";
+    private static final String FLUTTER_METHOD_CHANNEL_SAY_HELLO = "demo.integrate/sayhello";
+    private static final String FLUTTER_METHOD_FLUTTER_SAY_HELLO = "flutterSayHello";
+    private static final String FLUTTER_METHOD_ANDROID_SAY_HELLO = "androidSayHello";
+
     private LinearLayout mViewContainer;
     private EditText mRouteNameView;
+
+    private MethodChannel methodChannel;
+    private MethodChannel.MethodCallHandler methodCallHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,40 +58,60 @@ public class FlutterTestActivity extends FragmentActivity {
 
     private void addFlutterView() {
         Loger.d(TAG, "addFlutterView 3: ");
-        View flutterView = Flutter.createView(
+        FlutterView flutterView = Flutter.createView(
                 FlutterTestActivity.this,
                 getLifecycle(),
-//                new android.arch.lifecycle.Lifecycle() {
-//                    @Override
-//                    public void addObserver(@NonNull LifecycleObserver observer) {
-//                        Loger.d(TAG, "addObserver: observer=" + observer);
-//                    }
-//
-//                    @Override
-//                    public void removeObserver(@NonNull LifecycleObserver observer) {
-//                        Loger.d(TAG, "removeObserver: observer=" + observer);
-//                    }
-//
-//                    @NonNull
-//                    @Override
-//                    public State getCurrentState() {
-//                        Loger.d(TAG, "getCurrentState: ");
-//                        return null;
-//                    }
-//                },
-//        null,
                 mRouteNameView.getText().toString()
         );
-//        FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(600, 800);
-//        layout.leftMargin = 100;
-//        layout.topMargin = 200;
-//        flutterView.setBackgroundColor(Color.parseColor("#22ff0000"));
-//        addContentView(flutterView, layout);
 
-        View testView = new View(this);
+        initFlutterMethodCallHandler();
+        methodChannel = new MethodChannel(flutterView, FLUTTER_METHOD_CHANNEL_SAY_HELLO);
+        methodChannel.setMethodCallHandler(methodCallHandler);
+
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         mViewContainer.removeAllViews();
         mViewContainer.addView(flutterView, lp);
+    }
+
+    private void initFlutterMethodCallHandler() {
+        if (methodCallHandler == null) {
+            methodCallHandler = (call, result) -> {
+                Loger.d(TAG, "-->receive method from flutter, method=" + call.method);
+                if (FLUTTER_METHOD_FLUTTER_SAY_HELLO.equals(call.method)) {
+                    Toast.makeText(FlutterTestActivity.this, "Receive sayHello from flutter", Toast.LENGTH_SHORT).show();
+                    result.success("Nice to meet you!");
+
+                    UiThreadUtil.postDelay(() -> {
+                        sayHelloToFlutter();
+                    }, 3000);
+                } else {
+                    result.notImplemented();
+                }
+            };
+        }
+    }
+
+    private void sayHelloToFlutter() {
+        Loger.d(TAG, "-->sayHelloToFlutter()");
+        if (methodChannel != null) {
+            methodChannel.invokeMethod(FLUTTER_METHOD_ANDROID_SAY_HELLO, "loading", new MethodChannel.Result() {
+                @Override
+                public void success(@Nullable Object result) {
+                    Loger.d(TAG, "-->sayHelloToFlutter() success, result=" + result);
+                    Toast.makeText(FlutterTestActivity.this, "Receive resp from flutter: " + result, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void error(String errorCode, @Nullable String errorMessage, @Nullable Object errorDetails) {
+                    Loger.d(TAG, "-->sayHelloToFlutter() error, errorMessage=" + errorMessage + ", errorDetails=" + errorDetails);
+                }
+
+                @Override
+                public void notImplemented() {
+                    Loger.d(TAG, "-->sayHelloToFlutter(), target notImplemented");
+                }
+            });
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Looper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,5 +68,16 @@ public class Utils {
                 getTL2BRGradientDrawable(colors),
                 context.getResources().getDrawable(maskResId)
         });
+    }
+
+    public static boolean isMainThread() {
+        boolean isMainThread = false;
+        Thread curThread = Thread.currentThread();
+        Looper mainLooper = Looper.getMainLooper();
+        if (mainLooper != null) {
+            Thread mainThread = mainLooper.getThread();
+            isMainThread = (curThread.getId() == mainThread.getId());
+        }
+        return isMainThread;
     }
 }

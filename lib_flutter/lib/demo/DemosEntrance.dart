@@ -5,6 +5,7 @@ import 'package:lib_flutter/demo/demo_camera_preview.dart';
 import 'package:lib_flutter/demo/demo_custom_scroll_view.dart';
 import 'package:lib_flutter/demo/demo_fetch_data_from_net.dart';
 import 'package:lib_flutter/demo/demo_handle_text_field_change.dart';
+import 'package:lib_flutter/demo/demo_integrate_with_native.dart';
 import 'package:lib_flutter/demo/demo_lake.dart';
 import 'package:lib_flutter/demo/demo_lifecycle_watcher.dart';
 import 'package:lib_flutter/demo/demo_list_item_click.dart';
@@ -40,6 +41,8 @@ class DemoManager {
 
   void initRouteWidgetList() {
     demoItemList = new List();
+    demoItemList.add(DemoItem(DemoIntegrateWithNative.routeName,
+        DemoIntegrateWithNative.pageName, DemoIntegrateWithNative()));
     demoItemList.add(DemoItem(DemoTakePictureApp.routeName,
         DemoTakePictureApp.pageName, DemoTakePictureApp()));
     demoItemList.add(DemoItem(DemoVideoPlayerApp.routeName,

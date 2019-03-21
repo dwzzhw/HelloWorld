@@ -8,12 +8,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.loading.helloworld.MyTestParcel2;
 import com.example.loading.helloworld.R;
+import com.example.loading.helloworld.utils.Loger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -37,7 +37,7 @@ public class SportsTestActivity extends BaseActivity {
         super.onDestroy();
         destroyFlag = true;
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,13 +66,13 @@ public class SportsTestActivity extends BaseActivity {
 //        Uri uri = Uri.parse("qqsports://kbsqqsports?type=11&matchId=23:819743");
         Uri uri = Uri.parse("qqsports://kbsqqsports?pageType=302&moduleId=135");
         intent.setData(uri);
-        Log.i(TAG, "dwz -->openKbsMatchDetailPage(), uri=" + uri);
+        Loger.i(TAG, "-->openKbsMatchDetailPage(), uri=" + uri);
         startActivity(intent);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void jumpToMatchDetailPage() {
-        Log.i(TAG, "dwz1 -->jumpToMatchDetailPage()");
+        Loger.d(TAG, "-->jumpToMatchDetailPage()");
         Intent intent = new Intent("qqsports.matchdetail");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
@@ -90,14 +90,14 @@ public class SportsTestActivity extends BaseActivity {
     }
 
     private void deleteShortCut() {
-        Log.i(TAG, "dwz -->deleteShortCut()");
+        Loger.i(TAG, "-->deleteShortCut()");
         Intent shortcut = new Intent("com.android.launcher.action.UNINSTALL_SHORTCUT");
         Intent tIntent = null;
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, "QQSports");
 
         tIntent = getLauncherIntent();
         shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, tIntent);
-        Log.d(TAG, "dwz send delete short cut broadcast");
+        Loger.d(TAG, "send delete short cut broadcast");
         sendBroadcast(shortcut);
     }
 
@@ -123,26 +123,26 @@ public class SportsTestActivity extends BaseActivity {
     private void logTest() {
         Runtime runtime = Runtime.getRuntime();
         try {
-            Log.i(TAG, "dwz catch log begin");
+            Loger.i(TAG, "catch log begin");
             runtime.exec("logcat -ce");
             Process process = runtime.exec("logcat -v time");
             printStream(process.getInputStream());
-            Log.i(TAG, "dwz catch log end");
+            Loger.i(TAG, "catch log end");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.i(TAG, "dwz catch log fail");
+            Loger.i(TAG, "catch log fail");
         }
     }
 
     private void printStream(final InputStream in) {
-        Log.i(TAG, "printStream(), in=" + in);
+        Loger.i(TAG, "printStream(), in=" + in);
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 if (in != null) {
 
                     File sdRoot = Environment.getExternalStorageDirectory();
-                    Log.i(TAG, "dwz sdRoot=" + sdRoot);
+                    Loger.i(TAG, "sdRoot=" + sdRoot);
                     File logRoot = new File(sdRoot, "qqsports_log");
                     if (!logRoot.exists()) {
                         logRoot.mkdirs();
@@ -155,14 +155,14 @@ public class SportsTestActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                     }
-                    Log.i(TAG, "dwz log file path =" + logFile.getAbsolutePath() + ", exist=" + logFile.exists());
+                    Loger.i(TAG, "log file path =" + logFile.getAbsolutePath() + ", exist=" + logFile.exists());
 
                     BufferedOutputStream bos = null;
                     BufferedInputStream bin = new BufferedInputStream(in);
                     byte[] buffer = new byte[4096];
                     try {
                         bos = new BufferedOutputStream(new FileOutputStream(logFile));
-                        Log.i(TAG, "dwz bos=" + bos);
+                        Loger.i(TAG, "bos=" + bos);
                         if (bos != null) {
                             int cnt = 0;
                             while (!destroyFlag && (cnt = bin.read(buffer)) > 0) {
@@ -171,7 +171,7 @@ public class SportsTestActivity extends BaseActivity {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Log.i(TAG, "printStream(), IOException");
+                        Loger.i(TAG, "printStream(), IOException");
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
