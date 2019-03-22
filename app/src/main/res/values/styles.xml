@@ -1,6 +1,9 @@
 <resources>
 
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+    <!--<style name="AppTheme" parent="@android:style/Theme.Holo.Light">-->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/app_bg_color</item>
+        <item name="android:windowAnimationStyle">@style/CActivityAnim</item>
     </style>
 
     <style name="CommonListHorizontalDivider">

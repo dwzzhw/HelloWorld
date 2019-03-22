@@ -1,83 +1,72 @@
-package com.loading.flutterbridge.demo;
+package com.loading.flutterbridge.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.loading.common.component.ActivityHelper;
+import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
-import com.loading.flutterbridge.R;
-import com.loading.flutterbridge.activity.FlutterContainerActivity;
 
 import io.flutter.facade.Flutter;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.view.FlutterView;
 
-public class FlutterTestActivity extends FragmentActivity {
-    public static final String TAG = "FlutterTestActivity";
+public class FlutterContainerActivity extends BaseActivity {
+    public static final String TAG = "FlutterContainerActivity";
     private static final String FLUTTER_METHOD_CHANNEL_SAY_HELLO = "demo.integrate/sayhello";
     private static final String FLUTTER_METHOD_FLUTTER_SAY_HELLO = "flutterSayHello";
     private static final String FLUTTER_METHOD_ANDROID_SAY_HELLO = "androidSayHello";
 
-    private LinearLayout mViewContainer;
-    private EditText mRouteNameView;
+    private static final String EXTRA_KEY_ROUTE_NAME = "route_name";
 
     private MethodChannel methodChannel;
     private MethodChannel.MethodCallHandler methodCallHandler;
+    private String mTargetRouteStr;
+    private FlutterView mFlutterView;
+
+    public static void startActivity(Context context, String routeStr) {
+        if (context != null) {
+            Intent intent = new Intent(context, FlutterContainerActivity.class);
+            intent.putExtra(EXTRA_KEY_ROUTE_NAME, routeStr);
+            ActivityHelper.startActivityByIntent(context, intent);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_flutter_test);
-        mViewContainer = findViewById(R.id.view_container);
-        mRouteNameView = findViewById(R.id.route_name);
-    }
-
-    public void onBtnClicked(View view) {
-        Loger.d(TAG, "-->onBtnClicked()");
-
-        if (view.getId() == R.id.btn_add_flutter_view) {
-            String routeName = mRouteNameView.getText().toString();
-            if (!TextUtils.isEmpty(routeName)) {
-                FlutterContainerActivity.startActivity(this, routeName);
-            } else {
-                addFlutterView();
-            }
+        initIntentData();
+        initFlutterView();
+        if (mFlutterView != null) {
+            setContentView(mFlutterView);
+        } else {
+            quitActivity();
         }
     }
 
-    @SuppressWarnings("unused")
-    private void addFlutterFragment() {
-        Loger.d(TAG, "addFlutterFragment: ");
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.view_container, Flutter.createFragment("route1"));
-        tx.commit();
+    private void initIntentData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mTargetRouteStr = intent.getStringExtra(EXTRA_KEY_ROUTE_NAME);
+        }
     }
 
-    private void addFlutterView() {
-        Loger.d(TAG, "addFlutterView 3: ");
-        FlutterView flutterView = Flutter.createView(
-                FlutterTestActivity.this,
+    private void initFlutterView() {
+        Loger.d(TAG, "initFlutterView");
+        mFlutterView = Flutter.createView(
+                FlutterContainerActivity.this,
                 getLifecycle(),
-                mRouteNameView.getText().toString()
+                mTargetRouteStr
         );
 
         initFlutterMethodCallHandler();
-        methodChannel = new MethodChannel(flutterView, FLUTTER_METHOD_CHANNEL_SAY_HELLO);
+        methodChannel = new MethodChannel(mFlutterView, FLUTTER_METHOD_CHANNEL_SAY_HELLO);
         methodChannel.setMethodCallHandler(methodCallHandler);
-
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        mViewContainer.removeAllViews();
-        mViewContainer.addView(flutterView, lp);
     }
 
     private void initFlutterMethodCallHandler() {
@@ -85,7 +74,7 @@ public class FlutterTestActivity extends FragmentActivity {
             methodCallHandler = (call, result) -> {
                 Loger.d(TAG, "-->receive method from flutter, method=" + call.method);
                 if (FLUTTER_METHOD_FLUTTER_SAY_HELLO.equals(call.method)) {
-                    Toast.makeText(FlutterTestActivity.this, "Receive sayHello from flutter", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlutterContainerActivity.this, "Receive sayHello from flutter", Toast.LENGTH_SHORT).show();
                     result.success("Nice to meet you!");
 
                     UiThreadUtil.postDelay(this::sayHelloToFlutter, 3000);
@@ -103,7 +92,7 @@ public class FlutterTestActivity extends FragmentActivity {
                 @Override
                 public void success(@Nullable Object result) {
                     Loger.d(TAG, "-->sayHelloToFlutter() success, result=" + result);
-                    Toast.makeText(FlutterTestActivity.this, "Receive resp from flutter: " + result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FlutterContainerActivity.this, "Receive resp from flutter: " + result, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
