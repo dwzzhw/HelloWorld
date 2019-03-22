@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.example.loading.helloworld.R;
 
 public class MatchStatPlayerStatViewWrapper {
-    private static final String TAG = MatchStatPlayerStatViewWrapper.class.getSimpleName() + "_dwz";
+    private static final String TAG = MatchStatPlayerStatViewWrapper.class.getSimpleName();
     protected Context mContext;
     protected View convertView;
 

@@ -7,7 +7,7 @@ class DemoLakeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //...
-    print('dwz Hello lake app33');
+    print('Hello lake app33');
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(

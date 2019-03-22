@@ -336,7 +336,6 @@ public class JsonReader implements Closeable {
     return lenient;
   }
 
-    //dwz test
     private boolean isSkipFormatError = false;
 
   /**
@@ -354,7 +353,7 @@ public class JsonReader implements Closeable {
       peeked = PEEKED_NONE;
     } else {
         if (Gson.SKIP_FORMAT_ERROR) {
-            Log.w("JsonReader", "dwz -->beginArray(), Expected BEGIN_ARRAY but was " + peek() + locationString());
+            Log.w("JsonReader", "-->beginArray(), Expected BEGIN_ARRAY but was " + peek() + locationString());
             skipValue();
             peeked = PEEKED_END_ARRAY;
             isSkipFormatError = true;
@@ -371,7 +370,7 @@ public class JsonReader implements Closeable {
   public void endArray() throws IOException {
       if (isSkipFormatError) {
           peeked = PEEKED_NONE;
-          Log.w("JsonReader", "dwz -->endArray(), isSkipFormatError= " + isSkipFormatError+", ignore this end operation");
+          Log.w("JsonReader", "-->endArray(), isSkipFormatError= " + isSkipFormatError+", ignore this end operation");
           isSkipFormatError = false;
           return;
       }
@@ -402,7 +401,7 @@ public class JsonReader implements Closeable {
       peeked = PEEKED_NONE;
     } else {
         if(Gson.SKIP_FORMAT_ERROR){
-            Log.w("JsonReader", "dwz -->beginObject(), Expected BEGIN_OBJECT but was " + peek() + locationString());
+            Log.w("JsonReader", "-->beginObject(), Expected BEGIN_OBJECT but was " + peek() + locationString());
             skipValue();
             peeked = PEEKED_END_OBJECT;
             isSkipFormatError = true;
@@ -419,7 +418,7 @@ public class JsonReader implements Closeable {
   public void endObject() throws IOException {
       if (isSkipFormatError) {
           peeked = PEEKED_NONE;
-          Log.w("JsonReader", "dwz -->endObject(), isSkipFormatError= " + isSkipFormatError+", ignore this end operation");
+          Log.w("JsonReader", "-->endObject(), isSkipFormatError= " + isSkipFormatError+", ignore this end operation");
           isSkipFormatError = false;
           return;
       }

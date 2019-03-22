@@ -1,4 +1,4 @@
-package com.example.loading.helloworld.utils;
+package com.loading.common.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

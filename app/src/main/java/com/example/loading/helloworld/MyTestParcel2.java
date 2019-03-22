@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by loading on 4/21/16.
  */
 public class MyTestParcel2 implements Parcelable {
-    private static final String TAG = "MyTestParcel_dwz";
+    private static final String TAG = "MyTestParcel";
     public int data;
 
     public MyTestParcel2(int data) {

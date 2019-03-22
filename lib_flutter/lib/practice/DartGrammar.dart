@@ -11,17 +11,15 @@ class DartGrammarTest {
       logd('then2');
     }).whenComplete(() {
       logd('when 2 complete');
-    }).catchError(() {
+    }).catchError((_) {
       logd('catch2Error');
     });
     future1.then((_) {
       logd('then1');
-    })
-//        .whenComplete(() {
-//      logd('when 1 complete');
-//    }).catchError(() {
-//      logd('catch1Error');
-//    })
-        ;
+    }).whenComplete(() {
+      logd('when 1 complete');
+    }).catchError((_) {
+      logd('catch1Error');
+    });
   }
 }

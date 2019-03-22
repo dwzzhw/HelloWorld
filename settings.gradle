@@ -1,6 +1,9 @@
 include ':app'
+include ':lib_flutter_bridge'
+include ':lib_common'
 include ':robustgson_2.8'
 include ':mygroovy'
+
 setBinding(new Binding([gradle: this]))                                 // new
 evaluate(new File(                                                      // new
         ".",                                               // new

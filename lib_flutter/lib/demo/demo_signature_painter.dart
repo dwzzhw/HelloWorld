@@ -57,7 +57,7 @@ class SignatureState extends State<Signature> {
 class PainterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    debugPrint('dwz Build PainterApp');
+    debugPrint('Build PainterApp');
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Signature Painter1'),

@@ -1,4 +1,4 @@
-package com.example.loading.helloworld.activity;
+package com.loading.flutterbridge.demo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +10,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.loading.helloworld.R;
-import com.example.loading.helloworld.utils.Loger;
-import com.example.loading.helloworld.utils.UiThreadUtil;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.flutterbridge.R;
 
 import io.flutter.facade.Flutter;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.view.FlutterView;
 
 public class FlutterTestActivity extends FragmentActivity {
-    public static final String TAG = "FlutterTestActivity_dwz";
+    public static final String TAG = "FlutterTestActivity";
     private static final String FLUTTER_METHOD_CHANNEL_SAY_HELLO = "demo.integrate/sayhello";
     private static final String FLUTTER_METHOD_FLUTTER_SAY_HELLO = "flutterSayHello";
     private static final String FLUTTER_METHOD_ANDROID_SAY_HELLO = "androidSayHello";
@@ -41,14 +41,12 @@ public class FlutterTestActivity extends FragmentActivity {
 
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
-        switch (view.getId()) {
-            case R.id.btn_add_flutter_view:
-                addFlutterView();
-//                addFlutterFragment();
-                break;
+        if (view.getId() == R.id.btn_add_flutter_view) {
+            addFlutterView();
         }
     }
 
+    @SuppressWarnings("unused")
     private void addFlutterFragment() {
         Loger.d(TAG, "addFlutterFragment: ");
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
@@ -82,9 +80,7 @@ public class FlutterTestActivity extends FragmentActivity {
                     Toast.makeText(FlutterTestActivity.this, "Receive sayHello from flutter", Toast.LENGTH_SHORT).show();
                     result.success("Nice to meet you!");
 
-                    UiThreadUtil.postDelay(() -> {
-                        sayHelloToFlutter();
-                    }, 3000);
+                    UiThreadUtil.postDelay(this::sayHelloToFlutter, 3000);
                 } else {
                     result.notImplemented();
                 }

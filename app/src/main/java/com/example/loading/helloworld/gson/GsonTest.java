@@ -3,7 +3,7 @@ package com.example.loading.helloworld.gson;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.loading.helloworld.utils.Utils;
+import com.loading.common.utils.Utils;
 import com.google.gson.Gson;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class GsonTest {
-    private static final String TAG = "GsonTest_dwz";
+    private static final String TAG = "GsonTest";
 
     public static final void testGson(Context context) {
         String jsonStr = Utils.readAssertResource(context, "myJson.txt");

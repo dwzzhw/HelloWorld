@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.loading.helloworld.activity.FlutterTestActivity;
+import com.loading.flutterbridge.demo.FlutterTestActivity;
 import com.example.loading.helloworld.activity.MiscTestActivity;
 import com.example.loading.helloworld.activity.SportsTestActivity;
 import com.example.loading.helloworld.activity.UITestActivity;
 import com.example.loading.helloworld.download.SocketClientActivity;
 import com.example.loading.helloworld.download.SocketServerActivity;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 
 
 public class MainActivity extends Activity {
-    private static final String TAG = MainActivity.class.getSimpleName() + "_dwz";
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

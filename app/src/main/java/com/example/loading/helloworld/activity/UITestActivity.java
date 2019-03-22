@@ -27,8 +27,9 @@ import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.SurfaceViewTestActivity;
 import com.example.loading.helloworld.ViewDrawingOrderTestActivity;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
-import com.example.loading.helloworld.utils.Loger;
-import com.example.loading.helloworld.utils.Utils;
+import com.loading.common.component.BaseActivity;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.Utils;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
 
 public class UITestActivity extends BaseActivity {
@@ -69,7 +70,7 @@ public class UITestActivity extends BaseActivity {
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i(TAG, "dwz View is clicked");
+            Log.i(TAG, "View is clicked");
 //            openKbsMatchDetailPage();
             changeTitle();
 //            openSurfacePage();
@@ -158,7 +159,7 @@ public class UITestActivity extends BaseActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            Log.d(TAG, "dwz-->onTextChanged(), s=" + s + ", start=" + start + ", before=" + before + ", count=" + count);
+            Log.d(TAG, "-->onTextChanged(), s=" + s + ", start=" + start + ", before=" + before + ", count=" + count);
             atSymbleIndex = -1;
             if (before == 0 && count > 0) {   //手动输入或黏贴的最后一个字符 @
                 if (s.charAt(start + count - 1) == '@') {
@@ -175,12 +176,12 @@ public class UITestActivity extends BaseActivity {
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            Log.d(TAG, "dwz-->beforeTextChanged(), s=" + s + ", start=" + start + ", after=" + after + ", count=" + count);
+            Log.d(TAG, "-->beforeTextChanged(), s=" + s + ", start=" + start + ", after=" + after + ", count=" + count);
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            Log.d(TAG, "dwz-->afterTextChanged(), s=" + s);
+            Log.d(TAG, "-->afterTextChanged(), s=" + s);
             int encountedAtIndex = atSymbleIndex;
             if (encountedAtIndex >= 0 && s.charAt(encountedAtIndex) == '@') {
                 Log.i(TAG, "Do auto replace now, atSymbleIndex=" + encountedAtIndex);
@@ -201,7 +202,7 @@ public class UITestActivity extends BaseActivity {
     private void bgTest() {
         if (titleTextView != null) {
             Drawable bgDrawable = Utils.getTL2BRGradientMaskDrawable(new int[]{0x22ff0000, 0x2200ff00}, R.drawable.emo_banku, this);
-            Log.i(TAG, "dwz -->bgTest(), bgDrawable=" + bgDrawable);
+            Log.i(TAG, "-->bgTest(), bgDrawable=" + bgDrawable);
             titleTextView.setBackground(bgDrawable);
         }
     }
@@ -250,12 +251,12 @@ public class UITestActivity extends BaseActivity {
 ////              Log.d(TAG, " only print log");
 //        }
 
-//        Log.d(TAG, "dwz long sleep begin");
+//        Log.d(TAG, "long sleep begin");
 //        try {
 //            Thread.sleep(30000);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-//        Log.d(TAG, "dwz long sleep end");
+//        Log.d(TAG, "long sleep end");
     }
 }

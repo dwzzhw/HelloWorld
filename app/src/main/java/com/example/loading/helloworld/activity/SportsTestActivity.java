@@ -13,7 +13,8 @@ import android.view.MenuItem;
 
 import com.example.loading.helloworld.MyTestParcel2;
 import com.example.loading.helloworld.R;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.component.BaseActivity;
+import com.loading.common.utils.Loger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -78,11 +79,11 @@ public class SportsTestActivity extends BaseActivity {
         Bundle bundle = new Bundle();
 
         MyTestParcel2 parcel = new MyTestParcel2(87654);
-//        bundle.putParcelable("dwz_par1", parcel);
-        bundle.putString("dwz_par", "HelloBundle");
+//        bundle.putParcelable("par1", parcel);
+        bundle.putString("par", "HelloBundle");
         bundle.putString("mid", "12345");
 
-        intent.putExtra("dwz_par2", parcel);
+        intent.putExtra("par2", parcel);
 
 
         intent.putExtras(bundle);

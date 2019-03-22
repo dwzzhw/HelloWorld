@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 public class SocketClientActivity extends FragmentActivity {
     private static final String TAG = "SocketClientActivity";

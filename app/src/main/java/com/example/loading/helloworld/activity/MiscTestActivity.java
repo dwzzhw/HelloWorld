@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.component.BaseActivity;
+import com.loading.common.utils.Loger;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -54,7 +55,7 @@ public class MiscTestActivity extends BaseActivity {
     }
 
     private long gpower(int n) {
-        Loger.d(TAG, "dwz gpower result, n=" + n);
+        Loger.d(TAG, "gpower result, n=" + n);
         if (n == 0)
             return 1;
         if (n > 31) {
@@ -64,7 +65,7 @@ public class MiscTestActivity extends BaseActivity {
         long val = gpower(n >> 1) * gpower(n >> 1);
         if ((n & 1) > 0)
             val *= 2;
-        Loger.d(TAG, "dwz gpower result, n=" + n + ", result=" + val);
+        Loger.d(TAG, "gpower result, n=" + n + ", result=" + val);
         return val;
     }
 

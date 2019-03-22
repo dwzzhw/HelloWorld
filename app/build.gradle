@@ -39,21 +39,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':robustgson_2.8')
+    implementation project(':lib_common')
+    implementation project(':lib_flutter_bridge')
     implementation deps.design
     implementation(deps.lottie) {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
-    implementation(project(':flutter'))
-            {
-                exclude group: 'com.android.support', module: 'support-v4'
-//                exclude group: 'com.android.support', module: 'design'
-//                exclude group: 'com.android.support', module: 'appcompat-v7'
-            }
-    implementation 'android.arch.lifecycle:common:1.1.0'
-    implementation 'android.arch.lifecycle:viewmodel:1.1.0'
-    implementation 'android.arch.lifecycle:runtime:1.1.0'
 }
 
 class MyGroovyPlugin implements Plugin<Project> {

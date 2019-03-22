@@ -16,8 +16,8 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.example.loading.helloworld.utils.DrawUtils;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.DrawUtils;
+import com.loading.common.utils.Loger;
 import com.example.loading.helloworld.view.ISurfaceWrapper;
 import com.example.loading.helloworld.view.SurfaceViewWrapper;
 import com.example.loading.helloworld.view.TextureViewWrapper;

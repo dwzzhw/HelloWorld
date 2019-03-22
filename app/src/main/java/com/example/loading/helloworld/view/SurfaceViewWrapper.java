@@ -5,7 +5,7 @@ import android.graphics.PixelFormat;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 /**
  * Created by loading on 25/04/2018.

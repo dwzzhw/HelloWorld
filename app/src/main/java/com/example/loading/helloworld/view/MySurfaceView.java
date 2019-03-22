@@ -1,11 +1,10 @@
 package com.example.loading.helloworld.view;
 
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 /**
  * Created by loading on 25/04/2018.

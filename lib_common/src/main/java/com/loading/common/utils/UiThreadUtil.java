@@ -1,4 +1,4 @@
-package com.example.loading.helloworld.utils;
+package com.loading.common.utils;
 
 import android.os.Handler;
 import android.os.Looper;

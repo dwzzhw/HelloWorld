@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;

@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.example.loading.helloworld.utils.Loger;
+import com.loading.common.utils.Loger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
