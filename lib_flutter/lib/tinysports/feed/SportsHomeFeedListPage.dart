@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
+import 'package:lib_flutter/tinysports/feed/data/SportsFeedIndexRespPO.dart';
+import 'package:lib_flutter/tinysports/feed/model/SportsFeedIndexModel.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
@@ -13,19 +15,30 @@ class SportsHomeFeedListPage extends SportsBasePage {
 }
 
 class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
-  List feedItemDataList = [];
+  List<SportsFeedIndexItem> feedItemDataList = [];
 
   @override
   void initState() {
     super.initState();
+    _getFeedIndexListFromNet();
+  }
+
+  void _getFeedIndexListFromNet() {
+    SportsFeedIndexModel indexModel = SportsFeedIndexModel();
+    indexModel.fetchFeedIndexList().then((indexList) {
+      logd(widget.TAG,
+          '-->fetch feed index data completed, data list=$indexList');
+      setState(() {
+        feedItemDataList.clear();
+        feedItemDataList.addAll(indexList);
+      });
+    }).catchError((error) {
+      logd(TAG, 'error happen when fetch feed index data, error=$error');
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    feedItemDataList.add("1");
-    feedItemDataList.add("2");
-    feedItemDataList.add("3");
-
     Widget targetWidget;
     if (widget.needAppBar) {
       targetWidget = new Scaffold(
@@ -57,9 +70,13 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   }
 
   Widget _getFeedItemWidget(int feedItemIndex) {
+    SportsFeedIndexItem feedIndexItem = feedItemDataList[feedItemIndex];
     return new Padding(
-      padding: new EdgeInsets.all(10),
-      child: Text('Feed Item At $feedItemIndex'),
+      padding: new EdgeInsets.all(0),
+      child: ListTile(
+        title: Text('Feed Id ${feedIndexItem.id}'),
+        subtitle: Text('columnId=${feedIndexItem.columnId}'),
+      ),
     );
   }
 }
