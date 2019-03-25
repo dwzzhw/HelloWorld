@@ -58,7 +58,7 @@ class _AddItemToListState extends State<DemoAddItemToList> {
   }
 
   void launchFlutterHomePage() {
-    logd('-->launchFlutterHomePage()');
+    printLog('-->launchFlutterHomePage()');
     launch('https://flutterchina.club/');
   }
 

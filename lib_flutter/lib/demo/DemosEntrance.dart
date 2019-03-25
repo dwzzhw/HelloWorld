@@ -24,7 +24,7 @@ import 'package:lib_flutter/utils/Loger.dart';
 class DemosEntrance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    logd("DemosEntrance 2019-0319 10:52, route is " + window.defaultRouteName);
+    printLog("DemosEntrance 2019-0319 10:52, route is " + window.defaultRouteName);
 
     DemoManager demoManager = DemoManager();
     demoManager.initRouteWidgetList();
@@ -87,7 +87,7 @@ class DemoManager {
       resultWidget = DemoListPage(demoItemList);
     }
 
-    logd(
+    printLog(
         '-->getTargetWidget(), routeName=$routeName , result widget=$resultWidget');
     return resultWidget;
   }

@@ -19,10 +19,10 @@ class TakePictureScreenState extends State<DemoTakePictureApp> {
   Future<void> _initializeControllerFuture;
 
   void fetchCamera() async {
-    logd('-->fetchCamera()');
+    printLog('-->fetchCamera()');
     final cameraList = await availableCameras();
     CameraDescription camera = cameraList.first;
-    logd('<--fetchCamera(), camera=$camera');
+    printLog('<--fetchCamera(), camera=$camera');
 
     setState(() {
       _controller = CameraController(camera, ResolutionPreset.high);
@@ -39,7 +39,7 @@ class TakePictureScreenState extends State<DemoTakePictureApp> {
   }
 
   Widget _getBodyWidget() {
-    logd('-->getBodyWidget(), camera controller=$_controller');
+    printLog('-->getBodyWidget(), camera controller=$_controller');
     if (_controller == null || _initializeControllerFuture == null) {
       return Center(
         child: CircularProgressIndicator(),
@@ -87,7 +87,7 @@ class TakePictureScreenState extends State<DemoTakePictureApp> {
                   MaterialPageRoute(
                       builder: (context) => DisplayPictureScreen(path)));
             } catch (e) {
-              logd(e);
+              printLog(e);
             }
           }),
     );

@@ -2,24 +2,24 @@ import 'package:lib_flutter/utils/Loger.dart';
 
 class DartGrammarTest {
   Future doFutureTest() {
-    logd('-->doFutureTest()');
-    Future future1 = new Future(() => logd('future1'));
+    printLog('-->doFutureTest()');
+    Future future1 = new Future(() => printLog('future1'));
     Future future2 = new Future(() {
-      logd('future2');
+      printLog('future2');
     });
     future2.then((_) {
-      logd('then2');
+      printLog('then2');
     }).whenComplete(() {
-      logd('when 2 complete');
+      printLog('when 2 complete');
     }).catchError((_) {
-      logd('catch2Error');
+      printLog('catch2Error');
     });
     future1.then((_) {
-      logd('then1');
+      printLog('then1');
     }).whenComplete(() {
-      logd('when 1 complete');
+      printLog('when 1 complete');
     }).catchError((_) {
-      logd('catch1Error');
+      printLog('catch1Error');
     });
   }
 }

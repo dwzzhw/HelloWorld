@@ -17,7 +17,7 @@ class _HandleTextFieldChangeState extends State<DemoHandleTextFieldChange> {
   final _myTextEditingController = TextEditingController();
 
   void _printTextFieldContent() {
-    logd('Second text field content is [${_myTextEditingController.text}]');
+    printLog('Second text field content is [${_myTextEditingController.text}]');
   }
 
   @override
@@ -45,7 +45,7 @@ class _HandleTextFieldChangeState extends State<DemoHandleTextFieldChange> {
           children: <Widget>[
             TextField(
               onChanged: (text) {
-                logd('First text field content: [$text]');
+                printLog('First text field content: [$text]');
               },
             ),
             TextField(
@@ -63,7 +63,7 @@ class _HandleTextFieldChangeState extends State<DemoHandleTextFieldChange> {
             InkWell(
               // When the user taps the button, show a snackbar
               onTap: () {
-                logd('Ripple button is clicked');
+                printLog('Ripple button is clicked');
                 _myTextEditingController.text = 'Ripple button is clicked';
                 Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text('Tap'),

@@ -28,10 +28,10 @@ class IntegrateWithNativeState extends State<DemoIntegrateWithNative> {
 
   Future<String> _handleNativeCall(MethodCall call) async {
     String msg = 'Unknown msg';
-    logd(
+    printLog(
         '-->_handleNativeCall(), method=${call.method}, args=${call.arguments}');
     if (DemoIntegrateWithNative.METHOD_FROM_ANDROID == call.method) {
-      logd('-->receive message from android');
+      printLog('-->receive message from android');
       msg = 'Nice to meet you too, ${call.arguments}';
     }
     return getMsg(msg);
@@ -43,7 +43,7 @@ class IntegrateWithNativeState extends State<DemoIntegrateWithNative> {
 
   Future<void> _getMsgFromNative() async {
     String msg;
-    logd('-->_getMsgFromNative');
+    printLog('-->_getMsgFromNative');
     try {
       msg = await methodChannel
           .invokeMethod('${DemoIntegrateWithNative.METHOD_TO_NATIVE}');
@@ -52,7 +52,7 @@ class IntegrateWithNativeState extends State<DemoIntegrateWithNative> {
     } catch (e) {
       msg = 'Unexpected msg: $e';
     }
-    logd('<--_getMsgFromNative, msg=$msg');
+    printLog('<--_getMsgFromNative, msg=$msg');
 
     setState(() {
       _msgFromNative = msg;
