@@ -41,3 +41,4 @@ build/
 .flutter-plugins
 *.xcconfig
 *.lock
+*.g.dart

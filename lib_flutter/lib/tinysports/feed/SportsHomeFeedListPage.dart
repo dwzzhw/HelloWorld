@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
 import 'package:lib_flutter/tinysports/feed/data/SportsFeedIndexRespPO.dart';
+import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
+import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 import 'package:lib_flutter/tinysports/feed/model/SportsFeedIndexModel.dart';
+import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
@@ -15,7 +18,7 @@ class SportsHomeFeedListPage extends SportsBasePage {
 }
 
 class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
-  List<SportsFeedIndexItem> feedItemDataList = [];
+  List<FeedItemDetailInfo> feedItemDataList = [];
 
   @override
   void initState() {
@@ -26,14 +29,34 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   void _getFeedIndexListFromNet() {
     SportsFeedIndexModel indexModel = SportsFeedIndexModel();
     indexModel.fetchFeedIndexList().then((indexList) {
+//      logd(widget.TAG,
+//          '-->fetch feed index data completed, data list=$indexList');
+      _getFeedListFromNet(indexList);
+    }).catchError((error) {
+      logd(widget.TAG, 'error happen when fetch feed index data, error=$error');
+    });
+  }
+
+  void _getFeedListFromNet(List<FeedIndexItem> feedIndexList) {
+    SportsFeedListModel listModel = SportsFeedListModel();
+    String idList = '';
+    for (int i = 0; i < feedIndexList.length && i < 20; i++) {
+      FeedIndexItem indexItem = feedIndexList[i];
+      if (indexItem.id.startsWith('80_')) {
+        idList += indexItem.id;
+        idList += ',';
+      }
+    }
+    logd(widget.TAG, '__getFeedListFromNet(), ids=$idList');
+
+    listModel.fetchFeedList(idList, (feedDetailList) {
       logd(widget.TAG,
-          '-->fetch feed index data completed, data list=$indexList');
+          'Fetch feed list detail back, feedDetailList=$feedDetailList');
+
       setState(() {
         feedItemDataList.clear();
-        feedItemDataList.addAll(indexList);
+        feedItemDataList.addAll(feedDetailList);
       });
-    }).catchError((error) {
-      logd(TAG, 'error happen when fetch feed index data, error=$error');
     });
   }
 
@@ -70,12 +93,12 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   }
 
   Widget _getFeedItemWidget(int feedItemIndex) {
-    SportsFeedIndexItem feedIndexItem = feedItemDataList[feedItemIndex];
+    FeedItemDetailInfo feedItemDetail = feedItemDataList[feedItemIndex];
     return new Padding(
       padding: new EdgeInsets.all(0),
       child: ListTile(
-        title: Text('Feed Id ${feedIndexItem.id}'),
-        subtitle: Text('columnId=${feedIndexItem.columnId}'),
+        title: Text('${feedItemDetail.title}'),
+        subtitle: Text('${feedItemDetail.abstract}'),
       ),
     );
   }
