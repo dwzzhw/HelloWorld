@@ -11,7 +11,7 @@ class FeedIndex extends Object {
   int code;
 
   @JsonKey(name: 'data')
-  Data data;
+  FeedIndexData data;
 
   @JsonKey(name: 'version')
   String version;
@@ -31,7 +31,7 @@ class FeedIndex extends Object {
 
 
 @JsonSerializable()
-class Data extends Object {
+class FeedIndexData extends Object {
 
   @JsonKey(name: 'marquee')
   List<Marquee> marquee;
@@ -57,11 +57,11 @@ class Data extends Object {
   @JsonKey(name: 'ruleTimeVersion')
   String ruleTimeVersion;
 
-  Data(this.marquee,this.list,this.hasMore,this.curVersion,this.interval,this.lastFeedId,this.ruleId,this.ruleTimeVersion,);
+  FeedIndexData(this.marquee,this.list,this.hasMore,this.curVersion,this.interval,this.lastFeedId,this.ruleId,this.ruleTimeVersion,);
 
-  factory Data.fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
+  factory FeedIndexData.fromJson(Map<String, dynamic> srcJson) => _$FeedIndexDataFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$FeedIndexDataToJson(this);
 
 }
 

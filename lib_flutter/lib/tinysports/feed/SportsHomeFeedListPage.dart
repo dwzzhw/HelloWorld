@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/http/net_request_listener.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
 import 'package:lib_flutter/tinysports/feed/data/SportsFeedIndexRespPO.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 import 'package:lib_flutter/tinysports/feed/model/SportsFeedIndexModel.dart';
+import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
+import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
@@ -27,14 +30,22 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   }
 
   void _getFeedIndexListFromNet() {
-    SportsFeedIndexModel indexModel = SportsFeedIndexModel();
-    indexModel.fetchFeedIndexList().then((indexList) {
+    SportsFeedIndexModel2 indexModel = SportsFeedIndexModel2(null);
+    indexModel.setCompleteCallbackFunc(() {
+      List<FeedIndexItem> indexList = indexModel.getFeedIndexList();
+      logd(widget.TAG,
+          '-->fetch feed index data completed, data list=$indexList');
+      _getFeedListFromNet(indexList);
+    });
+    indexModel.loadData();
+//    SportsFeedIndexModel indexModel = SportsFeedIndexModel();
+//    indexModel.fetchFeedIndexList().then((indexList) {
 //      logd(widget.TAG,
 //          '-->fetch feed index data completed, data list=$indexList');
-      _getFeedListFromNet(indexList);
-    }).catchError((error) {
-      logd(widget.TAG, 'error happen when fetch feed index data, error=$error');
-    });
+//      _getFeedListFromNet(indexList);
+//    }).catchError((error) {
+//      logd(widget.TAG, 'error happen when fetch feed index data, error=$error');
+//    });
   }
 
   void _getFeedListFromNet(List<FeedIndexItem> feedIndexList) {
@@ -94,12 +105,6 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
 
   Widget _getFeedItemWidget(int feedItemIndex) {
     FeedItemDetailInfo feedItemDetail = feedItemDataList[feedItemIndex];
-    return new Padding(
-      padding: new EdgeInsets.all(0),
-      child: ListTile(
-        title: Text('${feedItemDetail.title}'),
-        subtitle: Text('${feedItemDetail.abstract}'),
-      ),
-    );
+    return FeedItemNewsView(feedItemDetail);
   }
 }
