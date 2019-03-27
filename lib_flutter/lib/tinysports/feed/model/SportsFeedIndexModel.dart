@@ -1,11 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:lib_flutter/tinysports/feed/data/SportsFeedIndexRespPO.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/utils/Loger.dart';
-import 'dart:async';
 
 String TAG = 'SportsFeedIndexModel';
 

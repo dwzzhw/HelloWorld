@@ -21,8 +21,6 @@ class FeedList extends Object {
   Map<String, dynamic> toJson() => _$FeedListToJson(this);
 
   List<FeedItemDetailInfo> getFeedDetailInfoList() {
-//    logd('FeedIndexPO', '-->getFeedList, data=$data');
-
     List<FeedItemDetailInfo> detailList = List();
     data?.forEach((key, content) {
       if (content != null && content.info != null) {
