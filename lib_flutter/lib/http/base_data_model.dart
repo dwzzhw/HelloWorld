@@ -8,27 +8,25 @@ abstract class BaseDataModel<T> extends Object {
   static const int ERROR_CODE_EXCEPTION = -1001;
   static const int ERROR_CODE_EMPTY_BODY = -1002;
   static final String TAG = "BaseDataModel";
-  NetRequestListener mListener;
-  Function mCompleteFunction;
+  OnDataCompleteFunc<T> OnCompleteFunction;
+  OnDataErrorFunc OnErrorFunction;
   T mRespData;
 
-  BaseDataModel(this.mCompleteFunction);
-
-  //  BaseDataModel(this.mListener, {test(String)});
+  BaseDataModel(this.OnCompleteFunction, {this.OnErrorFunction});
 
   String getUrl();
 
   Map<String, String> getReqParamMap() => null;
 
   void loadData() {
-    HttpController.get(getUrl(), _onGetRespBody, params: getReqParamMap(),
+    HttpController.get(getUrl(), onGetRespBody, params: getReqParamMap(),
         errorCallback: (exception) {
       notifyDataError(ERROR_CODE_EXCEPTION, exception.toString());
     });
   }
 
-  void _onGetRespBody(String respBodyStr) {
-    logd(TAG, '-->_onGetRespBody(), response=, body=$respBodyStr');
+  void onGetRespBody(String respBodyStr) {
+    logd(TAG, '-->onGetRespBody(), response=, body=$respBodyStr');
     if (respBodyStr == null) {
       notifyDataError(
           ERROR_CODE_EMPTY_BODY, 'Fail to get response from server');
@@ -60,14 +58,18 @@ abstract class BaseDataModel<T> extends Object {
   void parseDataContentObj(dynamic dataObj);
 
   void notifyDataComplete() {
-    if (mCompleteFunction != null) {
-      mCompleteFunction();
-    } else {
-      mListener?.onDataComplete();
+    logd(TAG,
+        '-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$OnCompleteFunction');
+    if (OnCompleteFunction != null) {
+      OnCompleteFunction(mRespData);
     }
   }
 
   void notifyDataError(int errorCode, String errorMsg) {
-    mListener?.onDataError(errorCode, errorMsg);
+    logd(TAG,
+        '-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$OnErrorFunction');
+    if (OnErrorFunction != null) {
+      OnErrorFunction(errorCode, errorMsg);
+    }
   }
 }

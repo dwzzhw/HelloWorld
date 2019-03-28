@@ -1,8 +1,12 @@
 import 'package:http/http.dart' as http;
+import 'package:lib_flutter/utils/Loger.dart';
 
 class HttpController {
+  static String TAG = 'HttpController';
+
   static void get(String url, Function callback,
       {Map<String, String> params, Function errorCallback}) async {
+    logd(TAG, '-->get(), url=$url');
     if (params != null && params.isNotEmpty) {
       StringBuffer sb = new StringBuffer("?");
       params.forEach((key, value) {
@@ -26,6 +30,7 @@ class HttpController {
 
   static void post(String url, Function callback,
       {Map<String, String> params, Function errorCallback}) async {
+    logd(TAG, '-->post(), url=$url');
     try {
       http.Response res = await http.post(url, body: params);
 

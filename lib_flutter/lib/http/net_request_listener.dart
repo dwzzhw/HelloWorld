@@ -1,4 +1,2 @@
-abstract class NetRequestListener {
-  void onDataComplete();
-  void onDataError(int errorCode, String errorMsg);
-}
+typedef void OnDataCompleteFunc<T>(T data);
+typedef void OnDataErrorFunc(int code, String errorMsg);

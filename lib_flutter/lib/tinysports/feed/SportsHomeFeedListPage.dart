@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
-import 'package:lib_flutter/tinysports/feed/data/SportsFeedIndexRespPO.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
-import 'package:lib_flutter/tinysports/feed/model/SportsFeedIndexModel.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
 import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
@@ -22,6 +19,8 @@ class SportsHomeFeedListPage extends SportsBasePage {
 
 class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   List<FeedItemDetailInfo> feedItemDataList = [];
+  bool isSuccess = true;
+  String errTipsMsg;
 
   @override
   void initState() {
@@ -30,26 +29,27 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   }
 
   void _getFeedIndexListFromNet() {
-    SportsFeedIndexModel2 indexModel = SportsFeedIndexModel2(null);
-    indexModel.setCompleteCallbackFunc(() {
-      List<FeedIndexItem> indexList = indexModel.getFeedIndexList();
-      logd(widget.TAG,
-          '-->fetch feed index data completed, data list=$indexList');
-      _getFeedListFromNet(indexList);
+    isSuccess = true;
+    SportsFeedIndexModel indexModel = SportsFeedIndexModel((feedIndexData) {
+      List<FeedIndexItem> indexList = feedIndexData?.list;
+      if (indexList != null) {
+        _getFeedListFromNet(indexList);
+      } else {
+        _onFetchDataError('Index list is empty');
+      }
+    }, (code, errMsg) {
+      _onFetchDataError(errMsg);
     });
-    indexModel.loadData();
-//    SportsFeedIndexModel indexModel = SportsFeedIndexModel();
-//    indexModel.fetchFeedIndexList().then((indexList) {
+//    indexModel.setCompleteCallbackFunc(() {
+//      List<FeedIndexItem> indexList = indexModel.getFeedIndexList();
 //      logd(widget.TAG,
 //          '-->fetch feed index data completed, data list=$indexList');
 //      _getFeedListFromNet(indexList);
-//    }).catchError((error) {
-//      logd(widget.TAG, 'error happen when fetch feed index data, error=$error');
 //    });
+    indexModel.loadData();
   }
 
   void _getFeedListFromNet(List<FeedIndexItem> feedIndexList) {
-    SportsFeedListModel listModel = SportsFeedListModel();
     String idList = '';
     for (int i = 0; i < feedIndexList.length && i < 20; i++) {
       FeedIndexItem indexItem = feedIndexList[i];
@@ -59,15 +59,32 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
       }
     }
     logd(widget.TAG, '__getFeedListFromNet(), ids=$idList');
+    SportsFeedListModel listModel = SportsFeedListModel(idList, (feedItemList) {
+      if (feedItemList == null) {
+        setState(() {
+          feedItemDataList.clear();
+          feedItemDataList.addAll(feedItemList);
+        });
+      } else {
+        _onFetchDataError('Item list is empty');
+      }
+    }, (code, errMsg) {
+      _onFetchDataError(errMsg);
+    });
 
-    listModel.fetchFeedList(idList, (feedDetailList) {
-      logd(widget.TAG,
-          'Fetch feed list detail back, feedDetailList=$feedDetailList');
+    listModel.loadData();
 
-      setState(() {
-        feedItemDataList.clear();
-        feedItemDataList.addAll(feedDetailList);
-      });
+//    listModel.fetchFeedList(idList, (feedDetailList) {
+//      logd(widget.TAG,
+//          'Fetch feed list detail back, feedDetailList=$feedDetailList');
+//    });
+  }
+
+  void _onFetchDataError(String errorMsg) {
+    logd(widget.TAG, '-->_onFetchDataError(), errorMsg=$errorMsg');
+    setState(() {
+      isSuccess = false;
+      errTipsMsg = errorMsg;
     });
   }
 
@@ -90,7 +107,15 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   }
 
   Widget _getFeedListPageContentWidget() {
-    if (feedItemDataList.length > 0) {
+    if (!isSuccess) {
+      String tipsMsg = errTipsMsg;
+      if (tipsMsg == null || tipsMsg.length == 0) {
+        tipsMsg = 'fail to fetch data from net.';
+      }
+      new Center(
+        child: Text('$tipsMsg'),
+      );
+    } else if (feedItemDataList.length > 0) {
       return new ListView.builder(
           itemCount: feedItemDataList.length,
           itemBuilder: (BuildContext context, int position) {
