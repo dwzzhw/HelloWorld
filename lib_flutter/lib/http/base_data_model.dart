@@ -8,11 +8,11 @@ abstract class BaseDataModel<T> extends Object {
   static const int ERROR_CODE_EXCEPTION = -1001;
   static const int ERROR_CODE_EMPTY_BODY = -1002;
   static final String TAG = "BaseDataModel";
-  OnDataCompleteFunc<T> OnCompleteFunction;
-  OnDataErrorFunc OnErrorFunction;
+  OnDataCompleteFunc<T> onCompleteFunction;
+  OnDataErrorFunc onErrorFunction;
   T mRespData;
 
-  BaseDataModel(this.OnCompleteFunction, {this.OnErrorFunction});
+  BaseDataModel(this.onCompleteFunction, {this.onErrorFunction});
 
   String getUrl();
 
@@ -59,17 +59,17 @@ abstract class BaseDataModel<T> extends Object {
 
   void notifyDataComplete() {
     logd(TAG,
-        '-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$OnCompleteFunction');
-    if (OnCompleteFunction != null) {
-      OnCompleteFunction(mRespData);
+        '-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$onCompleteFunction');
+    if (onCompleteFunction != null) {
+      onCompleteFunction(mRespData);
     }
   }
 
   void notifyDataError(int errorCode, String errorMsg) {
     logd(TAG,
-        '-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$OnErrorFunction');
-    if (OnErrorFunction != null) {
-      OnErrorFunction(errorCode, errorMsg);
+        '-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$onErrorFunction');
+    if (onErrorFunction != null) {
+      onErrorFunction(errorCode, errorMsg);
     }
   }
 }

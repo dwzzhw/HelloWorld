@@ -3,3 +3,7 @@
 Unhandled Exception: type '_InternalLinkedHashMap<dynamic, dynamic>' is not a subtype of type 'Map<String, String>'
 
 2. 匿名内部类暂时不支持
+
+3. 时刻注意具体类型与dynamic的转化，包括集合类的默认类型、超级函数的泛型等，一旦某处指定了具体类型，其他地方就可能出错
+
+4. crash之后的堆栈很可能以debug的级别在logcat中呈现，出现莫名中断的问题时注意查看

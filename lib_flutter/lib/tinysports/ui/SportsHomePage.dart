@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
-import 'package:lib_flutter/tinysports/feed/SportsHomeFeedListPage.dart';
+import 'package:lib_flutter/tinysports/feed/sports_home_feed_list_page.dart';
+import 'package:lib_flutter/tinysports/schedule/hot_schedule_list_page.dart';
 
 class SportsHomePage extends SportsBasePage {
   static final routeName = 'sports_home';
@@ -46,12 +47,13 @@ class SportsHomePageState extends State<SportsHomePage> {
     Widget tabContent;
     switch (tabIndex) {
       case 0:
+//        tabContent = Center(
+//          child: Text("First Tab Content"),
+//        );
         tabContent = SportsHomeFeedListPage(false);
         break;
       case 1:
-        tabContent = Center(
-          child: Text("Second Tab Content"),
-        );
+        tabContent = HotScheduleListPage(false);
         break;
       case 2:
         tabContent = Center(

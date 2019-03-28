@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
+import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
 import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
-import 'package:lib_flutter/utils/Loger.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
-  final String TAG = "SportsHomeFeedListPage";
   final bool needAppBar;
 
   @override
@@ -17,10 +16,9 @@ class SportsHomeFeedListPage extends SportsBasePage {
   SportsHomeFeedListPage(this.needAppBar);
 }
 
-class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
+class SportsHomeFeedListPageState
+    extends SportsBasePageState<SportsHomeFeedListPage> {
   List<FeedItemDetailInfo> feedItemDataList = [];
-  bool isSuccess = true;
-  String errTipsMsg;
 
   @override
   void initState() {
@@ -35,10 +33,10 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
       if (indexList != null) {
         _getFeedListFromNet(indexList);
       } else {
-        _onFetchDataError('Index list is empty');
+        onFetchDataError('Index list is empty');
       }
     }, (code, errMsg) {
-      _onFetchDataError(errMsg);
+      onFetchDataError(errMsg);
     });
     indexModel.loadData();
   }
@@ -52,35 +50,22 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
         idList += ',';
       }
     }
-    logd(widget.TAG, '__getFeedListFromNet(), ids=$idList');
+    log('__getFeedListFromNet(), ids=$idList');
     SportsFeedListModel listModel = SportsFeedListModel(idList, (feedItemList) {
-      logd(widget.TAG, '-->fetch data return, feedItemList=$feedItemList');
+      log('-->fetch data return, feedItemList=$feedItemList');
       if (feedItemList != null) {
         setState(() {
           feedItemDataList.clear();
           feedItemDataList.addAll(feedItemList);
         });
       } else {
-        _onFetchDataError('Feed detail list is empty');
+        onFetchDataError('Feed detail list is empty');
       }
     }, (code, errMsg) {
-      _onFetchDataError(errMsg);
+      onFetchDataError(errMsg);
     });
 
     listModel.loadData();
-
-//    listModel.fetchFeedList(idList, (feedDetailList) {
-//      logd(widget.TAG,
-//          'Fetch feed list detail back, feedDetailList=$feedDetailList');
-//    });
-  }
-
-  void _onFetchDataError(String errorMsg) {
-    logd(widget.TAG, '-->_onFetchDataError(), errorMsg=$errorMsg');
-    setState(() {
-      isSuccess = false;
-      errTipsMsg = errorMsg;
-    });
   }
 
   @override
@@ -96,8 +81,7 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
     } else {
       targetWidget = _getFeedListPageContentWidget();
     }
-    logd('${widget.TAG}',
-        '-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    log('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 
@@ -126,5 +110,10 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
   Widget _getFeedItemWidget(int feedItemIndex) {
     FeedItemDetailInfo feedItemDetail = feedItemDataList[feedItemIndex];
     return FeedItemNewsView(feedItemDetail);
+  }
+
+  @override
+  String getLogTAG() {
+    return 'SportsHomeFeedListPage';
   }
 }

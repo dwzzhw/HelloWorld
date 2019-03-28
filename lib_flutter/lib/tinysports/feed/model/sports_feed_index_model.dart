@@ -5,10 +5,10 @@ import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
   SportsFeedIndexModel(OnDataCompleteFunc<FeedIndexData> mCompleteFunction,
       OnDataErrorFunc mErrorFunction)
-      : super(mCompleteFunction, OnErrorFunction: mErrorFunction);
+      : super(mCompleteFunction, onErrorFunction: mErrorFunction);
 
   void setCompleteCallbackFunc(Function completeFunc) {
-    OnCompleteFunction = completeFunc;
+    onCompleteFunction = completeFunc;
   }
 
   @override
