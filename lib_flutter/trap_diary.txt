@@ -1,3 +1,5 @@
 2019.03.28
 1. 函数返回值声明成List，return List<T>时执行流程会卡住
+Unhandled Exception: type '_InternalLinkedHashMap<dynamic, dynamic>' is not a subtype of type 'Map<String, String>'
+
 2. 匿名内部类暂时不支持

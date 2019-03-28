@@ -40,12 +40,6 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
     }, (code, errMsg) {
       _onFetchDataError(errMsg);
     });
-//    indexModel.setCompleteCallbackFunc(() {
-//      List<FeedIndexItem> indexList = indexModel.getFeedIndexList();
-//      logd(widget.TAG,
-//          '-->fetch feed index data completed, data list=$indexList');
-//      _getFeedListFromNet(indexList);
-//    });
     indexModel.loadData();
   }
 
@@ -60,13 +54,14 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
     }
     logd(widget.TAG, '__getFeedListFromNet(), ids=$idList');
     SportsFeedListModel listModel = SportsFeedListModel(idList, (feedItemList) {
-      if (feedItemList == null) {
+      logd(widget.TAG, '-->fetch data return, feedItemList=$feedItemList');
+      if (feedItemList != null) {
         setState(() {
           feedItemDataList.clear();
           feedItemDataList.addAll(feedItemList);
         });
       } else {
-        _onFetchDataError('Item list is empty');
+        _onFetchDataError('Feed detail list is empty');
       }
     }, (code, errMsg) {
       _onFetchDataError(errMsg);
@@ -112,7 +107,7 @@ class SportsHomeFeedListPageState extends State<SportsHomeFeedListPage> {
       if (tipsMsg == null || tipsMsg.length == 0) {
         tipsMsg = 'fail to fetch data from net.';
       }
-      new Center(
+      return new Center(
         child: Text('$tipsMsg'),
       );
     } else if (feedItemDataList.length > 0) {
