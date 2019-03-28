@@ -5,14 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.loading.flutterbridge.demo.FlutterTestActivity;
 import com.example.loading.helloworld.activity.MiscTestActivity;
 import com.example.loading.helloworld.activity.SportsTestActivity;
 import com.example.loading.helloworld.activity.UITestActivity;
 import com.example.loading.helloworld.download.SocketClientActivity;
 import com.example.loading.helloworld.download.SocketServerActivity;
 import com.loading.common.utils.Loger;
+import com.loading.flutterbridge.demo.FlutterTestActivity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -77,6 +78,8 @@ public class MainActivity extends Activity {
             Log.d(TAG, "onBtnClicked: target class=" + targetClass);
             Intent intent = new Intent(this, targetClass);
             startActivity(intent);
+        } else {
+            Toast.makeText(this, "Not impl yet!", Toast.LENGTH_SHORT).show();
         }
     }
 }
