@@ -26,7 +26,7 @@ abstract class BaseDataModel<T> extends Object {
   }
 
   void onGetRespBody(String respBodyStr) {
-    logd(TAG, '-->onGetRespBody(), response=, body=$respBodyStr');
+    log('-->onGetRespBody(), response=, body=$respBodyStr');
     if (respBodyStr == null) {
       notifyDataError(
           ERROR_CODE_EMPTY_BODY, 'Fail to get response from server');
@@ -57,19 +57,25 @@ abstract class BaseDataModel<T> extends Object {
   ///dataObj可能为Map<String, dynamic>或List<dynamic>
   void parseDataContentObj(dynamic dataObj);
 
+  String getLogTAG() {
+    return 'BaseDataModel';
+  }
+
   void notifyDataComplete() {
-    logd(TAG,
-        '-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$onCompleteFunction');
+    log('-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$onCompleteFunction');
     if (onCompleteFunction != null) {
       onCompleteFunction(mRespData);
     }
   }
 
   void notifyDataError(int errorCode, String errorMsg) {
-    logd(TAG,
-        '-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$onErrorFunction');
+    log('-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$onErrorFunction');
     if (onErrorFunction != null) {
       onErrorFunction(errorCode, errorMsg);
     }
+  }
+
+  void log(String logMsg) {
+    logd(getLogTAG(), logMsg);
   }
 }

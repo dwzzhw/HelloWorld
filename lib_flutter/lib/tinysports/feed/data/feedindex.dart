@@ -1,12 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lib_flutter/tinysports/base/data/jump_data.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 part 'feedindex.g.dart';
 
-
 @JsonSerializable()
 class FeedIndex extends Object {
-
   @JsonKey(name: 'code')
   int code;
 
@@ -16,9 +15,14 @@ class FeedIndex extends Object {
   @JsonKey(name: 'version')
   String version;
 
-  FeedIndex(this.code,this.data,this.version,);
+  FeedIndex(
+    this.code,
+    this.data,
+    this.version,
+  );
 
-  factory FeedIndex.fromJson(Map<String, dynamic> srcJson) => _$FeedIndexFromJson(srcJson);
+  factory FeedIndex.fromJson(Map<String, dynamic> srcJson) =>
+      _$FeedIndexFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FeedIndexToJson(this);
 
@@ -26,13 +30,10 @@ class FeedIndex extends Object {
     logd('FeedIndexPO', '-->getFeedIndexList, data=$data');
     return data?.list;
   }
-
 }
-
 
 @JsonSerializable()
 class FeedIndexData extends Object {
-
   @JsonKey(name: 'marquee')
   List<Marquee> marquee;
 
@@ -57,66 +58,44 @@ class FeedIndexData extends Object {
   @JsonKey(name: 'ruleTimeVersion')
   String ruleTimeVersion;
 
-  FeedIndexData(this.marquee,this.list,this.hasMore,this.curVersion,this.interval,this.lastFeedId,this.ruleId,this.ruleTimeVersion,);
+  FeedIndexData(
+    this.marquee,
+    this.list,
+    this.hasMore,
+    this.curVersion,
+    this.interval,
+    this.lastFeedId,
+    this.ruleId,
+    this.ruleTimeVersion,
+  );
 
-  factory FeedIndexData.fromJson(Map<String, dynamic> srcJson) => _$FeedIndexDataFromJson(srcJson);
+  factory FeedIndexData.fromJson(Map<String, dynamic> srcJson) =>
+      _$FeedIndexDataFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FeedIndexDataToJson(this);
-
 }
-
 
 @JsonSerializable()
 class Marquee extends Object {
-
   @JsonKey(name: 'title')
   String title;
 
   @JsonKey(name: 'jumpData')
   JumpData jumpData;
 
-  Marquee(this.title,this.jumpData,);
+  Marquee(
+    this.title,
+    this.jumpData,
+  );
 
-  factory Marquee.fromJson(Map<String, dynamic> srcJson) => _$MarqueeFromJson(srcJson);
+  factory Marquee.fromJson(Map<String, dynamic> srcJson) =>
+      _$MarqueeFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$MarqueeToJson(this);
-
 }
-
-
-@JsonSerializable()
-class JumpData extends Object {
-
-  @JsonKey(name: 'type')
-  String type;
-
-  @JsonKey(name: 'param')
-  Param param;
-
-  JumpData(this.type,this.param,);
-
-  factory JumpData.fromJson(Map<String, dynamic> srcJson) => _$JumpDataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$JumpDataToJson(this);
-
-}
-
-
-@JsonSerializable()
-class Param extends Object {
-
-  Param();
-
-  factory Param.fromJson(Map<String, dynamic> srcJson) => _$ParamFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$ParamToJson(this);
-
-}
-
 
 @JsonSerializable()
 class FeedIndexItem extends Object {
-
   @JsonKey(name: 'id')
   String id;
 
@@ -132,12 +111,16 @@ class FeedIndexItem extends Object {
   @JsonKey(name: 'report')
   String report;
 
-  FeedIndexItem(this.id,this.pos,this.columnId,this.session,this.report,);
+  FeedIndexItem(
+    this.id,
+    this.pos,
+    this.columnId,
+    this.session,
+    this.report,
+  );
 
-  factory FeedIndexItem.fromJson(Map<String, dynamic> srcJson) => _$FeedIndexItemFromJson(srcJson);
+  factory FeedIndexItem.fromJson(Map<String, dynamic> srcJson) =>
+      _$FeedIndexItemFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$FeedIndexItemToJson(this);
-
 }
-
-
