@@ -47,10 +47,10 @@ class SportsHomePageState extends State<SportsHomePage> {
     Widget tabContent;
     switch (tabIndex) {
       case 0:
-//        tabContent = Center(
-//          child: Text("First Tab Content"),
-//        );
-        tabContent = SportsHomeFeedListPage(false);
+        tabContent = Center(
+          child: Text("First Tab Content"),
+        );
+//        tabContent = SportsHomeFeedListPage(false);
         break;
       case 1:
         tabContent = HotScheduleListPage(false);
