@@ -49,6 +49,11 @@ class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
     return paramMap;
   }
 
+  @override
+  String getCacheKey() {
+    return 'feed_detail_list_hot';
+  }
+
 //  void fetchFeedList(String idList, Function callback) {
 //    Map<String, String> params = Map();
 //    params['ids'] = idList;

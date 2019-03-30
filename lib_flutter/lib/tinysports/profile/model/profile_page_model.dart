@@ -23,4 +23,14 @@ class ProfilePageModel extends BaseDataModel<ProfilePageInfo> {
   String getLogTAG() {
     return 'ProfilePageModel';
   }
+
+  @override
+  String getCacheKey() {
+    return 'profile_page_data';
+  }
+
+  @override
+  bool needCache() {
+    return true;
+  }
 }

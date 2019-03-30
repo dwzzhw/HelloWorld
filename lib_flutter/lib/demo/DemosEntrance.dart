@@ -11,6 +11,7 @@ import 'package:lib_flutter/demo/demo_lifecycle_watcher.dart';
 import 'package:lib_flutter/demo/demo_list_item_click.dart';
 import 'package:lib_flutter/demo/demo_parse_json_background.dart';
 import 'package:lib_flutter/demo/demo_random_words.dart';
+import 'package:lib_flutter/demo/demo_read_write_local_file.dart';
 import 'package:lib_flutter/demo/demo_shopping_list.dart';
 import 'package:lib_flutter/demo/demo_tab_layout.dart';
 import 'package:lib_flutter/demo/demo_video_player.dart';
@@ -24,7 +25,8 @@ import 'package:lib_flutter/utils/Loger.dart';
 class DemosEntrance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    printLog("DemosEntrance 2019-0319 10:52, route is " + window.defaultRouteName);
+    printLog(
+        "DemosEntrance 2019-0319 10:52, route is " + window.defaultRouteName);
 
     DemoManager demoManager = DemoManager();
     demoManager.initRouteWidgetList();
@@ -41,6 +43,10 @@ class DemoManager {
 
   void initRouteWidgetList() {
     demoItemList = new List();
+    demoItemList.add(DemoItem(
+        DemoReadWriteFile.routeName,
+        DemoReadWriteFile.pageName,
+        DemoReadWriteFile(storage: CounterStorage())));
     demoItemList.add(DemoItem(DemoIntegrateWithNative.routeName,
         DemoIntegrateWithNative.pageName, DemoIntegrateWithNative()));
     demoItemList.add(DemoItem(DemoTakePictureApp.routeName,

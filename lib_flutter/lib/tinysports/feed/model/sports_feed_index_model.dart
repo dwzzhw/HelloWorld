@@ -24,4 +24,9 @@ class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
   List<FeedIndexItem> getFeedIndexList() {
     return mRespData?.list;
   }
+
+  @override
+  String getCacheKey() {
+    return 'feed_index_list_hot';
+  }
 }

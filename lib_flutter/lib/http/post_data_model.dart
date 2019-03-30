@@ -10,9 +10,9 @@ abstract class PostDataModel<T> extends BaseDataModel<T> {
       {OnDataErrorFunc onErrorFunction})
       : super(onCompleteFunction, onErrorFunction: onErrorFunction);
 
-  void loadData() {
-    logd(TAG, '-->loadData()');
-    HttpController.post(getUrl(), onGetRespBody, params: getReqParamMap(),
+  void loadDataFromNet() {
+    logd(TAG, '-->loadDataFromNet()');
+    HttpController.post(getUrl(), onGetHttpRespBody, params: getReqParamMap(),
         errorCallback: (exception) {
       notifyDataError(BaseDataModel.ERROR_CODE_EXCEPTION, exception.toString());
     });

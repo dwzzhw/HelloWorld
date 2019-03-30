@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:lib_flutter/utils/Loger.dart';
 
 class HttpController {
-  static String TAG = 'HttpController';
+  static const String TAG = 'HttpController';
 
   static void get(String url, Function callback,
       {Map<String, String> params, Function errorCallback}) async {

@@ -39,4 +39,9 @@ class ScheduleListModel extends BaseDataModel<ScheduleListData> {
         '-->getGroupedScheduleInfoList(), resultList length=${resultList?.length}');
     return resultList;
   }
+
+  @override
+  String getCacheKey() {
+    return 'hot_schedule_list';
+  }
 }
