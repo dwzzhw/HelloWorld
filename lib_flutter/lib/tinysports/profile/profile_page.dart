@@ -7,7 +7,6 @@ import 'package:lib_flutter/tinysports/profile/view/profile_k_entrance_view.dart
 import 'package:lib_flutter/tinysports/profile/view/profile_user_info_view.dart';
 import 'package:lib_flutter/tinysports/profile/view/profile_v_entrance_view.dart';
 import 'package:lib_flutter/tinysports/profile/view/profile_wallet_view.dart';
-import 'package:lib_flutter/tinysports/schedule/view/schedule_item_view.dart';
 
 class ProfilePage extends SportsBasePage {
   final bool needAppBar;

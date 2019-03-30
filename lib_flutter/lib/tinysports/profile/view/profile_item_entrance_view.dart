@@ -13,8 +13,8 @@ class ProfileItemEntranceView extends StatelessWidget {
         children: <Widget>[
           Image.network(
             item.logo,
-            width: 30,
-            height: 30,
+            width: 24,
+            height: 24,
           ),
           Text(
             item.name,

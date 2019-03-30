@@ -20,12 +20,20 @@ class ProfileUserInfoViewState extends State<ProfileUserInfoView> {
     return Container(
       child: Row(
         children: <Widget>[
-          Image.asset('lake'),
+          Container(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: Image.asset(
+              'assets/images/lake.jpg',
+              width: 60.0,
+              height: 60.0,
+              fit: BoxFit.cover,
+            ),
+          ),
           Container(
             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: Text(
               '登录可享受更多服务',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 18),
             ),
           )
         ],

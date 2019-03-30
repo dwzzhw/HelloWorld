@@ -35,5 +35,18 @@ class ProfileVEntranceView extends StatelessWidget {
         children: lineWidgetList,
       ),
     );
+
+//    return Container(
+//      child: GridView.builder(
+//        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//          crossAxisCount: 4,
+//        ),
+//        itemCount: itemList.length,
+//        itemBuilder: (context, index) {
+//          return ProfileItemEntranceView(itemList[index]);
+//        },
+//      ),
+//      height: lineCnt * 110.0,
+//    );
   }
 }

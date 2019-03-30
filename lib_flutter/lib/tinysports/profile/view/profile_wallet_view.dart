@@ -18,7 +18,7 @@ class ProfileWalletViewState extends State<ProfileWalletView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: getWalletItemWidgetList(),

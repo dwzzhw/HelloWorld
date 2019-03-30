@@ -14,13 +14,17 @@ class ProfileKEntranceView extends StatelessWidget {
     int itemCnt = kEntranceGroup.list.length;
     int lineCnt = itemCnt ~/ 4 + (itemCnt % 4 == 0 ? 0 : 1);
     List<Widget> lineWidgetList = List();
-    lineWidgetList.add(Container(
-      padding: EdgeInsets.all(10),
-      child: Text(
-        kEntranceGroup.title,
-        textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 18),
-      ),
+    lineWidgetList.add(Row(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Text(
+            kEntranceGroup.title,
+            textAlign: TextAlign.left,
+            style: TextStyle(fontSize: 18),
+          ),
+        )
+      ],
     ));
     logd(TAG, '-->build, itemCnt=$itemCnt, lineCnt=$lineCnt');
     for (int i = 0; i < lineCnt; i++) {
@@ -38,6 +42,17 @@ class ProfileKEntranceView extends StatelessWidget {
 //        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       ));
     }
+
+//    return GridView.builder(
+//      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//        crossAxisCount: 4,
+//      ),
+//      itemCount: kEntranceGroup.list.length,
+//      itemBuilder: (context, index) {
+//        return Image.network(kEntranceGroup.list[index].logo);
+//      },
+//    );
+
     return Container(
       child: Column(
         children: lineWidgetList,
