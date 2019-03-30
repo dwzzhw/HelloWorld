@@ -22,6 +22,7 @@ class SportsHomeFeedListPageState
 
   @override
   void initState() {
+    log('-->initState()');
     super.initState();
     _getFeedIndexListFromNet();
   }

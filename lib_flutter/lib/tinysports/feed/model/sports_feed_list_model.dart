@@ -1,10 +1,8 @@
 import 'package:lib_flutter/http/net_request_listener.dart';
 import 'package:lib_flutter/http/post_data_model.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
-import 'package:lib_flutter/utils/Loger.dart';
 
 class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
-  String TAG = 'SportsFeedListModel';
   String idListStr;
 
   SportsFeedListModel(this.idListStr, OnDataCompleteFunc onCompleteFunc,
@@ -19,7 +17,7 @@ class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
   @override
   void parseDataContentObj(dataObj) {
     if (dataObj is Map) {
-      logd(TAG, '-->parseDataContentObj(), dataObj is Map');
+      log('-->parseDataContentObj(), dataObj is Map');
       Map<String, FeedItemContent> parsedItemMap =
           (dataObj as Map<String, dynamic>).map(
         (key, entry) => MapEntry(
@@ -34,7 +32,7 @@ class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
         }
       });
     } else if (dataObj is List) {
-      logd(TAG, '-->parseDataContentObj(), dataObj is List');
+      log('-->parseDataContentObj(), dataObj is List');
     }
   }
 
@@ -44,14 +42,19 @@ class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
     if (paramMap == null) {
       paramMap = Map<String, String>();
     }
-    logd(TAG, '-->getReqParamMap(), ids=$idListStr');
+    log('-->getReqParamMap(), ids=$idListStr');
     paramMap['ids'] = idListStr;
     return paramMap;
   }
 
   @override
   String getCacheKey() {
-    return 'feed_detail_list_hot';
+    return 'feed_detail_list_hot_${idListStr.hashCode})';
+  }
+
+  @override
+  String getLogTAG() {
+    return 'SportsFeedListModel';
   }
 
 //  void fetchFeedList(String idList, Function callback) {

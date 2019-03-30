@@ -13,7 +13,8 @@ class CacheManager {
     if (cacheKey != null && cacheKey.length > 0 && payload != null) {
       File cacheFile = await FileHandler().getCacheFile('$CACHE_DIR/$cacheKey');
       cacheFile.create(recursive: true);
-      CachedPayloadJsonObj cacheObj = CachedPayloadJsonObj('101', payload);
+      CachedPayloadJsonObj cacheObj =
+          CachedPayloadJsonObj.createNewInstance(payload);
       cacheFile.writeAsString(cacheObj.toString());
     }
   }
@@ -52,10 +53,15 @@ class CachedPayloadJsonObj {
   String time;
   dynamic payloadJson;
 
-  CachedPayloadJsonObj(this.time, this.payloadJson);
+  CachedPayloadJsonObj(this.payloadJson, this.time);
+
+  CachedPayloadJsonObj.createNewInstance(dynamic payloadJson) {
+    this.payloadJson = payloadJson;
+    this.time = DateTime.now().millisecondsSinceEpoch.toString();
+  }
 
   factory CachedPayloadJsonObj.fromJson(Map<String, dynamic> json) {
-    return CachedPayloadJsonObj(json['time'] as String, json['payloadJson']);
+    return CachedPayloadJsonObj(json['payloadJson'], json['time'] as String);
   }
 
   Map<String, dynamic> toJson() =>

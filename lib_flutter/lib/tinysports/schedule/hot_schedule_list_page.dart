@@ -85,7 +85,6 @@ class HotScheduleListPageState
   }
 
   Widget _getScheduleItemWidget(int itemIndex) {
-    log('-->_getScheduleItemWidget(), itemIndex=$itemIndex');
     dynamic itemData = groupedScheduleList[itemIndex];
     if (itemData is ScheduleInfo) {
       return ScheduleItemView(itemData);

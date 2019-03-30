@@ -4,9 +4,11 @@ import 'package:lib_flutter/http/http_controller.dart';
 import 'package:lib_flutter/http/net_request_listener.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 import 'package:lib_flutter/utils/cache_manager.dart';
+import 'package:lib_flutter/utils/date_util.dart';
 
 abstract class BaseDataModel<T> extends Object {
   static const String TAG = "BaseDataModel";
+
   static const int ERROR_CODE_EXCEPTION = -1001;
   static const int ERROR_CODE_EMPTY_BODY = -1002;
 
@@ -34,7 +36,12 @@ abstract class BaseDataModel<T> extends Object {
   String getCacheKey();
 
   bool needCache() {
-    return false;
+    return true;
+  }
+
+  int getCacheValidTimeInMil() {
+//    return 2*DateUtil.HOUR_IN_MILL_SECONDS;
+    return DateUtil.MINUTE_IN_MILL_SECONDS;
   }
 
   void loadData({int reqType = REQ_TYPE_CACHE_OR_NET}) {
@@ -45,7 +52,7 @@ abstract class BaseDataModel<T> extends Object {
       new Future(() async {
         dynamic cachedPayload = await getCachedData();
         if (cachedPayload != null) {
-          parseRespBody(cachedPayload, RESP_TYPE_CACHE);
+          parseCachedPayload(cachedPayload);
         }
       }).whenComplete(() {
         if (mRespData != null) {
@@ -71,10 +78,22 @@ abstract class BaseDataModel<T> extends Object {
 
   Future<dynamic> getCachedData() async {
     String cacheKey = getCacheKey();
+    dynamic payload;
     CachedPayloadJsonObj cachedPayloadObj =
         await CacheManager.readFromCache(cacheKey);
     log('-->getCachedData(), cacheKey=$cacheKey, cachedPayloadObj=$cachedPayloadObj');
-    return cachedPayloadObj?.payloadJson;
+
+    if (cachedPayloadObj != null) {
+      int cacheTime = int.tryParse(cachedPayloadObj.time);
+      if (cacheTime != null &&
+          DateTime.now().millisecondsSinceEpoch - cacheTime <
+              getCacheValidTimeInMil()) {
+        payload = cachedPayloadObj.payloadJson;
+      } else {
+        log('-->Cache for $cacheKey is expired');
+      }
+    }
+    return payload;
   }
 
   void onGetHttpRespBody(String respBodyStr) {
@@ -83,14 +102,13 @@ abstract class BaseDataModel<T> extends Object {
       notifyDataError(
           ERROR_CODE_EMPTY_BODY, 'Fail to get response from server');
     } else {
-      new Future(() {
-        parseRespBody(respBodyStr, RESP_TYPE_NET);
-      });
+      parseHttpRespBody(respBodyStr);
     }
   }
 
-  parseRespBody(dynamic respBody, int respType) {
-    final parsedMap = (respBody is String) ? jsonDecode(respBody) : respBody;
+  ///解析网路请求返回中的body部分
+  void parseHttpRespBody(String respBody) {
+    final parsedMap = jsonDecode(respBody);
 
     int code = parsedMap['code'] as int;
     String version = parsedMap['version'] as String;
@@ -101,9 +119,21 @@ abstract class BaseDataModel<T> extends Object {
       notifyDataError(code, errMsg);
     } else {
       parseDataContentObj(dataContentObj);
-      _notifyDataComplete(respType);
-      if (needCache() && mRespData != null && respType == RESP_TYPE_NET) {
+      _notifyDataComplete(RESP_TYPE_NET);
+      if (needCache() && mRespData != null) {
         CacheManager.writeToCache(getCacheKey(), respBody);
+      }
+    }
+  }
+
+  ///解析从缓存中读取出来的内容，该内容已经通过json decode过
+  void parseCachedPayload(dynamic cachePayload) {
+    if (cachePayload is Map<String, dynamic>) {
+      int code = cachePayload['code'] as int;
+      dynamic dataContentObj = cachePayload['data'];
+
+      if (code == 0 && dataContentObj != null) {
+        parseDataContentObj(dataContentObj);
       }
     }
   }
@@ -113,7 +143,7 @@ abstract class BaseDataModel<T> extends Object {
   void parseDataContentObj(dynamic dataObj);
 
   void _notifyDataComplete(int respType) {
-    log('-->notifyDataComplete(), url=${getUrl()}, OnCompleteFunction=$onCompleteFunction, respType=$respType');
+    log('-->notifyDataComplete(), url=${getUrl()}, respType=$respType, OnCompleteFunction=$onCompleteFunction');
     if (onCompleteFunction != null) {
       onCompleteFunction(mRespData);
     }

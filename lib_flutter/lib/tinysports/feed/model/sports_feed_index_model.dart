@@ -29,4 +29,9 @@ class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
   String getCacheKey() {
     return 'feed_index_list_hot';
   }
+
+  @override
+  String getLogTAG() {
+    return 'SportsFeedIndexModel';
+  }
 }

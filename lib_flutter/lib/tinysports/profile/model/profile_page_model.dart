@@ -28,9 +28,4 @@ class ProfilePageModel extends BaseDataModel<ProfilePageInfo> {
   String getCacheKey() {
     return 'profile_page_data';
   }
-
-  @override
-  bool needCache() {
-    return true;
-  }
 }

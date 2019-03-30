@@ -176,7 +176,6 @@ class MatchInfo extends Object {
     } else if (livePeriod == LIVE_PERIOD_PRESTART) {
       desc = '未开始';
     }
-    logd(TAG, '-->getLiveTypeDesc(), livePeriod=$livePeriod, desc=$desc');
     return desc;
   }
 }

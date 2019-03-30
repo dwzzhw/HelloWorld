@@ -4,10 +4,8 @@ import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class ScheduleListModel extends BaseDataModel<ScheduleListData> {
-  static final TAG = 'ScheduleListModel';
-
-  ScheduleListModel(
-      OnDataCompleteFunc<ScheduleListData> onCompleteFunction, OnDataErrorFunc onErrorFunc)
+  ScheduleListModel(OnDataCompleteFunc<ScheduleListData> onCompleteFunction,
+      OnDataErrorFunc onErrorFunc)
       : super(onCompleteFunction, onErrorFunction: onErrorFunc);
 
   @override
@@ -17,7 +15,7 @@ class ScheduleListModel extends BaseDataModel<ScheduleListData> {
 
   @override
   void parseDataContentObj(dataObj) {
-    logd(TAG, '-->parseDataContentObj');
+    log('-->parseDataContentObj');
     mRespData = ScheduleListData.fromJson(dataObj);
   }
 
@@ -35,13 +33,17 @@ class ScheduleListModel extends BaseDataModel<ScheduleListData> {
         }
       });
     }
-    logd(TAG,
-        '-->getGroupedScheduleInfoList(), resultList length=${resultList?.length}');
+    log('-->getGroupedScheduleInfoList(), resultList length=${resultList?.length}');
     return resultList;
   }
 
   @override
   String getCacheKey() {
     return 'hot_schedule_list';
+  }
+
+  @override
+  String getLogTAG() {
+    return 'ScheduleListModel';
   }
 }
