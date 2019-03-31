@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/ui/SportsHomePage.dart';
+import 'package:lib_flutter/tinysports/ui/sports_home_page.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class TinySportsRouteManager {

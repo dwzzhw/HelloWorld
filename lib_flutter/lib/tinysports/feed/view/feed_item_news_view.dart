@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 
@@ -38,8 +39,8 @@ class FeedItemNewsView extends StatelessWidget {
           ),
           new Container(
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: new Image.network(
-              feedItemDetail.imgurl,
+            child: CachedNetworkImage(
+              imageUrl: feedItemDetail.imgurl,
               width: 160.0,
               height: 90.0,
               fit: BoxFit.cover,

@@ -1,14 +1,21 @@
+import 'package:lib_flutter/utils/date_format.dart';
+
 class DateUtil {
   static const int HOUR_IN_MILL_SECONDS = 60 * 60 * 1000;
   static const int MINUTE_IN_MILL_SECONDS = 60 * 1000;
   static const int DAY_IN_MILL_SECONDS = 24 * HOUR_IN_MILL_SECONDS;
 
-  static String getDateStrPartII(String dateStr) {
-    List<String> list = dateStr.split(" ");
-    if (list.length > 1) {
-      return list[1].substring(0, 5);
+  static String getDateHourMinutePart(String dateStr) {
+    return parseDateStr(dateStr, ['HH', ':', 'nn']);
+  }
+
+  static String parseDateStr(String oriDateStr, List<String> targetFormat) {
+    DateTime dateTime = DateTime.tryParse(oriDateStr);
+
+    if (dateTime != null && targetFormat != null) {
+      return formatDate(dateTime, targetFormat);
     } else {
-      return dateStr;
+      return oriDateStr;
     }
   }
 }

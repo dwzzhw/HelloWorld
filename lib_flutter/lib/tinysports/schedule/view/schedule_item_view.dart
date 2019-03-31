@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
@@ -55,7 +56,7 @@ class ScheduleItemViewState extends State<ScheduleItemView> {
       child: Column(
         children: <Widget>[
           Text(
-            '${DateUtil.getDateStrPartII(matchInfo.startTime)}',
+            '${DateUtil.getDateHourMinutePart(matchInfo.startTime)}',
             style: TextStyle(fontSize: 14),
           ),
           Text(
@@ -100,8 +101,8 @@ class ScheduleItemViewState extends State<ScheduleItemView> {
       padding: EdgeInsets.fromLTRB(5, 2, 1, 2),
       child: Row(
         children: <Widget>[
-          Image.network(
-            logoUrl,
+          CachedNetworkImage(
+            imageUrl: logoUrl,
             width: 20,
             height: 20,
           ),

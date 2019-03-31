@@ -55,16 +55,16 @@ class SportsHomePageState extends State<SportsHomePage> {
         tabContent = SportsHomeFeedListPage(false);
         break;
       case 1:
-        tabContent = Center(
-          child: Text("Schedule List Tab Content"),
-        );
-//        tabContent = HotScheduleListPage(false);
+//        tabContent = Center(
+//          child: Text("Schedule List Tab Content"),
+//        );
+        tabContent = HotScheduleListPage(false);
         break;
       case 2:
-        tabContent = Center(
-          child: Text("Profile Tab Content"),
-        );
-//        tabContent = ProfilePage(false);
+//        tabContent = Center(
+//          child: Text("Profile Tab Content"),
+//        );
+        tabContent = ProfilePage(false);
         break;
     }
     return tabContent;
