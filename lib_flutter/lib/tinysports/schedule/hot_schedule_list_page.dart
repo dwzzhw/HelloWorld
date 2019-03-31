@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
@@ -10,7 +10,7 @@ import 'package:lib_flutter/tinysports/schedule/view/schedule_item_view.dart';
 class HotScheduleListPage extends SportsBasePage {
   final bool needAppBar;
 
-  HotScheduleListPage(this.needAppBar);
+  HotScheduleListPage({this.needAppBar = false});
 
   @override
   State<StatefulWidget> createState() => HotScheduleListPageState();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
@@ -9,11 +9,12 @@ import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
   final bool needAppBar;
+  final String columnId;
 
   @override
   State<StatefulWidget> createState() => SportsHomeFeedListPageState();
 
-  SportsHomeFeedListPage(this.needAppBar);
+  SportsHomeFeedListPage(this.columnId, {this.needAppBar = false});
 }
 
 class SportsHomeFeedListPageState
@@ -29,7 +30,8 @@ class SportsHomeFeedListPageState
 
   void _getFeedIndexListFromNet() {
     isSuccess = true;
-    SportsFeedIndexModel indexModel = SportsFeedIndexModel((feedIndexData) {
+    SportsFeedIndexModel indexModel =
+        SportsFeedIndexModel(widget.columnId, (feedIndexData) {
       List<FeedIndexItem> indexList = feedIndexData?.list;
       if (indexList != null) {
         _getFeedListFromNet(indexList);
@@ -92,17 +94,17 @@ class SportsHomeFeedListPageState
       if (tipsMsg == null || tipsMsg.length == 0) {
         tipsMsg = 'fail to fetch data from net.';
       }
-      return new Center(
+      return Center(
         child: Text('$tipsMsg'),
       );
     } else if (feedItemDataList.length > 0) {
-      return new ListView.builder(
+      return ListView.builder(
           itemCount: feedItemDataList.length,
           itemBuilder: (BuildContext context, int position) {
             return _getFeedItemWidget(position);
           });
     } else {
-      return new Center(
+      return Center(
         child: CircularProgressIndicator(),
       );
     }

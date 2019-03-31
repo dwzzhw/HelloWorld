@@ -40,8 +40,8 @@ abstract class BaseDataModel<T> extends Object {
   }
 
   int getCacheValidTimeInMil() {
-//    return 2*DateUtil.HOUR_IN_MILL_SECONDS;
-    return DateUtil.MINUTE_IN_MILL_SECONDS;
+    return 2*DateUtil.HOUR_IN_MILL_SECONDS;
+//    return DateUtil.MINUTE_IN_MILL_SECONDS;
   }
 
   void loadData({int reqType = REQ_TYPE_CACHE_OR_NET}) {

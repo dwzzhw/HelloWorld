@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/SportsBasePage.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
 import 'package:lib_flutter/tinysports/profile/model/profile_page_model.dart';
@@ -11,7 +11,7 @@ import 'package:lib_flutter/tinysports/profile/view/profile_wallet_view.dart';
 class ProfilePage extends SportsBasePage {
   final bool needAppBar;
 
-  ProfilePage(this.needAppBar);
+  ProfilePage({this.needAppBar = false});
 
   @override
   State<StatefulWidget> createState() => ProfilePageState();

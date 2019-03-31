@@ -11,7 +11,7 @@ class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
 
   @override
   String getUrl() {
-    return 'http://preapp.sports.qq.com/feed/list';
+    return 'http://app.sports.qq.com/feed/list';
   }
 
   @override

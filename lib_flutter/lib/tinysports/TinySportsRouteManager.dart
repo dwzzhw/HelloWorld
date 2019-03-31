@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/ui/sports_home_page.dart';
+import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
+import 'package:lib_flutter/tinysports/ui/sports_main_page.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 
 class TinySportsRouteManager {
@@ -7,6 +8,8 @@ class TinySportsRouteManager {
 
   void initRouteWidgetList() {
     sportPageList = new List();
+    sportPageList.add(SportsPageItem(
+        SportsMainPage.routeName, SportsMainPage.pageName, SportsMainPage()));
     sportPageList.add(SportsPageItem(
         SportsHomePage.routeName, SportsHomePage.pageName, SportsHomePage()));
   }

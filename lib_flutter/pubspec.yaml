@@ -57,6 +57,18 @@ flutter:
 
   assets:
     - assets/images/lake.jpg
+    - assets/images/tab_discover.png
+    - assets/images/tab_discover_current.png
+    - assets/images/tab_match.png
+    - assets/images/tab_match_current.png
+    - assets/images/tab_me.png
+    - assets/images/tab_me_current.png
+    - assets/images/tab_news.png
+    - assets/images/tab_news_current.png
+    - assets/images/tab_shequ.png
+    - assets/images/tab_shequ_current.png
+    - assets/images/tab_vip.png
+    - assets/images/tab_vip_current.png
 
   # To add Flutter specific assets to your application, add an assets section, 
   # like this:
