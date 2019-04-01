@@ -6,6 +6,10 @@ class DateUtil {
   static const int DAY_IN_MILL_SECONDS = 24 * HOUR_IN_MILL_SECONDS;
 
   static String getDateHourMinutePart(String dateStr) {
+    return parseDateStr(dateStr, ['mm', '月', 'dd', '日 ', 'HH', ':', 'nn']);
+  }
+
+  static String getDateMonthDayHourMinPart(String dateStr) {
     return parseDateStr(dateStr, ['HH', ':', 'nn']);
   }
 

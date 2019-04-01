@@ -9,7 +9,7 @@ class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
       this.columnId,
       OnDataCompleteFunc<FeedIndexData> mCompleteFunction,
       OnDataErrorFunc mErrorFunction)
-      : super(mCompleteFunction, onErrorFunction: mErrorFunction);
+      : super(mCompleteFunction, mErrorFunction);
 
   void setCompleteCallbackFunc(Function completeFunc) {
     onCompleteFunction = completeFunc;

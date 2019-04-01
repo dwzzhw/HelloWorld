@@ -5,7 +5,7 @@ import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
 class ProfilePageModel extends BaseDataModel<ProfilePageInfo> {
   ProfilePageModel(OnDataCompleteFunc<ProfilePageInfo> onCompleteFunction,
       OnDataErrorFunc onErrorFunc)
-      : super(onCompleteFunction, onErrorFunction: onErrorFunc);
+      : super(onCompleteFunction, onErrorFunc);
 
   @override
   String getUrl() {

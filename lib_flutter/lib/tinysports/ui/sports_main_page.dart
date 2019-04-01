@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
-import 'package:lib_flutter/tinysports/feed/sports_home_feed_list_page.dart';
-import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_bar.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_item_view.dart';
+import 'package:lib_flutter/tinysports/news/news_container_page.dart';
 import 'package:lib_flutter/tinysports/profile/profile_page.dart';
 import 'package:lib_flutter/tinysports/schedule/hot_schedule_list_page.dart';
 import 'package:lib_flutter/utils/Loger.dart';
@@ -50,8 +49,7 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
   }
 
   void updateSelectedNavigatorItem(int clickedItemType, bool isSelected) {
-    log(
-        '-->updateSelectedNavigatorItem(), type=$clickedItemType, isSelected=$isSelected');
+    log('-->updateSelectedNavigatorItem(), type=$clickedItemType, isSelected=$isSelected');
     if (clickedItemType != selectedNavigatorItemType) {
       setState(() {
         selectedNavigatorItemType = clickedItemType;
@@ -63,17 +61,17 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
     return selectedNavigatorItemType == MainNavigatorItemView.ITEM_TYPE_HOME
         ? null
         : AppBar(
-      title: Text('腾讯体育Lite'),
-    );
+            title: Text('腾讯体育Lite'),
+          );
   }
 
   Widget getNavigatorBar() {
     return Container(
       child: MainNavigatorBar(
           widget.navigatorItemTypeList, selectedNavigatorItemType,
-              (int clickedItemType, bool isSelected) {
-            updateSelectedNavigatorItem(clickedItemType, isSelected);
-          }),
+          (int clickedItemType, bool isSelected) {
+        updateSelectedNavigatorItem(clickedItemType, isSelected);
+      }),
     );
   }
 
@@ -81,7 +79,12 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
     Widget tabContent;
     switch (selectedNavigatorItemType) {
       case MainNavigatorItemView.ITEM_TYPE_HOME:
-        tabContent = SportsHomePage();
+//        tabContent = SportsHomePage();
+      //20190401007173
+      //20190401001318
+      //20180805003682
+        //dwz test
+        tabContent = NewsContainerPage('20190401005988');
         break;
       case MainNavigatorItemView.ITEM_TYPE_SCHEDULE:
         tabContent = HotScheduleListPage();

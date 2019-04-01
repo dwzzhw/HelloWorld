@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
 import 'package:lib_flutter/tinysports/schedule/model/schedule_list_model.dart';
 import 'package:lib_flutter/tinysports/schedule/view/list_group_title_view.dart';
@@ -20,19 +20,15 @@ class HotScheduleListPageState
     extends SportsBasePageState<HotScheduleListPage> {
   List<dynamic> groupedScheduleList = [];
   ScheduleListModel scheduleListModel;
-  bool isSuccess = true;
-  String errTipsMsg;
 
   @override
   void initState() {
     super.initState();
-    log('-->initState begin');
     scheduleListModel =
         ScheduleListModel(fetchDataFromModel, (errCode, errMsg) {
       onFetchDataError(errMsg);
     });
     scheduleListModel.loadData();
-    log('-->initState end');
   }
 
   void fetchDataFromModel(ScheduleListData scheduleListData) {

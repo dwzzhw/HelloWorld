@@ -18,7 +18,7 @@ class MainNavigatorBar extends StatelessWidget {
           color: Colors.grey,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: getItemWidgetList(),
         )
       ],

@@ -5,7 +5,7 @@ import 'package:lib_flutter/tinysports/base/data/column_info.dart';
 class ColumnInfoListModel extends BaseDataModel<ColumnInfoList> {
   ColumnInfoListModel(OnDataCompleteFunc<ColumnInfoList> onCompleteFunction,
       OnDataErrorFunc onErrorFunction)
-      : super(onCompleteFunction, onErrorFunction: onErrorFunction);
+      : super(onCompleteFunction, onErrorFunction);
 
   @override
   String getCacheKey() {

@@ -6,7 +6,7 @@ import 'package:lib_flutter/utils/Loger.dart';
 class ScheduleListModel extends BaseDataModel<ScheduleListData> {
   ScheduleListModel(OnDataCompleteFunc<ScheduleListData> onCompleteFunction,
       OnDataErrorFunc onErrorFunc)
-      : super(onCompleteFunction, onErrorFunction: onErrorFunc);
+      : super(onCompleteFunction, onErrorFunc);
 
   @override
   String getUrl() {

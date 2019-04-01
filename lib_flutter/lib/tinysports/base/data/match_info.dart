@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/utils/Loger.dart';
 
 part 'match_info.g.dart';
 

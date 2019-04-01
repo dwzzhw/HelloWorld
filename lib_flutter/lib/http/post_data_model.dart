@@ -8,7 +8,7 @@ abstract class PostDataModel<T> extends BaseDataModel<T> {
 
   PostDataModel(OnDataCompleteFunc onCompleteFunction,
       {OnDataErrorFunc onErrorFunction})
-      : super(onCompleteFunction, onErrorFunction: onErrorFunction);
+      : super(onCompleteFunction, onErrorFunction);
 
   void loadDataFromNet() {
     logd(TAG, '-->loadDataFromNet()');

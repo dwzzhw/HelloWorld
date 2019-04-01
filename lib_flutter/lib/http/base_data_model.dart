@@ -23,7 +23,7 @@ abstract class BaseDataModel<T> extends Object {
   OnDataErrorFunc onErrorFunction;
   T mRespData;
 
-  BaseDataModel(this.onCompleteFunction, {this.onErrorFunction});
+  BaseDataModel(this.onCompleteFunction, this.onErrorFunction);
 
   String getUrl();
 
