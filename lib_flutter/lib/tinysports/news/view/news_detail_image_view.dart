@@ -1,25 +1,45 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/image_item.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
+import 'package:lib_flutter/utils/Loger.dart';
 
 class NewsDetailImageView extends StatelessWidget {
+  static const TAG = 'NewsDetailImageView';
+
   final NewsDetailItemImgContent itemContent;
 
   NewsDetailImageView(this.itemContent);
 
   @override
   Widget build(BuildContext context) {
-    double fontSize = 18;
-    double lineSpacing = 1.2;
-    Color textColor = Colors.black;
     double itemPaddingTop = 10;
     double itemPaddingBottom = 10;
 
     ImageItem itemItem = itemContent.getPreviewImg();
+    double screenWidth = MediaQuery.of(context).size.width;
+    logd(TAG, '-->screenWidth=$screenWidth');
+
+    double resultWidth = screenWidth - 12 * 2;
+    double resultHeight;
+    double targetWidth = double.tryParse(itemItem.width);
+    double targetHeight = double.tryParse(itemItem.height);
+    if (targetWidth != null &&
+        targetWidth > 0 &&
+        targetHeight != null &&
+        targetHeight > 0) {
+      resultHeight = resultWidth * targetHeight / targetWidth;
+    } else {
+      resultHeight = resultWidth * 9 / 16;
+    }
+
     return Container(
       padding: EdgeInsets.fromLTRB(0, itemPaddingTop, 0, itemPaddingBottom),
-      child: Image.network(itemItem.imgurl,
-          width: 320, height: 180, fit: BoxFit.contain),
+      child: CachedNetworkImage(
+          imageUrl: itemItem.imgurl,
+          width: resultWidth,
+          height: resultHeight,
+          fit: BoxFit.contain),
     );
   }
 }

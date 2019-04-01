@@ -4,7 +4,6 @@ import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_conten
 
 part 'news_detail_item_content.g.dart';
 
-@JsonSerializable()
 abstract class NewsDetailItemContentBase {
   static const int TYPE_NONE = -1;
   static const int TYPE_TEXT = 0;
@@ -15,32 +14,58 @@ abstract class NewsDetailItemContentBase {
   static const int TYPE_LINK = 5;
   static const int TYPE_GROUP_PIC = 6;
 
+  static const String STR_TEXT = 'text';
+  static const String STR_IMG = 'img';
+  static const String STR_VIDEO = 'video';
+  static const String STR_LINK = 'link';
+  static const String STR_GROUP_PIC = 'groupPic';
+
   NewsDetailItemContentBase();
 
   String getTypeStr();
 
   static int getTypeInt(String typeStr) {
     int dataType = TYPE_NONE;
-    if (dataType == TYPE_NONE) {
-      switch (typeStr) {
-        case "text":
-          dataType = TYPE_TEXT;
-          break;
-        case "img":
-          dataType = TYPE_IMG;
-          break;
-        case "link":
-          dataType = TYPE_LINK;
-          break;
-        case "video":
-          dataType = TYPE_VIDEO;
-          break;
-        case "groupPic":
-          dataType = TYPE_GROUP_PIC;
-          break;
-      }
+    switch (typeStr) {
+      case STR_TEXT:
+        dataType = TYPE_TEXT;
+        break;
+      case STR_IMG:
+        dataType = TYPE_IMG;
+        break;
+      case STR_LINK:
+        dataType = TYPE_LINK;
+        break;
+      case STR_VIDEO:
+        dataType = TYPE_VIDEO;
+        break;
+      case STR_GROUP_PIC:
+        dataType = TYPE_GROUP_PIC;
+        break;
     }
     return dataType;
+  }
+
+  static String getTypeStrFromInt(int typeInt) {
+    String typeStr = '';
+    switch (typeInt) {
+      case TYPE_TEXT:
+        typeStr = STR_TEXT;
+        break;
+      case TYPE_IMG:
+        typeStr = STR_IMG;
+        break;
+      case TYPE_LINK:
+        typeStr = STR_LINK;
+        break;
+      case TYPE_VIDEO:
+        typeStr = STR_VIDEO;
+        break;
+      case TYPE_GROUP_PIC:
+        typeStr = STR_GROUP_PIC;
+        break;
+    }
+    return typeStr;
   }
 
   factory NewsDetailItemContentBase.fromJson(Map<String, dynamic> srcJson) {
@@ -122,6 +147,18 @@ class NewsDetailItemVideoContent extends NewsDetailItemContentBase {
     this.vid,
   );
 
+  ImageItem getPreviewImg() {
+    ImageItem previewImg;
+    if (img != null) {
+      if (img.imgurl0 != null && img.imgurl0.isValid()) {
+        previewImg = img.imgurl0;
+      } else {
+        previewImg = img.imgurl1000;
+      }
+    }
+    return previewImg;
+  }
+
   factory NewsDetailItemVideoContent.fromJson(Map<String, dynamic> srcJson) =>
       _$NewsDetailItemVideoContentFromJson(srcJson);
 
@@ -165,8 +202,8 @@ class NewsDetailItemImgContent extends NewsDetailItemContentBase {
   ImageItem getPreviewImg() {
     ImageItem previewImg;
     if (img != null) {
-      if (img.imgurl10 != null && img.imgurl10.isValid()) {
-        previewImg = img.imgurl10;
+      if (img.imgurl0 != null && img.imgurl0.isValid()) {
+        previewImg = img.imgurl0;
       } else {
         previewImg = img.imgurl1000;
       }
@@ -180,7 +217,7 @@ class NewsDetailItemImgContent extends NewsDetailItemContentBase {
       if (img.imgurl1000 != null && img.imgurl1000.isValid()) {
         hdImg = img.imgurl1000;
       } else {
-        hdImg = img.imgurl10;
+        hdImg = img.imgurl0;
       }
     }
     return hdImg;
@@ -199,13 +236,13 @@ class NewsDetailItemImgContent extends NewsDetailItemContentBase {
 
 @JsonSerializable()
 class NewsDetailItemImgGroup extends Object {
-  ImageItem imgurl10;
+  ImageItem imgurl0;
   ImageItem imgurl1000;
 
   ImageItem imgurlgif;
 
   NewsDetailItemImgGroup(
-    this.imgurl10,
+    this.imgurl0,
     this.imgurl1000,
     this.imgurlgif,
   );

@@ -4,6 +4,7 @@ import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/model/news_detail_info_model.dart';
 import 'package:lib_flutter/tinysports/news/news_normal_detail_page.dart';
+import 'package:lib_flutter/tinysports/news/news_photo_group_page.dart';
 
 class NewsContainerPage extends SportsBasePage {
   final bool needAppBar;
@@ -65,13 +66,38 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
       );
     } else if (newsDetailInfo != null) {
       return Container(
-        child: NewsNormalDetailPage(newsDetailInfo),
+        child: _getNewsContentWidget(),
       );
     } else {
       return new Center(
         child: CircularProgressIndicator(),
       );
     }
+  }
+
+  Widget _getNewsContentWidget() {
+    Widget contentWidget;
+    String aType;
+    if (newsDetailInfo != null) {
+      aType = newsDetailInfo.atype;
+      switch (int.tryParse(aType)) {
+        case NewsDetailInfo.ITEM_NORMAL:
+          contentWidget = NewsNormalDetailPage(newsDetailInfo);
+          break;
+        case NewsDetailInfo.ITEM_MULTI_IMG:
+          contentWidget = NewsPhotoGroupPage(newsDetailInfo);
+          break;
+      }
+    }
+    log('-->_getNewsContentWidget(), aType=$aType, widget=$contentWidget');
+    if (contentWidget == null) {
+      contentWidget = Container(
+        child: Center(
+          child: Text('Unsupported News type: $aType'),
+        ),
+      );
+    }
+    return contentWidget;
   }
 
   @override

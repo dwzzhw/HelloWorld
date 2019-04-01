@@ -5,6 +5,7 @@ import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 import 'package:lib_flutter/tinysports/news/view/news_detail_image_view.dart';
 import 'package:lib_flutter/tinysports/news/view/news_detail_text_view.dart';
+import 'package:lib_flutter/tinysports/news/view/news_detail_video_view.dart';
 import 'package:lib_flutter/utils/date_util.dart';
 
 class NewsNormalDetailPage extends SportsBaseStatelessPage {
@@ -68,6 +69,8 @@ class NewsNormalDetailPage extends SportsBaseStatelessPage {
       resultView = NewsDetailTextView(itemContent);
     } else if (itemContent is NewsDetailItemImgContent) {
       resultView = NewsDetailImageView(itemContent);
+    } else if (itemContent is NewsDetailItemVideoContent) {
+      resultView = NewsDetailVideoView(itemContent);
     } else {
       resultView = Text('Unsupported data');
     }

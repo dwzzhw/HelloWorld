@@ -80,11 +80,12 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
     switch (selectedNavigatorItemType) {
       case MainNavigatorItemView.ITEM_TYPE_HOME:
 //        tabContent = SportsHomePage();
-      //20190401007173
-      //20190401001318
-      //20180805003682
+        //20190401007173  资讯
+        //20190401005988  资讯
+        //20190401001318  组图
+        //20180805003682  专题
         //dwz test
-        tabContent = NewsContainerPage('20190401005988');
+        tabContent = NewsContainerPage('20190401001318');
         break;
       case MainNavigatorItemView.ITEM_TYPE_SCHEDULE:
         tabContent = HotScheduleListPage();

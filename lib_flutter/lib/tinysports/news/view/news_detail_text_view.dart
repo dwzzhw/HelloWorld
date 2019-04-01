@@ -22,6 +22,7 @@ class NewsDetailTextView extends StatelessWidget {
         break;
       case NewsDetailItemTxtContent.LOCAL_STYLE_SUB_TITLE:
         fontSize = 12;
+        itemPaddingTop = 0;
         textColor = Colors.grey;
         break;
     }
