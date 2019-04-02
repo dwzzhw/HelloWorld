@@ -31,19 +31,27 @@ class MainNavigatorItemView extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
-            Image.asset(
-              getItemLogoPath(),
-              width: 30.0,
-              height: 30.0,
-              fit: BoxFit.fill,
-            ),
-            Text(
-              getItemTitle(),
-              style: TextStyle(fontSize: 12, color: getTitleColor()),
-            )
+            getIconWidget(),
+            getTitleWidget(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget getIconWidget() {
+    return Image.asset(
+      getItemLogoPath(),
+      width: 30.0,
+      height: 30.0,
+      fit: BoxFit.fill,
+    );
+  }
+
+  Widget getTitleWidget() {
+    return Text(
+      getItemTitle(),
+      style: TextStyle(fontSize: 12, color: getTitleColor()),
     );
   }
 

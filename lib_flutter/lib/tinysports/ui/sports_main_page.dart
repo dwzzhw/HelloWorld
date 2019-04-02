@@ -42,7 +42,8 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
             Expanded(
               child: _getHomeTabContent(),
             ),
-            getNavigatorBar()
+//            getSelfDefineNavigatorBar(),
+            getBottomNavigationBar(),
           ],
         ),
       ),
@@ -66,7 +67,7 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
           );
   }
 
-  Widget getNavigatorBar() {
+  Widget getSelfDefineNavigatorBar() {
     return Container(
       child: MainNavigatorBar(
           widget.navigatorItemTypeList, selectedNavigatorItemType,
@@ -74,6 +75,34 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
         updateSelectedNavigatorItem(clickedItemType, isSelected);
       }),
     );
+  }
+
+  Widget getBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      items: getBottomBarItemList(),
+      onTap: onBottomBarSelected,
+    );
+  }
+
+  List<BottomNavigationBarItem> getBottomBarItemList() {
+    List<BottomNavigationBarItem> list = List();
+    widget.navigatorItemTypeList.forEach((int itemType) {
+      bool isSelected = selectedNavigatorItemType == itemType;
+      MainNavigatorItemView itemView =
+          MainNavigatorItemView(isSelected, itemType, null);
+      list.add(
+        BottomNavigationBarItem(
+            icon: itemView.getIconWidget(), title: itemView.getTitleWidget()),
+      );
+    });
+    return list;
+  }
+
+  void onBottomBarSelected(int selectedIndex) {
+    log('-->onBottomBarSelected(), selectedIndex=$selectedIndex');
+    updateSelectedNavigatorItem(
+        widget.navigatorItemTypeList[selectedIndex], true);
   }
 
   Widget _getHomeTabContent() {
