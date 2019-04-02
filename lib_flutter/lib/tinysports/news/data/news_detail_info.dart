@@ -6,14 +6,6 @@ part 'news_detail_info.g.dart';
 
 @JsonSerializable()
 class NewsDetailInfo extends Object {
-  static const int ITEM_NORMAL = 0;
-  static const int ITEM_MULTI_IMG = 1;// 组图类型
-  static const int ITEM_VIDEO = 2;//视频文章类型（atype=2或3）新增vid字段
-  static const int ITEM_VIDEO_ONLY = 3;
-  static const int ITEM_WEBVIEW = 6; // 链接型文章
-  static const int ITEM_SPECIAL = 11;//专题
-  static const int ITEM_VIDEO_SPECIAL = 23;//视频专辑
-
   String newsId;
 
   String title;

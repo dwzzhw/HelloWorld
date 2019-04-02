@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
@@ -9,7 +10,7 @@ import 'package:lib_flutter/tinysports/news/news_special_detail_page.dart';
 
 class NewsContainerPage extends SportsBasePage {
   final bool needAppBar;
-  String newsId;
+  final String newsId;
 
   NewsContainerPage(this.newsId, {this.needAppBar = false});
 
@@ -82,13 +83,13 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
     if (newsDetailInfo != null) {
       aType = newsDetailInfo.atype;
       switch (int.tryParse(aType)) {
-        case NewsDetailInfo.ITEM_NORMAL:
+        case NewsItem.ITEM_NORMAL:
           contentWidget = NewsNormalDetailPage(newsDetailInfo);
           break;
-        case NewsDetailInfo.ITEM_MULTI_IMG:
+        case NewsItem.ITEM_MULTI_IMG:
           contentWidget = NewsPhotoGroupPage(newsDetailInfo);
           break;
-        case NewsDetailInfo.ITEM_SPECIAL:
+        case NewsItem.ITEM_SPECIAL:
           contentWidget = NewsSpecialDetailPage(newsDetailInfo);
           break;
       }

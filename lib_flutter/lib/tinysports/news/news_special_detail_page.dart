@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
-import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
+import 'package:lib_flutter/tinysports/news/view/news_list_item_view.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_content.dart';
@@ -24,7 +24,6 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
         title: new Text(''),
       ),
       body: Container(
-        padding: EdgeInsets.all(12),
         child: _getSpecialListView(),
       ),
     );
@@ -114,7 +113,7 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
         itemView = NewsSpecialPageTopPicView(itemContent.data);
         break;
       case NewsSpecialListViewDataContainer.VIEW_TYPE_PAGE_NORMAL_ITEM:
-        itemView = FeedItemNewsView(itemContent.data);
+        itemView = NewsListItemView(itemContent.data);
         break;
     }
     return itemView;

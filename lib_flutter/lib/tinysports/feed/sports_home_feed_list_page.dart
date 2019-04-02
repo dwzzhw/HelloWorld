@@ -6,7 +6,7 @@ import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
-import 'package:lib_flutter/tinysports/feed/view/feed_item_news_view.dart';
+import 'package:lib_flutter/tinysports/news/view/news_list_item_view.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
   final bool needAppBar;
@@ -113,7 +113,7 @@ class SportsHomeFeedListPageState
 
   Widget _getFeedItemWidget(int feedItemIndex) {
     NewsItem feedItemDetail = feedItemDataList[feedItemIndex];
-    return FeedItemNewsView(feedItemDetail);
+    return NewsListItemView(feedItemDetail);
   }
 
   @override

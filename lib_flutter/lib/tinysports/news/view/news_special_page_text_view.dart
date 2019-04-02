@@ -14,6 +14,7 @@ class NewsSpecialPageTextView extends StatelessWidget {
     Color textColor = Colors.black;
     double itemPaddingTop = 10;
     double itemPaddingBottom = 10;
+    double itemPaddingLR = 12;
 
     switch (viewType) {
       case NewsSpecialListViewDataContainer.VIEW_TYPE_PAGE_TITLE:
@@ -31,7 +32,7 @@ class NewsSpecialPageTextView extends StatelessWidget {
         break;
     }
     return Container(
-      padding: EdgeInsets.fromLTRB(0, itemPaddingTop, 0, itemPaddingBottom),
+      padding: EdgeInsets.fromLTRB(itemPaddingLR, itemPaddingTop, itemPaddingLR, itemPaddingBottom),
       child: Text(
         txtStr,
         style: TextStyle(
