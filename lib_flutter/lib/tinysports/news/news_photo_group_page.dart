@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/image_item.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
+import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 
@@ -14,7 +15,7 @@ class NewsPhotoGroupPage extends SportsBaseStatelessPage {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        leading: Icon(Icons.chevron_left),
+        leading: AppBarBackButton(),
         backgroundColor: Colors.black,
         title: new Text(
           newsDetailInfo.title,

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/tinysports/TinySportsRouteManager.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/utils/Loger.dart';
 import 'package:lib_flutter/utils/common_utils.dart';
@@ -15,6 +16,8 @@ class NewsListItemView extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         logd(TAG, 'News Item is clicked');
+        TinySportsRouteManager.startNewsDetailPage(
+            context, newsItemInfo?.newsId);
       },
       child: Container(
         padding: const EdgeInsets.all(10.0),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
+import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/news/view/news_list_item_view.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
@@ -20,8 +21,8 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        leading: Icon(Icons.chevron_left),
-        title: new Text(''),
+        leading: AppBarBackButton(),
+        title: new Text(newsDetailInfo?.title),
       ),
       body: Container(
         child: _getSpecialListView(),
