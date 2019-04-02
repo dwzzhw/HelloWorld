@@ -5,6 +5,7 @@ import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/model/news_detail_info_model.dart';
 import 'package:lib_flutter/tinysports/news/news_normal_detail_page.dart';
 import 'package:lib_flutter/tinysports/news/news_photo_group_page.dart';
+import 'package:lib_flutter/tinysports/news/news_special_detail_page.dart';
 
 class NewsContainerPage extends SportsBasePage {
   final bool needAppBar;
@@ -86,6 +87,9 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
           break;
         case NewsDetailInfo.ITEM_MULTI_IMG:
           contentWidget = NewsPhotoGroupPage(newsDetailInfo);
+          break;
+        case NewsDetailInfo.ITEM_SPECIAL:
+          contentWidget = NewsSpecialDetailPage(newsDetailInfo);
           break;
       }
     }

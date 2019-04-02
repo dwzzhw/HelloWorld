@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
+import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_bar.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_item_view.dart';
 import 'package:lib_flutter/tinysports/news/news_container_page.dart';
@@ -79,13 +80,13 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
     Widget tabContent;
     switch (selectedNavigatorItemType) {
       case MainNavigatorItemView.ITEM_TYPE_HOME:
-//        tabContent = SportsHomePage();
+        tabContent = SportsHomePage();
         //20190401007173  资讯
         //20190401005988  资讯
         //20190401001318  组图
         //20180805003682  专题
         //dwz test
-        tabContent = NewsContainerPage('20190401001318');
+//        tabContent = NewsContainerPage('20180805003682');
         break;
       case MainNavigatorItemView.ITEM_TYPE_SCHEDULE:
         tabContent = HotScheduleListPage();

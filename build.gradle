@@ -13,10 +13,10 @@ ext.deps = [
 buildscript {
     repositories {
         jcenter()
-//        maven {
-//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-//        }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url "http://maven.oa.com/nexus/content/groups/androidbuild"
+        }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
     }
     dependencies {
@@ -30,10 +30,10 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-//        maven {
-//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-//        }
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url "http://maven.oa.com/nexus/content/groups/androidbuild"
+        }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         google()
     }
 }

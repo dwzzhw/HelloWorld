@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';

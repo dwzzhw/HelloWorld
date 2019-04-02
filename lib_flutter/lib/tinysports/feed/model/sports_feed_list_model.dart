@@ -1,8 +1,9 @@
 import 'package:lib_flutter/http/net_request_listener.dart';
 import 'package:lib_flutter/http/post_data_model.dart';
+import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 
-class SportsFeedListModel extends PostDataModel<List<FeedItemDetailInfo>> {
+class SportsFeedListModel extends PostDataModel<List<NewsItem>> {
   String idListStr;
 
   SportsFeedListModel(this.idListStr, OnDataCompleteFunc onCompleteFunc,

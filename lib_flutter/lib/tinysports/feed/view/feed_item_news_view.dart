@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
+import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 
 class FeedItemNewsView extends StatelessWidget {
-  final FeedItemDetailInfo feedItemDetail;
+  final NewsItem feedItemDetail;
 
   FeedItemNewsView(this.feedItemDetail);
 

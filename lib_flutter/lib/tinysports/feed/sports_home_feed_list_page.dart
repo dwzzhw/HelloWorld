@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
@@ -19,7 +20,7 @@ class SportsHomeFeedListPage extends SportsBasePage {
 
 class SportsHomeFeedListPageState
     extends SportsBasePageState<SportsHomeFeedListPage> {
-  List<FeedItemDetailInfo> feedItemDataList = [];
+  List<NewsItem> feedItemDataList = [];
 
   @override
   void initState() {
@@ -111,7 +112,7 @@ class SportsHomeFeedListPageState
   }
 
   Widget _getFeedItemWidget(int feedItemIndex) {
-    FeedItemDetailInfo feedItemDetail = feedItemDataList[feedItemIndex];
+    NewsItem feedItemDetail = feedItemDataList[feedItemIndex];
     return FeedItemNewsView(feedItemDetail);
   }
 

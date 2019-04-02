@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 
 part 'news_detail_item_subject_content.g.dart';
@@ -20,6 +21,12 @@ class NewsDetailItemSubjectContent extends NewsDetailItemContentBase {
   @override
   String getTypeStr() {
     return type;
+  }
+
+  bool hasValidData() {
+    return info != null &&
+        info.sectionData != null &&
+        info.sectionData.length > 0;
   }
 }
 
@@ -125,7 +132,7 @@ class NewsSubjectPicInfo extends Object {
 
 @JsonSerializable()
 class NewsSubjectSectionData extends Object {
-  List<NewsSubjectArtlist> artlist;
+  List<NewsItem> artlist;
 
   String title;
 
@@ -140,73 +147,15 @@ class NewsSubjectSectionData extends Object {
   Map<String, dynamic> toJson() => _$NewsSubjectSectionDataToJson(this);
 }
 
-@JsonSerializable()
-class NewsSubjectArtlist extends Object {
-  String newsId;
+class NewsSpecialListViewDataContainer {
+  static const int VIEW_TYPE_PAGE_TITLE = 1;
+  static const int VIEW_TYPE_PAGE_SUBTITLE = 2;
+  static const int VIEW_TYPE_PAGE_PIC_HEADER = 3;
+  static const int VIEW_TYPE_PAGE_GROUP_TITLE = 4;
+  static const int VIEW_TYPE_PAGE_NORMAL_ITEM = 5;
 
-  String title;
+  int viewType;
+  dynamic data;
 
-  String abstract;
-
-  String url;
-
-  String imgurl;
-
-  String imgurl1;
-
-  String imgurl2;
-
-  String pub_time;
-
-  String publishTime;
-
-  String atype;
-
-  String newsAppId;
-
-  String source;
-
-  String shareUrl;
-
-  String duration;
-
-  String hasCopyRight;
-
-  String vid;
-
-  String commentsNum;
-
-  String commentId;
-
-  String tag_key;
-
-  String user_tag_id;
-
-  NewsSubjectArtlist(
-    this.newsId,
-    this.title,
-    this.abstract,
-    this.url,
-    this.imgurl,
-    this.imgurl1,
-    this.imgurl2,
-    this.pub_time,
-    this.publishTime,
-    this.atype,
-    this.newsAppId,
-    this.source,
-    this.shareUrl,
-    this.duration,
-    this.hasCopyRight,
-    this.vid,
-    this.commentsNum,
-    this.commentId,
-    this.tag_key,
-    this.user_tag_id,
-  );
-
-  factory NewsSubjectArtlist.fromJson(Map<String, dynamic> srcJson) =>
-      _$NewsSubjectArtlistFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$NewsSubjectArtlistToJson(this);
+  NewsSpecialListViewDataContainer(this.viewType, this.data);
 }
