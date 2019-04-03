@@ -13,4 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sports Test Page"/>
+
+    <Button
+        android:id="@+id/misc_test_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Test 01" />
 </RelativeLayout>

@@ -4,7 +4,6 @@ import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_bar.dart';
 import 'package:lib_flutter/tinysports/main/view/main_navigator_item_view.dart';
-import 'package:lib_flutter/tinysports/news/news_container_page.dart';
 import 'package:lib_flutter/tinysports/profile/profile_page.dart';
 import 'package:lib_flutter/tinysports/schedule/hot_schedule_list_page.dart';
 import 'package:lib_flutter/utils/Loger.dart';

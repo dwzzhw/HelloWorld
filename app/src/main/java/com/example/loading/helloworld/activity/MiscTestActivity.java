@@ -5,11 +5,15 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loading.helloworld.R;
 import com.loading.common.component.BaseActivity;
+import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
@@ -30,9 +34,34 @@ public class MiscTestActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Log.i(TAG, "Title view is clicked");
-            doBinarySearch();
+            doINetTest();
         }
     };
+
+    public void onBtnClicked(View view) {
+        Loger.d(TAG, "-->onBtnClicked()");
+        switch (view.getId()) {
+            case R.id.misc_test_01:
+                doINetTest();
+                break;
+        }
+    }
+
+    private void doINetTest() {
+        Loger.d(TAG, "-->doINetTest()");
+        AsyncOperationUtil.asyncOperation(
+                () -> {
+                    try {
+                        InetAddress address = InetAddress.getByName("1.2.3.4.");
+                        Loger.d(TAG, "-->doINetTest(), address=" + address);
+                        Toast.makeText(MiscTestActivity.this, "address=" + address, Toast.LENGTH_SHORT).show();
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                        Loger.e(TAG, "-->doINetTest(), exception=" + e, e);
+                    }
+                }
+        );
+    }
 
     private void doBinarySearch() {
         int[] arrays = new int[]{1, 3, 6, 8, 9, 11};
