@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,14 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
   String mid;
   MatchDetailInfoModel matchDetailInfoModel;
   MatchDetailInfo matchDetailInfo;
+  String pageTitle;
 
   MatchDetailPageState(this.mid);
 
   @override
   void initState() {
     super.initState();
+    pageTitle = '';
 
     matchDetailInfoModel = MatchDetailInfoModel(mid, fetchDataFromModel,
         (int code, String errMsg) {
@@ -44,6 +47,14 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
     log('-->fetchDataFromModel(), matchDetailInfo=$info');
     setState(() {
       matchDetailInfo = info;
+      MatchInfo matchInfo = matchDetailInfo?.matchInfo;
+      if (matchInfo != null) {
+        if (matchInfo.isVsMatch()) {
+          pageTitle = matchInfo.leftName + ' VS ' + matchInfo.rightName;
+        } else {
+          pageTitle = matchInfo.title;
+        }
+      }
     });
   }
 
@@ -52,18 +63,28 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
     return Scaffold(
       appBar: AppBar(
         leading: AppBarBackButton(),
-        title: Text('Match Detail Page'),
+        title: Center(
+          child: Text(pageTitle),
+        ),
       ),
-      body: MatchDetailImgTxtHeaderView(matchDetailInfo),
+      body: _getMatchDetailPageContentWidget(),
     );
   }
 
   Widget _getMatchDetailPageContentWidget() {
-    return Center(
-      child: Text(matchDetailInfo != null
-          ? matchDetailInfo.matchInfo.matchDesc
-          : 'Match Detail Info'),
-    );
+    Widget contentWidget;
+    if (!isSuccess) {
+      contentWidget = Center(
+        child: Text('Fail to get match detail info'),
+      );
+    } else if (matchDetailInfo == null) {
+      contentWidget = Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      contentWidget = MatchDetailImgTxtHeaderView(matchDetailInfo);
+    }
+    return contentWidget;
   }
 
   @override

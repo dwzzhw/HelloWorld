@@ -2,10 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
+import 'package:lib_flutter/utils/Loger.dart';
 import 'package:lib_flutter/utils/common_utils.dart';
 import 'package:lib_flutter/utils/date_util.dart';
 
 class MatchDetailImgTxtHeaderView extends StatelessWidget {
+  static const String TAG = 'MatchDetailImgTxtHeaderView';
   final MatchDetailInfo matchDetailInfo;
 
   MatchDetailImgTxtHeaderView(this.matchDetailInfo);
@@ -20,23 +22,30 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             getTeamLogoNameView(matchInfo.leftBadge, matchInfo.leftName),
-            Column(
-              children: <Widget>[
-                getMatchDateTimeLiveTypeView(),
-                getVSAreaWidget(),
-                getMatchDescView(),
-              ],
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  getMatchDateTimeLiveTypeView(),
+                  getVSAreaWidget(),
+                  getMatchDescView(),
+                ],
+              ),
             ),
             getTeamLogoNameView(matchInfo.rightBadge, matchInfo.rightName),
           ],
         );
       } else {
-        resultWidget = Column(
-          children: <Widget>[
-            getMatchDateTimeLiveTypeView(),
-            getMatchTitleView(),
-            getMatchDescView(),
-          ],
+        resultWidget = Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              getMatchDateTimeLiveTypeView(),
+              getMatchTitleView(),
+              getMatchDescView(),
+            ],
+          ),
         );
       }
     }
@@ -45,23 +54,35 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
         child: Text('Bad Match Info'),
       );
     } else {
-      Color startColor = Color(0xFF1589CC);
-      Color endColor = Color(0xFF0F6799);
+//      Color startColor = Color(0xFF1589CC);
+//      Color endColor = Color(0xFF0F6799);
+      Color startColor = Colors.blue;
+      Color endColor = Colors.green;
+
+      if (!CommonUtils.isEmptyStr(matchDetailInfo.leftColor) &&
+          !CommonUtils.isEmptyStr(matchDetailInfo.rightColor)) {
+        startColor = Color(int.tryParse(
+            matchDetailInfo.leftColor.replaceAll(
+                '#', matchDetailInfo.leftColor.length < 8 ? 'ff' : ''),
+            radix: 16));
+        endColor = Color(int.tryParse(
+            matchDetailInfo.rightColor.replaceAll(
+                '#', matchDetailInfo.rightColor.length < 8 ? 'ff' : ''),
+            radix: 16));
+      }
       resultWidget = Container(
         height: 150,
         decoration: BoxDecoration(
 //          color: Colors.blue,
 //          border: new Border.all(color: Colors.yellow, width: 5.0,),
 //          borderRadius: new BorderRadius.all(new Radius.circular(50.0)),
-          gradient: LinearGradient(
-            colors: [startColor, endColor],
-//              begin: Alignment.topLeft,
-//              end: Alignment.bottomRight
-          ),
+//          gradient: new LinearGradient(colors: [Colors.blue, Colors.green]),
+          gradient: new LinearGradient(
+              colors: [startColor, endColor],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
         ),
-        child: Center(
-          child: resultWidget,
-        ),
+        child: resultWidget,
       );
     }
 
@@ -72,6 +93,7 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           CachedNetworkImage(
             imageUrl: logoUrl,
@@ -103,7 +125,7 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
               style: TextStyle(fontSize: fontSize, color: fontColor),
             ),
             Text(
-              '  ::  ',
+              '  :  ',
               style: TextStyle(fontSize: 26, color: Colors.black),
             ),
             Text(
@@ -114,7 +136,7 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
         );
       } else {
         vsWidget = Text(
-          'V:S',
+          'VS',
           style: TextStyle(fontSize: 28, color: Colors.white),
         );
       }
@@ -132,16 +154,22 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
         result = result + '  ' + liveTypeDesc;
       }
     }
-    return Text(
-      result,
-      style: TextStyle(fontSize: 14, color: Colors.white),
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+      child: Text(
+        result,
+        style: TextStyle(fontSize: 14, color: Colors.white),
+      ),
     );
   }
 
   Widget getMatchDescView() {
-    return Text(
-      matchDetailInfo.matchInfo.matchDesc,
-      style: TextStyle(fontSize: 12, color: Colors.grey),
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+      child: Text(
+        matchDetailInfo.matchInfo.matchDesc,
+        style: TextStyle(fontSize: 12, color: Colors.white70),
+      ),
     );
   }
 
