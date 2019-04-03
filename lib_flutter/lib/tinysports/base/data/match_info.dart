@@ -4,26 +4,37 @@ part 'match_info.g.dart';
 
 @JsonSerializable()
 class MatchInfo extends Object {
-  static final String TAG = 'MatchInfo';
+  static const String TAG = 'MatchInfo';
 
   // 赛事类型, 1足球、2篮球、3综合赛事、4非对阵赛事
-  static final String MATCH_TYPE_FOOTBALL = '1';
-  static final String MATCH_TYPE_BASKETBALL = '2';
-  static final String MATCH_TYPE_GENERAL = '3';
-  static final String MATCH_TYPE_NON_VS = '4';
+  static const String MATCH_TYPE_FOOTBALL = '1';
+  static const String MATCH_TYPE_BASKETBALL = '2';
+  static const String MATCH_TYPE_GENERAL = '3';
+  static const String MATCH_TYPE_NON_VS = '4';
 
   // 比赛状态:0未开始、1进行中、2已结束、3比赛前延期、4比赛中延期、5取消
-  static final String MATCH_PERIOD_PRESTART = '0';
-  static final String MATCH_PERIOD_ONGOING = '1';
-  static final String MATCH_PERIOD_FINISHED = '2';
-  static final String MATCH_PERIOD_POSTPONED_PRE_MATCH = '3';
-  static final String MATCH_PERIOD_POSTPONED_IN_MATCH = '4';
-  static final String MATCH_PERIOD_CANCEL = '5';
+  static const String MATCH_PERIOD_PRESTART = '0';
+  static const String MATCH_PERIOD_ONGOING = '1';
+  static const String MATCH_PERIOD_FINISHED = '2';
+  static const String MATCH_PERIOD_POSTPONED_PRE_MATCH = '3';
+  static const String MATCH_PERIOD_POSTPONED_IN_MATCH = '4';
+  static const String MATCH_PERIOD_CANCEL = '5';
 
   // 直播状态 0未开始、1进行中、2已结束，存在任何一种直播即认为正在直播中
-  static final String LIVE_PERIOD_PRESTART = '0';
-  static final String LIVE_PERIOD_ONGOING = '1';
-  static final String LIVE_PERIOD_FINISHED = '2';
+  static const String LIVE_PERIOD_PRESTART = '0';
+  static const String LIVE_PERIOD_ONGOING = '1';
+  static const String LIVE_PERIOD_FINISHED = '2';
+
+  static const int LIVE_TYPE_NONE = 0;
+  static const int LIVE_TYPE_PIC_WORD = 1; //图文直播
+  static const int LIVE_TYPE_AUDIO = 2; //语音直播
+  static const int LIVE_TYPE_VIDEO = 3; //视频直播
+  static const int LIVE_TYPE_COLLECTION = 4;
+
+  static const String LIVE_TYPE_DESC_PIC_WORD = "图文直播";
+  static const String LIVE_TYPE_DESC_VIDEO = "视频直播";
+  static const String LIVE_TYPE_DESC_AUDIO = "音频直播";
+  static const String LIVE_TYPE_DESC_COLLECTION = "集锦";
 
   String matchType;
 
@@ -166,7 +177,7 @@ class MatchInfo extends Object {
     return livePeriod == LIVE_PERIOD_FINISHED;
   }
 
-  String getLiveTypeDesc() {
+  String getLivePeriodDesc() {
     String desc = '';
     if (livePeriod == LIVE_PERIOD_FINISHED) {
       desc = '已结束';
@@ -174,6 +185,25 @@ class MatchInfo extends Object {
       desc = '直播中';
     } else if (livePeriod == LIVE_PERIOD_PRESTART) {
       desc = '未开始';
+    }
+    return desc;
+  }
+
+  String getLiveTypeDesc() {
+    String desc = '';
+    switch (int.tryParse(liveType)) {
+      case LIVE_TYPE_PIC_WORD:
+        desc = LIVE_TYPE_DESC_PIC_WORD;
+        break;
+      case LIVE_TYPE_AUDIO:
+        desc = LIVE_TYPE_DESC_AUDIO;
+        break;
+      case LIVE_TYPE_VIDEO:
+        desc = LIVE_TYPE_DESC_VIDEO;
+        break;
+      case LIVE_TYPE_COLLECTION:
+        desc = LIVE_TYPE_DESC_COLLECTION;
+        break;
     }
     return desc;
   }

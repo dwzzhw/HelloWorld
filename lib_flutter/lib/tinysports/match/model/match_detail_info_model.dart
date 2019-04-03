@@ -1,24 +1,41 @@
 import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/http/net_request_listener.dart';
+import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
 
-class MatchDetailInfoModel extends BaseDataModel{
-  MatchDetailInfoModel(OnDataCompleteFunc onCompleteFunction, OnDataErrorFunc onErrorFunction) : super(onCompleteFunction, onErrorFunction);
+class MatchDetailInfoModel extends BaseDataModel<MatchDetailInfo> {
+  String mid;
+
+  MatchDetailInfoModel(
+      this.mid,
+      OnDataCompleteFunc<MatchDetailInfo> onCompleteFunction,
+      OnDataErrorFunc onErrorFunction)
+      : super(onCompleteFunction, onErrorFunction);
 
   @override
   String getCacheKey() {
-    // TODO: implement getCacheKey
-    return null;
+    return 'match_detail_info_$mid';
   }
 
   @override
   String getUrl() {
-    // TODO: implement getUrl
-    return null;
+    return 'https://app.sports.qq.com/match/detail';
+  }
+
+  @override
+  Map<String, String> getReqParamMap() {
+    Map<String, String> paramMap = super.getReqParamMap();
+    if (paramMap == null) {
+      paramMap = Map<String, String>();
+    }
+    log('-->getReqParamMap(), id=$mid');
+    paramMap['mid'] = mid;
+    return paramMap;
   }
 
   @override
   void parseDataContentObj(dataObj) {
-    // TODO: implement parseDataContentObj
+    if (dataObj is Map<String, dynamic>) {
+      mRespData = MatchDetailInfo.fromJson(dataObj);
+    }
   }
-
 }

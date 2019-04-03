@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/tinysports/TinySportsRouteManager.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
+import 'package:lib_flutter/utils/Loger.dart';
 import 'package:lib_flutter/utils/date_util.dart';
 
 class ScheduleItemView extends StatefulWidget {
@@ -14,6 +16,7 @@ class ScheduleItemView extends StatefulWidget {
 }
 
 class ScheduleItemViewState extends State<ScheduleItemView> {
+  static const String TAG = 'ScheduleItemViewState';
   ScheduleInfo scheduleInfo;
   MatchInfo matchInfo;
 
@@ -25,28 +28,38 @@ class ScheduleItemViewState extends State<ScheduleItemView> {
     matchInfo = scheduleInfo?.matchInfo;
   }
 
+  void _onItemTaped(BuildContext context) {
+    logd(TAG, '-->_onItemTaped(), mid=${matchInfo?.mid}');
+    TinySportsRouteManager.startMatchDetailPage(context, matchInfo?.mid);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
-          child: new Row(
-            children: [
-              getDateDescSection(matchInfo),
-              new Expanded(
-                child: getCenterSectionWidget(matchInfo),
-              ),
-              getMatchStateSection(matchInfo),
-            ],
+    return GestureDetector(
+      onTap: () {
+        _onItemTaped(context);
+      },
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.fromLTRB(4, 10, 4, 10),
+            child: new Row(
+              children: [
+                getDateDescSection(matchInfo),
+                new Expanded(
+                  child: getCenterSectionWidget(matchInfo),
+                ),
+                getMatchStateSection(matchInfo),
+              ],
+            ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
-          height: 0.5,
-          color: Colors.grey[200],
-        ),
-      ],
+          Container(
+            padding: EdgeInsets.fromLTRB(4, 0, 4, 0),
+            height: 0.5,
+            color: Colors.grey[200],
+          ),
+        ],
+      ),
     );
   }
 
@@ -170,7 +183,7 @@ class ScheduleItemViewState extends State<ScheduleItemView> {
             ),
           ),
           Text(
-            matchInfo.getLiveTypeDesc(),
+            matchInfo.getLivePeriodDesc(),
             style: TextStyle(
               fontSize: 12,
               color: stateTxtColor,
