@@ -7,6 +7,6 @@ abstract class SportsBasePage extends StatefulWidget {
   }
 
   void log(String logMsg) {
-    logd(getLogTAG(), logMsg);
+    llogd(getLogTAG(), logMsg);
   }
 }

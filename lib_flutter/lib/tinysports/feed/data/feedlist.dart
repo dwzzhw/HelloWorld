@@ -29,7 +29,7 @@ class FeedList extends Object {
         detailList.add(content.info);
       }
     });
-    logd('FeedIndexPO',
+    llogd('FeedIndexPO',
         '-->getFeedDetailInfoList done, list length=${detailList.length}');
     return detailList;
   }

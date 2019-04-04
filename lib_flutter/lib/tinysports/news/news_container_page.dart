@@ -37,7 +37,7 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
   }
 
   void fetchDataFromModel(NewsDetailInfo detailInfo) {
-    log('-->fetchDataFromModel(), newsDetailInfo=$detailInfo');
+    llog('-->fetchDataFromModel(), newsDetailInfo=$detailInfo');
     setState(() {
       newsDetailInfo = detailInfo;
     });
@@ -56,12 +56,12 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
     } else {
       targetWidget = _getNewsDetailPageContentWidget();
     }
-    log('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 
   Widget _getNewsDetailPageContentWidget() {
-    log('-->_getNewsDetailPageContentWidget(), isSuccess=$isSuccess');
+    llog('-->_getNewsDetailPageContentWidget(), isSuccess=$isSuccess');
     if (!isSuccess) {
       String tipsMsg = errTipsMsg;
       if (tipsMsg == null || tipsMsg.length == 0) {
@@ -99,7 +99,7 @@ class NewsContainerPageState extends SportsBasePageState<NewsContainerPage> {
           break;
       }
     }
-    log('-->_getNewsContentWidget(), aType=$aType, widget=$contentWidget');
+    llog('-->_getNewsContentWidget(), aType=$aType, widget=$contentWidget');
     if (contentWidget == null) {
       contentWidget = Scaffold(
         appBar: AppBar(

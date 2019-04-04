@@ -32,7 +32,7 @@ class HotScheduleListPageState
   }
 
   void fetchDataFromModel(ScheduleListData scheduleListData) {
-    log('-->fetchDataFromModel(), scheduleListData=$scheduleListData');
+    llog('-->fetchDataFromModel(), scheduleListData=$scheduleListData');
     setState(() {
       groupedScheduleList.clear();
       groupedScheduleList
@@ -53,12 +53,12 @@ class HotScheduleListPageState
     } else {
       targetWidget = _getScheduleListPageContentWidget();
     }
-    log('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 
   Widget _getScheduleListPageContentWidget() {
-    log('-->_getScheduleListPageContentWidget(), isSuccess=$isSuccess');
+    llog('-->_getScheduleListPageContentWidget(), isSuccess=$isSuccess');
     if (!isSuccess) {
       String tipsMsg = errTipsMsg;
       if (tipsMsg == null || tipsMsg.length == 0) {

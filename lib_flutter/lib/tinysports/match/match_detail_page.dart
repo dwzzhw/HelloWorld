@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
@@ -45,7 +43,7 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
   }
 
   void fetchDataFromModel(MatchDetailInfo info) {
-    log('-->fetchDataFromModel(), matchDetailInfo=$info');
+    llog('-->fetchDataFromModel(), matchDetailInfo=$info');
     setState(() {
       matchDetailInfo = info;
       MatchInfo matchInfo = matchDetailInfo?.matchInfo;

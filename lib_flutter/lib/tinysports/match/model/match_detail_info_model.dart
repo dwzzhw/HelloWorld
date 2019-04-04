@@ -38,4 +38,9 @@ class MatchDetailInfoModel extends BaseDataModel<MatchDetailInfo> {
       mRespData = MatchDetailInfo.fromJson(dataObj);
     }
   }
+
+  @override
+  String getLogTAG() {
+    return 'MatchDetailInfoModel';
+  }
 }

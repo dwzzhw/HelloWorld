@@ -6,7 +6,7 @@ class HttpController {
 
   static void get(String url, Function callback,
       {Map<String, String> params, Function errorCallback}) async {
-    logd(TAG, '-->get(), url=$url');
+    llogd(TAG, '-->get(), url=$url');
     if (params != null && params.isNotEmpty) {
       StringBuffer sb = new StringBuffer("?");
       params.forEach((key, value) {
@@ -30,7 +30,7 @@ class HttpController {
 
   static void post(String url, Function callback,
       {Map<String, String> params, Function errorCallback}) async {
-    logd(TAG, '-->post(), url=$url');
+    llogd(TAG, '-->post(), url=$url');
     try {
       http.Response res = await http.post(url, body: params);
 

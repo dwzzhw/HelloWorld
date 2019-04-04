@@ -27,7 +27,7 @@ class FeedIndex extends Object {
   Map<String, dynamic> toJson() => _$FeedIndexToJson(this);
 
   List<FeedIndexItem> getFeedIndexList() {
-    logd('FeedIndexPO', '-->getFeedIndexList, data=$data');
+    llogd('FeedIndexPO', '-->getFeedIndexList, data=$data');
     return data?.list;
   }
 }

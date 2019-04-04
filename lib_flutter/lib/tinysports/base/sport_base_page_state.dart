@@ -6,7 +6,7 @@ abstract class SportsBasePageState<T extends StatefulWidget> extends State<T> {
   String errTipsMsg;
 
   void onFetchDataError(String errorMsg) {
-    logd(getLogTAG(), '-->_onFetchDataError(), errorMsg=$errorMsg');
+    llogd(getLogTAG(), '-->_onFetchDataError(), errorMsg=$errorMsg');
     setState(() {
       isSuccess = false;
       errTipsMsg = errorMsg;
@@ -20,7 +20,7 @@ abstract class SportsBasePageState<T extends StatefulWidget> extends State<T> {
     return null;
   }
 
-  void log(String logMsg) {
-    logd(getLogTAG(), logMsg);
+  void llog(String logMsg) {
+    llogd(getLogTAG(), logMsg);
   }
 }

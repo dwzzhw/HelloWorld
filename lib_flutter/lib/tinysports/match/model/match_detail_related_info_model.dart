@@ -42,4 +42,9 @@ class MatchDetailRelatedInfoModel
       mRespData = MatchDetailRelatedInfo.fromJson(dataObj);
     }
   }
+
+  @override
+  String getLogTAG() {
+    return 'MatchDetailRelatedInfoModel';
+  }
 }

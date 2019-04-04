@@ -15,7 +15,7 @@ class ScheduleListModel extends BaseDataModel<ScheduleListData> {
 
   @override
   void parseDataContentObj(dataObj) {
-    log('-->parseDataContentObj');
+    llog('-->parseDataContentObj');
     mRespData = ScheduleListData.fromJson(dataObj);
   }
 
@@ -33,7 +33,7 @@ class ScheduleListModel extends BaseDataModel<ScheduleListData> {
         }
       });
     }
-    log('-->getGroupedScheduleInfoList(), resultList length=${resultList?.length}');
+    llog('-->getGroupedScheduleInfoList(), resultList length=${resultList?.length}');
     return resultList;
   }
 

@@ -26,7 +26,7 @@ class _DemoReadWriteFileState extends State<DemoReadWriteFile> {
   void initState() {
     super.initState();
     widget.storage.readCounter().then((int value) {
-      logd(widget.TAG, '-->read file done, saved count=$_counter');
+      llogd(widget.TAG, '-->read file done, saved count=$_counter');
       setState(() {
         _counter = value;
       });
@@ -69,7 +69,7 @@ class CounterStorage {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    logd('', '-->getLocalFilePat(), path=$path');
+    llogd('', '-->getLocalFilePat(), path=$path');
     return File('$path/counter.txt');
   }
 

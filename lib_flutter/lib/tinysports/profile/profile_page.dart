@@ -37,7 +37,7 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
   }
 
   void fetchDataFromModel(ProfilePageInfo profilePageInfo) {
-    log('-->fetchDataFromModel(), profilePageInfo=$profilePageInfo');
+    llog('-->fetchDataFromModel(), profilePageInfo=$profilePageInfo');
     setState(() {
       this.profilePageInfo = profilePageInfo;
       profilePageItemList.clear();
@@ -76,12 +76,12 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
     } else {
       targetWidget = _getProfilePageContentWidget();
     }
-    log('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 
   Widget _getProfilePageContentWidget() {
-    log('-->_getProfilePageContentWidget(), isSuccess=$isSuccess');
+    llog('-->_getProfilePageContentWidget(), isSuccess=$isSuccess');
     if (!isSuccess) {
       String tipsMsg = errTipsMsg;
       if (tipsMsg == null || tipsMsg.length == 0) {
@@ -104,7 +104,7 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
   }
 
   Widget _getProfileGroupItemWidget(int itemIndex) {
-    log('-->_getProfileGroupItemWidget(), itemIndex=$itemIndex');
+    llog('-->_getProfileGroupItemWidget(), itemIndex=$itemIndex');
     Widget itemWidget;
     String itemType = profilePageItemList[itemIndex];
     if (itemType == VIEW_TYPE_USER_INFO) {

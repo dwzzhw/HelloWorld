@@ -50,7 +50,7 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
   }
 
   void updateSelectedNavigatorItem(int clickedItemType, bool isSelected) {
-    log('-->updateSelectedNavigatorItem(), type=$clickedItemType, isSelected=$isSelected');
+    llog('-->updateSelectedNavigatorItem(), type=$clickedItemType, isSelected=$isSelected');
     if (clickedItemType != selectedNavigatorItemType) {
       setState(() {
         selectedNavigatorItemType = clickedItemType;
@@ -99,7 +99,7 @@ class SportsMainPageState extends SportsBasePageState<SportsMainPage> {
   }
 
   void onBottomBarSelected(int selectedIndex) {
-    log('-->onBottomBarSelected(), selectedIndex=$selectedIndex');
+    llog('-->onBottomBarSelected(), selectedIndex=$selectedIndex');
     updateSelectedNavigatorItem(
         widget.navigatorItemTypeList[selectedIndex], true);
   }

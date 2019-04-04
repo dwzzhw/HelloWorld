@@ -29,7 +29,7 @@ class ScheduleItemViewState extends State<ScheduleItemView> {
   }
 
   void _onItemTaped(BuildContext context) {
-    logd(TAG, '-->_onItemTaped(), mid=${matchInfo?.mid}');
+    llogd(TAG, '-->_onItemTaped(), mid=${matchInfo?.mid}');
     TinySportsRouteManager.startMatchDetailPage(context, matchInfo?.mid);
   }
 

@@ -157,6 +157,6 @@ abstract class BaseDataModel<T> extends Object {
   }
 
   void log(String logMsg) {
-    logd(getLogTAG(), logMsg);
+    llogd(getLogTAG(), logMsg);
   }
 }

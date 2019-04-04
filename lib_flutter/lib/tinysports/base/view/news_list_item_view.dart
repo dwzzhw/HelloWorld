@@ -15,12 +15,12 @@ class NewsListItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        logd(TAG, 'News Item is clicked');
+        llogd(TAG, 'News Item is clicked');
         TinySportsRouteManager.startNewsDetailPage(
             context, newsItemInfo?.newsId);
       },
       child: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
           children: [
             Expanded(

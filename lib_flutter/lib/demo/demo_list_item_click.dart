@@ -52,7 +52,7 @@ class _SampleAppPageState extends State<SampleAppPage> {
         child: new Padding(
             padding: new EdgeInsets.all(10.0), child: new Text("Row $i")),
         onTap: () {
-          log('Row[$i] tapped');
+          llog('Row[$i] tapped');
           printLog('debug-Row[$i] tapped');
         },
       ));

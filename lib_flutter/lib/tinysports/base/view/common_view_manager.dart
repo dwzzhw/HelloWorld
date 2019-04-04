@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/tinysports/base/data/comment_item.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
+import 'package:lib_flutter/tinysports/base/view/comment_item_view.dart';
 import 'package:lib_flutter/tinysports/base/view/common_group_header_view.dart';
 import 'package:lib_flutter/tinysports/base/view/news_list_item_view.dart';
 import 'package:lib_flutter/tinysports/base/view/schedule_item_view.dart';
 
 class CommonViewManager {
+  static const String TAG = 'CommonViewManager';
+
+  static const double PAGE_HORIZON_MARGIN = 10;
+
   static const int VIEW_TYPE_COMMON_NONE = 10000;
   static const int VIEW_TYPE_COMMON_GROUP_HEADER = 10001;
 
-  static const int VIEW_TYPE_NEWS_ITEM_NONE_IMG = 10101;
-  static const int VIEW_TYPE_NEWS_ITEM_ONE_IMG = 10102;
-  static const int VIEW_TYPE_NEWS_ITEM_THREE_IMG = 10103;
+  static const int VIEW_TYPE_NEWS_ITEM_NONE_IMG = 10100;
+  static const int VIEW_TYPE_NEWS_ITEM_ONE_IMG = 10101;
+  static const int VIEW_TYPE_NEWS_ITEM_THREE_IMG = 10102;
 
-  static const int VIEW_TYPE_SCHEDULE_VS = 10111;
-  static const int VIEW_TYPE_SCHEDULE_NON_VS = 10112;
+  static const int VIEW_TYPE_SCHEDULE_VS = 10120;
+  static const int VIEW_TYPE_SCHEDULE_NON_VS = 10121;
+
+  static const int VIEW_TYPE_COMMENT_HOST_ITEM = 10140;
 
   static Widget getCommonView(int viewType, dynamic dataObj) {
     Widget resultView;
     switch (viewType) {
       case VIEW_TYPE_COMMON_NONE:
-        resultView = getNoneView();
+        resultView = getNoneView(dataObj);
         break;
       case VIEW_TYPE_COMMON_GROUP_HEADER:
         if (dataObj is String) {
@@ -39,16 +47,29 @@ class CommonViewManager {
           resultView = ScheduleItemView(dataObj);
         }
         break;
+      case VIEW_TYPE_COMMENT_HOST_ITEM:
+        if (dataObj is CommentItem) {
+          resultView = getCommentHostItemView(dataObj);
+        }
+        break;
     }
     return resultView;
   }
 
-  static Widget getNoneView() {
+  static Widget getNoneView(dynamic dataObj) {
+    String tipsStr = 'None view';
+    if (dataObj is NewsItem) {
+      tipsStr = 'Unsupported News Item, atype=${dataObj.atype}';
+    }
     return Container(
 //      width: 0,
 //      height: 0,
-      child: Text('None view'),
+      child: Text(tipsStr),
     );
+  }
+
+  static Widget getCommentHostItemView(CommentItem commentItem) {
+    return CommentItemView(commentItem);
   }
 
   static Widget getNewsItemView(NewsItem newsItem) {

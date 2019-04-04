@@ -14,7 +14,7 @@ class FileHandler {
   Future<File> getDocFile(String filePath) async {
     final path = await _docDirPath;
     File resultFile = File('$path/$filePath');
-    logd(TAG,
+    llogd(TAG,
         '-->getDocFile(), target path=$filePath, result path=${resultFile?.path}');
     return resultFile;
   }
@@ -27,7 +27,7 @@ class FileHandler {
   Future<File> getCacheFile(String filePath) async {
     final path = await _cacheDirPath;
     File resultFile = File('$path/$filePath');
-    logd(TAG,
+    llogd(TAG,
         '-->getCacheFile(), target path=$filePath, result path=${resultFile?.path}');
     return resultFile;
   }
@@ -41,7 +41,7 @@ class FileHandler {
   Future<File> getExternalFile(String filePath) async {
     final path = await _externalDirPath;
     File resultFile = File('$path/$filePath');
-    logd(TAG,
+    llogd(TAG,
         '-->getExternalFile(), target path=$filePath, result path=${resultFile?.path}');
     return resultFile;
   }

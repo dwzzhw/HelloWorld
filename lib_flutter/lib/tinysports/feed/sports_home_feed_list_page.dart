@@ -23,7 +23,7 @@ class SportsHomeFeedListPageState
 
   @override
   void initState() {
-    log('-->initState()');
+    llog('-->initState()');
     super.initState();
     _getFeedIndexListFromNet();
   }
@@ -53,9 +53,9 @@ class SportsHomeFeedListPageState
         idList += ',';
       }
     }
-    log('__getFeedListFromNet(), ids=$idList');
+    llog('__getFeedListFromNet(), ids=$idList');
     SportsFeedListModel listModel = SportsFeedListModel(idList, (feedItemList) {
-      log('-->fetch data return, feedItemList=$feedItemList');
+      llog('-->fetch data return, feedItemList=$feedItemList');
       if (feedItemList != null) {
         setState(() {
           feedItemDataList.clear();
@@ -84,7 +84,8 @@ class SportsHomeFeedListPageState
     } else {
       targetWidget = _getFeedListPageContentWidget();
     }
-    log('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog(
+        '-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 
@@ -98,11 +99,15 @@ class SportsHomeFeedListPageState
         child: Text('$tipsMsg'),
       );
     } else if (feedItemDataList.length > 0) {
-      return ListView.builder(
-          itemCount: feedItemDataList.length,
-          itemBuilder: (BuildContext context, int position) {
-            return _getFeedItemWidget(position);
-          });
+      return Container(
+        padding: EdgeInsets.fromLTRB(CommonViewManager.PAGE_HORIZON_MARGIN, 0,
+            CommonViewManager.PAGE_HORIZON_MARGIN, 0),
+        child: ListView.builder(
+            itemCount: feedItemDataList.length,
+            itemBuilder: (BuildContext context, int position) {
+              return _getFeedItemWidget(position);
+            }),
+      );
     } else {
       return Center(
         child: CircularProgressIndicator(),

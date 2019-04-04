@@ -21,7 +21,7 @@ class MainNavigatorItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        logd(TAG,
+        llogd(TAG,
             '-->navigator item is clicked, type=$itemType, isSelected=$isSelected');
         if (onClickListener != null) {
           onClickListener(itemType, isSelected);

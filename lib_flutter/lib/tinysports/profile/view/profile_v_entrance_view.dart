@@ -14,7 +14,7 @@ class ProfileVEntranceView extends StatelessWidget {
     int itemCnt = itemList.length;
     int lineCnt = itemCnt ~/ 4 + (itemCnt % 4 == 0 ? 0 : 1);
     List<Widget> lineWidgetList = List();
-    logd(TAG, '-->build, itemCnt=$itemCnt, lineCnt=$lineCnt');
+    llogd(TAG, '-->build, itemCnt=$itemCnt, lineCnt=$lineCnt');
     for (int i = 0; i < lineCnt; i++) {
       List<Widget> columnWidgetList = List();
       for (int j = i * 4; j < (i + 1) * 4; j++) {

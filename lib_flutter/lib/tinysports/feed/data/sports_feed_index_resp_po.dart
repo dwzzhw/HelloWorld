@@ -11,13 +11,13 @@ class SportsFeedIndexRespPO {
 
   factory SportsFeedIndexRespPO.fromJson(String jsonStr) {
     final parsedMap = jsonDecode(jsonStr);
-    logd('FeedIndexPO', '-->SportsFeedIndexRespPO.fromJson(), parsedMap OK');
+    llogd('FeedIndexPO', '-->SportsFeedIndexRespPO.fromJson(), parsedMap OK');
     return SportsFeedIndexRespPO(parsedMap['code'], parsedMap['version'],
         SportsFeedIndexInfo.fromJson(parsedMap['data']));
   }
 
   List<SportsFeedIndexItem> getFeedIndexList() {
-    logd('FeedIndexPO', '-->getFeedIndexList, data=$data');
+    llogd('FeedIndexPO', '-->getFeedIndexList, data=$data');
     return data?.list;
   }
 }
@@ -31,7 +31,7 @@ class SportsFeedIndexInfo {
     List itemJsonStrList = jsonStr['list'];
 //    logd('FeedIndexPO',
 //        '-->SportsFeedIndexInfo.fromJson(), list=$itemJsonStrList');
-    logd('FeedIndexPO', '-->SportsFeedIndexInfo.fromJson(), OK');
+    llogd('FeedIndexPO', '-->SportsFeedIndexInfo.fromJson(), OK');
 
     List<SportsFeedIndexItem> tList = itemJsonStrList
         .map<SportsFeedIndexItem>((json) => SportsFeedIndexItem.fromJson(json))

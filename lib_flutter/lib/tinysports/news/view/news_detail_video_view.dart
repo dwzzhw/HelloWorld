@@ -22,7 +22,7 @@ class NewsDetailVideoView extends StatelessWidget {
 
     ImageItem itemItem = itemContent.getPreviewImg();
     double screenWidth = MediaQuery.of(context).size.width;
-    logd(TAG, '-->screenWidth=$screenWidth');
+    llogd(TAG, '-->screenWidth=$screenWidth');
 
     double resultWidth = screenWidth - 12 * 2;
     double resultHeight;

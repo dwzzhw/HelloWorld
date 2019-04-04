@@ -9,7 +9,7 @@ class CacheManager {
   static const String CACHE_DIR = 'cache';
 
   static void writeToCache(String cacheKey, dynamic payload) async {
-    logd(TAG, '-->writeToCache(), cacheKey=$cacheKey, payload=$payload');
+    llogd(TAG, '-->writeToCache(), cacheKey=$cacheKey, payload=$payload');
     if (cacheKey != null && cacheKey.length > 0 && payload != null) {
       File cacheFile = await FileHandler().getCacheFile('$CACHE_DIR/$cacheKey');
       cacheFile.create(recursive: true);
@@ -41,10 +41,10 @@ class CacheManager {
 //        }
       }
     } catch (e, s) {
-      logd(TAG, '-->Exception happens when parse cached obj, stack=$s');
+      llogd(TAG, '-->Exception happens when parse cached obj, stack=$s');
     }
 
-    logd(TAG, '-->readFromCache(), cacheKey=$cacheKey, cacheObj=$cacheObj');
+    llogd(TAG, '-->readFromCache(), cacheKey=$cacheKey, cacheObj=$cacheObj');
     return cacheObj;
   }
 }
