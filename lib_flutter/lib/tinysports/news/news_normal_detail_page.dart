@@ -15,10 +15,10 @@ class NewsNormalDetailPage extends SportsBaseStatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: AppBarBackButton(),
-        title: new Text(''),
+        title: Text(''),
       ),
       body: Container(
         padding: EdgeInsets.all(12),
@@ -53,7 +53,7 @@ class NewsNormalDetailPage extends SportsBaseStatelessPage {
         headerList.add(subTitleContent);
       }
 
-      return new ListView.builder(
+      return ListView.builder(
           itemCount: itemList.length + headerList.length,
           itemBuilder: (BuildContext context, int position) {
             return _getNewsDetailContentItemView(position < headerList.length

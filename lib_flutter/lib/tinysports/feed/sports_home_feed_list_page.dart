@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
+import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
-import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
 import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
-import 'package:lib_flutter/tinysports/news/view/news_list_item_view.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
   final bool needAppBar;
@@ -113,7 +112,7 @@ class SportsHomeFeedListPageState
 
   Widget _getFeedItemWidget(int feedItemIndex) {
     NewsItem feedItemDetail = feedItemDataList[feedItemIndex];
-    return NewsListItemView(feedItemDetail);
+    return CommonViewManager.getNewsItemView(feedItemDetail);
   }
 
   @override

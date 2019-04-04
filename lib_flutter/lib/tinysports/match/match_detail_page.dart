@@ -1,11 +1,12 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
+import 'package:lib_flutter/tinysports/match/match_detail_prepost_page.dart';
 import 'package:lib_flutter/tinysports/match/model/match_detail_info_model.dart';
 import 'package:lib_flutter/tinysports/match/view/match_detail_img_txt_header_view.dart';
 
@@ -82,9 +83,21 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
         child: CircularProgressIndicator(),
       );
     } else {
-      contentWidget = MatchDetailImgTxtHeaderView(matchDetailInfo);
+      contentWidget = Column(
+        children: <Widget>[
+          MatchDetailImgTxtHeaderView(matchDetailInfo),
+          Expanded(
+            child: _getMatchDetailSubContentWidget(),
+          )
+        ],
+      );
     }
     return contentWidget;
+  }
+
+  Widget _getMatchDetailSubContentWidget() {
+    Widget subContentWidget = MatchDetailPrePostPage(mid, matchDetailInfo);
+    return subContentWidget;
   }
 
   @override

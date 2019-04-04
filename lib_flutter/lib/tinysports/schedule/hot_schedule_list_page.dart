@@ -5,7 +5,7 @@ import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
 import 'package:lib_flutter/tinysports/schedule/model/schedule_list_model.dart';
 import 'package:lib_flutter/tinysports/schedule/view/list_group_title_view.dart';
-import 'package:lib_flutter/tinysports/schedule/view/schedule_item_view.dart';
+import 'package:lib_flutter/tinysports/base/view/schedule_item_view.dart';
 
 class HotScheduleListPage extends SportsBasePage {
   final bool needAppBar;
