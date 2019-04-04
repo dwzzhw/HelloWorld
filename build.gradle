@@ -16,7 +16,10 @@ buildscript {
 //            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
+//        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
+        maven{
+            url'https://maven.google.com'
+        }
         jcenter()
         google()
     }
@@ -34,6 +37,9 @@ allprojects {
 //            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{
+            url'https://maven.google.com'
+        }
 //        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
