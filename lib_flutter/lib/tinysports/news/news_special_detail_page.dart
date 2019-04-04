@@ -3,7 +3,6 @@ import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
 import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
-import 'package:lib_flutter/tinysports/base/view/news_list_item_view.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_content.dart';
@@ -20,10 +19,10 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         leading: AppBarBackButton(),
-        title: new Text(newsDetailInfo?.title),
+        title: Text(newsDetailInfo?.title),
       ),
       body: Container(
         child: _getSpecialListView(),
@@ -91,7 +90,7 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
       });
 
       log('-->item count=${viewDataList.length}');
-      return new ListView.builder(
+      return ListView.builder(
           itemCount: viewDataList.length,
           itemBuilder: (BuildContext context, int position) {
             return _getSpecialItemView(viewDataList[position]);
@@ -115,7 +114,10 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
         itemView = NewsSpecialPageTopPicView(itemContent.data);
         break;
       case NewsSpecialListViewDataContainer.VIEW_TYPE_PAGE_NORMAL_ITEM:
-        itemView = CommonViewManager.getNewsItemView(itemContent.data);
+        itemView = Container(
+            padding: EdgeInsets.fromLTRB(CommonViewManager.PAGE_HORIZON_MARGIN,
+                0, CommonViewManager.PAGE_HORIZON_MARGIN, 0),
+            child: CommonViewManager.getNewsItemView(itemContent.data));
         break;
     }
     return itemView;
