@@ -10,9 +10,9 @@ class CommonGroupHeaderView extends StatelessWidget {
     double fontSize = 18;
     double lineSpacing = 1.2;
     Color textColor = Colors.black;
-    double itemPaddingTop = 10;
+    double itemPaddingTop = 0;
     double itemPaddingBottom = 10;
-    double itemPaddingLR = 12;
+    double itemPaddingLR = 2;
 
     return Container(
       padding: EdgeInsets.fromLTRB(
