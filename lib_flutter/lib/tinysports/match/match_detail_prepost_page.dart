@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/http/multi_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/comment_item.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
@@ -6,10 +7,9 @@ import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
 import 'package:lib_flutter/tinysports/comment/data/comment_list_content_info.dart';
 import 'package:lib_flutter/tinysports/comment/data/comment_list_page_info.dart';
-import 'package:lib_flutter/tinysports/comment/model/comment_list_info_model.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_related_info.dart';
-import 'package:lib_flutter/tinysports/match/model/match_detail_related_info_model.dart';
+import 'package:lib_flutter/tinysports/match/model/match_detail_pre_post_model.dart';
 import 'package:lib_flutter/tinysports/match/view/MatchViewManager.dart';
 import 'package:lib_flutter/utils/common_utils.dart';
 
@@ -28,8 +28,8 @@ class MatchDetailPrePostPageState
     extends SportsBasePageState<MatchDetailPrePostPage> {
   String mid;
   MatchDetailInfo matchDetailInfo;
-  MatchDetailRelatedInfoModel matchDetailRelatedInfoModel;
-  CommentListInfoModel commentListInfoModel;
+  MatchDetailPrePostModel prePostDataModel;
+
   MatchDetailRelatedInfo matchDetailRelatedInfo;
   CommentListPageInfo commentListPageInfo;
 
@@ -39,31 +39,25 @@ class MatchDetailPrePostPageState
   void initState() {
     super.initState();
 
-    matchDetailRelatedInfoModel = MatchDetailRelatedInfoModel(
-        mid, onGotRelatedInfoFromModel, (int code, String errMsg) {
-      onFetchDataError(errMsg);
-    });
-    matchDetailRelatedInfoModel.loadData();
+    prePostDataModel = MatchDetailPrePostModel(
+        mid, matchDetailInfo?.targetId, onFetchDataCompleted);
+
+    prePostDataModel.loadData();
   }
 
-  void onGotRelatedInfoFromModel(MatchDetailRelatedInfo info) {
-    llog('-->onGotRelatedInfoFromModel(), matchRelatedInfo=$info');
-    matchDetailRelatedInfo = info;
-    fetchCommentListFromNet();
-  }
-
-  void fetchCommentListFromNet() {
-    if (commentListInfoModel == null) {
-      commentListInfoModel = CommentListInfoModel(matchDetailInfo?.targetId,
-          onGotCommentListInfoFromModel, (int code, String errMsg) {});
-    }
-    commentListInfoModel.loadData();
-  }
-
-  void onGotCommentListInfoFromModel(CommentListPageInfo info) {
-    llog('-->onGotCommentListInfoFromModel(), commentListPageInfo=$info');
+  void onFetchDataCompleted(
+      MultiDataModel multiDataModel, int dataType, bool success) {
+    llog(
+        '-->onFetchDataCompleted(), multiDataModel=$multiDataModel, dataType=$dataType, success=$success');
     setState(() {
-      commentListPageInfo = info;
+      if (success && multiDataModel is MatchDetailPrePostModel) {
+        matchDetailRelatedInfo = multiDataModel.matchDetailRelatedInfo;
+        commentListPageInfo = multiDataModel.commentListPageInfo;
+        llog(
+            '-->onFetchDataCompleted(), matchDetailRelatedInfo=$matchDetailRelatedInfo, commentListPageInfo=$commentListPageInfo');
+      } else {
+        onFetchDataError(multiDataModel.lastErrorMsg);
+      }
     });
   }
 

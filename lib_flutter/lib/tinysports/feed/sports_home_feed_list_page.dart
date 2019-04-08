@@ -31,14 +31,14 @@ class SportsHomeFeedListPageState
   void _getFeedIndexListFromNet() {
     isSuccess = true;
     SportsFeedIndexModel indexModel =
-        SportsFeedIndexModel(widget.columnId, (feedIndexData) {
-      List<FeedIndexItem> indexList = feedIndexData?.list;
+        SportsFeedIndexModel(widget.columnId, (dataModel, dataType) {
+      List<FeedIndexItem> indexList = dataModel.mRespData?.list;
       if (indexList != null) {
         _getFeedListFromNet(indexList);
       } else {
         onFetchDataError('Index list is empty');
       }
-    }, (code, errMsg) {
+    }, (dataModel, code, errMsg, dataType) {
       onFetchDataError(errMsg);
     });
     indexModel.loadData();
@@ -54,17 +54,18 @@ class SportsHomeFeedListPageState
       }
     }
     llog('__getFeedListFromNet(), ids=$idList');
-    SportsFeedListModel listModel = SportsFeedListModel(idList, (feedItemList) {
-      llog('-->fetch data return, feedItemList=$feedItemList');
-      if (feedItemList != null) {
+    SportsFeedListModel listModel =
+        SportsFeedListModel(idList, (dataModel, dataType) {
+      llog('-->fetch data return, feedItemList=${dataModel.mRespData}');
+      if (dataModel != null && dataModel.mRespData != null) {
         setState(() {
           feedItemDataList.clear();
-          feedItemDataList.addAll(feedItemList);
+          feedItemDataList.addAll(dataModel.mRespData);
         });
       } else {
         onFetchDataError('Feed detail list is empty');
       }
-    }, (code, errMsg) {
+    }, (dataModel, code, errMsg, dataType) {
       onFetchDataError(errMsg);
     });
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
+import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/column_info.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/feed/model/column_info_list_model.dart';
 import 'package:lib_flutter/tinysports/feed/sports_home_feed_list_page.dart';
 
@@ -24,9 +25,10 @@ class SportsHomePageState extends State<SportsHomePage> {
 
   void _getColumnInfoListFromNet() {
     ColumnInfoListModel model =
-        ColumnInfoListModel((ColumnInfoList columnInfoList) {
-      initColumnList(columnInfoList?.list);
-    }, (int errCode, String errMsg) {
+        ColumnInfoListModel((BaseDataModel<ColumnInfoList> dataModel, int dataType) {
+      initColumnList(
+          dataModel.mRespData?.list);
+    }, (BaseDataModel dataModel, int errCode, String errMsg, int dataType) {
       initColumnList(null);
     });
     model.loadData();

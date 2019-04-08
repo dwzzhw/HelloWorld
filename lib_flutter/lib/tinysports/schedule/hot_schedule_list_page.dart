@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
+import 'package:lib_flutter/tinysports/base/view/schedule_item_view.dart';
 import 'package:lib_flutter/tinysports/schedule/model/schedule_list_model.dart';
 import 'package:lib_flutter/tinysports/schedule/view/list_group_title_view.dart';
-import 'package:lib_flutter/tinysports/base/view/schedule_item_view.dart';
 
 class HotScheduleListPage extends SportsBasePage {
   final bool needAppBar;
@@ -25,14 +25,14 @@ class HotScheduleListPageState
   void initState() {
     super.initState();
     scheduleListModel =
-        ScheduleListModel(fetchDataFromModel, (errCode, errMsg) {
+        ScheduleListModel(fetchDataFromModel, (BaseDataModel dataModel, errCode, errMsg, int dataType) {
       onFetchDataError(errMsg);
     });
     scheduleListModel.loadData();
   }
 
-  void fetchDataFromModel(ScheduleListData scheduleListData) {
-    llog('-->fetchDataFromModel(), scheduleListData=$scheduleListData');
+  void fetchDataFromModel(BaseDataModel dataModel, int dataType) {
+    llog('-->fetchDataFromModel(), scheduleListData=${dataModel.mRespData}');
     setState(() {
       groupedScheduleList.clear();
       groupedScheduleList
@@ -53,7 +53,8 @@ class HotScheduleListPageState
     } else {
       targetWidget = _getScheduleListPageContentWidget();
     }
-    llog('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog(
+        '-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 

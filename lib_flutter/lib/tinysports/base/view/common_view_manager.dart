@@ -84,8 +84,10 @@ class CommonViewManager {
         break;
       case NewsItem.ITEM_SPECIAL:
       case NewsItem.ITEM_VIDEO:
+      case NewsItem.ITEM_VIDEO_ONLY:
       case NewsItem.ITEM_VIDEO_SPECIAL:
       case NewsItem.ITEM_WEBVIEW:
+      case NewsItem.ITEM_NORMAL:
         itemViewType = VIEW_TYPE_NEWS_ITEM_ONE_IMG;
         break;
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
+import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
+import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
 import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
 import 'package:lib_flutter/tinysports/profile/model/profile_page_model.dart';
 import 'package:lib_flutter/tinysports/profile/view/profile_k_entrance_view.dart';
@@ -30,16 +31,17 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    profilePageModel = ProfilePageModel(fetchDataFromModel, (errCode, errMsg) {
+    profilePageModel =
+        ProfilePageModel(fetchDataFromModel, (BaseDataModel dataModel, errCode, errMsg, int dataType) {
       onFetchDataError(errMsg);
     });
     profilePageModel.loadData();
   }
 
-  void fetchDataFromModel(ProfilePageInfo profilePageInfo) {
-    llog('-->fetchDataFromModel(), profilePageInfo=$profilePageInfo');
+  void fetchDataFromModel(BaseDataModel dataModel, int dataType) {
+    llog('-->fetchDataFromModel(), profilePageInfo=${dataModel.mRespData}');
     setState(() {
-      this.profilePageInfo = profilePageInfo;
+      this.profilePageInfo = dataModel.mRespData;
       profilePageItemList.clear();
       if (profilePageInfo != null) {
         if (profilePageInfo.userInfo != null) {
@@ -76,7 +78,8 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
     } else {
       targetWidget = _getProfilePageContentWidget();
     }
-    llog('-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
+    llog(
+        '-->build(), targetWidget=$targetWidget, needAppBar=${widget.needAppBar}');
     return targetWidget;
   }
 

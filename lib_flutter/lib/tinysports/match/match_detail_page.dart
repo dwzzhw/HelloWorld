@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
@@ -36,16 +37,16 @@ class MatchDetailPageState extends SportsBasePageState<MatchDetailPage> {
     pageTitle = '';
 
     matchDetailInfoModel = MatchDetailInfoModel(mid, fetchDataFromModel,
-        (int code, String errMsg) {
+        (BaseDataModel dataModel, int code, String errMsg, int dataType) {
       onFetchDataError(errMsg);
     });
     matchDetailInfoModel.loadData();
   }
 
-  void fetchDataFromModel(MatchDetailInfo info) {
-    llog('-->fetchDataFromModel(), matchDetailInfo=$info');
+  void fetchDataFromModel(BaseDataModel<MatchDetailInfo> dataModel, int dataType) {
+    llog('-->fetchDataFromModel(), matchDetailInfo=${dataModel.mRespData}');
     setState(() {
-      matchDetailInfo = info;
+      matchDetailInfo = dataModel.mRespData;
       MatchInfo matchInfo = matchDetailInfo?.matchInfo;
       if (matchInfo != null) {
         if (matchInfo.isVsMatch()) {

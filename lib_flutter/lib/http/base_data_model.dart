@@ -12,8 +12,11 @@ abstract class BaseDataModel<T> extends Object {
   static const int ERROR_CODE_EXCEPTION = -1001;
   static const int ERROR_CODE_EMPTY_BODY = -1002;
 
-  static const int RESP_TYPE_CACHE = 1;
-  static const int RESP_TYPE_NET = 2;
+  static const int LOAD_DATA_TYPE_CACHE = 0;
+  static const int LOAD_DATA_TYPE_REFRESH = 1;
+  static const int LOAD_DATA_TYPE_LOAD_MORE = 2;
+  static const int LOAD_DATA_TYPE_LOAD_PREV = 3;
+  static const int LOAD_DATA_TYPE_PERIOD = 4;
 
   static const int REQ_TYPE_CACHE_OR_NET = 1;
   static const int REQ_TYPE_CACHE_AND_NET = 2;
@@ -40,7 +43,7 @@ abstract class BaseDataModel<T> extends Object {
   }
 
   int getCacheValidTimeInMil() {
-    return 2*DateUtil.HOUR_IN_MILL_SECONDS;
+    return 2 * DateUtil.HOUR_IN_MILL_SECONDS;
 //    return DateUtil.MINUTE_IN_MILL_SECONDS;
   }
 
@@ -56,7 +59,7 @@ abstract class BaseDataModel<T> extends Object {
         }
       }).whenComplete(() {
         if (mRespData != null) {
-          _notifyDataComplete(RESP_TYPE_CACHE);
+          _notifyDataComplete(LOAD_DATA_TYPE_CACHE);
           if (reqType <= REQ_TYPE_CACHE_OR_NET) {
             return;
           }
@@ -72,8 +75,13 @@ abstract class BaseDataModel<T> extends Object {
     log('-->loadDataFromNet()');
     HttpController.get(getUrl(), onGetHttpRespBody, params: getReqParamMap(),
         errorCallback: (exception) {
-      notifyDataError(ERROR_CODE_EXCEPTION, exception.toString());
+      notifyDataError(
+          ERROR_CODE_EXCEPTION, exception.toString(), LOAD_DATA_TYPE_REFRESH);
     });
+  }
+
+  void cancelNetReq() {
+    //TODO to be implement
   }
 
   Future<dynamic> getCachedData() async {
@@ -99,8 +107,8 @@ abstract class BaseDataModel<T> extends Object {
   void onGetHttpRespBody(String respBodyStr) {
     log('-->onGetRespBody(), response body=$respBodyStr');
     if (respBodyStr == null) {
-      notifyDataError(
-          ERROR_CODE_EMPTY_BODY, 'Fail to get response from server');
+      notifyDataError(ERROR_CODE_EMPTY_BODY, 'Fail to get response from server',
+          LOAD_DATA_TYPE_REFRESH);
     } else {
       parseHttpRespBody(respBodyStr);
     }
@@ -116,10 +124,10 @@ abstract class BaseDataModel<T> extends Object {
     dynamic dataContentObj = parsedMap['data'];
 
     if (code != 0) {
-      notifyDataError(code, errMsg);
+      notifyDataError(code, errMsg, LOAD_DATA_TYPE_REFRESH);
     } else {
       parseDataContentObj(dataContentObj);
-      _notifyDataComplete(RESP_TYPE_NET);
+      _notifyDataComplete(LOAD_DATA_TYPE_REFRESH);
       if (needCache() && mRespData != null) {
         CacheManager.writeToCache(getCacheKey(), respBody);
       }
@@ -145,14 +153,14 @@ abstract class BaseDataModel<T> extends Object {
   void _notifyDataComplete(int respType) {
     log('-->notifyDataComplete(), url=${getUrl()}, respType=$respType, OnCompleteFunction=$onCompleteFunction');
     if (onCompleteFunction != null) {
-      onCompleteFunction(mRespData);
+      onCompleteFunction(this, respType);
     }
   }
 
-  void notifyDataError(int errorCode, String errorMsg) {
-    log('-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, OnErrorFunction=$onErrorFunction');
+  void notifyDataError(int errorCode, String errorMsg, int respType) {
+    log('-->notifyDataError(), errorCode=$errorCode, errorMsg=$errorMsg, respType=$respType, OnErrorFunction=$onErrorFunction');
     if (onErrorFunction != null) {
-      onErrorFunction(errorCode, errorMsg);
+      onErrorFunction(this, errorCode, errorMsg, respType);
     }
   }
 
