@@ -13,6 +13,7 @@ import 'package:lib_flutter/demo/demo_parse_json_background.dart';
 import 'package:lib_flutter/demo/demo_random_words.dart';
 import 'package:lib_flutter/demo/demo_read_write_local_file.dart';
 import 'package:lib_flutter/demo/demo_shopping_list.dart';
+import 'package:lib_flutter/demo/demo_sliver_hero_page.dart';
 import 'package:lib_flutter/demo/demo_tab_layout.dart';
 import 'package:lib_flutter/demo/demo_video_player.dart';
 import 'package:lib_flutter/utils/Loger.dart';
@@ -43,6 +44,8 @@ class DemoManager {
 
   void initRouteWidgetList() {
     demoItemList = new List();
+    demoItemList.add(DemoItem(
+        DemoHeroPage.routeName, DemoHeroPage.pageName, DemoHeroPage()));
     demoItemList.add(DemoItem(
         DemoReadWriteFile.routeName,
         DemoReadWriteFile.pageName,

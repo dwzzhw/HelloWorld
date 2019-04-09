@@ -29,7 +29,7 @@ class TinySportsRouteManager {
     }
 
     if (resultWidget == null) {
-      resultWidget = SportsHomePage();
+      resultWidget = SportsMainPage();
     }
 
     printLog(
