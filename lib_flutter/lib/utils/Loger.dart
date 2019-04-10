@@ -11,3 +11,9 @@ void llogd(String tag, String logMsg) {
 void llog(String logMsg) {
   print('[Flutter_dwz] -- ' + logMsg);
 }
+
+class Loger {
+  static void d(String tag, String logMsg) {
+    llogd(tag, logMsg);
+  }
+}
