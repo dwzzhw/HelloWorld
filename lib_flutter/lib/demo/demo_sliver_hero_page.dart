@@ -90,15 +90,15 @@ class DemoHeroPage extends StatelessWidget {
         slivers: <Widget>[
           SliverPersistentHeader(
             pinned: true,
-//            floating: true,
+            floating: true,
             delegate: HeroHeader(
               onLayoutToggle: onLayoutToggle,
               minExtent: 70.0,
               maxExtent: 250.0,
             ),
           ),
-          getBottomWidget(),
-//          getSliverBody(),
+//          getBottomWidget(),
+          getSliverBody(),
         ],
       ),
     );

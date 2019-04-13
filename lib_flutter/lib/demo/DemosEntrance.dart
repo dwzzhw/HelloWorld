@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/demo/animation/demo_animation_home.dart';
 import 'package:lib_flutter/demo/demo_camera_preview.dart';
 import 'package:lib_flutter/demo/demo_custom_scroll_view.dart';
 import 'package:lib_flutter/demo/demo_fetch_data_from_net.dart';
@@ -9,6 +10,7 @@ import 'package:lib_flutter/demo/demo_integrate_with_native.dart';
 import 'package:lib_flutter/demo/demo_lake.dart';
 import 'package:lib_flutter/demo/demo_lifecycle_watcher.dart';
 import 'package:lib_flutter/demo/demo_list_item_click.dart';
+import 'package:lib_flutter/demo/demo_nested_scroll.dart';
 import 'package:lib_flutter/demo/demo_parse_json_background.dart';
 import 'package:lib_flutter/demo/demo_random_words.dart';
 import 'package:lib_flutter/demo/demo_read_write_local_file.dart';
@@ -46,6 +48,10 @@ class DemoManager {
     demoItemList = new List();
     demoItemList.add(DemoItem(
         DemoHeroPage.routeName, DemoHeroPage.pageName, DemoHeroPage()));
+    demoItemList.add(DemoItem(AnimationDemoHome.routeName,
+        AnimationDemoHome.pageName, AnimationDemoHome()));
+    demoItemList.add(DemoItem(DemoNestedScrollPage.routeName,
+        DemoNestedScrollPage.pageName, DemoNestedScrollPage()));
     demoItemList.add(DemoItem(
         DemoReadWriteFile.routeName,
         DemoReadWriteFile.pageName,

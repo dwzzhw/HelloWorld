@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
+import 'package:lib_flutter/tinysports/match/match_detail_container_page.dart';
 import 'package:lib_flutter/tinysports/match/match_detail_page.dart';
 import 'package:lib_flutter/tinysports/news/news_container_page.dart';
 import 'package:lib_flutter/tinysports/ui/sports_main_page.dart';
@@ -47,10 +48,16 @@ class TinySportsRouteManager {
   }
 
   static startMatchDetailPage(BuildContext context, String mid) {
+//    Navigator.push(
+//        context,
+//        MaterialPageRoute(
+//            builder: (context) => MatchDetailPage(
+//                  mid,
+//                )));
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MatchDetailPage(
+            builder: (context) => MatchDetailContainerPage(
                   mid,
                 )));
   }
