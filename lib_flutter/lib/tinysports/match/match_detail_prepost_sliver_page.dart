@@ -122,31 +122,35 @@ class MatchDetailPrePostSliverPageState
       llog(
           '-->_getMatchDetailPrePostPageContentWidget(), item count=${viewDataList.length}');
       if (isNestedScrollList) {
-        contentWidget = Builder(builder: (BuildContext context) {
-          return CustomScrollView(
-            key: PageStorageKey<String>('match_pre_post_list'),
-            slivers: <Widget>[
-              SliverOverlapInjector(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 16.0,
-                ),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return MatchViewManager.getMatchView(viewDataList[index]);
-                    },
-                    childCount: viewDataList.length,
+        contentWidget = SafeArea(
+            top: false,
+            bottom: false,
+            child: Builder(builder: (BuildContext context) {
+              return CustomScrollView(
+                key: PageStorageKey<String>('match_pre_post_list'),
+                slivers: <Widget>[
+                  SliverOverlapInjector(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
                   ),
-                ),
-              ),
-            ],
-          );
-        });
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                      horizontal: 16.0,
+                    ),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return MatchViewManager.getMatchView(
+                              viewDataList[index]);
+                        },
+                        childCount: viewDataList.length,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }));
       } else {
         contentWidget = Container(
           padding: EdgeInsets.fromLTRB(CommonViewManager.PAGE_HORIZON_MARGIN, 0,

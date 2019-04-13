@@ -59,16 +59,21 @@ class MatchDetailContainerPageState
     });
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return _getMatchDetailPageContentWidget();
+  }
+
   List<Widget> getSubTabsList() {
     List<Widget> tabTitleList = [
       Tab(
         text: '赛事回顾',
       ),
       Tab(
-        text: 'Tab 01',
+        text: 'Tab 02',
       ),
       Tab(
-        text: 'Tab 02',
+        text: 'Tab 03',
       )
     ];
     return tabTitleList;
@@ -138,11 +143,6 @@ class MatchDetailContainerPageState
       });
     }).toList());
     return tabSliverViewList;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _getMatchDetailPageContentWidget();
   }
 
   Widget _getMatchDetailPageContentWidget() {
