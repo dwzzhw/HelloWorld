@@ -70,6 +70,7 @@ flutter:
     - assets/images/tab_shequ_current.png
     - assets/images/tab_vip.png
     - assets/images/tab_vip_current.png
+    - assets/video/butterfly.mp4
     - packages/flutter_gallery_assets/products/earrings.png
     - packages/flutter_gallery_assets/products/hat.png
     - packages/flutter_gallery_assets/products/sunnies.png

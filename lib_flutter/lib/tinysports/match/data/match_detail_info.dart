@@ -117,4 +117,16 @@ class MatchDetailInfo extends Object {
       _$MatchDetailInfoFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$MatchDetailInfoToJson(this);
+
+  bool isLiveOngoing() {
+    return matchInfo != null && matchInfo.isLiveOngoing();
+  }
+
+  bool isLivePreStart() {
+    return matchInfo != null && matchInfo.isLivePreStart();
+  }
+
+  bool isLiveFinished() {
+    return matchInfo != null && matchInfo.isLiveFinished();
+  }
 }

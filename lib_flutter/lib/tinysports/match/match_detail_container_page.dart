@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
+import 'package:lib_flutter/tinysports/base/view/VideoPlayerView.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
-import 'package:lib_flutter/tinysports/match/match_detail_prepost_page.dart';
+import 'package:lib_flutter/tinysports/match/data/match_detail_sub_tab_info.dart';
 import 'package:lib_flutter/tinysports/match/match_detail_prepost_sliver_page.dart';
 import 'package:lib_flutter/tinysports/match/model/match_detail_info_model.dart';
 import 'package:lib_flutter/tinysports/match/view/match_detail_img_txt_header_view.dart';
 import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
 
 class MatchDetailContainerPage extends SportsBasePage {
   final String mid;
@@ -24,10 +22,15 @@ class MatchDetailContainerPage extends SportsBasePage {
 
 class MatchDetailContainerPageState
     extends SportsBasePageState<MatchDetailContainerPage> {
+//  String mockVideoUrl =
+//      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+  String mockVideoAssetsPath = 'assets/video/butterfly.mp4';
+  double tabBarHeight = 36;
   String mid;
   MatchDetailInfoModel matchDetailInfoModel;
   MatchDetailInfo matchDetailInfo;
   String pageTitle;
+  List<String> subTabTypeList;
 
   MatchDetailContainerPageState(this.mid);
 
@@ -56,93 +59,24 @@ class MatchDetailContainerPageState
           pageTitle = matchInfo.title;
         }
       }
+      updateSubTabTypeList();
     });
+  }
+
+  void updateSubTabTypeList() {
+    if (subTabTypeList != null) {
+      subTabTypeList.clear();
+    } else {
+      subTabTypeList = List();
+    }
+    subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_PRE_POST_INFO);
+    subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_IMG_TXT_LIVE);
+    subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_STAT_DATA);
   }
 
   @override
   Widget build(BuildContext context) {
     return _getMatchDetailPageContentWidget();
-  }
-
-  List<Widget> getSubTabsList() {
-    List<Widget> tabTitleList = [
-      Tab(
-        text: '赛事回顾',
-      ),
-      Tab(
-        text: 'Tab 02',
-      ),
-      Tab(
-        text: 'Tab 03',
-      )
-    ];
-    return tabTitleList;
-  }
-
-  int getSubTabsCnt() {
-    List<Widget> tabsList = getSubTabsList();
-    return tabsList != null ? tabsList.length : 0;
-  }
-
-  Widget getTabBarView() {
-    Widget tabBarView;
-    if (getSubTabsCnt() > 1) {
-      tabBarView = PreferredSize(
-          child: Container(
-            child: TabBar(
-              tabs: getSubTabsList(),
-            ),
-            color: Colors.blue,
-          ),
-          preferredSize: new Size(double.infinity, 46.0));
-    }
-    return tabBarView;
-  }
-
-  List<Widget> getSubTabSliverViewList() {
-    List<Widget> tabSliverViewList = List();
-    tabSliverViewList.add(_getMatchDetailPrePostContentWidget());
-//    tabSliverViewList.add(_getMatchDetailPageContentWidget());
-
-//    return tabSliverViewList;
-
-    tabSliverViewList.addAll(_allPages.keys.map<Widget>((_Page page) {
-      return Builder(builder: (BuildContext context) {
-        return CustomScrollView(
-          key: PageStorageKey<_Page>(page),
-          slivers: <Widget>[
-            SliverOverlapInjector(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 16.0,
-              ),
-              sliver: SliverFixedExtentList(
-                itemExtent: _CardDataItem.height,
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    final _CardData data = _allPages[page][index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8.0,
-                      ),
-                      child: _CardDataItem(
-                        page: page,
-                        data: data,
-                      ),
-                    );
-                  },
-                  childCount: _allPages[page].length,
-                ),
-              ),
-            ),
-          ],
-        );
-      });
-    }).toList());
-    return tabSliverViewList;
   }
 
   Widget _getMatchDetailPageContentWidget() {
@@ -160,7 +94,6 @@ class MatchDetailContainerPageState
         ),
       );
     } else {
-      List<Widget> tabViewList = getSubTabSliverViewList();
       contentWidget = DefaultTabController(
         length: getSubTabsCnt(),
         child: Scaffold(
@@ -175,18 +108,18 @@ class MatchDetailContainerPageState
                     title: Text(pageTitle),
 //                  actions: <Widget>[MaterialDemoDocumentationButton(routeName)],
                     pinned: true,
-                    expandedHeight: 220.0,
+                    expandedHeight: getHeaderMaxHeight(context),
                     forceElevated: innerBoxIsScrolled,
                     bottom: getTabBarView(),
                     flexibleSpace: SizedBox.expand(
-                      child: MatchDetailImgTxtHeaderView(matchDetailInfo),
+                      child: getHeaderContentView(),
                     ),
                   ),
                 ),
               ];
             },
             body: TabBarView(
-              children: tabViewList,
+              children: getSubTabSliverViewList(),
             ),
           ),
         ),
@@ -195,197 +128,122 @@ class MatchDetailContainerPageState
     return contentWidget;
   }
 
+  double getHeaderMaxHeight(BuildContext context) {
+    return MediaQuery.of(context).size.width * 9 / 16 + tabBarHeight;
+  }
+
+  Widget getHeaderContentView() {
+    Widget headerContentView;
+    if (matchDetailInfo != null) {
+      if (matchDetailInfo.isLiveFinished() || matchDetailInfo.isLiveOngoing()) {
+//        String descStr = matchDetailInfo.isLiveFinished() ? '赛事已结束' : '精彩赛事进行中';
+//        headerContentView = Center(
+//          child: Text(descStr),
+//        );
+        headerContentView = VideoPlayerView(assetsPath: mockVideoAssetsPath);
+      } else {
+        headerContentView = MatchDetailImgTxtHeaderView(matchDetailInfo);
+      }
+    } else {
+      headerContentView = Center(
+        child: Text('未能正确获取赛事信息'),
+      );
+    }
+    return headerContentView;
+  }
+
+  int getSubTabsCnt() {
+    return subTabTypeList != null ? subTabTypeList.length : 0;
+  }
+
+  Widget getTabBarView() {
+    Widget tabBarView;
+    if (getSubTabsCnt() > 1) {
+      List<Widget> tabList = List();
+      subTabTypeList.forEach((String tabType) {
+        tabList.add(Tab(
+          text: MatchDetailSubTabInfo.getSubTabTitle(tabType),
+        ));
+      });
+
+      tabBarView = PreferredSize(
+          child: Container(
+            child: TabBar(
+              tabs: tabList,
+              labelColor: Colors.blue,
+              unselectedLabelColor: Colors.black,
+              labelStyle: TextStyle(fontSize: 18),
+              unselectedLabelStyle: TextStyle(fontSize: 16),
+            ),
+            color: Colors.white,
+          ),
+          preferredSize: new Size(double.infinity, tabBarHeight));
+    }
+    return tabBarView;
+  }
+
+  List<Widget> getSubTabSliverViewList() {
+    List<Widget> tabSliverViewList = List();
+    subTabTypeList.forEach((String tabType) {
+      Widget subContentWidget;
+      switch (tabType) {
+        case MatchDetailSubTabInfo.TAB_TYPE_PRE_POST_INFO:
+          subContentWidget = _getMatchDetailPrePostContentWidget();
+          break;
+        case MatchDetailSubTabInfo.TAB_TYPE_IMG_TXT_LIVE:
+        case MatchDetailSubTabInfo.TAB_TYPE_STAT_DATA:
+          subContentWidget = _getMockTabContent(tabType);
+          break;
+      }
+      if (subContentWidget != null) {
+        tabSliverViewList.add(subContentWidget);
+      }
+    });
+    return tabSliverViewList;
+  }
+
   Widget _getMatchDetailPrePostContentWidget() {
     Widget subContentWidget =
         MatchDetailPrePostSliverPage(mid, matchDetailInfo);
     return subContentWidget;
   }
 
+  Widget _getMockTabContent(String tabType) {
+    return Builder(builder: (BuildContext context) {
+      return CustomScrollView(
+        key: PageStorageKey<String>('mock_tab_content_$tabType'),
+        slivers: <Widget>[
+          SliverOverlapInjector(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
+            ),
+            sliver: SliverFixedExtentList(
+              itemExtent: 40,
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8.0,
+                    ),
+                    child: Text(
+                        '${MatchDetailSubTabInfo.getSubTabTitle(tabType)}_mock_item_$index'),
+                  );
+                },
+                childCount: 100,
+              ),
+            ),
+          ),
+        ],
+      );
+    });
+  }
+
   @override
   String getLogTAG() {
     return 'MatchDetailPage';
-  }
-}
-
-class MatchDetailPageSliverPersistentHeaderDelegate
-    implements SliverPersistentHeaderDelegate {
-  static const String TAG = "MatchDetailHeaderDelegate";
-  final double minHeaderHeight;
-  final double maxHeaderHeight;
-  final Widget headerContentWidget;
-
-  MatchDetailPageSliverPersistentHeaderDelegate(this.headerContentWidget,
-      {this.minHeaderHeight = 70, this.maxHeaderHeight = 250});
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    Loger.d(TAG,
-        '-->buid(), headerContentWidget=$headerContentWidget， shrinkOffset=$shrinkOffset');
-//    return Stack(
-//      fit: StackFit.expand,
-//      children: <Widget>[
-//        Container(
-//          child: headerContentWidget,
-//        ),
-//      ],
-//    );
-    return SizedBox.expand(
-      child: headerContentWidget,
-    );
-  }
-
-  @override
-  double get maxExtent => maxHeaderHeight;
-
-  @override
-  double get minExtent => minHeaderHeight;
-
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    bool needRebuild = false;
-    if (oldDelegate is MatchDetailPageSliverPersistentHeaderDelegate) {
-      needRebuild = oldDelegate.minHeaderHeight != minHeaderHeight ||
-          oldDelegate.maxHeaderHeight != maxHeaderHeight ||
-          oldDelegate.headerContentWidget != headerContentWidget;
-    } else {
-      needRebuild = true;
-    }
-    Loger.d(TAG, '-->shouldRebuild(), needRebuild=$needRebuild');
-    return needRebuild;
-  }
-
-  @override
-  FloatingHeaderSnapConfiguration get snapConfiguration => null;
-}
-
-const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
-
-class _Page {
-  _Page({this.label});
-
-  final String label;
-
-  String get id => label[0];
-
-  @override
-  String toString() => '$runtimeType("$label")';
-}
-
-class _CardData {
-  const _CardData({this.title, this.imageAsset, this.imageAssetPackage});
-
-  final String title;
-  final String imageAsset;
-  final String imageAssetPackage;
-}
-
-final Map<_Page, List<_CardData>> _allPages = <_Page, List<_CardData>>{
-  _Page(label: 'HOME'): <_CardData>[
-    const _CardData(
-      title: 'Flatwear',
-      imageAsset: 'products/flatwear.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Pine Table',
-      imageAsset: 'products/table.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Blue Cup',
-      imageAsset: 'products/cup.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Tea Set',
-      imageAsset: 'products/teaset.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Desk Set',
-      imageAsset: 'products/deskset.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Blue Linen Napkins',
-      imageAsset: 'products/napkins.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Planters',
-      imageAsset: 'products/planters.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Kitchen Quattro',
-      imageAsset: 'products/kitchen_quattro.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Platter',
-      imageAsset: 'products/platter.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-  ],
-  _Page(label: 'APPAREL'): <_CardData>[
-    const _CardData(
-      title: 'Cloud-White Dress',
-      imageAsset: 'products/dress.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Ginger Scarf',
-      imageAsset: 'products/scarf.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-    const _CardData(
-      title: 'Blush Sweats',
-      imageAsset: 'products/sweats.png',
-      imageAssetPackage: _kGalleryAssetsPackage,
-    ),
-  ],
-};
-
-class _CardDataItem extends StatelessWidget {
-  const _CardDataItem({this.page, this.data});
-
-  static const double height = 272.0;
-  final _Page page;
-  final _CardData data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Align(
-              alignment:
-                  page.id == 'H' ? Alignment.centerLeft : Alignment.centerRight,
-              child: CircleAvatar(child: Text('${page.id}')),
-            ),
-            SizedBox(
-              width: 144.0,
-              height: 144.0,
-              child: Image.asset(
-                data.imageAsset,
-                package: data.imageAssetPackage,
-                fit: BoxFit.contain,
-              ),
-            ),
-            Center(
-              child: Text(
-                data.title,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
