@@ -148,7 +148,7 @@ class MatchDetailImgTxtHeaderView extends StatelessWidget {
     String result = '';
     MatchInfo matchInfo = matchDetailInfo?.matchInfo;
     if (matchInfo != null) {
-      result = DateUtil.getDateHourMinutePart(matchInfo.startTime);
+      result = DateUtil.getDateMonthDayHourMinPart(matchInfo.startTime);
       String liveTypeDesc = matchInfo.getLiveTypeDesc();
       if (!CommonUtils.isEmptyStr(liveTypeDesc)) {
         result = result + '  ' + liveTypeDesc;

@@ -3,9 +3,10 @@ import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/match_info.dart';
 import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/base/view/VideoPlayerView.dart';
+import 'package:lib_flutter/tinysports/base/view/video_player_view.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
 import 'package:lib_flutter/tinysports/match/data/match_detail_sub_tab_info.dart';
+import 'package:lib_flutter/tinysports/match/imgtxt/match_detail_img_txt_page.dart';
 import 'package:lib_flutter/tinysports/match/match_detail_prepost_sliver_page.dart';
 import 'package:lib_flutter/tinysports/match/model/match_detail_info_model.dart';
 import 'package:lib_flutter/tinysports/match/view/match_detail_img_txt_header_view.dart';
@@ -69,9 +70,13 @@ class MatchDetailContainerPageState
     } else {
       subTabTypeList = List();
     }
+
     subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_PRE_POST_INFO);
-    subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_IMG_TXT_LIVE);
-    subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_STAT_DATA);
+    if (matchDetailInfo != null &&
+        (matchDetailInfo.isLiveOngoing() || matchDetailInfo.isLiveFinished())) {
+      subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_IMG_TXT_LIVE);
+//      subTabTypeList.add(MatchDetailSubTabInfo.TAB_TYPE_STAT_DATA);
+    }
   }
 
   @override
@@ -191,6 +196,8 @@ class MatchDetailContainerPageState
           subContentWidget = _getMatchDetailPrePostContentWidget();
           break;
         case MatchDetailSubTabInfo.TAB_TYPE_IMG_TXT_LIVE:
+          subContentWidget = _getMatchDetailImgTxtContentWidget();
+          break;
         case MatchDetailSubTabInfo.TAB_TYPE_STAT_DATA:
           subContentWidget = _getMockTabContent(tabType);
           break;
@@ -205,6 +212,11 @@ class MatchDetailContainerPageState
   Widget _getMatchDetailPrePostContentWidget() {
     Widget subContentWidget =
         MatchDetailPrePostSliverPage(mid, matchDetailInfo);
+    return subContentWidget;
+  }
+
+  Widget _getMatchDetailImgTxtContentWidget() {
+    Widget subContentWidget = MatchDetailImgTxtPage(mid, matchDetailInfo);
     return subContentWidget;
   }
 

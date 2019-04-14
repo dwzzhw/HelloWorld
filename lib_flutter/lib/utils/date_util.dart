@@ -16,11 +16,11 @@ class DateUtil {
   ];
 
   static String getDateHourMinutePart(String dateStr) {
-    return parseDateStr(dateStr, FORMAT_STR_MONTH_DAY_HOUR_MINUTE);
+    return parseDateStr(dateStr, ['HH', ':', 'nn']);
   }
 
   static String getDateMonthDayHourMinPart(String dateStr) {
-    return parseDateStr(dateStr, ['HH', ':', 'nn']);
+    return parseDateStr(dateStr, FORMAT_STR_MONTH_DAY_HOUR_MINUTE);
   }
 
   static String getFormattedStrFromDateStr(

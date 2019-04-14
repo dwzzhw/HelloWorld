@@ -1,4 +1,5 @@
 # lib_flutter
+#flutter packages pub run build_runner watch
 
 A new flutter module project.
 

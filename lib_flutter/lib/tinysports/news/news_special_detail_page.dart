@@ -133,7 +133,7 @@ class NewsSpecialDetailPage extends SportsBaseStatelessPage {
         if (subTitle != '') {
           subTitle += '    ';
         }
-        subTitle += DateUtil.getDateHourMinutePart(newsDetailInfo.pub_time);
+        subTitle += DateUtil.getDateMonthDayHourMinPart(newsDetailInfo.pub_time);
       }
     }
     return subTitle;
