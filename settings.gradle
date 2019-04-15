@@ -1,8 +1,13 @@
 include ':app'
 include ':lib_flutter_bridge'
-include ':lib_common'
 include ':robustgson_2.8'
 include ':mygroovy'
+
+//include ':lib_commentbar'
+//include ':lib_emoj'
+include ':lib_common'
+include ':lib_router'
+include ':lib_compiler'
 
 setBinding(new Binding([gradle: this]))                                 // new
 evaluate(new File(                                                      // new

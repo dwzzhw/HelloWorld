@@ -21,7 +21,4 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':lib_common')
     implementation project(':lib_router')
-    implementation project(':lib_httpengine')
-    implementation project(':lib_config')
-    implementation project(path: ':lib_pojos')
 }

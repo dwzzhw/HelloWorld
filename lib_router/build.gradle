@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
-    // buildToolsVersion rootProject.ext.global_buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -19,17 +18,7 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-
-    implementation project(':lib_emoj')
-    implementation project(':lib_common')
-    implementation project(':lib_router')
-
-//    implementation project(':lib_config')
-//    implementation project(':lib_pojos')
-//    implementation project(':lib_ipc')
-//    implementation project(':lib_httpengine')
-//    implementation project(':lib_components')
-//    implementation project(':lib_recycler')
-//    implementation project(':lib_imagefetcher')
-//    implementation project(path: ':lib_rxbus')
+    implementation project(path: ':lib_common')
+    implementation project(path: ':lib_compiler')
+    annotationProcessor project(':lib_compiler')
 }
