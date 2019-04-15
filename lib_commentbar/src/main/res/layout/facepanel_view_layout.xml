@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="@dimen/comment_panel_finish_btn_width"
+        android:layout_height="@dimen/face_cb_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_bg_color_blue_selector"
+        android:clickable="true"
+        android:contentDescription="@null"
+        android:text="发送"
+        android:textColor="@drawable/btn_txt_color_blue_bg_selector"
+        android:textSize="15dp"
+        android:visibility="gone"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/btn_finish"
+        android:background="@color/facepanel_tab_bg_color"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:id="@+id/package_indicator_container"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/face_cb_height"
+            android:orientation="horizontal"/>
+
+    </HorizontalScrollView>
+
+    <com.tencent.qqsports.common.widget.ViewPagerEX
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/horizontal_scrollview"/>
+
+    <com.tencent.qqsports.common.widget.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/pager"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="10dp"
+        app:fillColor="@color/blue_primary"/>
+
+</RelativeLayout>

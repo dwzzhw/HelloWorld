@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView
+        android:id="@+id/txt_prop_preview_area"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_txt_prop_preview_area_height"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/comment_txt_prop_preview_area_margin_bottom"
+        android:visibility="gone"/>
+</FrameLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <View
+        android:id="@+id/touyingline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_bar_top_separate_line_height"
+        android:background="@drawable/comment_bar_top_divider_bg"/>
+
+    <RelativeLayout
+        android:id="@+id/below_touyingline_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_entrance_bar_height"
+        android:layout_below="@id/touyingline">
+
+        <RelativeLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/comment_bar_height"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape_comment_entrance_bar">
+
+            <EditText
+                android:id="@+id/comment_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toLeftOf="@+id/comment_face_icon"
+                android:background="@drawable/transparent"
+                android:clickable="false"
+                android:ellipsize="end"
+                android:enabled="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/saysth_style3"
+                android:maxLines="1"
+                android:textColor="@color/comment_bar_text_color"
+                android:textColorHint="@color/comment_bar_hint_color"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="@dimen/comment_bar_text_size"/>
+
+            <View
+                android:id="@+id/edit_area_mask_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@id/comment_face_icon"
+                android:layout_width="@dimen/comment_bar_face_panel_size"
+                android:layout_height="@dimen/comment_bar_face_panel_size"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/public_icon_emoji"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</merge>

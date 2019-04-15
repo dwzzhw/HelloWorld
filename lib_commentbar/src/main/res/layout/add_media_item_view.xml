@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:qqsports="http://schemas.android.com/apk/res-auto">
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:qqsports="http://schemas.android.com/apk/res-auto"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="150dp">-->
+
+    <ImageView
+        android:id="@+id/addpic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/input_pic_add"
+        />
+
+    <RelativeLayout
+        android:id="@+id/selected_media_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/comment_single_pic_panel_item_content_margin_trb"
+        android:layout_marginRight="@dimen/comment_single_pic_panel_item_content_margin_trb"
+        android:layout_marginTop="@dimen/comment_single_pic_panel_item_content_margin_trb"
+        >
+
+        <com.tencent.qqsports.imagefetcher.view.RecyclingImageView
+            android:id="@+id/pic_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            qqsports:actualImageScaleType="centerCrop"
+            qqsports:placeholderImageScaleType="fitXY"
+            />
+
+        <ImageView
+            android:id="@+id/video_logo"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/live_player_btn_play_nor"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/del_btn_container"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/delPicBtn"
+            android:layout_width="@dimen/del_pic_btn_width"
+            android:layout_height="@dimen/del_pic_btn_width"
+            android:layout_centerInParent="true"
+            android:src="@drawable/input_icon_delete"/>
+    </RelativeLayout>
+
+    <!--</RelativeLayout>-->
+
+</merge>

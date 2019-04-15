@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+
+    <LinearLayout
+        android:id="@+id/input_content_container"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/comment_bar_edit_text_height_full_screen"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_comment_control_bar"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <EditText
+            android:id="@+id/edit_area"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/transparent"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_vertical|left"
+            android:hint="@string/saysth_style3"
+            android:singleLine="true"
+            android:textColor="@color/comment_bar_text_color"
+            android:textColorHint="@color/comment_bar_hint_color"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
+            android:textSize="@dimen/app_text_size_32px"
+            tools:text="1发表伟大言论2发表伟大言论3发表伟大言论4发表伟大言论5发表伟大言论6发表伟大言论1发表伟大言论2发表伟大言论3发表伟大言论4发表伟大言论5发表伟大言论6发表伟大言论"/>
+
+        <View
+            android:id="@+id/single_pic_place_holder"
+            android:layout_width="@dimen/comment_bar_edit_text_height_full_screen"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/attach_btn_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <FrameLayout
+            android:id="@+id/icon_mode_container"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/icon_face"
+                android:layout_width="@dimen/comment_bar_face_panel_size"
+                android:layout_height="@dimen/comment_bar_face_panel_size"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/public_icon_emoji"
+                android:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/icon_keyboard"
+                android:layout_width="@dimen/comment_bar_face_panel_size"
+                android:layout_height="@dimen/comment_bar_face_panel_size"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/public_icon_keyboard"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/icon_pic_container"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/icon_pic"
+                android:layout_width="@dimen/comment_bar_face_panel_size"
+                android:layout_height="@dimen/comment_bar_face_panel_size"
+                android:background="@drawable/write_pic_icon"
+                android:contentDescription="@null"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:id="@+id/select_pic_num"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/community_post_pic_numbg"
+                android:gravity="center"
+                android:textColor="@color/text_color_white"
+                android:textSize="@dimen/app_text_size_18px"
+                android:visibility="gone"
+                tools:text="0"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/limit_txt_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:textSize="@dimen/app_text_size_24px"
+            android:visibility="gone"
+            tools:text="20"/>
+    </LinearLayout>
+
+    <!--</LinearLayout>-->
+</merge>

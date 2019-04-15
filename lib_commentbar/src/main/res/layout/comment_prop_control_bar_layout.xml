@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView
+        android:id="@+id/txt_preview_area"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_txt_prop_preview_area_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/comment_txt_prop_preview_area_margin_bottom"
+        android:visibility="gone"/>
+
+    <com.tencent.qqsports.recycler.view.RecyclerViewEx
+        android:id="@+id/comment_txt_prop_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_txt_prop_bar_height"
+        android:visibility="gone"/>
+
+    <!--</LinearLayout>-->
+</merge>

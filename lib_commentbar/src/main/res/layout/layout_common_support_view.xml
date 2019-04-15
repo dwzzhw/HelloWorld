@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <RelativeLayout
+        android:id="@+id/support_view_container"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/static_support_icon"
+            android:layout_width="@dimen/comment_entrance_bar_switch_btn_size"
+            android:layout_height="@dimen/comment_entrance_bar_switch_btn_size"
+            android:layout_centerInParent="true"
+            android:src="@drawable/input_icon_like"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_support_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="-10dp"
+        android:layout_toRightOf="@id/support_view_container"
+        android:ellipsize="end"
+        android:gravity="center|left"
+        android:maxLines="1"
+        android:minWidth="20dp"
+        android:singleLine="true"
+        android:textSize="@dimen/app_text_size_30px"/>
+    <!--</RelativeLayout>-->
+</merge>

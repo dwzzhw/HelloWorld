@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CommentBar">
+        <attr name="comment_bar_mode">
+            <flag name="emoj" value="1"/>
+            <flag name="pic" value="2"/>
+            <flag name="voice" value="4"/>
+            <flag name="label" value="8"/>
+            <flag name="video" value="16"/>
+            <flag name="txtProp" value="32"/>
+            <flag name="singlePic" value="64"/>
+        </attr>
+        <attr name="maxPics" format="integer"/>
+        <attr name="maxTextLength" format="integer"/>
+        <attr name="commentTheme">
+            <flag name="light" value="0"/>
+            <flag name="dark" value="1"/>
+        </attr>
+        <attr name="autoCompletedMode">
+            <flag name="none" value="0"/>
+            <flag name="atSymbol" value="1"/>
+        </attr>
+        <attr name="autoCompleteTrigger" format="string"/>
+        <attr name="autoCompleteTarget" format="string"/>
+        <attr name="maxLines" format="integer"/>
+        <attr name="defaultHint" format="string|reference"/>
+        <attr name="hintDrawable" format="reference"/>
+        <attr name="includeSupportBtn" format="boolean"/>
+        <attr name="includeCommentNumBtn" format="boolean"/>
+        <attr name="includeShareBtn" format="boolean"/>
+        <attr name="singleLineControlBarMode" format="boolean"/>
+        <attr name="upload_source_channel">
+            <flag name="shequ" value="1"/>
+            <flag name="comment" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CommentTxtPropControlBar">
+        <attr name="fullScreenMode" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CommonSupportView">
+        <attr name="animation_style">
+            <flag name="home" value="0x1"/>
+            <flag name="home_night" value="0x2"/>
+            <flag name="community" value="0x4"/>
+            <flag name="community_night" value="0x8"/>
+        </attr>
+    </declare-styleable>
+
+    <!--<declare-styleable name="CommentControlBar">-->
+    <!--<attr name="singleLineControlBarMode" format="boolean"/>-->
+    <!--</declare-styleable>-->
+</resources>

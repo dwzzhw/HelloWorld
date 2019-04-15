@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="comment_bar_hint_color">@color/black2</color>
+    <color name="comment_bar_text_color">@color/std_black1</color>
+    <color name="comment_bar_night_hint_color">@color/std_grey1</color>
+    <color name="comment_bar_night_text_color">@color/std_white0</color>
+    <color name="comment_divider">@color/std_grey2</color>
+    <color name="comment_divider_night">@color/std_black1</color>
+    <color name="comment_bar_background">@color/white</color>
+    <color name="comment_bar_night_background">@color/black1</color>
+    <color name="commentbar_bg_color">#FAFAFA</color>
+    <color name="facepanel_bg_color">#FFFFFF</color>
+    <color name="facepanel_tab_bg_color">#F5F5F5</color>
+
+    <color name="comment_bar_txt_prop_item_border_selected">#FF92B1D4</color>
+    <color name="comment_bar_txt_prop_item_border_normal">#FFDFE0E4</color>
+    <color name="comment_bar_txt_prop_item_rp_locked_bg">#FFC5CCD6</color>
+</resources>

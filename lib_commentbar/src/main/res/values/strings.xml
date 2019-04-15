@@ -1,0 +1,7 @@
+<resources>
+    <string name="saysth">我来说两句&#8230;</string>
+    <string name="saysth_style3">发表伟大言论</string>
+    <string name="post_select_notice">已选%1$d张，还可添加%2$d张</string>
+    <string name="comment_max_size_hint">最多可输入%1$d字</string>
+    <string name="bbs_send_topic_img_not_exits">图片不存在</string>
+</resources>

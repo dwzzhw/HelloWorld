@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
+    <stroke
+        android:width="0.5dp"
+        android:color="@color/comment_bar_txt_prop_item_border_normal"
+        android:dashGap="2dp"
+        android:dashWidth="2dp"/>
+    <solid android:color="@color/transparent"/>
+</shape>

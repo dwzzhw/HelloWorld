@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/touyingline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_bar_top_separate_line_height"
+        android:background="@drawable/comment_bar_top_divider_bg"/>
+
+    <RelativeLayout
+        android:id="@+id/below_touyingline_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/comment_entrance_bar_height"
+        android:layout_below="@id/touyingline">
+
+        <LinearLayout
+            android:id="@+id/opr_btn_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <com.tencent.qqsports.commentbar.view.CommonSupportView
+                android:id="@+id/support_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="9dp"/>
+
+            <LinearLayout
+                android:id="@+id/comment_switch_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="9dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/comment_switch_icon"
+                    android:layout_width="@dimen/comment_entrance_bar_switch_btn_size"
+                    android:layout_height="@dimen/comment_entrance_bar_switch_btn_size"
+                    android:src="@drawable/input_icon_comment"/>
+
+                <TextView
+                    android:id="@+id/comment_switch_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="2dp"
+                    android:maxLines="1"
+                    android:minWidth="16dp"
+                    android:textColor="@color/black2"
+                    android:textSize="@dimen/app_text_size_30px"
+                    tools:text="88"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/share_btn"
+                android:layout_width="@dimen/comment_entrance_bar_switch_btn_size"
+                android:layout_height="@dimen/comment_entrance_bar_switch_btn_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/input_icon_share"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/comment_bar_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/opr_btn_layout"
+            android:background="@drawable/shape_comment_entrance_bar"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/comment_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/transparent"
+                android:clickable="false"
+                android:ellipsize="end"
+                android:enabled="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/saysth"
+                android:maxLines="1"
+                android:textColor="@color/comment_bar_text_color"
+                android:textColorHint="@color/comment_bar_hint_color"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="@dimen/comment_bar_text_size"/>
+
+            <View
+                android:id="@+id/edit_area_mask_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</merge>

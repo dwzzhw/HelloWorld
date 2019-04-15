@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tencent.qqsports.common.widget.ime.InputMethodEventView
+    android:id="@+id/comment_panel_root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <com.tencent.qqsports.commentbar.txtprop.CommentTxtPropControlBar
+            android:id="@+id/prop_control_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/top_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/prop_control_bar"
+            android:background="@color/comment_divider"/>
+
+        <com.tencent.qqsports.commentbar.CommentControlBar
+            android:id="@+id/control_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_divider"/>
+
+        <View
+            android:id="@+id/middle_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/control_bar"/>
+
+        <FrameLayout
+            android:id="@+id/panel_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/middle_divider">
+
+            <View
+                android:id="@+id/sub_panel_height_place_holder"
+                android:layout_width="1px"
+                android:layout_height="0dp"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/single_pic_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/control_bar"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="15dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</com.tencent.qqsports.common.widget.ime.InputMethodEventView>
