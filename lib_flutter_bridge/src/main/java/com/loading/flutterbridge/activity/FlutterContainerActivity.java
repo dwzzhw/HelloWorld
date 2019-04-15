@@ -24,7 +24,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.view.FlutterView;
 
 public class FlutterContainerActivity extends BaseActivity {
-    public static final String TAG = "FlutterContainerActivity_dwz";
+    public static final String TAG = "FlutterContainerActivity";
     private static final String FLUTTER_METHOD_CHANNEL_SAY_HELLO = "demo.integrate/sayhello";
     private static final String FLUTTER_METHOD_FLUTTER_SAY_HELLO = "flutterSayHello";
     private static final String FLUTTER_METHOD_ANDROID_SAY_HELLO = "androidSayHello";

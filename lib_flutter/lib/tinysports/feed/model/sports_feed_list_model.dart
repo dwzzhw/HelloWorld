@@ -3,7 +3,7 @@ import 'package:lib_flutter/http/post_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/news_item.dart';
 import 'package:lib_flutter/tinysports/feed/data/feedlist.dart';
 
-class SportsFeedListModel extends PostDataModel<List<NewsItem>> {
+class SportsFeedListModel extends PostDataModel<Map<String, NewsItem>> {
   String idListStr;
 
   SportsFeedListModel(this.idListStr, OnDataCompleteFunc onCompleteFunc,
@@ -25,11 +25,11 @@ class SportsFeedListModel extends PostDataModel<List<NewsItem>> {
             key, entry == null ? null : FeedItemContent.fromJson(entry)),
       );
 
-      mRespData = List();
+      mRespData = Map();
 
       parsedItemMap.forEach((key, itemContent) {
         if (itemContent != null && itemContent.info != null) {
-          mRespData.add(itemContent.info);
+          mRespData[key]=itemContent.info;
         }
       });
     } else if (dataObj is List) {

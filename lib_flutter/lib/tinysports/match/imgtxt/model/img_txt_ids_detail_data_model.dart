@@ -1,6 +1,6 @@
 import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/model/idx_detail_base_data_model.dart';
+import 'package:lib_flutter/http/idx_detail_base_data_model.dart';
 import 'package:lib_flutter/tinysports/match/imgtxt/model/img_txt_detail_model.dart';
 import 'package:lib_flutter/tinysports/match/imgtxt/model/img_txt_ids_model.dart';
 

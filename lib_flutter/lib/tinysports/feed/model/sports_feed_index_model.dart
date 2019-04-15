@@ -15,6 +15,19 @@ class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
     onCompleteFunction = completeFunc;
   }
 
+  List<String> getIdList() {
+    List<FeedIndexItem> feedIndexList = mRespData?.list;
+    List<String> idList = List();
+    feedIndexList.forEach((feedIndexItem) {
+      if (feedIndexItem != null &&
+          feedIndexItem.id != null &&
+          feedIndexItem.id.startsWith('80_')) {
+        idList.add(feedIndexItem.id);
+      }
+    });
+    return idList;
+  }
+
   @override
   String getUrl() {
     return 'http://app.sports.qq.com/feed/index';

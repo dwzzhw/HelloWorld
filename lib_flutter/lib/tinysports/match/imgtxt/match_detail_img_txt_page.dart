@@ -58,10 +58,13 @@ class MatchDetailImgTxtPageState
       if (detailDataList == null) {
         detailDataList = List();
       }
-      if (pageIndex == 0) {
-        detailDataList.clear();
+      isSuccess = !CommonUtils.isListEmpty(newPageData) || isPageOver;
+      if (isSuccess) {
+        if (pageIndex == 0) {
+          detailDataList.clear();
+        }
+        detailDataList.addAll(newPageData);
       }
-      detailDataList.addAll(newPageData);
     });
   }
 

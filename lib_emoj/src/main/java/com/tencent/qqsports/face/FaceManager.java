@@ -310,7 +310,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
             String packageInfoPath = FilePathUtil.getSdcardFileFullPath(LOCAL_FACE_PACKAGE_NAME, false);
             if (packageInfo != null && !TextUtils.isEmpty(packageInfoPath)) {
                 FileHandler.writeObjectToFilePath(packageInfo, packageInfoPath);
-                Loger.d(TAG, "dwz-->saveCurrentFacePackageToLocal(), packageInfoPath=" + packageInfoPath);
+                Loger.d(TAG, "-->saveCurrentFacePackageToLocal(), packageInfoPath=" + packageInfoPath);
             }
         }
     }
