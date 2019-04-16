@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 ext {
+    mainModuleName = "app_shell"
     global_versionCode = 1000
     global_versionName = "1.0"
 
@@ -15,13 +16,13 @@ ext.deps = [
         lottie: 'com.airbnb.android:lottie:2.5.1',]
 buildscript {
     repositories {
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 //        maven {
-//            url 'https://maven.google.com'
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://maven.google.com'
+        }
 //        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
@@ -36,13 +37,13 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 //        maven {
-//            url 'https://maven.google.com'
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://maven.google.com'
+        }
 //        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()

@@ -39,19 +39,18 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
 //module manager code begin here
-    implementation project(':app')
+//    implementation project(':app')
 //    implementation project(':lib_commentbar')
 //    implementation project(':lib_emoj')
+    implementation project(':lib_flutter_bridge')
 //module manager code begin here
 
     //Base common dependencies go here
-    implementation project(':lib_flutter_bridge')
     implementation project(':lib_common')
     implementation project(':lib_router')
-    annotationProcessor project(':lib_compiler')
 
     implementation deps.design
 }
