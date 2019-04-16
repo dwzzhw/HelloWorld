@@ -27,10 +27,10 @@ import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.SurfaceViewTestActivity;
 import com.example.loading.helloworld.ViewDrawingOrderTestActivity;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
+import com.example.loading.helloworld.view.CustomizedTextDrawable;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.Utils;
-import com.example.loading.helloworld.view.CustomizedTextDrawable;
 
 public class UITestActivity extends BaseActivity {
     private static final String TAG = "UITestActivity";
@@ -82,19 +82,15 @@ public class UITestActivity extends BaseActivity {
 
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
-        switch (view.getId()) {
-            case R.id.btn_surface_view_test:
-                openSurfacePage();
-                break;
-            case R.id.btn_lottie_test:
-                openLottiePage();
-                break;
-            case R.id.btn_view_draw_order_test:
-                openViewDrawingOrderPage();
-                break;
-            case R.id.btn_memory_monitor_test:
-                startMemoryService();
-                break;
+        int viewId = view.getId();
+        if (viewId == R.id.btn_surface_view_test) {
+            openSurfacePage();
+        } else if (viewId == R.id.btn_lottie_test) {
+            openLottiePage();
+        } else if (viewId == R.id.btn_view_draw_order_test) {
+            openViewDrawingOrderPage();
+        } else if (viewId == R.id.btn_memory_monitor_test) {
+            startMemoryService();
         }
     }
 

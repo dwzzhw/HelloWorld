@@ -54,25 +54,20 @@ public class MainActivity extends Activity {
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
         Class targetClass = null;
-        switch (view.getId()) {
-            case R.id.socket_server:
-                targetClass = SocketServerActivity.class;
-                break;
-            case R.id.socket_client:
-                targetClass = SocketClientActivity.class;
-                break;
-            case R.id.btn_sports_test:
-                targetClass = SportsTestActivity.class;
-                break;
-            case R.id.btn_ui_test:
-                targetClass = UITestActivity.class;
-                break;
-            case R.id.btn_misc_test:
-                targetClass = MiscTestActivity.class;
-                break;
-            case R.id.bnt_open_flutter_page:
-                targetClass = FlutterTestActivity.class;
-                break;
+
+        int viewId = view.getId();
+        if (viewId == R.id.socket_server) {
+            targetClass = SocketServerActivity.class;
+        } else if (viewId == R.id.socket_client) {
+            targetClass = SocketClientActivity.class;
+        } else if (viewId == R.id.btn_sports_test) {
+            targetClass = SportsTestActivity.class;
+        } else if (viewId == R.id.btn_ui_test) {
+            targetClass = UITestActivity.class;
+        } else if (viewId == R.id.btn_misc_test) {
+            targetClass = MiscTestActivity.class;
+        } else if (viewId == R.id.bnt_open_flutter_page) {
+            targetClass = FlutterTestActivity.class;
         }
         if (targetClass != null) {
             Log.d(TAG, "onBtnClicked: target class=" + targetClass);

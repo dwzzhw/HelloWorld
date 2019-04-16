@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.loading.appshell"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:name=".ShellApplication"
+        android:allowBackup="true"
+        android:label="@string/app_shell_name"
+        android:theme="@style/AppTheme">
+    </application>
+
+</manifest>
+

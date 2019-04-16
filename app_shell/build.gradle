@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.global_compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.loading.appshell"
+
+        minSdkVersion rootProject.ext.global_minSdkVersion
+        targetSdkVersion rootProject.ext.global_targetSdkVersion
+        versionCode rootProject.ext.global_versionCode
+        versionName rootProject.ext.global_versionName
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('loading.keystore')
+            storePassword "loading"
+            keyAlias "loading.key1"
+            keyPassword "loading"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+//module manager code begin here
+    implementation project(':app')
+    implementation project(':lib_flutter_bridge')
+    implementation project(':lib_common')
+    implementation project(':lib_router')
+
+    implementation deps.design
+}

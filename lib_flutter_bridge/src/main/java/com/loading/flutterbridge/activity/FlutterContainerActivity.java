@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -74,7 +75,12 @@ public class FlutterContainerActivity extends BaseActivity {
     }
 
     private void initFlutterView() {
-        Loger.d(TAG, "-->initFlutterView()");
+        Loger.d(TAG, "-->initFlutterView(), mTargetRouteStr="+mTargetRouteStr);
+
+        if(TextUtils.isEmpty(mTargetRouteStr)){
+            mTargetRouteStr = getDefaultFlutterRouterStr();
+        }
+
         mFlutterView = Flutter.createView(
                 FlutterContainerActivity.this,
                 getLifecycle(),
@@ -84,6 +90,10 @@ public class FlutterContainerActivity extends BaseActivity {
         initFlutterMethodCallHandler();
         methodChannel = new MethodChannel(mFlutterView, FLUTTER_METHOD_CHANNEL_SAY_HELLO);
         methodChannel.setMethodCallHandler(methodCallHandler);
+    }
+
+    protected String getDefaultFlutterRouterStr(){
+        return null;
     }
 
     private void initFlutterMethodCallHandler() {

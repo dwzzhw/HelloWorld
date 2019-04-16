@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
-    // buildToolsVersion rootProject.ext.global_buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

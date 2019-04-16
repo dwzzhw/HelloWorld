@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
@@ -16,32 +16,11 @@ android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
 
     defaultConfig {
-        applicationId "com.example.loading.helloworld"
         minSdkVersion rootProject.ext.global_minSdkVersion
         targetSdkVersion rootProject.ext.global_targetSdkVersion
 
-        versionCode 1
-        versionName "1.0"
-    }
-
-    signingConfigs {
-        release {
-            storeFile file('loading.keystore')
-            storePassword "loading"
-            keyAlias "loading.key1"
-            keyPassword "loading"
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            zipAlignEnabled true
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        versionCode rootProject.ext.global_versionCode
+        versionName rootProject.ext.global_versionName
     }
 
     compileOptions {

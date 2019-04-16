@@ -40,10 +40,8 @@ public class MiscTestActivity extends BaseActivity {
 
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
-        switch (view.getId()) {
-            case R.id.misc_test_01:
-                doINetTest();
-                break;
+        if(view.getId() == R.id.misc_test_01){
+            doINetTest();
         }
     }
 

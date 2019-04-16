@@ -44,13 +44,11 @@ public class SocketClientActivity extends FragmentActivity {
     }
 
     public void onBtnClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_connect:
-                onConnectBtnClicked();
-                break;
-            case R.id.bnt_send:
-                onSendBtnClicked();
-                break;
+        int viewId = view.getId();
+        if (viewId == R.id.btn_connect) {
+            onConnectBtnClicked();
+        } else if (viewId == R.id.bnt_send) {
+            onSendBtnClicked();
         }
     }
 
