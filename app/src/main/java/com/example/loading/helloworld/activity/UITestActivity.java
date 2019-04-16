@@ -30,7 +30,7 @@ import com.example.loading.helloworld.lottie.LottieTestActivity;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.Utils;
+import com.loading.common.utils.CommonUtils;
 
 public class UITestActivity extends BaseActivity {
     private static final String TAG = "UITestActivity";
@@ -197,7 +197,7 @@ public class UITestActivity extends BaseActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void bgTest() {
         if (titleTextView != null) {
-            Drawable bgDrawable = Utils.getTL2BRGradientMaskDrawable(new int[]{0x22ff0000, 0x2200ff00}, R.drawable.emo_banku, this);
+            Drawable bgDrawable = CommonUtils.getTL2BRGradientMaskDrawable(new int[]{0x22ff0000, 0x2200ff00}, R.drawable.emo_banku, this);
             Log.i(TAG, "-->bgTest(), bgDrawable=" + bgDrawable);
             titleTextView.setBackground(bgDrawable);
         }

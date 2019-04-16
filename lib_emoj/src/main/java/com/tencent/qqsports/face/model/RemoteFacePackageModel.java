@@ -2,11 +2,8 @@ package com.tencent.qqsports.face.model;
 
 import android.text.format.DateUtils;
 
-import com.tencent.qqsports.config.URLConstants;
 import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
 import com.tencent.qqsports.face.data.RemoteFaceResPO;
-import com.tencent.qqsports.httpengine.datamodel.BaseDataModel;
-import com.tencent.qqsports.httpengine.datamodel.IDataListener;
 
 import java.util.List;
 

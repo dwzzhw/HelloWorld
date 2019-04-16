@@ -4,13 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.FileHandler;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.FileHandler;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.emoj.R;
 import com.tencent.qqsports.face.data.FaceItem;
 import com.tencent.qqsports.face.data.FacePackageInfo;
-import com.tencent.qqsports.logger.Loger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class LocalFacePackage extends BaseFacePackage {
             FacePackageInfo facePackageInfo = (FacePackageInfo) localPackageObj;
 
             List<FaceItem> faceItemList = facePackageInfo.getFaceNameList();
-            if (!CollectionUtils.isEmpty(faceItemList)) {
+            if (!CommonUtils.isEmpty(faceItemList)) {
                 mFaceName2FaceFileMappingProperties = new Properties();
                 mFaceNameList = new ArrayList<>();
                 for (FaceItem faceItem : faceItemList) {

@@ -11,12 +11,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 
 /**
  * Created by loading on 3/14/17.
  */
 
-public class Utils {
+public class CommonUtils {
     /**
      * 从assert下的json文件读取测试数据
      *
@@ -79,5 +80,13 @@ public class Utils {
             isMainThread = (curThread.getId() == mainThread.getId());
         }
         return isMainThread;
+    }
+
+    public static <T> int sizeOf(final Collection<T> collection) {
+        return collection == null ? 0 : collection.size();
+    }
+
+    public static <T> boolean isEmpty(final Collection<T> collection) {
+        return sizeOf(collection) <= 0;
     }
 }

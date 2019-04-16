@@ -12,7 +12,7 @@ public class UiThreadUtil {
 
     public static void runOnUiThread(Runnable runnable) {
         if (runnable != null) {
-            if (Utils.isMainThread()) {
+            if (CommonUtils.isMainThread()) {
                 runnable.run();
             } else {
                 mHandler.post(runnable);

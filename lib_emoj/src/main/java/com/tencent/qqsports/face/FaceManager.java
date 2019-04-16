@@ -5,20 +5,16 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.widget.TextView;
 
-import com.tencent.qqsports.common.NetworkChangeReceiver;
-import com.tencent.qqsports.common.toolbox.Foreground;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.FileHandler;
-import com.tencent.qqsports.common.util.FilePathUtil;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.UiThreadUtil;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.FileHandler;
+import com.loading.common.utils.FilePathUtil;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.UiThreadUtil;
 import com.tencent.qqsports.face.data.FacePackageInfo;
 import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
 import com.tencent.qqsports.face.data.RemoteFaceResPO;
 import com.tencent.qqsports.face.model.RemoteFacePackageModel;
-import com.tencent.qqsports.httpengine.datamodel.BaseDataModel;
-import com.tencent.qqsports.httpengine.datamodel.IDataListener;
-import com.tencent.qqsports.logger.Loger;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -99,7 +95,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
 
     public List<BaseFacePackage> getAvailablePackageList() {
         List<BaseFacePackage> resultList = mLocalPackageList;
-        if (!CollectionUtils.isEmpty(mRemotePackageList)) {
+        if (!CommonUtils.isEmpty(mRemotePackageList)) {
             boolean isRemotePackageValid = false;
             for (BaseFacePackage remotePackage : mRemotePackageList) {
                 if (remotePackage != null && remotePackage.isPackageValid()) {
@@ -162,7 +158,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
     }
 
     private void clearOutOfDateFacePackage() {
-        if (!CollectionUtils.isEmpty(mRemoteFacePackageInfoList)) {
+        if (!CommonUtils.isEmpty(mRemoteFacePackageInfoList)) {
             Set<String> validPackageSet = new HashSet<>(mRemoteFacePackageInfoList.size());
             for (int i = 0; i < mRemoteFacePackageInfoList.size(); i++) {
                 validPackageSet.add(mRemoteFacePackageInfoList.get(i).getFacePackageFolderFullPath());
@@ -249,13 +245,13 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         SpannableStringBuilder resultBuilder = new SpannableStringBuilder(iText == null ? "" : iText);
 
         if (iText != null && iText.length() > 0 && (txtView != null || textSize > 0.0001f)) {
-            if (!CollectionUtils.isEmpty(mLocalPackageList)) {
+            if (!CommonUtils.isEmpty(mLocalPackageList)) {
                 for (int i = 0; i < mLocalPackageList.size(); i++) {
                     resultBuilder = mLocalPackageList.get(i).convertToSpannableStr(resultBuilder, textSize, txtView);
                 }
             }
             //给远端包一个覆盖本地表情的机会，so, order is important
-            if (!CollectionUtils.isEmpty(mRemotePackageList)) {
+            if (!CommonUtils.isEmpty(mRemotePackageList)) {
                 for (int i = 0; i < mRemotePackageList.size(); i++) {
                     resultBuilder = mRemotePackageList.get(i).convertToSpannableStr(resultBuilder, textSize, txtView);
                 }
@@ -276,7 +272,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
 
     @Override
     public void onStatusChanged(int oldNetStatus, int netStatus, int oldNetSubType, int netSubType) {
-        if (SystemUtil.isNetworkAvailable()) {
+        if (SystemUtils.isNetworkAvailable()) {
             checkToUpdateData();
         }
     }

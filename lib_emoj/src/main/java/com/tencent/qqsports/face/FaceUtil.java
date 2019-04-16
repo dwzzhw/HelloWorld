@@ -2,12 +2,12 @@ package com.tencent.qqsports.face;
 
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.util.ZipUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.ZipUtils;
+import com.loading.modules.interfaces.download.DownloadListener;
+import com.loading.modules.interfaces.download.DownloadModuleMgr;
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadModuleMgr;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.io.File;
 import java.io.IOException;

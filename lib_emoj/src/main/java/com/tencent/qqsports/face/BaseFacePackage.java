@@ -10,11 +10,10 @@ import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.widget.TextView;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.widget.ImageSpanEx;
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -143,7 +142,7 @@ public abstract class BaseFacePackage {
                     if (bitmap != null) {
                         tDrawable = new BitmapDrawable(CApplication.getAppContext().getResources(), bitmap);
                         tDrawable.setBounds(0, 0, (int) imageSize, (int) imageSize);
-                        imageSpan = new ImageSpanEx(tDrawable, ImageSpanEx.ALIGN_CENTER);
+                        imageSpan = new ImageSpan(tDrawable);
                         int startPos = builder.length() - mat.group().length();
                         if (startPos >= 0) {
                             builder.setSpan(imageSpan, startPos, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -240,7 +239,7 @@ public abstract class BaseFacePackage {
     }
 
     public static float getImageSizeByTextView(TextView textView) {
-        float imageSize = SystemUtil.dpToPx(16);
+        float imageSize = SystemUtils.dpToPx(16);
         if (textView != null && textView.getPaint() != null) {
             TextPaint paint = textView.getPaint();
             imageSize = paint.descent() - paint.ascent();
@@ -279,6 +278,6 @@ public abstract class BaseFacePackage {
      */
     public boolean isPackageValid() {
         //对第一与最后一张表情进行抽样检查
-        return !CollectionUtils.isEmpty(mFaceNameList) && getFaceBitmap(mFaceNameList.get(0)) != null && getFaceBitmap(mFaceNameList.get(mFaceNameList.size() - 1)) != null;
+        return !CommonUtils.isEmpty(mFaceNameList) && getFaceBitmap(mFaceNameList.get(0)) != null && getFaceBitmap(mFaceNameList.get(mFaceNameList.size() - 1)) != null;
     }
 }
