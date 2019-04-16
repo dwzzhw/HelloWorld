@@ -45,10 +45,13 @@ dependencies {
     implementation project(':app')
 //    implementation project(':lib_commentbar')
 //    implementation project(':lib_emoj')
+//module manager code begin here
 
+    //Base common dependencies go here
     implementation project(':lib_flutter_bridge')
     implementation project(':lib_common')
     implementation project(':lib_router')
+    annotationProcessor project(':lib_compiler')
 
     implementation deps.design
 }
