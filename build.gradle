@@ -12,8 +12,13 @@ ext {
     support_version = "27.+"
 }
 ext.deps = [
-        design: "com.android.support:design:$support_version",
-        lottie: 'com.airbnb.android:lottie:2.5.1',]
+        design               : "com.android.support:design:$support_version",
+        lottie               : 'com.airbnb.android:lottie:2.5.1',
+        rx_java              : 'io.reactivex.rxjava2:rxjava:2.1.14',
+        rx_android           : 'io.reactivex.rxjava2:rxandroid:2.0.2',
+        rx_permissions2      : 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar',
+]
+
 buildscript {
     repositories {
 //        maven {

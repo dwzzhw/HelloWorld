@@ -4,8 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.tencent.qqsports.common.util.PermissionUtils;
-
+import com.loading.common.utils.PermissionUtils;
 
 /**
  * 按住说话录制控件

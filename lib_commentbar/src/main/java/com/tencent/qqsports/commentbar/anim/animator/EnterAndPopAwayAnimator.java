@@ -10,7 +10,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.utils.Loger;
 
 public class EnterAndPopAwayAnimator extends BaseViewAnimator {
     private static final String TAG = "EnterAndPopAwayAnimator";

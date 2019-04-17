@@ -4,7 +4,7 @@
         <item name="android:windowBackground">@color/app_bg_color</item>
         <item name="android:windowAnimationStyle">@style/CActivityAnim</item>
     </style>
-    
+
     <style name="CActivityAnim" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/push_left_in</item>
         <item name="android:activityOpenExitAnimation">@anim/zoom_small</item>
@@ -12,5 +12,8 @@
         <item name="android:activityCloseExitAnimation">@anim/push_right_out</item>
     </style>
 
+    <style name="SportsAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#2962FF</item>
+    </style>
 </resources>
 

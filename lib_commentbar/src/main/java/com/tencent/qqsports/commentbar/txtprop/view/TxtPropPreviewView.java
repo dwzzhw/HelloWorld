@@ -13,20 +13,14 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
 import com.tencent.qqsports.commentbar.BuildConfig;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.anim.IAnimationPlayListener;
 import com.tencent.qqsports.commentbar.anim.YoyoPlayer;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.TipsToast;
 import com.tencent.qqsports.face.FaceManager;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.imagefetcher.ImageFetcher;
-import com.tencent.qqsports.imagefetcher.view.RecyclingImageView;
-import com.tencent.qqsports.servicepojo.comment.CommentInfo;
-import com.tencent.qqsports.servicepojo.comment.CommentUserInfo;
 
 /**
  * 背景图保持高度固定，宽度等比拉伸，气泡背景出现在距顶部约0.4H处，以此约束后台下发的背景图
@@ -74,8 +68,8 @@ public class TxtPropPreviewView extends RelativeLayout implements View.OnLayoutC
 
         mYoyoPlayer = YoyoPlayer.newInstance();
         mContentPaddingTop = CApplication.getDimensionPixelSize(R.dimen.txt_prop_preview_content_margin_top);
-        int paddingLeft = (int) (SystemUtil.getScreenWidthIntPx() * PADDING_LEFT_TO_WIDTH_RATIO);
-        int paddingRight = (int) (SystemUtil.getScreenWidthIntPx() * PADDING_RIGHT_TO_WIDTH_RATIO);
+        int paddingLeft = (int) (SystemUtils.getScreenWidthIntPx() * PADDING_LEFT_TO_WIDTH_RATIO);
+        int paddingRight = (int) (SystemUtils.getScreenWidthIntPx() * PADDING_RIGHT_TO_WIDTH_RATIO);
         Loger.d(TAG, "-->initView(), paddingTop=" + mContentPaddingTop + ", paddingLeft=" + paddingLeft + ", paddingRight=" + paddingRight);
         setPadding(paddingLeft, mContentPaddingTop, paddingRight, 0);
     }

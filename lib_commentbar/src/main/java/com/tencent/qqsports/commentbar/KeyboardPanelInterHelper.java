@@ -4,11 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.common.widget.ime.IBeforeMeasureHeightChangeListener;
-import com.tencent.qqsports.common.widget.ime.IMEWindowMonitor;
-import com.tencent.qqsports.common.widget.ime.InputMethodChangeListener;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.widget.ime.IBeforeMeasureHeightChangeListener;
+import com.loading.common.widget.ime.IMEWindowMonitor;
+import com.loading.common.widget.ime.InputMethodChangeListener;
 
 /**
  * 处理软键盘与表情面板交替出现时闪烁的问题

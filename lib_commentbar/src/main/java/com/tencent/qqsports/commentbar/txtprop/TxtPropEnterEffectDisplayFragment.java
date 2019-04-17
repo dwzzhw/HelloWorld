@@ -14,24 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.anim.IAnimationPlayListener;
 import com.tencent.qqsports.commentbar.anim.YoyoPlayer;
 import com.tencent.qqsports.commentbar.anim.animator.BaseViewAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.ScaleInFromLB_Shake_ScaleOutAnimator;
 import com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.toolbox.VersionUtils;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.ObjectReuseCache;
-import com.tencent.qqsports.components.AbsActivity;
-import com.tencent.qqsports.components.BaseFragment;
-import com.tencent.qqsports.imagefetcher.ImageFetcher;
-import com.tencent.qqsports.servicepojo.comment.CommentInfo;
 
-import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
@@ -159,7 +150,7 @@ public class TxtPropEnterEffectDisplayFragment extends BaseFragment implements I
 
     public void addTxtPropCommentItem(List<CommentInfo> commentInfoList) {
         Loger.d(TAG, "-->addTxtPropCommentItem(), commentInfoList=" + commentInfoList + ", this=" + this);
-        if (!CollectionUtils.isEmpty(commentInfoList)) {
+        if (!CommonUtils.isEmpty(commentInfoList)) {
             clearTooMuchPendingData();
             for (CommentInfo commentInfo : commentInfoList) {
                 if (commentInfo != null && isValidEnterEffectProp(commentInfo) && !TextUtils.isEmpty(commentInfo.getTxtPropItemBgResUrl())) {

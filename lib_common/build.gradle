@@ -24,5 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.design
+    api deps.design
+    api deps.rx_java
+    api deps.rx_android
+    api deps.rx_permissions2
 }

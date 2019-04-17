@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_tips_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="11dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="11dp">
+
+    <ImageView
+        android:id="@+id/tips_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:src="@drawable/common_st_error" />
+
+    <TextView
+        android:id="@+id/tips_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:maxWidth="240dp"
+        android:minWidth="120dp"
+        android:textColor="@color/std_white0"
+        android:textSize="16dp"
+        tools:text="测试" />
+</LinearLayout>

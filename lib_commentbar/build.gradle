@@ -18,6 +18,7 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.design
 
     implementation project(':lib_emoj')
     implementation project(':lib_common')

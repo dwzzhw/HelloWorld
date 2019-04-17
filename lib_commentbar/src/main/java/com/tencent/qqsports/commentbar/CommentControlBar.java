@@ -31,17 +31,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.TipsToast;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.common.util.ViewUtils;
-import com.tencent.qqsports.common.widget.ImageSpanEx;
-import com.tencent.qqsports.config.SpConfig;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.utils.ViewUtils;
+import com.loading.common.widget.TipsToast;
 import com.tencent.qqsports.face.FaceManager;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.login.LoginModuleMgr;
 
 public class CommentControlBar extends LinearLayout
         implements View.OnClickListener,
@@ -117,7 +114,7 @@ public class CommentControlBar extends LinearLayout
         Loger.d(TAG, "-->initView(), singleLineMode=" + singleLineMode);
         isSingleLineMode = singleLineMode;
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        mAttachedActivity = SystemUtil.getAttachedActivity(context);
+        mAttachedActivity = SystemUtils.getAttachedActivity(context);
         setOrientation(isSingleLineMode ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
         LayoutInflater.from(context).inflate(getLayoutResId(), this, true);
 
@@ -368,7 +365,7 @@ public class CommentControlBar extends LinearLayout
 
         @Override
         public void afterTextChanged(Editable s) {
-            CommonUtil.filterEmptyLineForEditable(s, true);
+            CommonUtils.filterEmptyLineForEditable(s, true);
             onEditTextContentChanged(s);
 //            Loger.d(TAG, "afterTextChanged: text " + mEditText.getText());
             updateTextLengthMonitorView();
@@ -518,8 +515,8 @@ public class CommentControlBar extends LinearLayout
     private float getEditTextWidth() {
         int width = mEditText != null ? mEditText.getWidth() : 0;
         if (width <= 0) {
-            int totalPaddingAndMargin = SystemUtil.dpToPx(18);
-            int iconWidth = SystemUtil.dpToPx(34);
+            int totalPaddingAndMargin = SystemUtils.dpToPx(18);
+            int iconWidth = SystemUtils.dpToPx(34);
             int iconTotalWidth = 0;
             if (supportPic()) {
                 iconTotalWidth += iconWidth;
@@ -530,7 +527,7 @@ public class CommentControlBar extends LinearLayout
             if (supportVideo() && !mUserInjectEditTextView) {
                 iconTotalWidth += iconWidth;
             }
-            width = SystemUtil.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
+            width = SystemUtils.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
         }
         return width;
     }
@@ -624,9 +621,9 @@ public class CommentControlBar extends LinearLayout
 
     //隐藏软键盘
     public void hideKeyboard() {
-        int imeHeight = SystemUtil.getIMEVisibleHeight();
+        int imeHeight = SystemUtils.getIMEVisibleHeight();
         if (imeHeight > 0) {
-            if (SystemUtil.isLandscapeOrientation()) {
+            if (SystemUtils.isLandscapeOrientation()) {
                 mIMEHeightLand = imeHeight;
             } else {
                 mIMEHeightPort = imeHeight;
@@ -691,7 +688,7 @@ public class CommentControlBar extends LinearLayout
                 triggerChar.length() == 1 && targetString.startsWith(triggerChar)
                 && mEditText != null) {
             mAutoCompletedTextWatcher = new AutoCompletedTextWatcher(mEditText, triggerChar.charAt(0), targetString);
-            mAutoCompletedTextWatcher.setAutoCompletedTxtColor(CApplication.getColorFromRes(R.color.text_color_gray_2));
+            mAutoCompletedTextWatcher.setAutoCompletedTxtColor(CApplication.getColorFromRes(R.color.grey2));
             mEditText.addTextChangedListener(mAutoCompletedTextWatcher);
             mAutoCompleteMode = AUTO_COMPLETED_MODE_AT_SYMBOL;
         } else if (BuildConfig.DEBUG) {
@@ -726,7 +723,7 @@ public class CommentControlBar extends LinearLayout
     }
 
     public int getIMEHeight() {
-        int imeHeight = SystemUtil.isLandscapeOrientation() ? mIMEHeightLand : mIMEHeightPort;
+        int imeHeight = SystemUtils.isLandscapeOrientation() ? mIMEHeightLand : mIMEHeightPort;
         if (imeHeight <= 0) {
             imeHeight = SpConfig.getIMEDefaultHeight();
         }
@@ -777,7 +774,7 @@ public class CommentControlBar extends LinearLayout
         if (mControlBarListener != null) {
             if (toShow) {
                 if (mKeyboardPanelInterHelper != null &&
-                        SystemUtil.isKeyBoardShow(mAttachedActivity)) {
+                        SystemUtils.isKeyBoardShow(mAttachedActivity)) {
                     mKeyboardPanelInterHelper.doBeforeKeyboardMeasured(() -> {
                         notifyToggleDetailPanel(btnMode, true);
                     });

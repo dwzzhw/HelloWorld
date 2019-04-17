@@ -10,7 +10,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
-import com.tencent.qqsports.common.util.SystemUtil;
+import com.loading.common.utils.SystemUtils;
 
 public class AnimatorUtils {
     /**
@@ -90,7 +90,7 @@ public class AnimatorUtils {
                 int parentHeight = parentView.getHeight();
 
                 if (targetViewHeight > 0 && parentHeight > 0) {
-                    animatorSet.playTogether(ObjectAnimator.ofFloat(targetView, "x", targetView.getX(), SystemUtil.dpToPx(120)),
+                    animatorSet.playTogether(ObjectAnimator.ofFloat(targetView, "x", targetView.getX(), SystemUtils.dpToPx(120)),
                             ObjectAnimator.ofFloat(targetView, "y", targetView.getY() - floatUpDeltaY, parentHeight / 3.0f),
                             ObjectAnimator.ofFloat(targetView, "scaleX", 1, 0),
                             ObjectAnimator.ofFloat(targetView, "scaleY", 1, 0),

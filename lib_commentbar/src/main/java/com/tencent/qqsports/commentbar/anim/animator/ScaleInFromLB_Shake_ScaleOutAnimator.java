@@ -3,8 +3,8 @@ package com.tencent.qqsports.commentbar.anim.animator;
 import android.animation.Animator;
 import android.view.View;
 
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.UiThreadUtil;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
 
 public class ScaleInFromLB_Shake_ScaleOutAnimator extends BaseViewAnimator {
     private static final String TAG = "ScaleInFromLB_Shake_ScaleOutAnimator";

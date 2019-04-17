@@ -2,12 +2,9 @@ package com.tencent.qqsports.commentbar.txtprop.view;
 
 import android.content.Context;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.SystemUtils;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.recycler.adapter.BeanBaseRecyclerAdapter;
-import com.tencent.qqsports.recycler.wrapper.CommonGrpVerticalLineWrapper;
-import com.tencent.qqsports.recycler.wrapper.ListViewBaseWrapper;
 
 public class TxtPropListAdapter extends BeanBaseRecyclerAdapter {
     public static final int TYPE_ENTER_EFFECT = 1;
@@ -35,8 +32,8 @@ public class TxtPropListAdapter extends BeanBaseRecyclerAdapter {
                 CommonGrpVerticalLineWrapper dividerWrapper = new CommonGrpVerticalLineWrapper(mContext);
                 dividerWrapper.setPadding(0);
                 dividerWrapper.setLineColor(CApplication.getColorFromRes(R.color.std_white1));
-                dividerWrapper.setLineWidth((int) (SystemUtil.dpToPx(0.5f)));
-                dividerWrapper.setLineHeight(SystemUtil.dpToPx(12));
+                dividerWrapper.setLineWidth((int) (SystemUtils.dpToPx(0.5f)));
+                dividerWrapper.setLineHeight(SystemUtils.dpToPx(12));
                 wrapper = dividerWrapper;
                 break;
         }

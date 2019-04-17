@@ -5,15 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.loading.common.manager.ListenerManager;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.ViewUtils;
 import com.tencent.qqsports.commentbar.anim.animator.BaseViewAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.EnterAndPopAwayAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.FadeOutAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.MyStandupAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.ScaleInFromLB_Shake_ScaleOutAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.ScaleInFromLB_Shake_StayAnimator;
-import com.tencent.qqsports.common.manager.ListenerManager;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.ViewUtils;
 
 /**
  * Created by loading on 09/20/18.
@@ -219,35 +219,19 @@ public class YoyoPlayer implements BaseViewAnimator.IInternalAnimationListener {
 
 
     private void notifyAnimationStart(BaseViewAnimator animation) {
-        mListenerManager.startNotifyBack(tListener -> {
-            if (tListener instanceof IAnimationPlayListener) {
-                ((IAnimationPlayListener) tListener).onAnimationStart(animation);
-            }
-        });
+        mListenerManager.loopListenerList(listener -> listener.onAnimationEnd(animation));
     }
 
     private void notifyAnimationStageChanged(BaseViewAnimator animation, int stage) {
-        mListenerManager.startNotifyBack(tListener -> {
-            if (tListener instanceof IAnimationPlayListener) {
-                ((IAnimationPlayListener) tListener).onAnimationStageChanged(animation, stage);
-            }
-        });
+        mListenerManager.loopListenerList(listener -> listener.onAnimationStageChanged(animation, stage));
     }
 
     private void notifyAnimationCanceled(BaseViewAnimator animation) {
-        mListenerManager.startNotifyBack(tListener -> {
-            if (tListener instanceof IAnimationPlayListener) {
-                ((IAnimationPlayListener) tListener).onAnimationCancel(animation);
-            }
-        });
+        mListenerManager.loopListenerList(listener -> listener.onAnimationCancel(animation));
     }
 
     private void notifyAnimationEnd(BaseViewAnimator animation) {
-        mListenerManager.startNotifyBack(tListener -> {
-            if (tListener instanceof IAnimationPlayListener) {
-                ((IAnimationPlayListener) tListener).onAnimationEnd(animation);
-            }
-        });
+        mListenerManager.loopListenerList(listener -> listener.onAnimationEnd(animation));
     }
 
     public void addAnimationListener(IAnimationPlayListener listener) {

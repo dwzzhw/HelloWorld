@@ -10,6 +10,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
+import com.loading.common.lifecycle.CActivityManager;
 import com.loading.common.utils.Loger;
 
 public class CApplication {
@@ -23,6 +24,7 @@ public class CApplication {
         }
         mAppContext = application.getApplicationContext();
         mApplication = application;
+        application.registerActivityLifecycleCallbacks(CActivityManager.getInstance());
         Loger.i(TAG, "mAppContext: " + mAppContext);
     }
 
