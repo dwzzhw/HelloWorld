@@ -9,12 +9,10 @@ import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.FileHandler;
 import com.loading.common.utils.FilePathUtil;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
 import com.loading.common.utils.UiThreadUtil;
-import com.tencent.qqsports.face.data.FacePackageInfo;
-import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
-import com.tencent.qqsports.face.data.RemoteFaceResPO;
-import com.tencent.qqsports.face.model.RemoteFacePackageModel;
+import com.loading.modules.interfaces.face.IFaceService;
+import com.loading.modules.interfaces.face.data.FacePackageInfo;
+import com.loading.modules.interfaces.face.data.RemoteFacePackageInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,23 +20,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FaceManager implements FaceUtil.IRemoteFacePackageListener, NetworkChangeReceiver.OnNetStatusChangeListener,
-        Foreground.ForegroundListener {
+public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceService {
     private static final String TAG = "FaceManager";
     public static final String LOCAL_FACE_PACKAGE_NAME = "local_face_info";
     private static final String FACE_STORAGE_PATH = "face";
     private static final int PREPARE_PACKAGE_INFO_MAX_RETRY_CNT = 5;
     private static final long PREPARE_PACKAGE_INFO_RETRY_DURATION = 30 * DateUtils.SECOND_IN_MILLIS;
 
-    private RemoteFacePackageModel mRemoteDataModel;
-    private RemoteFaceResPO mRemoteFaceRespPO;
-
     private List<BaseFacePackage> mLocalPackageList;
     private List<BaseFacePackage> mRemotePackageList;  //在表情面板中展示的远端表情包列表，即展示在面板底部的分组数量
     private String mLocalFacePackageFolderPath;     //网络表情包本地存储路径
     private List<RemoteFacePackageInfo> mRemoteFacePackageInfoList;   //远端获取到的sticker列表
-
-    private int mFetchPackageInfoRetryCnt = 0;
 
     private static class InstanceHolder {
         static FaceManager sInstance = new FaceManager();
@@ -46,11 +38,6 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
 
     public static FaceManager getInstance() {
         return InstanceHolder.sInstance;
-    }
-
-    public void init() {
-        Foreground.getInstance().addListener(FaceManager.this);
-        NetworkChangeReceiver.getInstance().addOnNetStatusChangeListener(FaceManager.this);
     }
 
     private FaceManager() {
@@ -61,36 +48,36 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         mLocalFacePackageFolderPath = FilePathUtil.getFilePathDir(FACE_STORAGE_PATH);
         Loger.d(TAG, "-->init<>, cached remote FacePackageFolderPath=" + mLocalFacePackageFolderPath);
 
-        mRemoteDataModel = new RemoteFacePackageModel(new IDataListener() {
-            @Override
-            public void onDataComplete(BaseDataModel data, int dataType) {
-                Loger.d(TAG, "-->onDataComplete(), model=" + data);
-                UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
-                if (data == mRemoteDataModel) {
-                    if (mRemoteFaceRespPO == null || !mRemoteFaceRespPO.isTheSameResp(mRemoteDataModel.getResponseData())) {
-                        mRemoteFaceRespPO = mRemoteDataModel.getResponseData();
-                        updateRemoteFacePackageInfo(mRemoteDataModel.getRemoteFacePackageList(), mRemoteDataModel.getDataVersion());
-                    } else {
-                        Loger.d(TAG, "-->Ignore duplicated remote data");
-                    }
-                }
-            }
-
-            @Override
-            public void onDataError(BaseDataModel data, int retCode, String retMsg, int dataType) {
-                Loger.d(TAG, "-->onDataError(), retCode=" + retCode + ", retMsg=" + retMsg + ", dataType=" + dataType);
-                if (mFetchPackageInfoRetryCnt++ < PREPARE_PACKAGE_INFO_MAX_RETRY_CNT) {
-                    UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
-                    UiThreadUtil.postDelay(mRetryFetchPackageInfoRunnable, PREPARE_PACKAGE_INFO_RETRY_DURATION);
-                }
-            }
-        });
+//        mRemoteDataModel = new RemoteFacePackageModel(new IDataListener() {
+//            @Override
+//            public void onDataComplete(BaseDataModel data, int dataType) {
+//                Loger.d(TAG, "-->onDataComplete(), model=" + data);
+//                UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
+//                if (data == mRemoteDataModel) {
+//                    if (mRemoteFaceRespPO == null || !mRemoteFaceRespPO.isTheSameResp(mRemoteDataModel.getResponseData())) {
+//                        mRemoteFaceRespPO = mRemoteDataModel.getResponseData();
+//                        updateRemoteFacePackageInfo(mRemoteDataModel.getRemoteFacePackageList(), mRemoteDataModel.getDataVersion());
+//                    } else {
+//                        Loger.d(TAG, "-->Ignore duplicated remote data");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onDataError(BaseDataModel data, int retCode, String retMsg, int dataType) {
+//                Loger.d(TAG, "-->onDataError(), retCode=" + retCode + ", retMsg=" + retMsg + ", dataType=" + dataType);
+//                if (mFetchPackageInfoRetryCnt++ < PREPARE_PACKAGE_INFO_MAX_RETRY_CNT) {
+//                    UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
+//                    UiThreadUtil.postDelay(mRetryFetchPackageInfoRunnable, PREPARE_PACKAGE_INFO_RETRY_DURATION);
+//                }
+//            }
+//        });
     }
 
     private void queryRemoteFaceInfo() {
-        Loger.d(TAG, "-->queryRemoteFaceInfo()");
-        UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
-        mRemoteDataModel.loadData();
+        Loger.d(TAG, "-->queryRemoteFaceInfo(), not implement yet");
+//        UiThreadUtil.removeRunnable(mRetryFetchPackageInfoRunnable);
+//        mRemoteDataModel.loadData();
     }
 
     public List<BaseFacePackage> getAvailablePackageList() {
@@ -108,7 +95,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
             } else {
                 //远端表情包已出错，重新下载
                 Loger.w(TAG, "-->getAvailablePackageList(), remote face package damaged, re-get one");
-                queryRemoteFaceInfo();
+//                queryRemoteFaceInfo();
             }
         }
         return resultList;
@@ -118,7 +105,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         if (mRemoteFacePackageInfoList != null) {
             boolean isAllInfoReady = true;
             for (RemoteFacePackageInfo packageInfo : mRemoteFacePackageInfoList) {
-                if (packageInfo != null && !packageInfo.checkFaceInfoReadyState() && !isRemotePackageDownloadFail(packageInfo)) {
+                if (!FaceUtil.checkFaceInfoReadyState(packageInfo) && !isRemotePackageDownloadFail(packageInfo)) {
                     isAllInfoReady = false;
                     if (triggerDownload) {
                         FaceUtil.downloadRemoteFacePackage(packageInfo, this, true);
@@ -147,7 +134,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         if (mRemoteFacePackageInfoList != null) {
             for (int i = 0; i < mRemoteFacePackageInfoList.size(); i++) {
                 RemoteFacePackageInfo packageInfo = mRemoteFacePackageInfoList.get(i);
-                if (packageInfo != null && packageInfo.checkFaceInfoReadyState()) {
+                if (FaceUtil.checkFaceInfoReadyState(packageInfo)) {
                     RemoteFacePackage remoteFacePackage = new RemoteFacePackage(packageInfo);
 
                     mRemotePackageList.add(remoteFacePackage);
@@ -161,7 +148,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         if (!CommonUtils.isEmpty(mRemoteFacePackageInfoList)) {
             Set<String> validPackageSet = new HashSet<>(mRemoteFacePackageInfoList.size());
             for (int i = 0; i < mRemoteFacePackageInfoList.size(); i++) {
-                validPackageSet.add(mRemoteFacePackageInfoList.get(i).getFacePackageFolderFullPath());
+                validPackageSet.add(FaceUtil.getFacePackageFolderFullPath(mRemoteFacePackageInfoList.get(i)));
             }
 
             File allFacePackageFolder = new File(mLocalFacePackageFolderPath);
@@ -180,7 +167,8 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         }
     }
 
-    private void updateRemoteFacePackageInfo(List<RemoteFacePackageInfo> remoteFacePackageInfoList, String version) {
+    @Override
+    public void updateRemoteFacePackageInfo(List<RemoteFacePackageInfo> remoteFacePackageInfoList, String version) {
         Loger.d(TAG, "-->updateRemoteFacePackageInfo(), version=" + version + ", remoteFacePackageInfoList=" + remoteFacePackageInfoList);
         mRemoteFacePackageInfoList = remoteFacePackageInfoList;
         checkRemoteFacePackageReadyState(true);
@@ -233,10 +221,12 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         return resultCharSeq;
     }
 
+    @Override
     public SpannableStringBuilder convertToSpannableStr(String iText, float textSize) {
         return convertToSpannableStr(iText, textSize, null);
     }
 
+    @Override
     public SpannableStringBuilder convertToSpannableStr(String iText, TextView txtView) {
         return convertToSpannableStr(iText, 0, txtView);
     }
@@ -260,43 +250,15 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, Network
         return resultBuilder;
     }
 
-    private Runnable mRetryFetchPackageInfoRunnable = () -> queryRemoteFaceInfo();
-
-    private void checkToUpdateData() {
-        boolean needUpdate = mRemoteDataModel != null && mRemoteDataModel.needUpdate();
-        Loger.d(TAG, "-->checkToUpdateData(), needUpdate=" + needUpdate);
-        if (needUpdate) {
-            queryRemoteFaceInfo();
-        }
-    }
-
-    @Override
-    public void onStatusChanged(int oldNetStatus, int netStatus, int oldNetSubType, int netSubType) {
-        if (SystemUtils.isNetworkAvailable()) {
-            checkToUpdateData();
-        }
-    }
-
-    @Override
-    public void onBecameForeground() {
-        checkToUpdateData();
-    }
-
-    @Override
-    public void onBecameBackground() {
-
-    }
-
-    public static void onAppDestroy() {
-        if (InstanceHolder.sInstance != null) {
-            InstanceHolder.sInstance.onDestroy();
-        }
-    }
-
-    private void onDestroy() {
-        NetworkChangeReceiver.getInstance().removeOnNetStatusChangeListener(this);
-        Foreground.getInstance().removeListener(this);
-    }
+//    private Runnable mRetryFetchPackageInfoRunnable = () -> queryRemoteFaceInfo();
+//
+//    private void checkToUpdateData() {
+//        boolean needUpdate = mRemoteDataModel != null && mRemoteDataModel.needUpdate();
+//        Loger.d(TAG, "-->checkToUpdateData(), needUpdate=" + needUpdate);
+//        if (needUpdate) {
+//            queryRemoteFaceInfo();
+//        }
+//    }
 
     //生成本地表情包需要的代码，勿删
     public void saveCurrentFacePackageToLocal() {

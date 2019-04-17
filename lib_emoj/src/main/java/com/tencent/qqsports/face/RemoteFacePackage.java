@@ -7,8 +7,8 @@ import android.text.TextUtils;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
 import com.tencent.qqsports.emoj.R;
-import com.tencent.qqsports.face.data.FaceItem;
-import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
+import com.loading.modules.interfaces.face.data.FaceItem;
+import com.loading.modules.interfaces.face.data.RemoteFacePackageInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class RemoteFacePackage extends BaseFacePackage {
     @Override
     protected void init() {
         if (mRemoteFacePackageInfo != null) {
-            mFacePackageFolderPath = mRemoteFacePackageInfo.getFacePackageFolderFullPath();
+            mFacePackageFolderPath = FaceUtil.getFacePackageFolderFullPath(mRemoteFacePackageInfo);
             if (mFacePackageFolderPath != null && !mFacePackageFolderPath.endsWith(File.separator)) {
                 mFacePackageFolderPath += File.separator;
             }

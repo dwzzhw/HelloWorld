@@ -1,4 +1,4 @@
-package com.tencent.qqsports.face.data;
+package com.loading.modules.interfaces.face.data;
 
 import java.io.Serializable;
 import java.util.List;

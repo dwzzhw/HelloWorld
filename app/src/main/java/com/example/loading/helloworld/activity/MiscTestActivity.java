@@ -11,6 +11,8 @@ import com.example.loading.helloworld.R;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.modules.interfaces.face.FaceModuleMgr;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,6 +22,7 @@ import java.util.LinkedHashSet;
 public class MiscTestActivity extends BaseActivity {
     private static final String TAG = "MiscTestActivity";
     private TextView titleTextView = null;
+    private TextView bbsBoardView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class MiscTestActivity extends BaseActivity {
 
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setOnClickListener(mTitleClickListener);
+        bbsBoardView = findViewById(R.id.bbs_board);
     }
 
     private View.OnClickListener mTitleClickListener = new View.OnClickListener() {
@@ -40,8 +44,9 @@ public class MiscTestActivity extends BaseActivity {
 
     public void onBtnClicked(View view) {
         Loger.d(TAG, "-->onBtnClicked()");
-        if(view.getId() == R.id.misc_test_01){
-            doINetTest();
+        if (view.getId() == R.id.misc_test_01) {
+//            doINetTest();
+            doEmojoFaceTest();
         }
     }
 
@@ -186,5 +191,17 @@ public class MiscTestActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void doEmojoFaceTest() {
+        String testStr = "一个表情[坏笑]";
+        bbsBoardView.setText(testStr);
+
+        UiThreadUtil.postDelay(new Runnable() {
+            @Override
+            public void run() {
+                bbsBoardView.setText(FaceModuleMgr.convertToSpannableStr(testStr, bbsBoardView));
+            }
+        }, 2000);
     }
 }
