@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:clickable="true"/>
 
-    <com.tencent.qqsports.commentbar.txtprop.CommentTxtPropControlBar
+    <com.loading.tobedetermine.commentbar.txtprop.CommentTxtPropControlBar
         android:id="@+id/prop_control_bar"
         android:layout_width="@dimen/comment_txt_prop_bar_item_width"
         android:layout_height="@dimen/comment_txt_prop_bar_height"

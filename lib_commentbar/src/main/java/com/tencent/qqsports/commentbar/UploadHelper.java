@@ -1,25 +1,17 @@
 package com.tencent.qqsports.commentbar;
 
+import android.graphics.ImageFormat;
 import android.text.TextUtils;
 
-import com.facebook.imageformat.DefaultImageFormats;
-import com.facebook.imageformat.ImageFormat;
-import com.facebook.imageformat.ImageFormatChecker;
-import com.tencent.qqsports.common.ConstantValues;
-import com.tencent.qqsports.common.TipsToast;
-import com.tencent.qqsports.common.http.UploadProgressMonitorListener;
-import com.tencent.qqsports.common.manager.CacheManager;
-import com.tencent.qqsports.common.pojo.MediaEntity;
-import com.tencent.qqsports.common.toolbox.AsyncOperationUtil;
-import com.tencent.qqsports.common.util.BitmapUtil;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.common.util.FilePathUtil;
-import com.tencent.qqsports.config.upload.UploadMultiModel;
-import com.tencent.qqsports.httpengine.datamodel.MultiDataModel;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.servicepojo.UploadPicPojo;
-import com.tencent.qqsports.servicepojo.UploadVideoPojo;
+import com.loading.common.utils.AsyncOperationUtil;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.FilePathUtil;
+import com.loading.common.utils.Loger;
+import com.loading.common.widget.TipsToast;
+import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.upload.UploadProgressMonitorListener;
+import com.loading.modules.interfaces.upload.data.UploadPicPojo;
+import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,7 +64,7 @@ public class UploadHelper implements MultiDataModel.IMultiDataListener {
     public void startUpload(List<String> localPics, MediaEntity videoEntity, String topicStr) {
         mSelectedLocalPics = localPics;
         notifyCompressBegin(getNeedCompressImgCnt(localPics));
-        if (!CommonUtil.isEmpty(localPics)) {
+        if (!CommonUtils.isEmpty(localPics)) {
             checkPicValidation(localPics, videoEntity, topicStr);
         } else {
             startUploadInternal(localPics, videoEntity, topicStr);

@@ -1,15 +1,14 @@
 package com.tencent.qqsports.commentbar;
 
-import com.tencent.qqsports.common.pojo.MediaEntity;
-import com.tencent.qqsports.servicepojo.UploadPicPojo;
-import com.tencent.qqsports.servicepojo.UploadVideoPojo;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
+import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.upload.data.UploadPicPojo;
+import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 
 import java.util.ArrayList;
 
 public class CommentInterface {
     public interface CommentPanelListener {
-        void onSendComment(String content, UploadPicPojo.UpPicRespData upPicRespData, UploadVideoPojo uploadVideoPojo, TxtPropItem txtPropItem); //发送文字、图片列表回调
+        void onSendComment(String content, UploadPicPojo.UpPicRespData upPicRespData, UploadVideoPojo uploadVideoPojo, Object txtPropItem); //发送文字、图片列表回调
 
         void onPanelShow();
 
@@ -26,12 +25,6 @@ public class CommentInterface {
         void onShowDetailPanel(int panelMode);
     }
 
-    public interface CommentPanelListenerForProp extends CommentPanelListener, CommentPanelSubSwitchListener {
-        void onLockTipsClicked(TxtPropItem propItem);
-
-        void onLockTipsShown(TxtPropItem propItem);
-    }
-
     public interface CommentPanelListenerWithMedia extends CommentPanelListener {
         void onUploadMediaBegin();
 
@@ -39,7 +32,7 @@ public class CommentInterface {
     }
 
     public interface IDraftAccessor {
-        void saveDraft(String commentContentStr, ArrayList<MediaEntity> selectedMediaList, TxtPropItem txtPropItem);
+        void saveDraft(String commentContentStr, ArrayList<MediaEntity> selectedMediaList, Object txtPropItem);
 
         void clearNoPersistDraft();
 
@@ -47,7 +40,7 @@ public class CommentInterface {
 
         ArrayList<MediaEntity> getSelectedMediaList();
 
-        TxtPropItem getLastTxtPropItem();
+        Object getLastTxtPropItem();
     }
 
     public interface IDraftAccessorSupplier {

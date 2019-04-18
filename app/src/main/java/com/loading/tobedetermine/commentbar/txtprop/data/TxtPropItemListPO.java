@@ -1,6 +1,4 @@
-package com.tencent.qqsports.commentbar.txtprop.data;
-
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
+package com.loading.tobedetermine.commentbar.txtprop.data;
 
 import java.io.Serializable;
 import java.util.List;

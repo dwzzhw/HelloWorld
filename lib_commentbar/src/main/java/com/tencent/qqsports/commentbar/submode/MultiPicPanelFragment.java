@@ -14,18 +14,16 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tencent.qqmusic.module.ipcframework.toolbox.IPC;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.photoselector.ICameraGalleryGuideCallback;
+import com.loading.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.videorecord.IPCCameraCallBack;
 import com.tencent.qqsports.commentbar.view.AddMediaItemView;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.interfaces.ICameraGalleryGuideCallback;
-import com.tencent.qqsports.common.pojo.MediaEntity;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.hostapp.HostAppModuleMgr;
-import com.tencent.qqsports.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
 
 import java.util.ArrayList;
 
@@ -100,7 +98,7 @@ public class MultiPicPanelFragment extends PanelModeBaseFragment implements
     public void onMediaContentClick(View itemView, int mediaItemIndex) {
         Loger.d(TAG, "-->onMediaContentClick()");
         showCameraGalleryGuideDialog();
-        if (!CollectionUtils.isEmpty(mOriPaths) && mediaItemIndex >= 0 && mOriPaths.size() > mediaItemIndex) {
+        if (!CommonUtils.isEmpty(mOriPaths) && mediaItemIndex >= 0 && mOriPaths.size() > mediaItemIndex) {
             MediaEntity selectedMediaEntry = mOriPaths.get(mediaItemIndex);
             if (selectedMediaEntry != null) {
                 notifyPageJumpForPS();

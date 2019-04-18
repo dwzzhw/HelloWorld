@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView
+    <com.loading.tobedetermine.commentbar.txtprop.view.TxtPropPreviewView
         android:id="@+id/txt_prop_preview_area"
         android:layout_width="match_parent"
         android:layout_height="@dimen/comment_txt_prop_preview_area_height"

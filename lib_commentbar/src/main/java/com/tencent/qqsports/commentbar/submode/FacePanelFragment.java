@@ -13,19 +13,19 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
+import com.loading.common.widget.CirclePageIndicator;
+import com.loading.common.widget.ViewPagerEX;
+import com.loading.common.widget.ViewPagerProxy;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.adapter.FacePagerAdapter;
 import com.tencent.qqsports.commentbar.view.FacePackageIndicatorView;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.widget.CirclePageIndicator;
-import com.tencent.qqsports.common.widget.ViewPagerEX;
-import com.tencent.qqsports.common.widget.ViewPagerProxy;
 import com.tencent.qqsports.face.BaseFacePackage;
 import com.tencent.qqsports.face.FaceManager;
 import com.tencent.qqsports.face.FacePageItems;
-import com.tencent.qqsports.logger.Loger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +80,10 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
         int bottomBarHeight = CApplication.getDimensionPixelSize(R.dimen.face_cb_height);
         int gridContentItemPaddingLR = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_item_padding_LR);  //GridView 中每一项的左右padding
         int gridContentContainerPaddingLR = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_padding_LR);  //GridView 左右padding
-        int pageIndicatorMaintainHeight = SystemUtil.dpToPx(20);
+        int pageIndicatorMaintainHeight = SystemUtils.dpToPx(20);
         int gridViewVerticalSpacing = (mPanelTargetHeight - bottomBarHeight - pageIndicatorMaintainHeight - 3 * faceItemSize) / 5;
         int faceItemContainerWidth = faceItemSize + gridContentItemPaddingLR * 2;
-        int colNum = (SystemUtil.getRealTimeScreenWidthIntPx(getContext()) - 2 * gridContentContainerPaddingLR) / faceItemContainerWidth;
+        int colNum = (SystemUtils.getRealTimeScreenWidthIntPx(getContext()) - 2 * gridContentContainerPaddingLR) / faceItemContainerWidth;
 
         List<FacePageItems> facePageList = new ArrayList<>(5);
         mPackageIndicatorContainer.removeAllViews();
@@ -92,7 +92,7 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
             if (facePackage != null && facePackage.isPackageValid()) {
                 facePackage.initRowColumnLayout(3, colNum, gridContentItemPaddingLR, gridViewVerticalSpacing);
                 List<FacePageItems> tFacePageList = facePackage.getFacePageList();
-                if (!CollectionUtils.isEmpty(tFacePageList)) {
+                if (!CommonUtils.isEmpty(tFacePageList)) {
                     int packageStartIndex = facePageList.size();
                     FacePackageIndicatorView indicatorView = new FacePackageIndicatorView(getContext());
                     indicatorView.setPackageStartIndexInViewPager(packageStartIndex);

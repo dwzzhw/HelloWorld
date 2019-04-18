@@ -7,7 +7,7 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.widget.EditText;
 
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.utils.Loger;
 
 /**
  * Created by loading on 3/22/17.

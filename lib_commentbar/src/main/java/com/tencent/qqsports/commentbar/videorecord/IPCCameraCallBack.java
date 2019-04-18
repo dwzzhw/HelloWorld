@@ -1,6 +1,6 @@
 package com.tencent.qqsports.commentbar.videorecord;
 
-import com.tencent.qqsports.common.pojo.MediaEntity;
+import com.loading.modules.data.MediaEntity;
 
 /**
  * Created by anxin on 2018/7/12.

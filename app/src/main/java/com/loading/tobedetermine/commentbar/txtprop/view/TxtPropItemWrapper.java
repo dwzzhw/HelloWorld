@@ -1,14 +1,12 @@
-package com.tencent.qqsports.commentbar.txtprop.view;
+package com.loading.tobedetermine.commentbar.txtprop.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.recycler.wrapper.ListViewBaseWrapper;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
 
 public class TxtPropItemWrapper extends ListViewBaseWrapper {
     private static final String TAG = "TxtPropItemWrapper";

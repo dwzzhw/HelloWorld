@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar.txtprop.view;
+package com.loading.tobedetermine.commentbar.txtprop.view;
 
 import android.content.Context;
 

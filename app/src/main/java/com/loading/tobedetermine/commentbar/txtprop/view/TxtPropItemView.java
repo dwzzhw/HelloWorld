@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar.txtprop.view;
+package com.loading.tobedetermine.commentbar.txtprop.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -12,14 +12,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.ViewUtils;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.ViewUtils;
-import com.tencent.qqsports.imagefetcher.ImageFetcher;
-import com.tencent.qqsports.imagefetcher.view.RecyclingImageView;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
 
 public class TxtPropItemView extends FrameLayout {
     private static final String TAG = "TxtPropItemView";

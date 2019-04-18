@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.loading.common.component.CApplication;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
 import com.tencent.qqsports.face.FacePageItems;
 
 import java.util.List;

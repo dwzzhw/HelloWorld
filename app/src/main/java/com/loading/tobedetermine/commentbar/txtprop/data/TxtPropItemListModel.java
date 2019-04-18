@@ -1,17 +1,10 @@
-package com.tencent.qqsports.commentbar.txtprop.data;
+package com.loading.tobedetermine.commentbar.txtprop.data;
 
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.commentbar.txtprop.view.TxtPropListAdapter;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.config.URLConstants;
-import com.tencent.qqsports.httpengine.datamodel.BaseDataModel;
-import com.tencent.qqsports.httpengine.datamodel.IDataListener;
-import com.tencent.qqsports.recycler.beanitem.CommonBeanItem;
-import com.tencent.qqsports.recycler.beanitem.IBeanItem;
-import com.tencent.qqsports.servicepojo.match.IMatchIdQueryListener;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
+import com.loading.deletelater.TxtPropItem;
+import com.loading.tobedetermine.commentbar.txtprop.view.TxtPropListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar.txtprop;
+package com.loading.tobedetermine.commentbar.txtprop;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,32 +13,19 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.utils.ViewUtils;
 import com.tencent.qqsports.commentbar.CommentConstants;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.anim.IAnimationPlayListener;
 import com.tencent.qqsports.commentbar.anim.YoyoPlayer;
 import com.tencent.qqsports.commentbar.anim.animator.BaseViewAnimator;
-import com.tencent.qqsports.commentbar.txtprop.view.TxtPropItemWrapper;
-import com.tencent.qqsports.commentbar.txtprop.view.TxtPropListAdapter;
-import com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView;
+import com.loading.tobedetermine.commentbar.txtprop.view.TxtPropItemWrapper;
+import com.loading.tobedetermine.commentbar.txtprop.view.TxtPropListAdapter;
+import com.loading.tobedetermine.commentbar.txtprop.view.TxtPropPreviewView;
 import com.tencent.qqsports.commentbar.utils.CommentUtils;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.common.util.ViewUtils;
-import com.tencent.qqsports.common.widget.PopupWindowWrapper;
-import com.tencent.qqsports.config.ViewTypeConstant;
-import com.tencent.qqsports.imagefetcher.ImageFetcher;
-import com.tencent.qqsports.modules.jumpdata.JumpProxyManager;
-import com.tencent.qqsports.recycler.beanitem.CommonBeanItem;
-import com.tencent.qqsports.recycler.beanitem.IBeanItem;
-import com.tencent.qqsports.recycler.layoutmanager.LinearLayoutManagerEx;
-import com.tencent.qqsports.recycler.view.RecyclerViewEx;
-import com.tencent.qqsports.servicepojo.comment.CommentInfo;
-import com.tencent.qqsports.servicepojo.prop.PropLockInfo;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
 
 import java.util.ArrayList;
 import java.util.List;

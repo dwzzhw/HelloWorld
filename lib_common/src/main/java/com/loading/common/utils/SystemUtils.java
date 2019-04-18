@@ -152,6 +152,15 @@ public class SystemUtils {
         }
     }
 
+    public static int getRealTimeScreenWidthIntPx(Context context) {
+        android.view.WindowManager windowsManager = (android.view.WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        android.view.Display display = windowsManager.getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+
+        return outMetrics.widthPixels;
+    }
+
     private static DisplayMetrics getDeviceDisplayMetrics(Context context) {
         if (sDisplayMertics == null && context != null) {
             android.view.WindowManager windowsManager = (android.view.WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

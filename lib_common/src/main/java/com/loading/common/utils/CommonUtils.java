@@ -16,8 +16,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.math.RoundingMode;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +32,7 @@ import java.util.regex.Pattern;
 
 public class CommonUtils {
     public static final String TAG = "CommonUtils";
+    public static final String FILE_SCHEME_PREFIX = "file://";
 
     /**
      * 从assert下的json文件读取测试数据
@@ -287,5 +292,83 @@ public class CommonUtils {
             }
         }
         return foundEmptyLine;
+    }
+
+    public static String tenTh2wan(long num) {
+        DecimalFormat df = new DecimalFormat("0.0");
+        if (num >= 10000000) {
+            String str = df.format(num / 100000000.0D);
+
+            return (!str.contains(".0") ? str : str.substring(0, str.length() - 2)) + "亿";
+        } else if (num >= 10000 && num < 10000000) {
+            String str = df.format(num / 10000.0D);
+            return (!str.contains(".0") ? str : str.substring(0, str.length() - 2)) + "万";
+        } else {
+            return num + "";
+        }
+    }
+
+    public static String tenTh2wan(String num) {
+        if (!TextUtils.isEmpty(num)) {
+            try {
+                long numLong = Long.parseLong(num);
+                return tenTh2wan(numLong);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    //    //保留两位小数
+    public static String tenTh2wan2(long num) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        if (num >= 100000000) {
+            String str = df.format(num / 100000000.00D);
+            if (str.endsWith("00")) {
+                return (str.substring(0, str.length() - 3)) + "亿";
+            } else if (str.endsWith("0")) {
+                return (str.substring(0, str.length() - 1)) + "亿";
+            } else {
+                return str + "亿";
+            }
+        } else if (num >= 10000) {
+            String str = df.format(num / 10000.00D);
+            if (str.endsWith("00")) {
+                return (str.substring(0, str.length() - 3)) + "万";
+            } else if (str.endsWith("0")) {
+                return (str.substring(0, str.length() - 1)) + "万";
+            } else {
+                return str + "万";
+            }
+        } else {
+            return String.valueOf(num);
+        }
+    }
+
+    public static String tenTh2wan2(String num) {
+        if (!TextUtils.isEmpty(num)) {
+            try {
+                long numLong = Long.parseLong(num);
+                return tenTh2wan2(numLong);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static String urlEncode(String str) throws UnsupportedEncodingException {
+        return !TextUtils.isEmpty(str) ?
+                (URLEncoder.encode(str, "utf-8").
+                        replaceAll("\\+", "%20").
+                        replaceAll("%7E", "~").
+                        replaceAll("\\*", "%2A").
+                        replaceAll("\\|", "%7C")) : "";
+    }
+
+    public static boolean isUrl(String url) {
+        return !TextUtils.isEmpty(url) && (url.startsWith("http:") || url.startsWith("https:"));
     }
 }

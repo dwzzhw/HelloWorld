@@ -43,8 +43,8 @@ dependencies {
     implementation deps.design
 
 //module manager code begin here
-    implementation project(':app')
-//    implementation project(':lib_commentbar')
+//    implementation project(':app')
+    implementation project(':lib_commentbar')
     implementation project(':lib_emoj')
     implementation project(':lib_flutter_bridge')
 //module manager code begin here

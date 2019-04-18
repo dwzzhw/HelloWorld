@@ -21,35 +21,29 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
-import com.tencent.qqsports.baseui.dialog.MDDialogFragment;
+import com.loading.common.component.ActivityHelper;
+import com.loading.common.component.BaseActivity;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.FragmentHelper;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.NotchPhoneUtil;
+import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.widget.TipsToast;
+import com.loading.common.widget.dialog.MDDialogFragment;
+import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.login.LoginModuleMgr;
+import com.loading.modules.interfaces.photoselector.IPSListener;
+import com.loading.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
+import com.loading.modules.interfaces.upload.UploadProgressMonitorListener;
+import com.loading.modules.interfaces.upload.data.UploadPicPojo;
+import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 import com.tencent.qqsports.commentbar.submode.FacePanelFragment;
 import com.tencent.qqsports.commentbar.submode.IPicPanelListener;
 import com.tencent.qqsports.commentbar.submode.MultiPicPanelFragment;
 import com.tencent.qqsports.commentbar.submode.PanelModeBaseFragment;
 import com.tencent.qqsports.commentbar.submode.SinglePicPanelFragment;
-import com.tencent.qqsports.commentbar.txtprop.CommentTxtPropControlBar;
-import com.tencent.qqsports.commentbar.txtprop.data.TxtPropItemListModel;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.TipsToast;
-import com.tencent.qqsports.common.http.UploadProgressMonitorListener;
-import com.tencent.qqsports.common.pojo.MediaEntity;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.FragmentHelper;
-import com.tencent.qqsports.common.util.NotchPhoneUtil;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.common.util.UiThreadUtil;
-import com.tencent.qqsports.components.AbsActivity;
-import com.tencent.qqsports.components.ActivityHelper;
-import com.tencent.qqsports.components.BaseActivity;
-import com.tencent.qqsports.httpengine.datamodel.BaseDataModel;
-import com.tencent.qqsports.httpengine.datamodel.IDataListener;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.login.LoginModuleMgr;
-import com.tencent.qqsports.modules.interfaces.photoselector.IPSListener;
-import com.tencent.qqsports.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
-import com.tencent.qqsports.servicepojo.UploadPicPojo;
-import com.tencent.qqsports.servicepojo.UploadVideoPojo;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +53,7 @@ public class CommentPanel extends MDDialogFragment
         UploadHelper.UploadHelperCallback,
         View.OnClickListener,
         IPSListener,
-        CommentControlBar.IControlBarListener,
-        CommentTxtPropControlBar.ITxtPropControlBarListener,
-        IDataListener {
+        CommentControlBar.IControlBarListener {
     private static final String TAG = "CommentPanel";
     public static final int THEME_DEFAULT = 0;
     public static final int THEME_NIGHT = 1;
@@ -88,8 +80,8 @@ public class CommentPanel extends MDDialogFragment
     private View mTopDivider;
     private View mMiddleDivider;
 
-    private CommentTxtPropControlBar mTxtPropControlBar;
-    private TxtPropItemListModel mTxtPropListModel;
+    //dwz test
+    private ICustomCommentControlBar mCustomControlBar;
 
     private int mBarMode = 0;
     private int mInitBarMode = 0;
@@ -165,7 +157,6 @@ public class CommentPanel extends MDDialogFragment
             isSingleLineControlBarMode = arguments.getBoolean(KEY_SINGLE_LINE_CONTROL_BAR_MODE, false);
             mUploadSourceChannel = arguments.getInt(KEY_UPLOAD_SOURCE_CHANNEL);
         }
-        mTxtPropListModel = new TxtPropItemListModel(getAttachedActivity(), this, isFullScreenMode);
 
         mDismissOnConfigChange = true;
         isFirstCreated = true;
@@ -179,7 +170,6 @@ public class CommentPanel extends MDDialogFragment
         mControlBar = mRootView.findViewById(R.id.control_bar);
         mPanelContainer = mRootView.findViewById(R.id.panel_container);
         mSubPanelHeightPlaceHolderView = mRootView.findViewById(R.id.sub_panel_height_place_holder);
-        mTxtPropControlBar = mRootView.findViewById(R.id.prop_control_bar);
         if (clickOutsideToDismiss()) {
             mRootView.setOnClickListener(this);
         }
@@ -217,11 +207,9 @@ public class CommentPanel extends MDDialogFragment
             }
             NotchPhoneUtil.rectForCutout(getActivity(), mControlBar);
         }
-        if (mTxtPropControlBar != null && supportProp() && !isFullScreenMode) {
-            mTxtPropControlBar.setVisibility(View.VISIBLE);
-            mTxtPropControlBar.setInitTxtPropInfo(mCommentDraftAccessor != null ? mCommentDraftAccessor.getLastTxtPropItem() : null);
-            mTxtPropControlBar.updateCommentContent(draftContentStr);
-            mTxtPropControlBar.setTxtPropControlBarListener(this);
+
+        if (mCustomControlBar != null) {
+            mCustomControlBar.initControlBar();
         }
 
         if (mPanelContainer != null) {
@@ -271,14 +259,14 @@ public class CommentPanel extends MDDialogFragment
         if (mControlBar != null) {
             mControlBar.applyTheme(mCurrentTheme);
         }
-        if (mTxtPropControlBar != null) {
-            mTxtPropControlBar.applyTheme(mCurrentTheme);
-        }
         if (mTopDivider != null) {
             mTopDivider.setBackgroundColor(CApplication.getColorFromRes(darkMode ? R.color.comment_divider_night : R.color.comment_divider));
         }
         if (mMiddleDivider != null) {
             mMiddleDivider.setBackgroundColor(CApplication.getColorFromRes(darkMode ? R.color.comment_divider_night : R.color.comment_divider));
+        }
+        if (mCustomControlBar != null) {
+            mCustomControlBar.applyTheme();
         }
     }
 
@@ -323,11 +311,12 @@ public class CommentPanel extends MDDialogFragment
             dialog.setCancelable(true);
             dialog.setCanceledOnTouchOutside(true);
 
-            if (getActivity() instanceof AbsActivity && ((AbsActivity) getActivity()).isFullScreen()) {
-                Loger.d(TAG, "-->init comment panel dialog, container Activity in full screen mode");
-                w.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-                w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            }
+            //dwz test
+//            if (getActivity() instanceof AbsActivity && ((AbsActivity) getActivity()).isFullScreen()) {
+//                Loger.d(TAG, "-->init comment panel dialog, container Activity in full screen mode");
+//                w.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+//                w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//            }
         }
     }
 
@@ -386,10 +375,6 @@ public class CommentPanel extends MDDialogFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         PhotoSelectorModuleMgr.addPSListener(this);
-        if (supportProp() && !isFullScreenMode) {
-            //全屏下暂不支持文字特效，屏蔽数据请求
-            mTxtPropListModel.loadData();
-        }
     }
 
     @Override
@@ -401,10 +386,6 @@ public class CommentPanel extends MDDialogFragment
         if (mUploadHelper != null) {
             mUploadHelper.onDestroy();
             mUploadHelper = null;
-        }
-
-        if (mTxtPropControlBar != null) {
-            mTxtPropControlBar.onDestroy();
         }
     }
 
@@ -580,7 +561,7 @@ public class CommentPanel extends MDDialogFragment
 
     public String getCommentTxtContentWithAutoSuffix() {
         String commentContent = mControlBar != null ? mControlBar.getCommentContent() : null;
-        String autoSuffix = mTxtPropControlBar != null ? mTxtPropControlBar.getAutoSuffixStr() : null;
+        String autoSuffix = mCustomControlBar != null ? mCustomControlBar.getContentTextSuffix() : null;
         if (!TextUtils.isEmpty(autoSuffix) && commentContent != null && !commentContent.endsWith(autoSuffix)) {
             commentContent += autoSuffix;
         }
@@ -595,8 +576,8 @@ public class CommentPanel extends MDDialogFragment
         userTopicStr = topicStr;
     }
 
-    private TxtPropItem getCurrentTxtProp() {
-        return mTxtPropControlBar != null ? mTxtPropControlBar.getSelectedTxtProp() : null;
+    private Object getCustomControlBarAttachInfo() {
+        return mCustomControlBar != null ? mCustomControlBar.getControlBarContentInfo() : null;
     }
 
     protected boolean isCanSendVideo() {
@@ -627,7 +608,7 @@ public class CommentPanel extends MDDialogFragment
                 if (!needUploader()) {
                     isRealSend = true;
                     if (mCommentPanelListener != null) {
-                        mCommentPanelListener.onSendComment(content, getBuildImageData(), getBuildVideoData(), getCurrentTxtProp());
+                        mCommentPanelListener.onSendComment(content, getBuildImageData(), getBuildVideoData(), getCustomControlBarAttachInfo());
                     }
                 } else {
                     if (mUploadHelper == null) {
@@ -642,7 +623,7 @@ public class CommentPanel extends MDDialogFragment
             } else if (isArticleLinkType() || contentNotEmpty) {
                 isRealSend = true;
                 if (mCommentPanelListener != null) {
-                    mCommentPanelListener.onSendComment(content, null, null, getCurrentTxtProp());
+                    mCommentPanelListener.onSendComment(content, null, null, getCustomControlBarAttachInfo());
                 }
             }
             if (isRealSend) {
@@ -653,7 +634,7 @@ public class CommentPanel extends MDDialogFragment
     }
 
     protected boolean canSendComment() {
-        return checkLoginStatus() && SystemUtil.checkAndTipNetwork();
+        return checkLoginStatus();
     }
 
     protected View.OnClickListener mFinishBtnClickListener = (view) -> {
@@ -743,7 +724,7 @@ public class CommentPanel extends MDDialogFragment
     @Override
     public boolean isKeyboardExpanded() {
         Context context = getContext();
-        boolean expanded = context instanceof Activity && SystemUtil.isKeyBoardShow((Activity) context);
+        boolean expanded = context instanceof Activity && SystemUtils.isKeyBoardShow((Activity) context);
         Loger.i(TAG, "keyboard expanded: " + expanded);
         return expanded;
     }
@@ -765,7 +746,7 @@ public class CommentPanel extends MDDialogFragment
     public void onDismiss(DialogInterface dialog) {
         Loger.d(TAG, "-->onDismiss()");
         if (mCommentDraftAccessor != null) {
-            mCommentDraftAccessor.saveDraft(getCommentTxtContent(), getSelectedMediaList(), getCurrentTxtProp());
+            mCommentDraftAccessor.saveDraft(getCommentTxtContent(), getSelectedMediaList(), getCustomControlBarAttachInfo());
         }
         needDismissPanelWhenPagePaused = false;
         super.onDismiss(dialog);
@@ -806,8 +787,8 @@ public class CommentPanel extends MDDialogFragment
         if (facePanel != null) {
             facePanel.updateFinishBtnEnableStatus();
         }
-        if (mTxtPropControlBar != null) {
-            mTxtPropControlBar.updateCommentContent(content.toString());
+        if (mCustomControlBar != null) {
+            mCustomControlBar.onTextContentChanged(content.toString());
         }
     }
 
@@ -825,7 +806,7 @@ public class CommentPanel extends MDDialogFragment
         } else if (mSinglePicPanel != null) {
             mediaCnt = mSinglePicPanel.getSelectedMediaCnt();
         } else if (mCommentDraftAccessor != null) {
-            mediaCnt = CollectionUtils.sizeOf(mCommentDraftAccessor.getSelectedMediaList());
+            mediaCnt = CommonUtils.sizeOf(mCommentDraftAccessor.getSelectedMediaList());
         }
         return mediaCnt;
     }
@@ -861,7 +842,7 @@ public class CommentPanel extends MDDialogFragment
     final public ArrayList<String> getSelectedPicPathList() {
         ArrayList<String> paths = null;
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CollectionUtils.isEmpty(lists)) {
+        if (!CommonUtils.isEmpty(lists)) {
             int size = lists.size();
             paths = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
@@ -879,7 +860,7 @@ public class CommentPanel extends MDDialogFragment
 
     private boolean needUploader() {
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CollectionUtils.isEmpty(lists) && lists.size() == 1) { // 分享过来的可能是http:路径，并且只有一张图
+        if (!CommonUtils.isEmpty(lists) && lists.size() == 1) { // 分享过来的可能是http:路径，并且只有一张图
             MediaEntity mediaEntity = lists.get(0);
             if (mediaEntity != null) {
                 if (mediaEntity.getPath() != null) {
@@ -895,7 +876,7 @@ public class CommentPanel extends MDDialogFragment
 
     private UploadPicPojo.UpPicRespData getBuildImageData() {
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CollectionUtils.isEmpty(lists) && lists.size() == 1) {
+        if (!CommonUtils.isEmpty(lists) && lists.size() == 1) {
             MediaEntity mediaEntity = lists.get(0);
 
             if (mediaEntity != null && mediaEntity.isImage()) {
@@ -965,9 +946,10 @@ public class CommentPanel extends MDDialogFragment
         if (mCommentPanelListener instanceof CommentInterface.CommentPanelListenerWithMedia) {
             ((CommentInterface.CommentPanelListenerWithMedia) mCommentPanelListener).onUploadMediaBegin();
         } else {
-            if (getContext() instanceof BaseActivity) {
-                ((BaseActivity) getContext()).showProgressDialog();
-            }
+            //dwz test
+//            if (getContext() instanceof BaseActivity) {
+//                ((BaseActivity) getContext()).showProgressDialog();
+//            }
         }
     }
 
@@ -976,7 +958,8 @@ public class CommentPanel extends MDDialogFragment
         Loger.i(TAG, "uploadEnd, isSuccess: " + success + ", msg: " + msg);
         if (!(mCommentPanelListener instanceof CommentInterface.CommentPanelListenerWithMedia)) {
             if (getContext() instanceof BaseActivity) {
-                ((BaseActivity) getContext()).dismissProgressDialog();
+                //dwz test
+//                ((BaseActivity) getContext()).dismissProgressDialog();
                 if (!success) {
                     TipsToast.getInstance().showTipsText(msg);
                 }
@@ -988,7 +971,7 @@ public class CommentPanel extends MDDialogFragment
             }
             dismissPanel();
             if (mCommentPanelListener != null) {
-                mCommentPanelListener.onSendComment(getCommentTxtContentWithAutoSuffix(), upPicRespData, uploadVideoPojo, getCurrentTxtProp());
+                mCommentPanelListener.onSendComment(getCommentTxtContentWithAutoSuffix(), upPicRespData, uploadVideoPojo, getCustomControlBarAttachInfo());
             }
         } else {
             if (mCommentPanelListener instanceof CommentInterface.CommentPanelListenerWithMedia) {
@@ -1017,36 +1000,6 @@ public class CommentPanel extends MDDialogFragment
     public void onClick(View v) {
         if (v.getId() == R.id.comment_panel_root_view) {
             dismissPanel();
-        }
-    }
-
-    @Override
-    public void onDataComplete(BaseDataModel data, int dataType) {
-        Loger.d(TAG, "-->onDataComplete(), model=" + data + ", dataType=" + dataType);
-        if (data == mTxtPropListModel && mTxtPropControlBar != null) {
-            mTxtPropControlBar.updateTxtPropListData(mTxtPropListModel.getPropBeanList());
-        }
-    }
-
-    @Override
-    public void onDataError(BaseDataModel data, int retCode, String retMsg, int dataType) {
-        if (data == mTxtPropListModel && mTxtPropControlBar != null) {
-            mTxtPropControlBar.updateTxtPropListData(null);
-        }
-    }
-
-    @Override
-    public void onLockTipsClicked(TxtPropItem propItem) {
-        dismissPanel();
-        if (mCommentPanelListener instanceof CommentInterface.CommentPanelListenerForProp) {
-            ((CommentInterface.CommentPanelListenerForProp) mCommentPanelListener).onLockTipsClicked(propItem);
-        }
-    }
-
-    @Override
-    public void onLockTipsShown(TxtPropItem propItem) {
-        if (mCommentPanelListener instanceof CommentInterface.CommentPanelListenerForProp) {
-            ((CommentInterface.CommentPanelListenerForProp) mCommentPanelListener).onLockTipsShown(propItem);
         }
     }
 

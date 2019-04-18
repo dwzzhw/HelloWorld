@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.loading.common.component.CApplication;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.face.FacePageItems;
-import com.tencent.qqsports.common.CApplication;
 
 public class FaceGridAdapter extends BaseAdapter {
     private Context mContext;

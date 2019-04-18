@@ -11,14 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.airbnb.lottie.LottieAnimationView;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.LottieAnimConstants;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.common.util.LottieHelper;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.logger.Loger;
 
 /**
  * Created by loading on 2019/3/20.
@@ -34,7 +30,6 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     public static final int ANIMATION_STYLE_COMMUNITY_NIGHT = 5;
 
     private Context mContext;
-    private LottieAnimationView mLottieSupportView;
     private ImageView mStaticSupportView;
     private TextView mNumberTv;
     private int mAnimationStyle;
@@ -78,19 +73,15 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
         mContext = context;
         LayoutInflater.from(getContext()).inflate(R.layout.layout_common_support_view, this, true);
         mStaticSupportView = findViewById(R.id.static_support_icon);
-        mLottieSupportView = findViewById(R.id.lottie_support_view);
         mNumberTv = findViewById(R.id.number_tv);
-        mLottieSupportView.addAnimatorListener(this);
     }
 
     private String getLottieAssetPath() {
         String assetPath = null;
         switch (mAnimationStyle) {
             case ANIMATION_STYLE_HOME:
-                assetPath = LottieAnimConstants.THUMB_UP_HOME_FILE;
                 break;
             case ANIMATION_STYLE_HOME_NIGHT:
-                assetPath = LottieAnimConstants.THUMB_UP_HOME_FILE_NIGHT_STYLE;
                 break;
             case ANIMATION_STYLE_COMMUNITY:
                 assetPath = THUMB_UP_COMMUNITY_FILE;
@@ -99,7 +90,6 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
                 assetPath = THUMB_UP_COMMUNITY_FILE_NIGHT_STYLE;
                 break;
             default:
-                assetPath = LottieAnimConstants.THUMB_UP_HOME_FILE;
         }
         return assetPath;
     }
@@ -109,7 +99,7 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     }
 
     private String getSupportCntStr() {
-        return mSupportCnt > 0 ? CommonUtil.tenTh2wan(mSupportCnt) : "";
+        return mSupportCnt > 0 ? CommonUtils.tenTh2wan(mSupportCnt) : "";
     }
 
     private boolean onSupportBtnClicked() {
@@ -129,7 +119,6 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
             setOnClickListener(this);
             mNumberTv.setTextColor(CApplication.getColorFromRes(isNightMode ? R.color.std_grey1 : R.color.black2));
         }
-        mLottieSupportView.setVisibility(View.GONE);
         mStaticSupportView.setVisibility(View.VISIBLE);
 
         String supportCntStr = getSupportCntStr();
@@ -142,7 +131,7 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     }
 
     private void onThumbViewClick() {
-        if (!isAlreadySupported() && SystemUtil.checkAndTipNetwork() && onSupportBtnClicked()) {
+        if (!isAlreadySupported() && onSupportBtnClicked()) {
             if (!isAlreadySupported()) {
                 //Mock support success
                 isSupported = true;
@@ -153,18 +142,13 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     }
 
     private void loadLottieRes() {
-        LottieHelper.setAnimation(mContext, mLottieSupportView, getLottieAssetPath(), () -> {
-            LottieHelper.playLottieAnimation(mLottieSupportView);
-        });
     }
 
     public void fillDataToView(boolean hasSupported, long supportCnt) {
         Loger.d(TAG, "-->fillDataToView(), hasSupported=" + hasSupported + ", supportCnt=" + supportCnt);
         isSupported = hasSupported;
         mSupportCnt = supportCnt;
-        if (!mLottieSupportView.isAnimating()) {
-            updateSupportState();
-        }
+        updateSupportState();
     }
 
     public void updateAnimationStyle(int animationStyle) {
@@ -187,7 +171,6 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     @Override
     public void onAnimationStart(Animator animation) {
         Loger.d(TAG, "-->onAnimationStart()");
-        mLottieSupportView.setVisibility(View.VISIBLE);
         mStaticSupportView.setVisibility(View.GONE);
     }
 

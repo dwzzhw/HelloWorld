@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar.txtprop;
+package com.loading.tobedetermine.commentbar.txtprop;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
@@ -21,7 +21,7 @@ import com.tencent.qqsports.commentbar.anim.IAnimationPlayListener;
 import com.tencent.qqsports.commentbar.anim.YoyoPlayer;
 import com.tencent.qqsports.commentbar.anim.animator.BaseViewAnimator;
 import com.tencent.qqsports.commentbar.anim.animator.ScaleInFromLB_Shake_ScaleOutAnimator;
-import com.tencent.qqsports.commentbar.txtprop.view.TxtPropPreviewView;
+import com.loading.tobedetermine.commentbar.txtprop.view.TxtPropPreviewView;
 
 import java.util.concurrent.LinkedBlockingQueue;
 

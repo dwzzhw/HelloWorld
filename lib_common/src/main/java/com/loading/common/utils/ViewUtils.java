@@ -35,4 +35,15 @@ public class ViewUtils {
         }
         return hasChild;
     }
+
+    private static long lastClickTime;
+    private static long MIN_CLICK_SCOPE = 500L;
+
+    public static boolean isFastDoubleClick() {
+        long curTime = System.currentTimeMillis();
+        long oldTime = lastClickTime;
+        lastClickTime = curTime;
+
+        return curTime - oldTime < MIN_CLICK_SCOPE;
+    }
 }

@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.view.CommonSupportView;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.logger.Loger;
 
 /**
  * 包含“点赞”，“评论”，“分享”等功能按钮，适用于资讯详情页与帖子详情页
@@ -144,7 +144,7 @@ public class CommentEntranceBarWithOprBtn extends CommentEntranceBar implements 
             if (commentNumber < 1) {
                 mCommentCntTxt.setText("");
             } else {
-                mCommentCntTxt.setText(CommonUtil.tenTh2wan(commentNumber));
+                mCommentCntTxt.setText(CommonUtils.tenTh2wan(commentNumber));
             }
         }
     }

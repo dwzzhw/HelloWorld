@@ -4,7 +4,7 @@
     android:layout_width="@dimen/comment_txt_prop_bar_height"
     android:layout_height="@dimen/comment_txt_prop_bar_height">
 
-    <com.tencent.qqsports.commentbar.txtprop.view.TxtPropItemView
+    <com.loading.tobedetermine.commentbar.txtprop.view.TxtPropItemView
         android:id="@+id/bg_content_view"
         android:layout_width="@dimen/comment_txt_prop_bar_item_size"
         android:layout_height="@dimen/comment_txt_prop_bar_item_size"

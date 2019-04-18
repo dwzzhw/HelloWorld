@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtils;
+import com.tencent.qqsports.commentbar.CommentBaseFragment;
 import com.tencent.qqsports.commentbar.CommentPanel;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.util.SystemUtil;
-import com.tencent.qqsports.components.BaseFragment;
-import com.tencent.qqsports.logger.Loger;
 
-public abstract class PanelModeBaseFragment extends BaseFragment {
+public abstract class PanelModeBaseFragment extends CommentBaseFragment {
     private static final String TAG = "PanelModeBaseFragment";
     public static final String KEY_TARGET_PANEL_HEIGHT = "target_panel_height";
 
@@ -84,7 +84,7 @@ public abstract class PanelModeBaseFragment extends BaseFragment {
                 mRootView.setLayoutParams(lp);
             }
             if (getContext() instanceof Activity) {
-                SystemUtil.hideKeyboard((Activity) getContext());
+                SystemUtils.hideKeyboard((Activity) getContext());
             }
             mRootView.setVisibility(View.VISIBLE);
         }
