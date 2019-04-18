@@ -21,13 +21,13 @@ ext.deps = [
 
 buildscript {
     repositories {
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 //        maven {
-//            url 'https://maven.google.com'
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://maven.google.com'
+        }
 //        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
@@ -42,13 +42,13 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {
-            url "http://maven.oa.com/nexus/content/groups/androidbuild"
-        }
-//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 //        maven {
-//            url 'https://maven.google.com'
+//            url "http://maven.oa.com/nexus/content/groups/androidbuild"
 //        }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven {
+            url 'https://maven.google.com'
+        }
 //        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
