@@ -1,8 +1,6 @@
-package com.tencent.qqsports.commentbar.utils;
+package com.loading.tobedetermine.commentbar;
 
-import com.tencent.qqsports.modules.interfaces.login.LoginModuleMgr;
-import com.tencent.qqsports.servicepojo.comment.CommentInfo;
-import com.tencent.qqsports.servicepojo.comment.CommentUserInfo;
+import com.loading.modules.interfaces.login.LoginModuleMgr;
 
 public class CommentUtils {
     public static CommentInfo generateMyCommentInfo(String content) {

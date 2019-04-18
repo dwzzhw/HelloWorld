@@ -39,8 +39,6 @@ public class CommentInterface {
         String getCommentContentStr();
 
         ArrayList<MediaEntity> getSelectedMediaList();
-
-        Object getLastTxtPropItem();
     }
 
     public interface IDraftAccessorSupplier {

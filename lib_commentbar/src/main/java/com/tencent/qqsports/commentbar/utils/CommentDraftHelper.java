@@ -2,11 +2,10 @@ package com.tencent.qqsports.commentbar.utils;
 
 import android.text.TextUtils;
 
+import com.loading.common.utils.CommonUtils;
+import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.commentpanel.data.DraftItem;
 import com.tencent.qqsports.commentbar.CommentInterface;
-import com.tencent.qqsports.common.pojo.MediaEntity;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.servicepojo.comment.DraftItem;
-import com.tencent.qqsports.servicepojo.prop.TxtPropItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,10 +19,9 @@ import java.util.Map;
 public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
     private Map<String, DraftItem> mDraftItemMap = new HashMap<>(1);
     private static final String DEFAULT_KEY = "default";
-    private TxtPropItem mLastTxtPropItem;
 
     @Override
-    public void saveDraft(String contentStr, ArrayList<MediaEntity> selectedMediaList, TxtPropItem txtPropItem) {
+    public void saveDraft(String contentStr, ArrayList<MediaEntity> selectedMediaList, Object txtPropItem) {
         saveDraft(DEFAULT_KEY, contentStr, selectedMediaList, txtPropItem);
     }
 
@@ -36,11 +34,11 @@ public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
         clearDraft(DEFAULT_KEY);
     }
 
-    public void saveDraft(String key, String contentStr, ArrayList<MediaEntity> selectedMediaList, TxtPropItem txtPropItem) {
+    public void saveDraft(String key, String contentStr, ArrayList<MediaEntity> selectedMediaList, Object txtPropItem) {
         if (key == null) {
             key = DEFAULT_KEY;
         }
-        if (!TextUtils.isEmpty(contentStr) || !CollectionUtils.isEmpty(selectedMediaList) || txtPropItem != null) {
+        if (!TextUtils.isEmpty(contentStr) || !CommonUtils.isEmpty(selectedMediaList) || txtPropItem != null) {
             DraftItem existingItem = mDraftItemMap.get(key);
             if (existingItem != null) {
                 existingItem.updateContent(contentStr, selectedMediaList, txtPropItem);
@@ -48,7 +46,6 @@ public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
                 existingItem = new DraftItem(contentStr, selectedMediaList, txtPropItem);
                 mDraftItemMap.put(key, existingItem);
             }
-            mLastTxtPropItem = txtPropItem;
         } else {
             clearDraft(key);
         }
@@ -59,9 +56,6 @@ public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
             key = DEFAULT_KEY;
         }
         mDraftItemMap.remove(key);
-        if (mLastTxtPropItem != null && mLastTxtPropItem.isEnterEffectType()) {
-            mLastTxtPropItem = null;
-        }
     }
 
     @Override
@@ -88,11 +82,6 @@ public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
         }
         DraftItem draftItem = mDraftItemMap.get(key);
         return draftItem != null ? draftItem.getSelectedMediaList() : null;
-    }
-
-    @Override
-    public TxtPropItem getLastTxtPropItem() {
-        return mLastTxtPropItem;
     }
 
     public interface IDraftChangeListener {

@@ -14,6 +14,8 @@ import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.hostapp.HostAppModuleMgr;
+import com.loading.modules.interfaces.photoselector.ICameraGalleryGuideCallback;
 import com.loading.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
 import com.tencent.qqsports.commentbar.CommentBaseFragment;
 import com.tencent.qqsports.commentbar.R;
@@ -204,7 +206,8 @@ public class SinglePicPanelFragment extends CommentBaseFragment implements AddMe
 
     private void onCameraReturn(MediaEntity psMediaEntity) {
         UiThreadUtil.postRunnable(() -> {
-            IPC.get().setMethodProvider(null);
+            //dwz test, IPC should included in PS module
+//            IPC.get().setMethodProvider(null);
             if (psMediaEntity != null) {
                 addSelectedMediaItem(psMediaEntity);
             }

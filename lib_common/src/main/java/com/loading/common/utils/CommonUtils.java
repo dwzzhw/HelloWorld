@@ -33,6 +33,9 @@ import java.util.regex.Pattern;
 public class CommonUtils {
     public static final String TAG = "CommonUtils";
     public static final String FILE_SCHEME_PREFIX = "file://";
+    public static final long BYTE_SIZE_KB = 1 << 10;
+    public static final long BYTE_SIZE_MB = 1 << 20;
+    public static final long BYTE_SIZE_GB = 1 << 30;
 
     /**
      * 从assert下的json文件读取测试数据
@@ -371,4 +374,10 @@ public class CommonUtils {
     public static boolean isUrl(String url) {
         return !TextUtils.isEmpty(url) && (url.startsWith("http:") || url.startsWith("https:"));
     }
+
+    public static String filterNullToEmptyStr(String str) {
+        return str == null ? "" : str;
+    }
 }
+
+

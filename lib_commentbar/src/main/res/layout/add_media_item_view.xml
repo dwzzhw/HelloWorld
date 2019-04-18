@@ -25,12 +25,11 @@
         android:layout_marginTop="@dimen/comment_single_pic_panel_item_content_margin_trb"
         >
 
-        <com.tencent.qqsports.imagefetcher.view.RecyclingImageView
+        <ImageView
             android:id="@+id/pic_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            qqsports:actualImageScaleType="centerCrop"
-            qqsports:placeholderImageScaleType="fitXY"
+            android:scaleType="centerCrop"
             />
 
         <ImageView

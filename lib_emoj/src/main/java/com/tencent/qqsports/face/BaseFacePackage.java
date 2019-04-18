@@ -14,6 +14,7 @@ import com.loading.common.component.CApplication;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtils;
+import com.loading.common.widget.ImageSpanEx;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
@@ -121,7 +122,7 @@ public abstract class BaseFacePackage {
                 imageSize = getImageSizeByTextView(txtView) * 0.8f;
             }
             if (imageSize > 0.0001f) {
-                ImageSpan imageSpan;
+                ImageSpanEx imageSpan;
                 Bitmap bitmap;
                 Drawable tDrawable;
                 Matcher mat = getPattern().matcher(initSequence);
@@ -142,7 +143,7 @@ public abstract class BaseFacePackage {
                     if (bitmap != null) {
                         tDrawable = new BitmapDrawable(CApplication.getAppContext().getResources(), bitmap);
                         tDrawable.setBounds(0, 0, (int) imageSize, (int) imageSize);
-                        imageSpan = new ImageSpan(tDrawable);
+                        imageSpan = new ImageSpanEx(tDrawable, ImageSpanEx.ALIGN_CENTER);
                         int startPos = builder.length() - mat.group().length();
                         if (startPos >= 0) {
                             builder.setSpan(imageSpan, startPos, builder.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

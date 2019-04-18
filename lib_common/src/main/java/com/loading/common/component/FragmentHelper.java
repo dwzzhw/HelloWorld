@@ -1,12 +1,15 @@
-package com.loading.common.utils;
+package com.loading.common.component;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 
+import com.loading.common.utils.Loger;
+
 public class FragmentHelper {
     private static final String TAG = "FragmentHelper";
+
     public static void addWithoutAnim(FragmentManager fragmentManager,
                                       int containerViewId,
                                       Fragment fragment,
@@ -68,5 +71,63 @@ public class FragmentHelper {
 
         }
 
+    }
+
+    public static void replaceWithoutAnim(FragmentManager fragmentManager,
+                                          int containerViewId,
+                                          Fragment fragment,
+                                          String fragTag) {
+        replaceWithCustomAnim(fragmentManager,
+                containerViewId,
+                fragment,
+                fragTag,
+                0,
+                0);
+    }
+
+    public static void replaceWithCustomAnim(FragmentManager fragmentManager,
+                                             int containerViewId,
+                                             Fragment fragment,
+                                             String tag,
+                                             int enterAnimResId,
+                                             int exitAnimResId) {
+        replaceWithCustomAnim(fragmentManager,
+                containerViewId,
+                fragment,
+                tag,
+                enterAnimResId,
+                exitAnimResId,
+                0,
+                0);
+
+    }
+
+    private static void replaceWithCustomAnim(FragmentManager fragmentManager,
+                                              int containerViewId,
+                                              Fragment fragment,
+                                              String tag,
+                                              int enterAnimResId,
+                                              int exitAnimResId,
+                                              int popEnterAnimResId,
+                                              int popExitAnimResId) {
+        Loger.d(TAG, "--->replaceWithCustomAnim()--,fragmentManager:" + fragmentManager
+                + ",containerViewId:" + containerViewId
+                + ",fragment:" + fragment
+                + ",tag:" + tag
+                + ",enterAnimResId:" + enterAnimResId
+                + ",exitAnimResId:" + exitAnimResId
+                + ",popEnterAnimResId:" + popEnterAnimResId
+                + ",popExitAnimResId:" + popExitAnimResId);
+        try {
+            if (fragmentManager != null && fragment != null) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(enterAnimResId, exitAnimResId, popEnterAnimResId, popExitAnimResId);
+                fragmentTransaction.replace(containerViewId, fragment, tag);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Loger.d(TAG, "Exception in replaceWithCustomAnim():" + e.toString());
+        }
     }
 }

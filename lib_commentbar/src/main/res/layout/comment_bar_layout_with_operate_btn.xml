@@ -56,7 +56,7 @@
                     android:maxLines="1"
                     android:minWidth="16dp"
                     android:textColor="@color/black2"
-                    android:textSize="@dimen/app_text_size_30px"
+                    android:textSize="15dp"
                     tools:text="88"/>
             </LinearLayout>
 

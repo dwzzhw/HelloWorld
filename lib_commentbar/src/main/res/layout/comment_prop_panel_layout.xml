@@ -62,7 +62,7 @@
         android:layout_height="@dimen/face_cb_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/btn_bg_color_blue_selector"
+        android:background="@drawable/comment_btn_bg_color_blue_selector"
         android:clickable="true"
         android:contentDescription="@null"
         android:text="确认"

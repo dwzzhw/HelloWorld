@@ -25,7 +25,7 @@ import com.loading.common.component.ActivityHelper;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.CommonUtils;
-import com.loading.common.utils.FragmentHelper;
+import com.loading.common.component.FragmentHelper;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.NotchPhoneUtil;
 import com.loading.common.utils.SystemUtils;
@@ -36,7 +36,10 @@ import com.loading.modules.data.MediaEntity;
 import com.loading.modules.interfaces.login.LoginModuleMgr;
 import com.loading.modules.interfaces.photoselector.IPSListener;
 import com.loading.modules.interfaces.photoselector.PhotoSelectorModuleMgr;
+import com.loading.modules.interfaces.upload.IUploadListener;
+import com.loading.modules.interfaces.upload.UploadModuleMgr;
 import com.loading.modules.interfaces.upload.UploadProgressMonitorListener;
+import com.loading.modules.interfaces.upload.data.UploadParams;
 import com.loading.modules.interfaces.upload.data.UploadPicPojo;
 import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 import com.tencent.qqsports.commentbar.submode.FacePanelFragment;
@@ -50,7 +53,7 @@ import java.util.List;
 
 public class CommentPanel extends MDDialogFragment
         implements IPicPanelListener,
-        UploadHelper.UploadHelperCallback,
+        IUploadListener,
         View.OnClickListener,
         IPSListener,
         CommentControlBar.IControlBarListener {
@@ -91,7 +94,6 @@ public class CommentPanel extends MDDialogFragment
     private boolean isSingleLineControlBarMode = false;
     private int mCurrentTheme = THEME_DEFAULT;
 
-    protected UploadHelper mUploadHelper;
     protected int mUploadSourceChannel;
     private int mAutoCompleteMode = CommentConstants.AUTO_COMPLETED_MODE_NONE;
     private String mAutoCompleteTrigger;
@@ -117,15 +119,15 @@ public class CommentPanel extends MDDialogFragment
     private SinglePicPanelFragment mSinglePicPanel = null;
 
     public static CommentPanel newInstance(int barMode, int maxPicCnt) {
-        return newInstance(barMode, maxPicCnt, 0, false, false, CommentConstants.MODE_NONE, UploadHelper.UPLOAD_CHANNEL_COMMENT);
+        return newInstance(barMode, maxPicCnt, 0, false, false, CommentConstants.MODE_NONE, UploadParams.UPLOAD_CHANNEL_COMMENT);
     }
 
     public static CommentPanel newInstance(int barMode, int maxPicCnt, boolean fullScreenMode, int initBarMode) {
-        return newInstance(barMode, maxPicCnt, 0, fullScreenMode, false, initBarMode, UploadHelper.UPLOAD_CHANNEL_COMMENT);
+        return newInstance(barMode, maxPicCnt, 0, fullScreenMode, false, initBarMode, UploadParams.UPLOAD_CHANNEL_COMMENT);
     }
 
     public static CommentPanel newInstance(int barMode, int maxPicCnt, int maxTxtLength, boolean fullScreenMode, int initBarMode) {
-        return newInstance(barMode, maxPicCnt, maxTxtLength, fullScreenMode, false, initBarMode, UploadHelper.UPLOAD_CHANNEL_COMMENT);
+        return newInstance(barMode, maxPicCnt, maxTxtLength, fullScreenMode, false, initBarMode, UploadParams.UPLOAD_CHANNEL_COMMENT);
     }
 
     public static CommentPanel newInstance(int barMode, int maxPicCnt, int maxTxtLength, boolean fullScreenMode, boolean singleLineControlBar, int initBarMode, int uploadSourceChannel) {
@@ -383,10 +385,7 @@ public class CommentPanel extends MDDialogFragment
         super.onDestroyView();
         PhotoSelectorModuleMgr.removePSListener(this);
 
-        if (mUploadHelper != null) {
-            mUploadHelper.onDestroy();
-            mUploadHelper = null;
-        }
+        UploadModuleMgr.cancelUpload(null);
     }
 
     /**
@@ -611,14 +610,9 @@ public class CommentPanel extends MDDialogFragment
                         mCommentPanelListener.onSendComment(content, getBuildImageData(), getBuildVideoData(), getCustomControlBarAttachInfo());
                     }
                 } else {
-                    if (mUploadHelper == null) {
-                        mUploadHelper = new UploadHelper(mUploadSourceChannel);
-                        BaseActivity baseActivity = getAttachedActivity();
-                        UploadProgressMonitorListener uploadProgressMonitorListener = baseActivity instanceof UploadProgressMonitorListener ? (UploadProgressMonitorListener) baseActivity : null;
-                        mUploadHelper.setUploadProgressListener(uploadProgressMonitorListener);
-                        mUploadHelper.setUploadMediaListener(this);
-                    }
-                    mUploadHelper.startUpload(selectedPisList, getVideoEntity(), userTopicStr);
+                    BaseActivity baseActivity = getAttachedActivity();
+                    UploadProgressMonitorListener uploadProgressMonitorListener = baseActivity instanceof UploadProgressMonitorListener ? (UploadProgressMonitorListener) baseActivity : null;
+                    UploadModuleMgr.startUpload(selectedPisList, getVideoEntity(), userTopicStr, this, uploadProgressMonitorListener);
                 }
             } else if (isArticleLinkType() || contentNotEmpty) {
                 isRealSend = true;

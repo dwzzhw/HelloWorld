@@ -7,6 +7,7 @@ include ':mygroovy'
 include ':lib_commentbar'
 include ':lib_emoj'
 include ':lib_common'
+include ':lib_tbd'
 
 include ':lib_router'
 include ':lib_compiler'

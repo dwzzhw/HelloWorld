@@ -3,11 +3,11 @@ package com.loading.common.utils;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -16,12 +16,16 @@ import android.os.Environment;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import com.loading.common.component.CApplication;
+import com.loading.common.lifecycle.CActivityManager;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -46,6 +50,7 @@ public class SystemUtils {
     private static String versionName = null;
     private static int versionCode = 0;
     private static int mainVersionCode = 0;
+    private static int mStatusBarHeight = 0;
 
     public static String getCurrentProcessName() {
         String processName = null;
@@ -212,6 +217,61 @@ public class SystemUtils {
         }
     }
 
+    /**
+     * 获取手机状态栏高度
+     */
+    @SuppressLint("PrivateApi")
+    public static int getStatusBarHeight() {
+        if (mStatusBarHeight > 0) {
+            return mStatusBarHeight;
+        }
+        try {
+            int resourceId = CApplication.getAppContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+            mStatusBarHeight = resourceId > 0 ? CApplication.getDimensionPixelSize(resourceId) : 0;
+        } catch (Exception ignored) {
+        }
+
+        if (mStatusBarHeight <= 0) {
+            mStatusBarHeight = getStatusBar(CActivityManager.getInstance().getTopActivity());
+        }
+        return mStatusBarHeight;
+    }
+
+    public static int getStatusBar(final Activity activity) {
+        int barHeight = 0;
+        if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
+            Rect rectangle = new Rect();
+            activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rectangle);
+            barHeight = rectangle.top;
+        }
+        return barHeight;
+    }
+
+    /**
+     * check device has navigation bar
+     *
+     * @param
+     * @return
+     */
+    public static boolean isNavigationBarShow() {
+        if (MobileUtil.isMeizu() && (Build.DEVICE.equals("mx2") || Build.DEVICE.equals("mx3"))) {
+            return false;
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && CActivityManager.getInstance().getTopActivity() != null && !MobileUtil.isHuaWeiDevice()) {
+                Display display = CActivityManager.getInstance().getTopActivity().getWindowManager().getDefaultDisplay();
+                Point size = new Point();
+                Point realSize = new Point();
+                display.getSize(size);
+                display.getRealSize(realSize);
+                return realSize.y != size.y;
+            } else {
+                boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+                boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
+                return (!(hasBackKey && hasHomeKey));
+            }
+        }
+    }
+
     public static void hideKeyboard(Activity activity) {
         Window window = activity != null ? activity.getWindow() : null;
         View decorView = window != null ? window.getDecorView() : null;
@@ -342,6 +402,10 @@ public class SystemUtils {
 
     public static String getDeviceModel() {
         return Build.MODEL;
+    }
+
+    public static String getManufacturer() {
+        return Build.MANUFACTURER;
     }
 
     @SuppressLint({"MissingPermission", "HardwareIds"})

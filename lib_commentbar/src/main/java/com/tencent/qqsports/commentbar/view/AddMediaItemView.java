@@ -6,13 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.loading.common.utils.BitmapUtils;
 import com.loading.common.utils.CommonUtils;
 import com.loading.modules.data.MediaEntity;
 import com.tencent.qqsports.commentbar.R;
 
 public class AddMediaItemView extends RelativeLayout implements View.OnClickListener {
     private ImageView mAddPicBtn = null;
-    private RecyclingImageView mPicContent = null;
+    private ImageView mPicContent = null;
     private View mPicContainer = null;
     private View mDelBtnContainer = null;
     private ImageView mVideoLogo = null;
@@ -66,7 +67,7 @@ public class AddMediaItemView extends RelativeLayout implements View.OnClickList
         if (mAddPicBtn != null && mDelBtnContainer != null && mVideoLogo != null && mPicContainer != null) {
             if (mediaEntity != null) {
                 String filePathUrl = CommonUtils.FILE_SCHEME_PREFIX + mediaEntity.getPath();
-                ImageFetcher.loadImage(mPicContent, filePathUrl);
+                mPicContent.setImageBitmap(BitmapUtils.loadBitmapFromFile(filePathUrl));
                 mAddPicBtn.setVisibility(View.GONE);
                 mDelBtnContainer.setVisibility(View.VISIBLE);
                 mPicContainer.setVisibility(View.VISIBLE);

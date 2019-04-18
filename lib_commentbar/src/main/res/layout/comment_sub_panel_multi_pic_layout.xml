@@ -54,7 +54,7 @@
             android:background="@drawable/add_pic_btnsend_selector"
             android:singleLine="true"
             android:text="确认发送"
-            android:textColor="@drawable/btn_txt_color_blue_bg_selector"/>
+            android:textColor="@drawable/comment_btn_txt_color_blue_bg_selector"/>
     </LinearLayout>
 
 </RelativeLayout>

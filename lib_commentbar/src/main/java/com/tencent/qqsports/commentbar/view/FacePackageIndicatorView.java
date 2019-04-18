@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.logger.Loger;
 
 public class FacePackageIndicatorView extends RelativeLayout {
     private static final String TAG = "FacePackageIndicatorView";

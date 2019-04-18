@@ -25,7 +25,10 @@ import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtils;
 import com.loading.common.utils.ViewUtils;
+import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.login.LoginModuleMgr;
+import com.loading.modules.interfaces.upload.data.UploadParams;
 import com.tencent.qqsports.commentbar.utils.CommentDraftHelper;
 
 @SuppressWarnings({"unused", "FieldCanBeLocal"})
@@ -89,7 +92,7 @@ public class CommentEntranceBar extends RelativeLayout implements View.OnClickLi
 //                    mHintDrawable = typeArray.getDrawable(R.styleable.CommentBar_hintDrawable);
                     mDefaultTxtHint = typeArray.getString(R.styleable.CommentBar_defaultHint);
                     mUseSingleLineControlBar = typeArray.getBoolean(R.styleable.CommentBar_singleLineControlBarMode, false);
-                    mUploadSourceChannel = typeArray.getInt(R.styleable.CommentBar_upload_source_channel, UploadHelper.UPLOAD_CHANNEL_COMMENT);
+                    mUploadSourceChannel = typeArray.getInt(R.styleable.CommentBar_upload_source_channel, UploadParams.UPLOAD_CHANNEL_COMMENT);
 
                     extraAttrs(typeArray);
                 } catch (Exception e) {
@@ -205,7 +208,10 @@ public class CommentEntranceBar extends RelativeLayout implements View.OnClickLi
         if (LoginModuleMgr.isLogined()) {
             showCommentPanelInternal(showFacePanel);
         } else {
-            LoginModuleMgr.startLoginActivity(getContext());
+            //dwz test, ignore login module at present
+            showCommentPanelInternal(showFacePanel);
+            TipsToast.getInstance().showTipsText("allow comment even not login");
+//            LoginModuleMgr.startLoginActivity(getContext());
         }
     }
 

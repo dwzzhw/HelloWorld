@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.tencent.qqsports.common.widget.ime.InputMethodEventView
+<com.loading.common.widget.ime.InputMethodEventView
     android:id="@+id/comment_panel_root_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,17 +13,17 @@
         android:clickable="true"
         android:orientation="vertical">
 
-        <com.loading.tobedetermine.commentbar.txtprop.CommentTxtPropControlBar
-            android:id="@+id/prop_control_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+        <!--<com.loading.tobedetermine.commentbar.txtprop.CommentTxtPropControlBar-->
+            <!--android:id="@+id/prop_control_bar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone"/>-->
 
+        <!--android:layout_below="@id/prop_control_bar"-->
         <View
             android:id="@+id/top_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_below="@id/prop_control_bar"
             android:background="@color/comment_divider"/>
 
         <com.tencent.qqsports.commentbar.CommentControlBar
@@ -63,4 +63,4 @@
             android:visibility="gone"/>
     </RelativeLayout>
 
-</com.tencent.qqsports.common.widget.ime.InputMethodEventView>
+</com.loading.common.widget.ime.InputMethodEventView>

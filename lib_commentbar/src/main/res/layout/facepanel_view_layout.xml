@@ -10,11 +10,11 @@
         android:layout_height="@dimen/face_cb_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/btn_bg_color_blue_selector"
+        android:background="@drawable/comment_btn_bg_color_blue_selector"
         android:clickable="true"
         android:contentDescription="@null"
         android:text="发送"
-        android:textColor="@drawable/btn_txt_color_blue_bg_selector"
+        android:textColor="@drawable/comment_btn_txt_color_blue_bg_selector"
         android:textSize="15dp"
         android:visibility="gone"/>
 
@@ -36,13 +36,13 @@
 
     </HorizontalScrollView>
 
-    <com.tencent.qqsports.common.widget.ViewPagerEX
+    <com.loading.common.widget.ViewPagerEX
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/horizontal_scrollview"/>
 
-    <com.tencent.qqsports.common.widget.CirclePageIndicator
+    <com.loading.common.widget.CirclePageIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

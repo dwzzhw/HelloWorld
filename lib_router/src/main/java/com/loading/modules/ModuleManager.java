@@ -7,6 +7,7 @@ import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtils;
 import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.widget.TipsToast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +49,8 @@ public class ModuleManager {
                 Loger.w(TAG, "---get()---, [" + interfaceClass.getSimpleName() + "] is not registered....");
                 if (BuildConfig.DEBUG) {
                     if (SystemUtils.isMainProcess()) {
-                        throw new IllegalStateException("Can't find service by interface : " + interfaceClass.getSimpleName());
+//                        throw new IllegalStateException("Can't find service by interface : " + interfaceClass.getSimpleName());
+                        TipsToast.getInstance().showTipsError("Can't find service by interface : " + interfaceClass.getSimpleName());
                     } else {
                         UiThreadUtil.runOnUiThread(() -> Toast.makeText(CApplication.getAppContext(), "Warning: call module method in another process!", Toast.LENGTH_SHORT).show());
                     }

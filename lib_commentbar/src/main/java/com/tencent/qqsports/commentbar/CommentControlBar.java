@@ -32,12 +32,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
+import com.loading.common.config.SpConfig;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtils;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.utils.ViewUtils;
+import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.login.LoginModuleMgr;
 import com.tencent.qqsports.face.FaceManager;
 
 public class CommentControlBar extends LinearLayout
@@ -49,6 +52,7 @@ public class CommentControlBar extends LinearLayout
     public static final int AUTO_COMPLETED_MODE_AT_SYMBOL = 1;
     private static final String HINT_DRAWABLE_PLACE_HOLDER = "_";
     private static final int WARNING_REMAIN_TXT_LENGTH_THRESHOLD = 20;
+    public static final String SP_KEY_IME_HEIGHT = "ime_height";
 
     private View mContentContainer; //中间带有颜色的部分
     protected EditText mEditText;
@@ -627,7 +631,7 @@ public class CommentControlBar extends LinearLayout
                 mIMEHeightLand = imeHeight;
             } else {
                 mIMEHeightPort = imeHeight;
-                SpConfig.setIMEDefaultHeight(imeHeight);
+                SpConfig.setValueToPreferences(SP_KEY_IME_HEIGHT, imeHeight);;
             }
         }
         Window window = getAttachedWindow();
@@ -725,7 +729,7 @@ public class CommentControlBar extends LinearLayout
     public int getIMEHeight() {
         int imeHeight = SystemUtils.isLandscapeOrientation() ? mIMEHeightLand : mIMEHeightPort;
         if (imeHeight <= 0) {
-            imeHeight = SpConfig.getIMEDefaultHeight();
+            imeHeight = SpConfig.getValueFromPreferences(SP_KEY_IME_HEIGHT, 0);
         }
         return imeHeight;
     }

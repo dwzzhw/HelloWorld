@@ -18,11 +18,11 @@
             android:layout_centerInParent="true"
             android:src="@drawable/input_icon_like"/>
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_support_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"/>
+        <!--<com.airbnb.lottie.LottieAnimationView-->
+            <!--android:id="@+id/lottie_support_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:visibility="gone"/>-->
 
     </RelativeLayout>
 
@@ -38,6 +38,6 @@
         android:maxLines="1"
         android:minWidth="20dp"
         android:singleLine="true"
-        android:textSize="@dimen/app_text_size_30px"/>
+        android:textSize="15dp"/>
     <!--</RelativeLayout>-->
 </merge>
