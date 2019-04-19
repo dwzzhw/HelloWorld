@@ -33,8 +33,8 @@ public class MobileUtil {
 
     /** 检测是否HTC手机 */
     public static boolean isHTC() {
-        return SystemUtils.getManufacturer() != null
-            && SystemUtils.getManufacturer().toLowerCase().contains("htc");
+        return SystemUtil.getManufacturer() != null
+            && SystemUtil.getManufacturer().toLowerCase().contains("htc");
     }
 
     //判断是否是小米 V6/V7/V8
@@ -67,7 +67,7 @@ public class MobileUtil {
 
     public static boolean isHuaWeiDevice() {
         return !TextUtils.isEmpty(Build.BRAND) && (HUAWEI.equalsIgnoreCase(Build.BRAND) || HONOR.equalsIgnoreCase(Build.BRAND)
-            && (HUAWEI.equalsIgnoreCase(SystemUtils.getManufacturer()) || HONOR.equalsIgnoreCase(SystemUtils.getManufacturer())));
+            && (HUAWEI.equalsIgnoreCase(SystemUtil.getManufacturer()) || HONOR.equalsIgnoreCase(SystemUtil.getManufacturer())));
     }
 
     public static boolean isXiaomiDevice() {
@@ -77,7 +77,7 @@ public class MobileUtil {
             Class<?> sysClass = Class.forName("android.os.SystemProperties");
             Method methodGetter = sysClass.getDeclaredMethod("get", String.class);
             String miuiVerName = (String) methodGetter.invoke(sysClass, "ro.miui.ui.version.name");
-            ret = !TextUtils.isEmpty(miuiVerName) && "xiaomi".equalsIgnoreCase(SystemUtils.getManufacturer());
+            ret = !TextUtils.isEmpty(miuiVerName) && "xiaomi".equalsIgnoreCase(SystemUtil.getManufacturer());
         } catch (Exception e) {
             e.printStackTrace();
         }

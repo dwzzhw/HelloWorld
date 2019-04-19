@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.submode.IFaceItemLongPressListener;
 
@@ -44,7 +44,7 @@ public class FacePanelPreviewView extends RelativeLayout implements IFaceItemLon
 
         facePreviewView = findViewById(R.id.face_preview_view);
         faceNameView = findViewById(R.id.face_name_view);
-        bottomMarginToFaceIcon = SystemUtils.dpToPx(0);
+        bottomMarginToFaceIcon = SystemUtil.dpToPx(0);
     }
 
     @Override

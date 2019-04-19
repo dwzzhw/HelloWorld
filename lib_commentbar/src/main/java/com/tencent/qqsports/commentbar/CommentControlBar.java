@@ -35,7 +35,7 @@ import com.loading.common.component.CApplication;
 import com.loading.common.config.SpConfig;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.utils.ViewUtils;
 import com.loading.common.widget.ImageSpanEx;
@@ -118,7 +118,7 @@ public class CommentControlBar extends LinearLayout
         Loger.d(TAG, "-->initView(), singleLineMode=" + singleLineMode);
         isSingleLineMode = singleLineMode;
         imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        mAttachedActivity = SystemUtils.getAttachedActivity(context);
+        mAttachedActivity = SystemUtil.getAttachedActivity(context);
         setOrientation(isSingleLineMode ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
         LayoutInflater.from(context).inflate(getLayoutResId(), this, true);
 
@@ -519,8 +519,8 @@ public class CommentControlBar extends LinearLayout
     private float getEditTextWidth() {
         int width = mEditText != null ? mEditText.getWidth() : 0;
         if (width <= 0) {
-            int totalPaddingAndMargin = SystemUtils.dpToPx(18);
-            int iconWidth = SystemUtils.dpToPx(34);
+            int totalPaddingAndMargin = SystemUtil.dpToPx(18);
+            int iconWidth = SystemUtil.dpToPx(34);
             int iconTotalWidth = 0;
             if (supportPic()) {
                 iconTotalWidth += iconWidth;
@@ -531,7 +531,7 @@ public class CommentControlBar extends LinearLayout
             if (supportVideo() && !mUserInjectEditTextView) {
                 iconTotalWidth += iconWidth;
             }
-            width = SystemUtils.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
+            width = SystemUtil.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
         }
         return width;
     }
@@ -625,9 +625,9 @@ public class CommentControlBar extends LinearLayout
 
     //隐藏软键盘
     public void hideKeyboard() {
-        int imeHeight = SystemUtils.getIMEVisibleHeight();
+        int imeHeight = SystemUtil.getIMEVisibleHeight();
         if (imeHeight > 0) {
-            if (SystemUtils.isLandscapeOrientation()) {
+            if (SystemUtil.isLandscapeOrientation()) {
                 mIMEHeightLand = imeHeight;
             } else {
                 mIMEHeightPort = imeHeight;
@@ -727,7 +727,7 @@ public class CommentControlBar extends LinearLayout
     }
 
     public int getIMEHeight() {
-        int imeHeight = SystemUtils.isLandscapeOrientation() ? mIMEHeightLand : mIMEHeightPort;
+        int imeHeight = SystemUtil.isLandscapeOrientation() ? mIMEHeightLand : mIMEHeightPort;
         if (imeHeight <= 0) {
             imeHeight = SpConfig.getValueFromPreferences(SP_KEY_IME_HEIGHT, 0);
         }
@@ -778,7 +778,7 @@ public class CommentControlBar extends LinearLayout
         if (mControlBarListener != null) {
             if (toShow) {
                 if (mKeyboardPanelInterHelper != null &&
-                        SystemUtils.isKeyBoardShow(mAttachedActivity)) {
+                        SystemUtil.isKeyBoardShow(mAttachedActivity)) {
                     mKeyboardPanelInterHelper.doBeforeKeyboardMeasured(() -> {
                         notifyToggleDetailPanel(btnMode, true);
                     });

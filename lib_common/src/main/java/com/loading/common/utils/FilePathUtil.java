@@ -64,7 +64,7 @@ public class FilePathUtil {
     }
 
     public static String getNamedCacheFolder(String folderName) {
-        return SystemUtils.isSdcardExist() ?
+        return SystemUtil.isSdcardExist() ?
                 getFullPath(folderName, sdcardDataCachePathType, true) :
                 getFullPath(folderName, dataCachePathType, true);
     }
@@ -74,7 +74,7 @@ public class FilePathUtil {
     }
 
     public static String getNamedFileFolder(String folderName) {
-        return getFullPath(folderName, SystemUtils.isSdcardExist() ? sdcardFileType : filePathType, true);
+        return getFullPath(folderName, SystemUtil.isSdcardExist() ? sdcardFileType : filePathType, true);
     }
 
     public static String getNamedDataFileFolder(String folderName) {
@@ -82,11 +82,11 @@ public class FilePathUtil {
     }
 
     public static String getCommonFilePath(String fileName) {
-        return getFullPath(fileName, SystemUtils.isSdcardExist() ? sdcardCommonFileType : filePathType, true);
+        return getFullPath(fileName, SystemUtil.isSdcardExist() ? sdcardCommonFileType : filePathType, true);
     }
 
     public static String getSdcardFileFullPath(String fileName, boolean isFolder) {
-        return SystemUtils.isSdcardExist() ? getFullPath(fileName, sdcardFileType, isFolder) : null;
+        return SystemUtil.isSdcardExist() ? getFullPath(fileName, sdcardFileType, isFolder) : null;
     }
 
     private static synchronized String getFullPath(String fileName, int pathType, boolean isFolder) {
@@ -106,27 +106,27 @@ public class FilePathUtil {
                     mkdirForPath(path, isFolder);
                     break;
                 case sdcardCacheType:
-                    if (SystemUtils.isSdcardExist()) {
+                    if (SystemUtil.isSdcardExist()) {
                         path = getSdCachePath() + File.separator + fileName;
                         mkdirForPath(path, isFolder);
                     }
                     break;
                 case sdcardFileType:
-                    if (SystemUtils.isSdcardExist()) {
+                    if (SystemUtil.isSdcardExist()) {
                         path = getSdFilePath() + File.separator + fileName;
                         Loger.d(TAG, "path = " + path);
                         mkdirForPath(path, isFolder);
                     }
                     break;
                 case sdcardCommonFileType:
-                    if (SystemUtils.isSdcardExist()) {
+                    if (SystemUtil.isSdcardExist()) {
                         path = getSdRootPath() + File.separator + fileName;
                         mkdirForPath(path, isFolder);
                     }
                     Loger.d(TAG, "sdcardCommonFileType path: " + path);
                     break;
                 case sdcardDataCachePathType:
-                    if (SystemUtils.isSdcardExist()) {
+                    if (SystemUtil.isSdcardExist()) {
                         path = getSdCachePath() + File.separator + SD_DATA_CACHE_DIR + (!TextUtils.isEmpty(fileName) ? (File.separator + fileName) : "");
                         mkdirForPath(path, isFolder);
                     }

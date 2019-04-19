@@ -97,7 +97,7 @@ public class NotchPhoneUtil {
             return 0;
         }
         if (MobileUtil.isVivo() && hasVivoNotchInScreen(context)) {
-            return SystemUtils.getStatusBarHeight();
+            return SystemUtil.getStatusBarHeight();
         }
         if (MobileUtil.isHuaWeiDevice() && hasNotchAtHuawei(context)) {
             int[] sizeAtHuawei = getNotchSizeAtHuawei(context);
@@ -107,7 +107,7 @@ public class NotchPhoneUtil {
             return 80;
         }
         if (MobileUtil.isXiaomiDevice() && hasMIUINotchInScreen()) {
-            return SystemUtils.getStatusBarHeight();
+            return SystemUtil.getStatusBarHeight();
         }
         return 0;
     }

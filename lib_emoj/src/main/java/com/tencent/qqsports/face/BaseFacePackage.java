@@ -7,13 +7,12 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.style.ImageSpan;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.widget.ImageSpanEx;
 
 import java.lang.ref.SoftReference;
@@ -240,7 +239,7 @@ public abstract class BaseFacePackage {
     }
 
     public static float getImageSizeByTextView(TextView textView) {
-        float imageSize = SystemUtils.dpToPx(16);
+        float imageSize = SystemUtil.dpToPx(16);
         if (textView != null && textView.getPaint() != null) {
             TextPaint paint = textView.getPaint();
             imageSize = paint.descent() - paint.ascent();

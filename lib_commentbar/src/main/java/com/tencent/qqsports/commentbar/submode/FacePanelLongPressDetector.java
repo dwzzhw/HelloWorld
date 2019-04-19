@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.face.FacePageItems;
@@ -48,7 +48,7 @@ public class FacePanelLongPressDetector implements View.OnTouchListener {
 
         mFaceItemLongPressListener = faceItemLongPressListener;
 
-        screenWidth = SystemUtils.getRealTimeScreenWidthIntPx(CApplication.getAppContext());
+        screenWidth = SystemUtil.getRealTimeScreenWidthIntPx(CApplication.getAppContext());
         itemContentHeight = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_item_size);
         itemTotalWidth = (screenWidth - paddingLR * 2) / columnCnt;
         Loger.d(TAG, "-->LongPressDetectorOnTouchListener.init<>, paddingLR=" + paddingLR + ", paddingTop=" + paddingTop + ", horizontalSpace=" + horizontalSpace

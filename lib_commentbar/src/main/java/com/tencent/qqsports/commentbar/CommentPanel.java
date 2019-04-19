@@ -28,7 +28,7 @@ import com.loading.common.utils.CommonUtils;
 import com.loading.common.component.FragmentHelper;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.NotchPhoneUtil;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.widget.TipsToast;
 import com.loading.common.widget.dialog.MDDialogFragment;
@@ -727,7 +727,7 @@ public class CommentPanel extends MDDialogFragment
     @Override
     public boolean isKeyboardExpanded() {
         Context context = getContext();
-        boolean expanded = context instanceof Activity && SystemUtils.isKeyBoardShow((Activity) context);
+        boolean expanded = context instanceof Activity && SystemUtil.isKeyBoardShow((Activity) context);
         Loger.i(TAG, "keyboard expanded: " + expanded);
         return expanded;
     }

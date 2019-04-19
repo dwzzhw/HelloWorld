@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.tencent.qqsports.commentbar.CommentBaseFragment;
 import com.tencent.qqsports.commentbar.CommentPanel;
 import com.tencent.qqsports.commentbar.R;
@@ -88,7 +88,7 @@ public abstract class PanelModeBaseFragment extends CommentBaseFragment {
                 mRootView.setLayoutParams(lp);
             }
             if (getContext() instanceof Activity) {
-                SystemUtils.hideKeyboard((Activity) getContext());
+                SystemUtil.hideKeyboard((Activity) getContext());
             }
             mRootView.setVisibility(View.VISIBLE);
         }

@@ -14,7 +14,7 @@ import com.loading.common.component.CApplication;
 import com.loading.common.lifecycle.Foreground;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.utils.VersionUtils;
 
@@ -128,8 +128,8 @@ public class TipsToast {
 
     private boolean supportCustomToast() {
         boolean support = true;
-        String deviceName = SystemUtils.getDeviceName();
-        String deviceProducName = SystemUtils.getDeviceProductName();
+        String deviceName = SystemUtil.getDeviceName();
+        String deviceProducName = SystemUtil.getDeviceProductName();
         if ((deviceName != null && (deviceName.contains("IUIN") || deviceName.contains("iuni")))
                 || (deviceProducName != null && (deviceProducName.contains("IUNI") || deviceProducName.contains("iuni")))) {
             Loger.w(TAG, "-->supportCustomToast(),  current device [" + deviceName + "_:_" + deviceProducName + "] not support custom toast");

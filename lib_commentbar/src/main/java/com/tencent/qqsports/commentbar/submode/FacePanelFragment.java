@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.widget.CirclePageIndicator;
 import com.loading.common.widget.ViewPagerEX;
 import com.loading.common.widget.ViewPagerProxy;
@@ -83,10 +83,10 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
         int bottomBarHeight = CApplication.getDimensionPixelSize(R.dimen.face_cb_height);
         int gridContentItemPaddingLR = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_item_padding_LR);  //GridView 中每一项的左右padding
         int gridContentContainerPaddingLR = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_padding_LR);  //GridView 左右padding
-        int pageIndicatorMaintainHeight = SystemUtils.dpToPx(20);
+        int pageIndicatorMaintainHeight = SystemUtil.dpToPx(20);
         int gridViewVerticalSpacing = (mPanelTargetHeight - bottomBarHeight - pageIndicatorMaintainHeight - 3 * faceItemSize) / 5;
         int faceItemContainerWidth = faceItemSize + gridContentItemPaddingLR * 2;
-        int colNum = (SystemUtils.getRealTimeScreenWidthIntPx(getContext()) - 2 * gridContentContainerPaddingLR) / faceItemContainerWidth;
+        int colNum = (SystemUtil.getRealTimeScreenWidthIntPx(getContext()) - 2 * gridContentContainerPaddingLR) / faceItemContainerWidth;
 
         List<FacePageItems> facePageList = new ArrayList<>(5);
         mPackageIndicatorContainer.removeAllViews();

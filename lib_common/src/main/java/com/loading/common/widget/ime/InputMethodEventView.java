@@ -7,12 +7,12 @@ import android.widget.RelativeLayout;
 
 import com.loading.common.manager.ListenerManager;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 
 public class InputMethodEventView extends RelativeLayout implements IMEWindowMonitor {
     private static final String TAG = InputMethodEventView.class.getSimpleName();
-    private static final int SOFTKEY_MIN_HEIGHT = SystemUtils.dpToPx(60);
+    private static final int SOFTKEY_MIN_HEIGHT = SystemUtil.dpToPx(60);
 
     private InputMethodChangeListener mInputMethodChangeListener;
     private ListenerManager<IBeforeMeasureHeightChangeListener> mNotifyManager = new ListenerManager<>();

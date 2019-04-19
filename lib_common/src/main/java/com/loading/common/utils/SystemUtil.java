@@ -31,10 +31,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Method;
 
-public class SystemUtils {
+public class SystemUtil {
     public static final String TAG = "SystemUtils";
     private static final int APP_MAIN_VERSION_CODE_LENGTH = 3;//eg:5.9.6
-    private static final int SOFTKEY_MIN_HEIGHT = SystemUtils.dpToPx(60);
+    private static final int SOFTKEY_MIN_HEIGHT = SystemUtil.dpToPx(60);
     private static final String OPERATOR_UNKNOWN = "";   //未知
     private static final String OPERATOR_CMCC = "CMCC";      //移动
     private static final String OPERATOR_CU = "CU";        //联通
@@ -92,7 +92,7 @@ public class SystemUtils {
         // 获取当前包名
         String packageName = CApplication.getAppContext().getPackageName();
         // 获取当前进程名
-        String processName = SystemUtils.getCurrentProcessName();
+        String processName = SystemUtil.getCurrentProcessName();
         return TextUtils.isEmpty(processName) || TextUtils.equals(packageName, processName);
     }
 

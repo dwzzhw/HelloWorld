@@ -149,7 +149,7 @@ public class VersionUtils {
     }
 
     public static long getCurrentLongVer() {
-        String currentVersion = SystemUtils.getAppVersion();
+        String currentVersion = SystemUtil.getAppVersion();
         if (!TextUtils.isEmpty(currentVersion)) {
             int lastDotIndex = currentVersion.lastIndexOf(".");
             if (lastDotIndex > 0) {

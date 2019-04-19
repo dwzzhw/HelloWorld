@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.ViewUtils;
 import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
@@ -366,8 +366,8 @@ public class CommentEntranceBar extends RelativeLayout implements View.OnClickLi
     protected float getEditTextWidth() {
         int width = mContentTextView != null ? mContentTextView.getWidth() : 0;
         if (width <= 0) {
-            int totalPaddingAndMargin = SystemUtils.dpToPx(18);
-            int iconWidth = SystemUtils.dpToPx(34);
+            int totalPaddingAndMargin = SystemUtil.dpToPx(18);
+            int iconWidth = SystemUtil.dpToPx(34);
             int iconTotalWidth = 0;
             if (supportPic()) {
                 iconTotalWidth += iconWidth;
@@ -381,7 +381,7 @@ public class CommentEntranceBar extends RelativeLayout implements View.OnClickLi
             if (supportVoice()) {
                 iconTotalWidth += iconWidth;
             }
-            width = SystemUtils.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
+            width = SystemUtil.getScreenWidthIntPx() - iconTotalWidth - totalPaddingAndMargin;
         }
         return width;
     }

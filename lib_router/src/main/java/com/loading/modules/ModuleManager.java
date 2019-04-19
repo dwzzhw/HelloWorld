@@ -5,7 +5,7 @@ import android.widget.Toast;
 import com.loading.common.BuildConfig;
 import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
-import com.loading.common.utils.SystemUtils;
+import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.widget.TipsToast;
 
@@ -48,7 +48,7 @@ public class ModuleManager {
             if (implObj == null) {
                 Loger.w(TAG, "---get()---, [" + interfaceClass.getSimpleName() + "] is not registered....");
                 if (BuildConfig.DEBUG) {
-                    if (SystemUtils.isMainProcess()) {
+                    if (SystemUtil.isMainProcess()) {
 //                        throw new IllegalStateException("Can't find service by interface : " + interfaceClass.getSimpleName());
                         TipsToast.getInstance().showTipsError("Can't find service by interface : " + interfaceClass.getSimpleName());
                     } else {
