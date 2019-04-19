@@ -9,14 +9,13 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.lifecircle.ActivityManager;
-import com.tencent.qqsports.common.manager.CacheManager;
-import com.tencent.qqsports.common.toolbox.VersionUtils;
-import com.tencent.qqsports.common.util.PackageManagerUtil;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
+import com.loading.common.component.CApplication;
+import com.loading.common.lifecycle.CActivityManager;
+import com.loading.common.manager.CacheManager;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.PackageManagerUtil;
+import com.loading.modules.interfaces.download.DownloadListener;
+import com.loading.modules.interfaces.download.DownloadRequest;
 
 import java.io.File;
 import java.util.HashMap;
@@ -32,11 +31,11 @@ public class DownloadNotificationManager implements DownloadListener {
     private HashMap<String, NotificationCompat.Builder> mBuilderMap = new HashMap<>();
 
     void startNotify(final String taskId, String notifyTitle) {
-        if ( !TextUtils.isEmpty(taskId) ) {
+        if (!TextUtils.isEmpty(taskId)) {
             NotificationCompat.Builder builder = mBuilderMap.get(taskId);
-            if ( builder == null ) {
-                builder = new NotificationCompat.Builder(CApplication.getAppContext()).
-                        setSmallIcon(VersionUtils.hasLOLLIPOP() ? R.drawable.push_icon : R.mipmap.ic_launcher_qqsports).
+            if (builder == null) {
+                builder = new NotificationCompat.Builder(CApplication.getAppContext(), null).
+                        setSmallIcon(R.drawable.push_icon).
                         setContentTitle(notifyTitle);
                 mBuilderMap.put(taskId, builder);
             }
@@ -44,14 +43,14 @@ public class DownloadNotificationManager implements DownloadListener {
     }
 
     void stopNotify(final String taskId) {
-        if ( !TextUtils.isEmpty(taskId) ) {
+        if (!TextUtils.isEmpty(taskId)) {
             removeBuilder(taskId);
             getNotifyMgr().cancel(getNotifyId(taskId));
         }
     }
 
     private void removeBuilder(final String taskId) {
-        if ( !TextUtils.isEmpty(taskId) ) {
+        if (!TextUtils.isEmpty(taskId)) {
             mBuilderMap.remove(taskId);
         }
     }
@@ -61,7 +60,7 @@ public class DownloadNotificationManager implements DownloadListener {
     }
 
     private NotificationManager getNotifyMgr() {
-        if ( mNotifyMgr == null ) {
+        if (mNotifyMgr == null) {
             mNotifyMgr = (NotificationManager) CApplication.getSysService(android.content.Context.NOTIFICATION_SERVICE);
         }
         return mNotifyMgr;
@@ -75,14 +74,14 @@ public class DownloadNotificationManager implements DownloadListener {
     @Override
     public void onDownloadProgress(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
         NotificationCompat.Builder builder = getNotifyBuilder(taskId);
-        if ( builder != null ) {
+        if (builder != null) {
             builder.setContentText("正在下载:" + nProgress + "%").
-                    setProgress(100, nProgress,false).
+                    setProgress(100, nProgress, false).
                     setAutoCancel(false).
                     setOngoing(true);
             PendingIntent pendingintent = PendingIntent.getActivity(CApplication.getAppContext(),
                     0,
-                    new Intent(CApplication.getAppContext(), ActivityManager.getHomeActivityCls()),
+                    new Intent(CApplication.getAppContext(), CActivityManager.getHomeActivityCls()),
                     PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setContentIntent(pendingintent);
             getNotifyMgr().notify(getNotifyId(taskId), builder.build());
@@ -92,7 +91,7 @@ public class DownloadNotificationManager implements DownloadListener {
     @Override
     public void onDownloadPaused(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
         NotificationCompat.Builder builder = getNotifyBuilder(taskId);
-        if ( builder != null ) {
+        if (builder != null) {
             getNotifyMgr().notify(getNotifyId(taskId),
                     builder.setOngoing(false).
                             setAutoCancel(true).
@@ -105,7 +104,7 @@ public class DownloadNotificationManager implements DownloadListener {
     @Override
     public void onDownloadComplete(String taskId, String downloadUrl, String finalFilePath, long completeSize, long totalSize, DownloadRequest downloadRequest) {
         NotificationCompat.Builder builder = getNotifyBuilder(taskId);
-        if ( builder != null ) {
+        if (builder != null) {
             String apkPackageName = downloadRequest != null && downloadRequest.isDownloadApk() ?
                     PackageManagerUtil.getPackageNameFromApk(CApplication.getAppContext(), finalFilePath) : null;
             boolean isApk = !TextUtils.isEmpty(apkPackageName);
@@ -131,7 +130,7 @@ public class DownloadNotificationManager implements DownloadListener {
     @Override
     public void onDownloadError(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
         NotificationCompat.Builder builder = getNotifyBuilder(taskId);
-        if ( builder != null ) {
+        if (builder != null) {
             getNotifyMgr().notify(getNotifyId(taskId),
                     builder.setOngoing(false).
                             setAutoCancel(true).

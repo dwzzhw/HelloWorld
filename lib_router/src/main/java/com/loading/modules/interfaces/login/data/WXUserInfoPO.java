@@ -1,7 +1,7 @@
 package com.loading.modules.interfaces.login.data;
 
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 
 import java.io.Serializable;
 
@@ -32,7 +32,7 @@ public class WXUserInfoPO implements Serializable {
         }
 
         public int getErrcode() {
-            return CommonUtils.optInt(errcode, 0);
+            return CommonUtil.optInt(errcode, 0);
         }
 
         @Override

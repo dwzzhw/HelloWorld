@@ -1,13 +1,13 @@
 package com.tencent.qqsports.download.limit;
 
-import com.tencent.qqsports.common.http.HttpUtils;
-import com.tencent.qqsports.common.util.FileHandler;
+import com.loading.common.utils.FileHandler;
+import com.loading.common.utils.HttpUtils;
+import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.download.BaseDownloader;
 import com.tencent.qqsports.download.DownloadManager;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.listener.InternalDownloadListener;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,32 +5,26 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.http.HttpConstant;
-import com.tencent.qqsports.common.http.HttpHeadersDef;
-import com.tencent.qqsports.common.http.HttpReqListener;
-import com.tencent.qqsports.common.http.HttpUtils;
-import com.tencent.qqsports.common.http.NetRequest;
-import com.tencent.qqsports.common.manager.CacheManager;
-import com.tencent.qqsports.common.manager.ListenerManager;
-import com.tencent.qqsports.common.threadpool.SportsExecutorSupplier;
-import com.tencent.qqsports.common.toolbox.AsyncOperationUtil;
-import com.tencent.qqsports.common.toolbox.FileDiskLruCache;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.common.util.ObjectHelper;
-import com.tencent.qqsports.common.util.TagRunnable;
-import com.tencent.qqsports.common.util.UiThreadUtil;
+import com.loading.common.component.CApplication;
+import com.loading.common.manager.CacheManager;
+import com.loading.common.manager.ListenerManager;
+import com.loading.common.toolbox.FileDiskLruCache;
+import com.loading.common.utils.AsyncOperationUtil;
+import com.loading.common.utils.CommonUtil;
+import com.loading.common.utils.HttpHeadersDef;
+import com.loading.common.utils.HttpUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.ObjectHelper;
+import com.loading.common.utils.TagRunnable;
+import com.loading.common.utils.UiThreadUtil;
+import com.loading.modules.interfaces.download.DownloadCheckListener;
+import com.loading.modules.interfaces.download.DownloadListener;
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.download.data.DownloadDataDBHelper;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.limit.LimitSpeedDownloader;
 import com.tencent.qqsports.download.listener.DownloadAppInstallListener;
 import com.tencent.qqsports.download.listener.InternalDownloadListener;
-import com.tencent.qqsports.httpengine.netreq.HttpHeadReq;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadCheckListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.io.File;
 import java.util.Collections;
@@ -42,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 到本类时,假设已经进行了下载必要性检查, 直接依赖此前下载状况继续下载流程即可
@@ -104,7 +99,8 @@ public class DownloadManager {
     private DownloadManager() {
         mDiskLruCache = new FileDiskLruCache();
         mDiskLruCache.setMaxCacheSize(DOWN_LOAD_CACHE_MAX_SIZE);
-        mExecutor = SportsExecutorSupplier.forDownload();
+        mExecutor = new ThreadPoolExecutor(1, 2, 60L, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<Runnable>());
         mExecutor.setRejectedExecutionHandler((r, executor) -> {
             DownloadRunnable downloadRunnable = r instanceof DownloadRunnable ? (DownloadRunnable) r : null;
             final Downloader downloader = downloadRunnable != null ? downloadRunnable.getDownloader() : null;
@@ -149,11 +145,6 @@ public class DownloadManager {
             if (downloader == null) {
                 BaseDownloader backgroundDownloader = getOngoingBackgroundRequest();
                 if (backgroundDownloader == null || !downloadRequest.isBackgroundReq()) {
-//                    if (downloadRequest.getQueriedFileSize() == 0) { //query file size from server
-//                        downloadRequest.setDownloadListener(downloadListener);
-//                        queryFileInfoFromServer(downloadRequest);
-//                        return taskId;
-//                    }
                     downloader = createDownloaderFromRequest(downloadRequest, mLoaderListener);
                     if (mPendingBackgroundRequest.contains(downloadRequest)) {
                         mPendingBackgroundRequest.remove(downloadRequest);
@@ -186,38 +177,6 @@ public class DownloadManager {
             }
         }
         return taskId;
-    }
-
-    private void queryFileInfoFromServer(DownloadRequest downloadRequest) {
-        executeTask(() -> {
-            if (downloadRequest != null) {
-                final String downloadUrl = downloadRequest.getUrl();
-                HttpHeadReq httpHeadReq = new HttpHeadReq(downloadUrl, new HttpReqListener() {
-                    @Override
-                    public void onReqComplete(NetRequest netReq, Object data) {
-                        final Map<String, List<String>> respHeaders = netReq.getRespHeaders();
-                        onQueryFileInfoDone(downloadRequest, true, respHeaders);
-                    }
-
-                    @Override
-                    public void onReqError(NetRequest netReq, int retCode, String retMsg) {
-                        Loger.w(TAG, "query download file size error, retcode: " + retCode + ", retMsg: " + retMsg);
-                        onQueryFileInfoDone(downloadRequest, false, null);
-                    }
-                });
-
-                Map<String, String> header = downloadRequest.getRequestHeader();
-                if (CollectionUtils.isEmpty(header)) {
-                    header = Collections.singletonMap(HttpHeadersDef.ACCEPT_RANGE, HttpConstant.HTTP_ACCEPT_RANGE_OPTION);
-                } else {
-                    header.remove(HttpHeadersDef.ACCEPT_RANGE);
-                    header.remove(HttpHeadersDef.ACCEPT_RANGE.toLowerCase());
-                    header.put(HttpHeadersDef.ACCEPT_RANGE, HttpConstant.HTTP_ACCEPT_RANGE_OPTION);
-                }
-                httpHeadReq.setHeader(header);
-                httpHeadReq.start();
-            }
-        });
     }
 
     private void onQueryFileInfoDone(DownloadRequest downloadRequest, boolean success, Map<String, List<String>> respHeaders) {
@@ -452,13 +411,6 @@ public class DownloadManager {
         return !TextUtils.isEmpty(taskId) ? mDownloaders.get(taskId) : null;
     }
 
-    private synchronized void notifyListener(String taskId, ListenerManager.INotifyCallBack notifyCallBack) {
-        ListenerManager<DownloadListener> listenerManager = !TextUtils.isEmpty(taskId) ? mListenersMap.get(taskId) : null;
-        if (listenerManager != null) {
-            listenerManager.startNotifyBack(notifyCallBack);
-        }
-    }
-
     private void registerAppInstallReceiver() {
         Loger.d(TAG, "-->registerAppInstallReceiver()");
         if (mAppInstallListener == null) {
@@ -566,7 +518,10 @@ public class DownloadManager {
             final String url = downloader.getDownloadUrl();
             final String tempFilePath = downloader.getTempFilePath();
             Loger.d(TAG, "-->onDownloadPause(), taskId: " + taskId + ", completeSize: " + completeSize + ", totalSize: " + totalSize);
-            notifyListener(taskId, tListener -> ((DownloadListener) tListener).onDownloadPaused(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
+            ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
+            if(listenerManager!=null){
+                listenerManager.loopListenerList(listener -> listener.onDownloadPaused(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
+            }
         }
 
         @Override
@@ -575,7 +530,10 @@ public class DownloadManager {
             final String url = downloader.getDownloadUrl();
             final String tempFilePath = downloader.getTempFilePath();
             final int downloadProgress = totalSize > 0 ? Math.min(100, (int) (completeSize * 100 / totalSize)) : 0;
-            notifyListener(taskId, tListener -> ((DownloadListener) tListener).onDownloadProgress(taskId, url, tempFilePath, completeSize, totalSize, downloadProgress, downloadRequest));
+            ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
+            if(listenerManager!=null){
+                listenerManager.loopListenerList(listener -> listener.onDownloadProgress(taskId, url, tempFilePath, completeSize, totalSize, downloadProgress, downloadRequest));
+            }
         }
 
         @Override
@@ -584,7 +542,10 @@ public class DownloadManager {
             final String url = downloader.getDownloadUrl();
             final String tempFilePath = downloader.getTempFilePath();
             Loger.d(TAG, "-->onDownloadError(), taskId: " + taskId + ", url: " + url);
-            notifyListener(taskId, tListener -> ((DownloadListener) tListener).onDownloadError(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
+            ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
+            if(listenerManager!=null){
+                listenerManager.loopListenerList(listener -> listener.onDownloadError(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
+            }
             clearTaskInfo(taskId);
             tryPlayingPendingBackgroundRequest();
         }
@@ -595,7 +556,10 @@ public class DownloadManager {
             final String url = downloader.getDownloadUrl();
             final String finalFilePath = downloader.getFinalFilePath();
             Loger.d(TAG, "-->onDownloadFinish(), taskId: " + taskId + ", finalFilePath: " + finalFilePath + ", url: " + url);
-            notifyListener(taskId, tListener -> ((DownloadListener) tListener).onDownloadComplete(taskId, url, finalFilePath, completeSize, totalSize, downloadRequest));
+            ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
+            if(listenerManager!=null){
+                listenerManager.loopListenerList(listener -> listener.onDownloadComplete(taskId, url, finalFilePath, completeSize, totalSize, downloadRequest));
+            }
             clearTaskInfo(taskId);
             tryPlayingPendingBackgroundRequest();
         }

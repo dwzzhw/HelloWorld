@@ -46,6 +46,7 @@ dependencies {
     implementation project(':app')
     implementation project(':lib_commentbar')
     implementation project(':lib_emoj')
+    implementation project(':lib_download')
     implementation project(':lib_flutter_bridge')
 //module manager code begin here
 

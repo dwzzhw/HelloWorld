@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
 import com.loading.common.config.SpConfig;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
@@ -369,7 +369,7 @@ public class CommentControlBar extends LinearLayout
 
         @Override
         public void afterTextChanged(Editable s) {
-            CommonUtils.filterEmptyLineForEditable(s, true);
+            CommonUtil.filterEmptyLineForEditable(s, true);
             onEditTextContentChanged(s);
 //            Loger.d(TAG, "afterTextChanged: text " + mEditText.getText());
             updateTextLengthMonitorView();

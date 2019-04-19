@@ -1,8 +1,8 @@
 package com.tencent.qqsports.download.limit;
 
-import com.tencent.qqsports.common.threadpool.NameRunnable;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.NameRunnable;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
-import com.tencent.qqsports.logger.Loger;
 
 import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;

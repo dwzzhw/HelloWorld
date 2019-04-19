@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.util.CommonUtil;
+import com.loading.common.utils.CommonUtil;
 
 import java.util.Map;
 

@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
 import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.download.DownloadModuleMgr;
+
+import java.util.List;
 
 public class SocketClientActivity extends FragmentActivity {
     private static final String TAG = "SocketClientActivity";
@@ -49,6 +52,8 @@ public class SocketClientActivity extends FragmentActivity {
             onConnectBtnClicked();
         } else if (viewId == R.id.bnt_send) {
             onSendBtnClicked();
+        } else if (viewId == R.id.btn_query) {
+            onQueryBtnClicked();
         }
     }
 
@@ -78,5 +83,32 @@ public class SocketClientActivity extends FragmentActivity {
         clientThread = new SocketClientThread(hostIp, handler);
         // 客户端启动ClientThread线程创建网络连接、读取来自服务器的数据
         new Thread(clientThread).start(); //①
+    }
+
+    private void onQueryBtnClicked() {
+        String targetUrl = input.getText().toString();
+        // 清空input文本框
+        input.setText("");
+
+        if (TextUtils.isEmpty(targetUrl)) {
+            targetUrl = "http://puep.qpic.cn/coral/Q3auHgzwzM4fgQ41VTF2rC5GOhteBjmYVBcmEo9tcIY1ic7XYxAyk6w/0";
+        }
+        DownloadModuleMgr.asyncQueryFileInfo(targetUrl, null, (url, success, headerFieldsMap) -> {
+            Loger.d(TAG, "dwz-->onQueryFileInfoDone(), url=" + url + ", success=" + success + ", paramMap=" + headerFieldsMap);
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("Query result from module: ").append(success).append("\n");
+            if (headerFieldsMap != null) {
+                for (String key : headerFieldsMap.keySet()) {
+                    builder.append(key).append(" = ");
+                    List<String> valueList = headerFieldsMap.get(key);
+                    if (valueList != null && valueList.size() > 0) {
+                        builder.append(valueList.get(0));
+                    }
+                    builder.append("\n");
+                }
+            }
+            show.setText(builder.toString());
+        });
     }
 }

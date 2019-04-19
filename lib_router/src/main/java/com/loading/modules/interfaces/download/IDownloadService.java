@@ -52,4 +52,6 @@ public interface IDownloadService extends IModuleInterface {
     boolean removeListener(DownloadListener downloadListener);
     boolean removeListener(String taskId, DownloadListener downloadListener);
     void removeListeners(String taskId);
+    
+    void asyncQueryFileInfo(String url, Map<String, String> requestHeader, IQueryFileInfoListener queryFileInfoListener);
 }

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.loading.common.R;
 import com.loading.common.component.CApplication;
 import com.loading.common.lifecycle.Foreground;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
@@ -88,7 +88,7 @@ public class TipsToast {
     }
 
     private void showTipsCustom(final CharSequence msg, final int tipsImgResId) {
-        if (CommonUtils.isMainThread()) {
+        if (CommonUtil.isMainThread()) {
             if (!supportCustomToast()) {
                 Toast.makeText(CApplication.getAppContext(), msg, TIPS_TIME).show();
             } else {

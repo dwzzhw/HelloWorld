@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtil;
 import com.loading.common.widget.ImageSpanEx;
@@ -278,6 +278,6 @@ public abstract class BaseFacePackage {
      */
     public boolean isPackageValid() {
         //对第一与最后一张表情进行抽样检查
-        return !CommonUtils.isEmpty(mFaceNameList) && getFaceBitmap(mFaceNameList.get(0)) != null && getFaceBitmap(mFaceNameList.get(mFaceNameList.size() - 1)) != null;
+        return !CommonUtil.isEmpty(mFaceNameList) && getFaceBitmap(mFaceNameList.get(0)) != null && getFaceBitmap(mFaceNameList.get(mFaceNameList.size() - 1)) != null;
     }
 }

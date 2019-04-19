@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.modules.interfaces.face.data.BaseFacePackage;
 import com.tencent.qqsports.emoj.R;
@@ -37,7 +37,7 @@ public class RemoteFacePackage extends BaseFacePackage {
             }
 
             List<FaceItem> faceItemList = mRemoteFacePackageInfo.getFaceList();
-            if (!CommonUtils.isEmpty(faceItemList)) {
+            if (!CommonUtil.isEmpty(faceItemList)) {
                 mFaceName2FaceFileMappingProperties = new Properties();
                 mFaceNameList = new ArrayList<>();
                 File folderFile = new File(mFacePackageFolderPath);

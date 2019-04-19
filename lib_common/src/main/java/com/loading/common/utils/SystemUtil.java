@@ -378,7 +378,7 @@ public class SystemUtil {
             }
         }
         if (!TextUtils.isEmpty(uniqueStr)) {
-            uniqueStr = CommonUtils.md5String(uniqueStr);
+            uniqueStr = CommonUtil.md5String(uniqueStr);
         }
         uniqueStr = uniqueStr == null ? "" : uniqueStr;
         return uniqueStr;
@@ -510,5 +510,9 @@ public class SystemUtil {
             }
         }
         return versionCode;
+    }
+
+    public static int getTargetSdkVersion() {
+        return CApplication.getAppContext().getApplicationInfo().targetSdkVersion;
     }
 }

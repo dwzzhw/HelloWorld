@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 import com.example.loading.helloworld.R;
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 
 import java.io.Serializable;
@@ -65,7 +65,7 @@ public class TxtPropItem implements Serializable {
     }
 
     public int getNum() {
-        return CommonUtils.optInt(num, -1);
+        return CommonUtil.optInt(num, -1);
     }
 
     public Param getParams() {

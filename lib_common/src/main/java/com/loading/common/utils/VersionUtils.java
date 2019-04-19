@@ -134,7 +134,7 @@ public class VersionUtils {
                 result = 0L;
                 for (int i = 0; i < digits.length; i++) {
                     int multiplier = i == 0 ? 1000000 : (i == 1 ? 1000 : 1);
-                    int currentDigit = CommonUtils.optInt(digits[i], -1);
+                    int currentDigit = CommonUtil.optInt(digits[i], -1);
                     if (currentDigit >= 0) {
                         result = result + currentDigit * multiplier;
                     } else {

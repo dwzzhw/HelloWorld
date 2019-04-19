@@ -1,6 +1,6 @@
 package com.loading.common.function;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 
 /**
  * Created by yudongjin on 2017/11/29.
@@ -29,7 +29,7 @@ public interface Consumer<T> {
      * @throws NullPointerException if {@code after} is null
      */
     default Consumer<T> andThen(Consumer<? super T> after) {
-        CommonUtils.requireNonNull(after);
+        CommonUtil.requireNonNull(after);
         return (T t) -> {
             accept(t);
             after.accept(t);

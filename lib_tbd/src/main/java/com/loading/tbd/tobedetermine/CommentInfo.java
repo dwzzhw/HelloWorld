@@ -4,7 +4,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.deletelater.TxtPropItem;
 import com.loading.modules.data.jumpdata.AppJumpParam;
@@ -80,7 +80,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
     }
 
     public boolean hasBadges() {
-        return userinfo != null && !CommonUtils.isEmpty(userinfo.badge);
+        return userinfo != null && !CommonUtil.isEmpty(userinfo.badge);
     }
 
     public List<CommentUserInfo.Badge> getBadges() {
@@ -193,7 +193,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
     }
 
     public String getContent() {
-        return CommonUtils.filterNullToEmptyStr(content);
+        return CommonUtil.filterNullToEmptyStr(content);
     }
 
     public void setContent(String content) {
@@ -332,15 +332,15 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         private AppJumpParam jumpData;
 
         public String getButton() {
-            return CommonUtils.filterNullToEmptyStr(button);
+            return CommonUtil.filterNullToEmptyStr(button);
         }
 
         public String getGoodsName() {
-            return CommonUtils.filterNullToEmptyStr(goodsName);
+            return CommonUtil.filterNullToEmptyStr(goodsName);
         }
 
         public String getIcon() {
-            return CommonUtils.filterNullToEmptyStr(icon);
+            return CommonUtil.filterNullToEmptyStr(icon);
         }
 
         public AppJumpParam getJumpData() {
@@ -348,11 +348,11 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         }
 
         public String getTip1() {
-            return CommonUtils.filterNullToEmptyStr(tip1);
+            return CommonUtil.filterNullToEmptyStr(tip1);
         }
 
         public String getTip2() {
-            return CommonUtils.filterNullToEmptyStr(tip2);
+            return CommonUtil.filterNullToEmptyStr(tip2);
         }
 
         public String getAdId() {

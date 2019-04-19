@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.view.CommonSupportView;
 
@@ -144,7 +144,7 @@ public class CommentEntranceBarWithOprBtn extends CommentEntranceBar implements 
             if (commentNumber < 1) {
                 mCommentCntTxt.setText("");
             } else {
-                mCommentCntTxt.setText(CommonUtils.tenTh2wan(commentNumber));
+                mCommentCntTxt.setText(CommonUtil.tenTh2wan(commentNumber));
             }
         }
     }

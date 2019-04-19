@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.widget.TextView;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.FileHandler;
 import com.loading.common.utils.FilePathUtil;
 import com.loading.common.utils.Loger;
@@ -84,7 +84,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceSe
     @Override
     public List<BaseFacePackage> getAvailablePackageList() {
         List<BaseFacePackage> resultList = mLocalPackageList;
-        if (!CommonUtils.isEmpty(mRemotePackageList)) {
+        if (!CommonUtil.isEmpty(mRemotePackageList)) {
             boolean isRemotePackageValid = false;
             for (BaseFacePackage remotePackage : mRemotePackageList) {
                 if (remotePackage != null && remotePackage.isPackageValid()) {
@@ -147,7 +147,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceSe
     }
 
     private void clearOutOfDateFacePackage() {
-        if (!CommonUtils.isEmpty(mRemoteFacePackageInfoList)) {
+        if (!CommonUtil.isEmpty(mRemoteFacePackageInfoList)) {
             Set<String> validPackageSet = new HashSet<>(mRemoteFacePackageInfoList.size());
             for (int i = 0; i < mRemoteFacePackageInfoList.size(); i++) {
                 validPackageSet.add(FaceUtil.getFacePackageFolderFullPath(mRemoteFacePackageInfoList.get(i)));
@@ -236,13 +236,13 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceSe
         SpannableStringBuilder resultBuilder = new SpannableStringBuilder(iText == null ? "" : iText);
 
         if (iText != null && iText.length() > 0 && (txtView != null || textSize > 0.0001f)) {
-            if (!CommonUtils.isEmpty(mLocalPackageList)) {
+            if (!CommonUtil.isEmpty(mLocalPackageList)) {
                 for (int i = 0; i < mLocalPackageList.size(); i++) {
                     resultBuilder = mLocalPackageList.get(i).convertToSpannableStr(resultBuilder, textSize, txtView);
                 }
             }
             //给远端包一个覆盖本地表情的机会，so, order is important
-            if (!CommonUtils.isEmpty(mRemotePackageList)) {
+            if (!CommonUtil.isEmpty(mRemotePackageList)) {
                 for (int i = 0; i < mRemotePackageList.size(); i++) {
                     resultBuilder = mRemotePackageList.get(i).convertToSpannableStr(resultBuilder, textSize, txtView);
                 }

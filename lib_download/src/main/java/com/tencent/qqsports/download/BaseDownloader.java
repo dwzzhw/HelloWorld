@@ -5,20 +5,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.http.HttpConstant;
-import com.tencent.qqsports.common.http.HttpHeadersDef;
-import com.tencent.qqsports.common.http.HttpReqListener;
-import com.tencent.qqsports.common.http.NetRequest;
-import com.tencent.qqsports.common.manager.CacheManager;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.CommonUtil;
-import com.tencent.qqsports.common.util.FileHandler;
-import com.tencent.qqsports.common.util.ObjectHelper;
+import com.loading.common.manager.CacheManager;
+import com.loading.common.utils.CommonUtil;
+import com.loading.common.utils.FileHandler;
+import com.loading.common.utils.HttpHeadersDef;
+import com.loading.common.utils.HttpUtils;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.ObjectHelper;
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.listener.InternalDownloadListener;
-import com.tencent.qqsports.httpengine.netreq.HttpHeadReq;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -357,31 +353,33 @@ public abstract class BaseDownloader {
         final String downloadUrl = mDownloadRequest.getUrl();
         final long totalDownloadFileSize = mDownloadRequest.getFileSize();
         Loger.d(TAG, "now start download from scratch ..., url: " + downloadUrl + ", totalSize: " + totalDownloadFileSize);
-        HttpHeadReq httpHeadReq = new HttpHeadReq(downloadUrl, new HttpReqListener() {
-            @Override
-            public void onReqComplete(NetRequest netReq, Object data) {
-                final Map<String, List<String>> respHeaders = netReq.getRespHeaders();
-                mRespHeaders = respHeaders;
-                onQueryFileInfoDone(true, respHeaders);
-            }
 
-            @Override
-            public void onReqError(NetRequest netReq, int retCode, String retMsg) {
-                Loger.w(TAG, "query download file size error, retcode: " + retCode + ", retMsg: " + retMsg);
-                onQueryFileInfoDone(false, null);
-            }
-        });
-
-        Map<String, String> header = mDownloadRequest.getRequestHeader();
-        if (CollectionUtils.isEmpty(header)) {
-            header = Collections.singletonMap(HttpHeadersDef.ACCEPT_RANGE, HttpConstant.HTTP_ACCEPT_RANGE_OPTION);
-        } else {
-            header.remove(HttpHeadersDef.ACCEPT_RANGE);
-            header.remove(HttpHeadersDef.ACCEPT_RANGE.toLowerCase());
-            header.put(HttpHeadersDef.ACCEPT_RANGE, HttpConstant.HTTP_ACCEPT_RANGE_OPTION);
-        }
-        httpHeadReq.setHeader(header);
-        httpHeadReq.start();
+        //dwz test
+//        HttpHeadReq httpHeadReq = new HttpHeadReq(downloadUrl, new HttpReqListener() {
+//            @Override
+//            public void onReqComplete(NetRequest netReq, Object data) {
+//                final Map<String, List<String>> respHeaders = netReq.getRespHeaders();
+//                mRespHeaders = respHeaders;
+//                onQueryFileInfoDone(true, respHeaders);
+//            }
+//
+//            @Override
+//            public void onReqError(NetRequest netReq, int retCode, String retMsg) {
+//                Loger.w(TAG, "query download file size error, retcode: " + retCode + ", retMsg: " + retMsg);
+//                onQueryFileInfoDone(false, null);
+//            }
+//        });
+//
+//        Map<String, String> header = mDownloadRequest.getRequestHeader();
+//        if (CommonUtil.isEmpty(header)) {
+//            header = Collections.singletonMap(HttpHeadersDef.ACCEPT_RANGE, HttpUtils.HTTP_ACCEPT_RANGE_OPTION);
+//        } else {
+//            header.remove(HttpHeadersDef.ACCEPT_RANGE);
+//            header.remove(HttpHeadersDef.ACCEPT_RANGE.toLowerCase());
+//            header.put(HttpHeadersDef.ACCEPT_RANGE, HttpUtils.HTTP_ACCEPT_RANGE_OPTION);
+//        }
+//        httpHeadReq.setHeader(header);
+//        httpHeadReq.start();
     }
 
     public synchronized void pauseDownload() {

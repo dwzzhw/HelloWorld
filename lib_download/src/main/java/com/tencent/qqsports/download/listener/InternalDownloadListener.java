@@ -1,9 +1,9 @@
 
 package com.tencent.qqsports.download.listener;
 
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.download.BaseDownloader;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.util.List;
 import java.util.Map;

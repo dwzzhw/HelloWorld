@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.data.MediaEntity;
@@ -75,7 +75,7 @@ public class SinglePicPanelFragment extends CommentBaseFragment implements AddMe
     @Override
     public void onMediaContentClick(View itemView, int mediaItemIndex) {
         Loger.d(TAG, "-->onMediaContentClick(), media item index=" + mediaItemIndex);
-        if (!CommonUtils.isEmpty(mOriPaths)) {
+        if (!CommonUtil.isEmpty(mOriPaths)) {
             MediaEntity selectedMediaEntry = mOriPaths.get(0);
             if (selectedMediaEntry != null) {
                 notifyPageJumpForPS();

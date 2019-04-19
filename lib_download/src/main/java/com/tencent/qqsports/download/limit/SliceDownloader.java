@@ -3,10 +3,9 @@ package com.tencent.qqsports.download.limit;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 
-import com.tencent.qqsports.common.http.HttpHeadersDef;
-import com.tencent.qqsports.common.util.ObjectHelper;
+import com.loading.common.utils.HttpHeadersDef;
+import com.loading.common.utils.Loger;
 import com.tencent.qqsports.download.utils.DownloadUtils;
-import com.tencent.qqsports.logger.Loger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +13,7 @@ import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * 分片下载器，负责下载指定url里的一段内容
@@ -43,10 +43,6 @@ public class SliceDownloader {
         mSliceListener = listener;
         mDownloadUrl = downloadUrl;
         mRandomFileCacheHelper = new RandomAccessFileCacheHelper(mRandomAccessFile);
-
-        ObjectHelper.assertTrue(startPos >= 0, " startPos should >=0");
-        ObjectHelper.assertTrue(!TextUtils.isEmpty(downloadUrl) && destFile != null && listener != null,
-                " Bad arguments: downloadUrl=" + downloadUrl + ", destFile=" + destFile + ", listener=" + listener);
     }
 
     public void startDownload() {

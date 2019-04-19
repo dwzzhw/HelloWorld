@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.FileHandler;
 import com.loading.common.utils.Loger;
 import com.loading.modules.interfaces.face.data.BaseFacePackage;
@@ -32,7 +32,7 @@ public class LocalFacePackage extends BaseFacePackage {
             FacePackageInfo facePackageInfo = (FacePackageInfo) localPackageObj;
 
             List<FaceItem> faceItemList = facePackageInfo.getFaceNameList();
-            if (!CommonUtils.isEmpty(faceItemList)) {
+            if (!CommonUtil.isEmpty(faceItemList)) {
                 mFaceName2FaceFileMappingProperties = new Properties();
                 mFaceNameList = new ArrayList<>();
                 for (FaceItem faceItem : faceItemList) {

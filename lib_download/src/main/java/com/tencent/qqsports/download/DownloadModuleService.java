@@ -1,10 +1,11 @@
 package com.tencent.qqsports.download;
 
-import com.tencent.qqsports.modules.ModulesMgr;
-import com.tencent.qqsports.modules.interfaces.download.DownloadCheckListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadListener;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
-import com.tencent.qqsports.modules.interfaces.download.IDownloadService;
+import com.loading.modules.interfaces.download.DownloadCheckListener;
+import com.loading.modules.interfaces.download.DownloadListener;
+import com.loading.modules.interfaces.download.DownloadRequest;
+import com.loading.modules.interfaces.download.IDownloadService;
+import com.loading.modules.interfaces.download.IQueryFileInfoListener;
+import com.tencent.qqsports.download.utils.DownloadUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -15,11 +16,6 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class DownloadModuleService implements IDownloadService {
-    @Override
-    public void onCreate() {
-        ModulesMgr.register(IDownloadService.class, this);
-    }
-
     @Override
     public void asyncInitConfig() {
         DownloadManager.getInstance().asyncInitConfig();
@@ -52,7 +48,7 @@ public class DownloadModuleService implements IDownloadService {
 
     @Override
     public String syncGetDownloadFilePath(String taskId, String downloadUrl, String fileMd5) {
-        return DownloadManager.getInstance().syncGetDownloadFilePath(taskId,  downloadUrl, fileMd5);
+        return DownloadManager.getInstance().syncGetDownloadFilePath(taskId, downloadUrl, fileMd5);
     }
 
     @Override
@@ -101,8 +97,7 @@ public class DownloadModuleService implements IDownloadService {
     }
 
     @Override
-    public void onDestroy() {
-        DownloadManager.getInstance().onDestroy();
-        ModulesMgr.unregister(IDownloadService.class);
+    public void asyncQueryFileInfo(String url, Map<String, String> requestHeader, IQueryFileInfoListener queryFileInfoListener) {
+        DownloadUtils.asyncQueryFileInfo(url, requestHeader, queryFileInfoListener);
     }
 }

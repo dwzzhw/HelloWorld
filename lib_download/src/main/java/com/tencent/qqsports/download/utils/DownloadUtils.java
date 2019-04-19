@@ -1,14 +1,18 @@
 package com.tencent.qqsports.download.utils;
 
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 
-import com.tencent.qqsports.common.CApplication;
-import com.tencent.qqsports.common.http.NetRequest;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.component.CApplication;
+import com.loading.common.utils.AsyncOperationUtil;
+import com.loading.common.utils.CommonUtil;
+import com.loading.common.utils.HttpUtils;
+import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.download.IQueryFileInfoListener;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -21,15 +25,57 @@ import javax.net.ssl.HttpsURLConnection;
 @SuppressWarnings("UnusedReturnValue")
 public class DownloadUtils {
     private static final String TAG = "DownloadUtils";
-//    private static final String LOCAL_TMP_FILE_SUFFIX = ".temp";
+    private final static int CONNECT_TIME_OUT = (int) (15 * DateUtils.SECOND_IN_MILLIS);
+    private final static int READ_TIME_OUT = (int) (20 * DateUtils.SECOND_IN_MILLIS);
+
+    //    private static final String LOCAL_TMP_FILE_SUFFIX = ".temp";
     private static final String TYPE_WML = "text/vnd.wap.wml";
     private static final String TYPE_WMLC = "application/vnd.wap.wmlc";
+
+    public static void asyncQueryFileInfo(String url, IQueryFileInfoListener queryFileInfoListener) {
+        asyncQueryFileInfo(url, null, queryFileInfoListener);
+    }
+
+    public static void asyncQueryFileInfo(String url, Map<String, String> requestHeader, IQueryFileInfoListener queryFileInfoListener) {
+        AsyncOperationUtil.asyncOperation(() -> {
+            syncQueryFileInfo(url, requestHeader, queryFileInfoListener);
+        });
+    }
+
+    public static void syncQueryFileInfo(String url, Map<String, String> requestHeader, IQueryFileInfoListener queryFileInfoListener) {
+        boolean success = false;
+        Map<String, List<String>> paramMap = null;
+        if (!TextUtils.isEmpty(url)) {
+            HttpURLConnection connection = getHttpConnection(url, false, false,
+                    CONNECT_TIME_OUT, READ_TIME_OUT, HttpUtils.HEAD_METHOD_NAME, requestHeader, true);
+            if (connection != null) {
+                paramMap = connection.getHeaderFields();
+                success = true;
+            }
+            disConnect(connection);
+        }
+        Loger.d(TAG, "-->syncQueryFileInfo(), url=" + url + ", result=" + success + ", paramMap=" + paramMap);
+        if (queryFileInfoListener != null) {
+            queryFileInfoListener.onQueryFileInfoDone(url, success, paramMap);
+        }
+    }
 
     public static HttpURLConnection getHttpConnection(String url,
                                                       boolean doInput,
                                                       boolean allowUserInteraction,
                                                       int connectTimeout,
                                                       int readTimeout,
+                                                      Map<String, String> requestHeader,
+                                                      boolean toRetry) {
+        return getHttpConnection(url, doInput, allowUserInteraction, connectTimeout, readTimeout, HttpUtils.GET_METHOD_NAME, requestHeader, toRetry);
+    }
+
+    public static HttpURLConnection getHttpConnection(String url,
+                                                      boolean doInput,
+                                                      boolean allowUserInteraction,
+                                                      int connectTimeout,
+                                                      int readTimeout,
+                                                      String requestMethod,
                                                       Map<String, String> requestHeader,
                                                       boolean toRetry) {
         HttpURLConnection uc = null;
@@ -57,12 +103,12 @@ public class DownloadUtils {
                 URL u = new URL(url);
                 uc = (HttpURLConnection) u.openConnection();
             }
-            uc.setRequestMethod(NetRequest.GET_METHOD_NAME);
+            uc.setRequestMethod(requestMethod);
             uc.setDoInput(doInput);// 设置是否从httpUrlConnection读入
             uc.setAllowUserInteraction(allowUserInteraction);
             uc.setConnectTimeout(connectTimeout);
             uc.setReadTimeout(readTimeout);
-            if (!CollectionUtils.isEmpty(requestHeader)) {
+            if (!CommonUtil.isEmpty(requestHeader)) {
                 for (String key : requestHeader.keySet()) {
                     if (!TextUtils.isEmpty(key)) {
                         uc.setRequestProperty(key, requestHeader.get(key));
@@ -75,17 +121,17 @@ public class DownloadUtils {
             Loger.d(TAG, "responseCode: " + reponseCode);
 //            TipsToast.getInstance().showTipsText("网络错误："+reponseCode);
             if (reponseCode == HttpURLConnection.HTTP_MOVED_TEMP ||
-                reponseCode == HttpURLConnection.HTTP_MOVED_PERM) {
+                    reponseCode == HttpURLConnection.HTTP_MOVED_PERM) {
                 // 302代表暂时性转移,301代表永久性转移
                 String loc = uc.getHeaderField("Location");
                 disConnect(uc);
                 uc = null;
                 if (loc != null) {
                     uc = getHttpConnection(loc, doInput, allowUserInteraction,
-                            connectTimeout, readTimeout, requestHeader, false);
+                            connectTimeout, readTimeout, requestMethod, requestHeader, false);
                 }
             } else if (reponseCode == HttpsURLConnection.HTTP_OK ||
-                       reponseCode == HttpsURLConnection.HTTP_PARTIAL) {
+                    reponseCode == HttpsURLConnection.HTTP_PARTIAL) {
                 // 206 Partial
                 // Content服务器已经接受请求GET请求资源的部分。请求必须包含一个Range头信息以指示获取范围可能必须包含If-Range头信息以成立请求条件
                 String contentType = uc.getContentType();
@@ -96,12 +142,13 @@ public class DownloadUtils {
                     disConnect(uc);
                     uc = null;
                     uc = getHttpConnection(url,
-                                           doInput,
-                                           allowUserInteraction,
-                                           connectTimeout,
-                                           readTimeout,
-                                           requestHeader,
-                                           false);
+                            doInput,
+                            allowUserInteraction,
+                            connectTimeout,
+                            readTimeout,
+                            requestMethod,
+                            requestHeader,
+                            false);
 
                 }
             } else {

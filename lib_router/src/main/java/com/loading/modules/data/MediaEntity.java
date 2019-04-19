@@ -3,7 +3,7 @@ package com.loading.modules.data;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 
 import java.io.Serializable;
 
@@ -129,7 +129,7 @@ public class MediaEntity implements Serializable {
     public String getImgUrl() {
         String imgUrl = !TextUtils.isEmpty(thumbnailsPath) || isVideo() ? thumbnailsPath : path;
         if (!TextUtils.isEmpty(imgUrl) && !imgUrl.startsWith("http")) {
-            imgUrl = CommonUtils.FILE_SCHEME_PREFIX + imgUrl;
+            imgUrl = CommonUtil.FILE_SCHEME_PREFIX + imgUrl;
         }
         return imgUrl;
     }
@@ -236,7 +236,7 @@ public class MediaEntity implements Serializable {
     }
 
     public boolean isLocalResource() {
-        return TextUtils.isEmpty(path) || !CommonUtils.isUrl(path);
+        return TextUtils.isEmpty(path) || !CommonUtil.isUrl(path);
     }
 
     public boolean getThumbnailsPathLocal() {

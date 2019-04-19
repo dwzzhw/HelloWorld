@@ -2,15 +2,15 @@ package com.tencent.qqsports.download;
 
 import android.text.format.DateUtils;
 
-import com.tencent.qqsports.common.http.HttpHeadersDef;
-import com.tencent.qqsports.common.threadpool.NameRunnable;
-import com.tencent.qqsports.common.util.CollectionUtils;
-import com.tencent.qqsports.common.util.SystemUtil;
+import com.loading.common.utils.CommonUtil;
+import com.loading.common.utils.HttpHeadersDef;
+import com.loading.common.utils.Loger;
+import com.loading.common.utils.SystemUtil;
+import com.loading.common.utils.NameRunnable;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.limit.NetSpeedMonitor;
 import com.tencent.qqsports.download.limit.RandomAccessFileCacheHelper;
 import com.tencent.qqsports.download.utils.DownloadUtils;
-import com.tencent.qqsports.logger.Loger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +67,7 @@ public class DownloadRunnable extends NameRunnable {
             }
             final String bytesRange = "bytes=" + (startPos + completeSize) + (endPos > 0 ? ("-" + (endPos - 1)) : "-");
             Map<String, String> requestHeader = downloadDataInfo.getRequestHeaderForRequest();
-            if (CollectionUtils.isEmpty(requestHeader)) {
+            if (CommonUtil.isEmpty(requestHeader)) {
                 requestHeader = Collections.singletonMap(HttpHeadersDef.RANGE, bytesRange);
             } else {
                 requestHeader.remove(HttpHeadersDef.RANGE);
@@ -120,12 +120,6 @@ public class DownloadRunnable extends NameRunnable {
                 mRandomFileCacheHelper.flushCacheData();
                 if (length < 0 && !isCancel()) { //means donwload complete
                     notifyDownloadComplete();
-                }
-
-                if (SystemUtil.getDebugMode()) {
-                    synchronized (DownloadRunnable.this) {
-                        Loger.d(TAG, "download complete, completeSize: " + completeSize + ", length: " + length + ", isCancel: " + isCancel);
-                    }
                 }
             } else {
                 notifyDownloadError();

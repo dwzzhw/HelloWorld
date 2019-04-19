@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
 
@@ -99,7 +99,7 @@ public class CommonSupportView extends RelativeLayout implements View.OnClickLis
     }
 
     private String getSupportCntStr() {
-        return mSupportCnt > 0 ? CommonUtils.tenTh2wan(mSupportCnt) : "";
+        return mSupportCnt > 0 ? CommonUtil.tenTh2wan(mSupportCnt) : "";
     }
 
     private boolean onSupportBtnClicked() {

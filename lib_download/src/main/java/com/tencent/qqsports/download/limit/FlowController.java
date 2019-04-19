@@ -1,6 +1,6 @@
 package com.tencent.qqsports.download.limit;
 
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.utils.Loger;
 
 public class FlowController {
     private static final String TAG = "FlowController";

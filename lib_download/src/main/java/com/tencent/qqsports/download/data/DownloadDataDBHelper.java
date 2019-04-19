@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.database.sqlite.SQLiteException;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.common.CApplication;
+import com.loading.common.component.CApplication;
 
 import java.util.List;
 

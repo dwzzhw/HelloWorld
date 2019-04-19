@@ -2,7 +2,7 @@ package com.tencent.qqsports.commentbar.utils;
 
 import android.text.TextUtils;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.modules.data.MediaEntity;
 import com.loading.modules.interfaces.commentpanel.data.DraftItem;
 import com.tencent.qqsports.commentbar.CommentInterface;
@@ -38,7 +38,7 @@ public class CommentDraftHelper implements CommentInterface.IDraftAccessor {
         if (key == null) {
             key = DEFAULT_KEY;
         }
-        if (!TextUtils.isEmpty(contentStr) || !CommonUtils.isEmpty(selectedMediaList) || txtPropItem != null) {
+        if (!TextUtils.isEmpty(contentStr) || !CommonUtil.isEmpty(selectedMediaList) || txtPropItem != null) {
             DraftItem existingItem = mDraftItemMap.get(key);
             if (existingItem != null) {
                 existingItem.updateContent(contentStr, selectedMediaList, txtPropItem);

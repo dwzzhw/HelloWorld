@@ -9,6 +9,11 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.loading.common.component.CApplication;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,12 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +37,7 @@ import java.util.regex.Pattern;
  * Created by loading on 3/14/17.
  */
 
-public class CommonUtils {
+public class CommonUtil {
     public static final String TAG = "CommonUtils";
     public static final String FILE_SCHEME_PREFIX = "file://";
     public static final long BYTE_SIZE_KB = 1 << 10;
@@ -211,6 +218,14 @@ public class CommonUtils {
         return sizeOf(collection) <= 0;
     }
 
+    public static <K, V> int sizeOf(final Map<K, V> map) {
+        return map == null ? 0 : map.size();
+    }
+
+    public static <K, V> boolean isEmpty(final Map<K, V> map) {
+        return sizeOf(map) <= 0;
+    }
+
     public static int optInt(final String string) {
         return optInt(string, 0);
     }
@@ -377,6 +392,117 @@ public class CommonUtils {
 
     public static String filterNullToEmptyStr(String str) {
         return str == null ? "" : str;
+    }
+
+    private static Gson sGson = new Gson();
+
+    public static <T> T fromJson(String json, Class<T> classOfT) {
+        T resultObj = null;
+        if (!TextUtils.isEmpty(json)) {
+            try {
+                resultObj = sGson.fromJson(json, classOfT);
+            } catch (Exception e) {
+                Loger.e(TAG, "fromJson  exception: " + e);
+            }
+        }
+        return resultObj;
+    }
+
+    public static <T> T fromJson(String json, Type type) {
+        T resultObj = null;
+        if (!TextUtils.isEmpty(json)) {
+            try {
+                resultObj = sGson.fromJson(json, type);
+            } catch (Exception e) {
+                Loger.e(TAG, "fromJson  exception: " + e);
+            }
+        }
+        return resultObj;
+    }
+
+    public static <T> T fromJson(String json, Class<T> classOfT, Class specialType, JsonDeserializer deserializer) {
+        T resultObj = null;
+        try {
+            if (deserializer == null || specialType == null) {
+                resultObj = sGson.fromJson(json, classOfT);
+            } else {
+                GsonBuilder builder = new GsonBuilder();
+                builder.registerTypeAdapter(specialType, deserializer);
+                resultObj = builder.create().fromJson(json, classOfT);
+            }
+        } catch (Exception e) {
+            Loger.e(TAG, "fromJson  exception: " + e);
+        }
+        return resultObj;
+    }
+
+    public static String toJson(Object src) {
+        String result = "";
+        try {
+            result = sGson.toJson(src);
+        } catch (Exception e) {
+            Loger.e(TAG, "toJson exception " + e);
+        }
+        return result;
+    }
+
+    public static <T> T parseJsonFromAssets(String jsonFileNameInAssets, Class<T> classOfT) {
+        if (!TextUtils.isEmpty(jsonFileNameInAssets) && classOfT != null) {
+            String jsonContent = getFromAssets(jsonFileNameInAssets);
+            if (!TextUtils.isEmpty(jsonContent)) {
+                return fromJson(jsonContent, classOfT);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public static <T> T parseJsonFromAssets(String jsonFileNameInAssets, Class<T> classOfT, Class specialType, JsonDeserializer deserializer) {
+        if (!TextUtils.isEmpty(jsonFileNameInAssets) && classOfT != null) {
+            String jsonContent = getFromAssets(jsonFileNameInAssets);
+            if (!TextUtils.isEmpty(jsonContent)) {
+                return fromJson(jsonContent, classOfT, specialType, deserializer);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public static String getFromAssets(String fileName) {
+        StringBuilder result = new StringBuilder();
+        InputStreamReader inputReader = null;
+        BufferedReader bufReader = null;
+        try {
+            inputReader = new InputStreamReader(CApplication.getAppContext().getResources().getAssets().open(fileName));
+            bufReader = new BufferedReader(inputReader);
+            String line;
+            while ((line = bufReader.readLine()) != null) {
+                result.append(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufReader != null) {
+                    bufReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (inputReader != null) {
+                    inputReader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return result.toString();
     }
 }
 

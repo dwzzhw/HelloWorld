@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtil;
 import com.loading.common.widget.CirclePageIndicator;
@@ -95,7 +95,7 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
             if (facePackage != null && facePackage.isPackageValid()) {
                 facePackage.initRowColumnLayout(3, colNum, gridContentItemPaddingLR, gridViewVerticalSpacing);
                 List<FacePageItems> tFacePageList = facePackage.getFacePageList();
-                if (!CommonUtils.isEmpty(tFacePageList)) {
+                if (!CommonUtil.isEmpty(tFacePageList)) {
                     int packageStartIndex = facePageList.size();
                     FacePackageIndicatorView indicatorView = new FacePackageIndicatorView(getContext());
                     indicatorView.setPackageStartIndexInViewPager(packageStartIndex);

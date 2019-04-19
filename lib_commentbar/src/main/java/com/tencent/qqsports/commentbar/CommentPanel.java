@@ -24,7 +24,7 @@ import android.widget.FrameLayout;
 import com.loading.common.component.ActivityHelper;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.component.FragmentHelper;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.NotchPhoneUtil;
@@ -809,7 +809,7 @@ public class CommentPanel extends MDDialogFragment
         } else if (mSinglePicPanel != null) {
             mediaCnt = mSinglePicPanel.getSelectedMediaCnt();
         } else if (mCommentDraftAccessor != null) {
-            mediaCnt = CommonUtils.sizeOf(mCommentDraftAccessor.getSelectedMediaList());
+            mediaCnt = CommonUtil.sizeOf(mCommentDraftAccessor.getSelectedMediaList());
         }
         return mediaCnt;
     }
@@ -845,7 +845,7 @@ public class CommentPanel extends MDDialogFragment
     final public ArrayList<String> getSelectedPicPathList() {
         ArrayList<String> paths = null;
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CommonUtils.isEmpty(lists)) {
+        if (!CommonUtil.isEmpty(lists)) {
             int size = lists.size();
             paths = new ArrayList<>(size);
             for (int i = 0; i < size; i++) {
@@ -863,7 +863,7 @@ public class CommentPanel extends MDDialogFragment
 
     private boolean needUploader() {
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CommonUtils.isEmpty(lists) && lists.size() == 1) { // 分享过来的可能是http:路径，并且只有一张图
+        if (!CommonUtil.isEmpty(lists) && lists.size() == 1) { // 分享过来的可能是http:路径，并且只有一张图
             MediaEntity mediaEntity = lists.get(0);
             if (mediaEntity != null) {
                 if (mediaEntity.getPath() != null) {
@@ -879,7 +879,7 @@ public class CommentPanel extends MDDialogFragment
 
     private UploadPicPojo.UpPicRespData getBuildImageData() {
         List<MediaEntity> lists = getSelectedMediaList();
-        if (!CommonUtils.isEmpty(lists) && lists.size() == 1) {
+        if (!CommonUtil.isEmpty(lists) && lists.size() == 1) {
             MediaEntity mediaEntity = lists.get(0);
 
             if (mediaEntity != null && mediaEntity.isImage()) {

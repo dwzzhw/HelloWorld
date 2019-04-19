@@ -2,13 +2,13 @@ package com.tencent.qqsports.download;
 
 import android.util.SparseBooleanArray;
 
-import com.tencent.qqsports.common.http.HttpUtils;
-import com.tencent.qqsports.common.toolbox.AsyncOperationUtil;
-import com.tencent.qqsports.common.util.FileHandler;
+import com.loading.common.utils.AsyncOperationUtil;
+import com.loading.common.utils.FileHandler;
+import com.loading.common.utils.HttpUtils;
+import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.download.DownloadRequest;
 import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.listener.InternalDownloadListener;
-import com.tencent.qqsports.logger.Loger;
-import com.tencent.qqsports.modules.interfaces.download.DownloadRequest;
 
 import java.util.ArrayList;
 import java.util.List;

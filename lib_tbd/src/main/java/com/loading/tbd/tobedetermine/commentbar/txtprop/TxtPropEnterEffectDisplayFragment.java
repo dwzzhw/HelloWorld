@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.anim.IAnimationPlayListener;
@@ -150,7 +150,7 @@ public class TxtPropEnterEffectDisplayFragment extends BaseFragment implements I
 
     public void addTxtPropCommentItem(List<CommentInfo> commentInfoList) {
         Loger.d(TAG, "-->addTxtPropCommentItem(), commentInfoList=" + commentInfoList + ", this=" + this);
-        if (!CommonUtils.isEmpty(commentInfoList)) {
+        if (!CommonUtil.isEmpty(commentInfoList)) {
             clearTooMuchPendingData();
             for (CommentInfo commentInfo : commentInfoList) {
                 if (commentInfo != null && isValidEnterEffectProp(commentInfo) && !TextUtils.isEmpty(commentInfo.getTxtPropItemBgResUrl())) {

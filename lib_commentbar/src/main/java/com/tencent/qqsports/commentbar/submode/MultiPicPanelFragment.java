@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loading.common.component.CApplication;
-import com.loading.common.utils.CommonUtils;
+import com.loading.common.utils.CommonUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.data.MediaEntity;
@@ -99,7 +99,7 @@ public class MultiPicPanelFragment extends PanelModeBaseFragment implements
     public void onMediaContentClick(View itemView, int mediaItemIndex) {
         Loger.d(TAG, "-->onMediaContentClick()");
         showCameraGalleryGuideDialog();
-        if (!CommonUtils.isEmpty(mOriPaths) && mediaItemIndex >= 0 && mOriPaths.size() > mediaItemIndex) {
+        if (!CommonUtil.isEmpty(mOriPaths) && mediaItemIndex >= 0 && mOriPaths.size() > mediaItemIndex) {
             MediaEntity selectedMediaEntry = mOriPaths.get(mediaItemIndex);
             if (selectedMediaEntry != null) {
                 notifyPageJumpForPS();

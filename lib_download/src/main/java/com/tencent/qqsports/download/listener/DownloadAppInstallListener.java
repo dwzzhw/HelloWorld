@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.tencent.qqsports.logger.Loger;
+import com.loading.common.utils.Loger;
 
 /**
  * Created by loading on 11/18/16.
