@@ -6,6 +6,7 @@ include ':mygroovy'
 
 include ':lib_commentbar'
 include ':lib_emoj'
+include ':lib_download'
 include ':lib_common'
 include ':lib_tbd'
 

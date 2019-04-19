@@ -6,9 +6,10 @@ import android.text.TextUtils;
 
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.face.data.BaseFacePackage;
 import com.tencent.qqsports.emoj.R;
 import com.loading.modules.interfaces.face.data.FaceItem;
-import com.loading.modules.interfaces.face.data.RemoteFacePackageInfo;
+import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
 
 import java.io.File;
 import java.util.ArrayList;

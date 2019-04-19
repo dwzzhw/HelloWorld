@@ -40,8 +40,8 @@ import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.utils.ViewUtils;
 import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.face.FaceModuleMgr;
 import com.loading.modules.interfaces.login.LoginModuleMgr;
-import com.tencent.qqsports.face.FaceManager;
 
 public class CommentControlBar extends LinearLayout
         implements View.OnClickListener,
@@ -489,7 +489,7 @@ public class CommentControlBar extends LinearLayout
 
     public void setCommentContent(String commentContentStr) {
         if (mEditText != null && !TextUtils.isEmpty(commentContentStr)) {
-            SpannableStringBuilder contentBuilder = FaceManager.getInstance().convertToSpannableStr(commentContentStr, mEditText);
+            SpannableStringBuilder contentBuilder = FaceModuleMgr.convertToSpannableStr(commentContentStr, mEditText);
             mEditText.setText(contentBuilder);
 
             Editable text = mEditText.getText();

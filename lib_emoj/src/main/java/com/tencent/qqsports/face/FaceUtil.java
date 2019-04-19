@@ -8,8 +8,8 @@ import com.loading.modules.interfaces.download.DownloadListener;
 import com.loading.modules.interfaces.download.DownloadModuleMgr;
 import com.loading.modules.interfaces.download.DownloadRequest;
 import com.loading.modules.interfaces.face.data.FaceItem;
-import com.loading.modules.interfaces.face.data.FacePackageInfo;
-import com.loading.modules.interfaces.face.data.RemoteFacePackageInfo;
+import com.tencent.qqsports.face.data.FacePackageInfo;
+import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
 
 import java.io.File;
 import java.io.IOException;

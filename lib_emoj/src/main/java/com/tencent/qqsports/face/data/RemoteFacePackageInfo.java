@@ -1,6 +1,8 @@
-package com.loading.modules.interfaces.face.data;
+package com.tencent.qqsports.face.data;
 
 import android.text.TextUtils;
+
+import com.loading.modules.interfaces.face.data.FaceItem;
 
 import java.io.Serializable;
 import java.util.List;

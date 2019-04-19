@@ -11,8 +11,9 @@ import com.loading.common.utils.FilePathUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.interfaces.face.IFaceService;
-import com.loading.modules.interfaces.face.data.FacePackageInfo;
-import com.loading.modules.interfaces.face.data.RemoteFacePackageInfo;
+import com.loading.modules.interfaces.face.data.BaseFacePackage;
+import com.tencent.qqsports.face.data.FacePackageInfo;
+import com.tencent.qqsports.face.data.RemoteFacePackageInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -80,6 +81,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceSe
 //        mRemoteDataModel.loadData();
     }
 
+    @Override
     public List<BaseFacePackage> getAvailablePackageList() {
         List<BaseFacePackage> resultList = mLocalPackageList;
         if (!CommonUtils.isEmpty(mRemotePackageList)) {
@@ -167,8 +169,7 @@ public class FaceManager implements FaceUtil.IRemoteFacePackageListener, IFaceSe
         }
     }
 
-    @Override
-    public void updateRemoteFacePackageInfo(List<RemoteFacePackageInfo> remoteFacePackageInfoList, String version) {
+    private void updateRemoteFacePackageInfo(List<RemoteFacePackageInfo> remoteFacePackageInfoList, String version) {
         Loger.d(TAG, "-->updateRemoteFacePackageInfo(), version=" + version + ", remoteFacePackageInfoList=" + remoteFacePackageInfoList);
         mRemoteFacePackageInfoList = remoteFacePackageInfoList;
         checkRemoteFacePackageReadyState(true);

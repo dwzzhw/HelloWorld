@@ -8,9 +8,10 @@ import com.loading.common.component.CApplication;
 import com.loading.common.utils.CommonUtils;
 import com.loading.common.utils.FileHandler;
 import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.face.data.BaseFacePackage;
 import com.tencent.qqsports.emoj.R;
 import com.loading.modules.interfaces.face.data.FaceItem;
-import com.loading.modules.interfaces.face.data.FacePackageInfo;
+import com.tencent.qqsports.face.data.FacePackageInfo;
 
 import java.util.ArrayList;
 import java.util.List;

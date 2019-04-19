@@ -9,8 +9,8 @@ import com.loading.common.component.CApplication;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.UiThreadUtil;
+import com.loading.modules.interfaces.face.data.FacePageItems;
 import com.tencent.qqsports.commentbar.R;
-import com.tencent.qqsports.face.FacePageItems;
 
 public class FacePanelLongPressDetector implements View.OnTouchListener {
     private static final String TAG = "FacePanelLongPressDetector";

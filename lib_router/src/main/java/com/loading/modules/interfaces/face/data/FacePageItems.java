@@ -1,4 +1,4 @@
-package com.tencent.qqsports.face;
+package com.loading.modules.interfaces.face.data;
 
 import android.graphics.Bitmap;
 

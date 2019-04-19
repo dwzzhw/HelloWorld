@@ -9,11 +9,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.loading.common.component.CApplication;
+import com.loading.modules.interfaces.face.data.FacePageItems;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.submode.FacePanelLongPressDetector;
 import com.tencent.qqsports.commentbar.submode.IFaceItemLongPressListener;
 import com.tencent.qqsports.commentbar.submode.IFacePanelListener;
-import com.tencent.qqsports.face.FacePageItems;
 
 import java.util.List;
 

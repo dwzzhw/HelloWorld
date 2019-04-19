@@ -20,12 +20,12 @@ import com.loading.common.utils.SystemUtil;
 import com.loading.common.widget.CirclePageIndicator;
 import com.loading.common.widget.ViewPagerEX;
 import com.loading.common.widget.ViewPagerProxy;
+import com.loading.modules.interfaces.face.FaceModuleMgr;
+import com.loading.modules.interfaces.face.data.BaseFacePackage;
+import com.loading.modules.interfaces.face.data.FacePageItems;
 import com.tencent.qqsports.commentbar.R;
 import com.tencent.qqsports.commentbar.adapter.FacePagerAdapter;
 import com.tencent.qqsports.commentbar.view.FacePackageIndicatorView;
-import com.tencent.qqsports.face.BaseFacePackage;
-import com.tencent.qqsports.face.FaceManager;
-import com.tencent.qqsports.face.FacePageItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
     }
 
     private void initFaceView() {
-        mFacePackageList = FaceManager.getInstance().getAvailablePackageList();
+        mFacePackageList = FaceModuleMgr.getAvailablePackageList();
 
         int faceItemSize = CApplication.getDimensionPixelSize(R.dimen.comment_face_panel_content_item_size);
         int bottomBarHeight = CApplication.getDimensionPixelSize(R.dimen.face_cb_height);
@@ -229,7 +229,7 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
             }
 
             String faceStr = facePageItems.getFaceStringAtGroupPosition(position);
-            SpannableStringBuilder spanStr = FaceManager.getInstance().convertToSpannableStr(faceStr, mEditText);
+            SpannableStringBuilder spanStr = FaceModuleMgr.convertToSpannableStr(faceStr, mEditText);
             Loger.d(TAG, "clicked item page index=" + facePageItems.getPageIndexInFacePackage() + ", pos in page=" + position + "， spanStr=" + spanStr);
             if (spanStr != null) {
                 insertContentAtCursor(spanStr, mEditText);
