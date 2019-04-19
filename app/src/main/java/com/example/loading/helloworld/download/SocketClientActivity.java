@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
 import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.download.DownloadListener;
 import com.loading.modules.interfaces.download.DownloadModuleMgr;
+import com.loading.modules.interfaces.download.DownloadRequest;
 
 import java.util.List;
 
 public class SocketClientActivity extends FragmentActivity {
-    private static final String TAG = "SocketClientActivity";
+    private static final String TAG = "SocketClientActivity_dwz";
     // 定义界面上的两个文本框
     EditText input;
     TextView show;
@@ -54,6 +56,8 @@ public class SocketClientActivity extends FragmentActivity {
             onSendBtnClicked();
         } else if (viewId == R.id.btn_query) {
             onQueryBtnClicked();
+        } else if (viewId == R.id.btn_download) {
+            onDownloadBtnClicked();
         }
     }
 
@@ -109,6 +113,38 @@ public class SocketClientActivity extends FragmentActivity {
                 }
             }
             show.setText(builder.toString());
+        });
+    }
+
+    private void onDownloadBtnClicked() {
+        String targetUrl = input.getText().toString();
+        // 清空input文本框
+        input.setText("");
+
+        if (TextUtils.isEmpty(targetUrl)) {
+            targetUrl = "http://puep.qpic.cn/coral/Q3auHgzwzM4fgQ41VTF2rC5GOhteBjmYVBcmEo9tcIY1ic7XYxAyk6w/0";
+        }
+
+        DownloadModuleMgr.startDownload(targetUrl, null, new DownloadListener() {
+            @Override
+            public void onDownloadProgress(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
+                show.setText("-->onDownloadProgress(), rate=" + nProgress + "(" + completeSize + "/" + totalSize + ")");
+            }
+
+            @Override
+            public void onDownloadPaused(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
+                show.setText("-->onDownloadPaused(), rate=" + nProgress + "(" + completeSize + "/" + totalSize + ")");
+            }
+
+            @Override
+            public void onDownloadError(String taskId, String downloadUrl, String tempFilePath, long completeSize, long totalSize, int nProgress, DownloadRequest downloadRequest) {
+                show.setText("-->onDownloadError(), rate=" + nProgress + "(" + completeSize + "/" + totalSize + ")");
+            }
+
+            @Override
+            public void onDownloadComplete(String taskId, String downloadUrl, String finalFilePath, long completeSize, long totalSize, DownloadRequest downloadRequest) {
+                show.setText("-->onDownloadComplete(), completeSize=" + completeSize + ", final path=" + finalFilePath);
+            }
         });
     }
 }

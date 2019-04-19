@@ -11,7 +11,6 @@ import com.loading.common.manager.ListenerManager;
 import com.loading.common.toolbox.FileDiskLruCache;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.CommonUtil;
-import com.loading.common.utils.HttpHeadersDef;
 import com.loading.common.utils.HttpUtils;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.ObjectHelper;
@@ -25,9 +24,9 @@ import com.tencent.qqsports.download.data.DownloadDataInfo;
 import com.tencent.qqsports.download.limit.LimitSpeedDownloader;
 import com.tencent.qqsports.download.listener.DownloadAppInstallListener;
 import com.tencent.qqsports.download.listener.InternalDownloadListener;
+import com.tencent.qqsports.download.utils.DownloadUtils;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,6 +144,11 @@ public class DownloadManager {
             if (downloader == null) {
                 BaseDownloader backgroundDownloader = getOngoingBackgroundRequest();
                 if (backgroundDownloader == null || !downloadRequest.isBackgroundReq()) {
+                    if (downloadRequest.getQueriedFileSize() == DownloadRequest.QUERY_FILE_INFO_STATUS_NOT_YET) { //query file size from server
+                        downloadRequest.setDownloadListener(downloadListener);
+                        queryFileInfoFromServer(downloadRequest);
+                        return taskId;
+                    }
                     downloader = createDownloaderFromRequest(downloadRequest, mLoaderListener);
                     if (mPendingBackgroundRequest.contains(downloadRequest)) {
                         mPendingBackgroundRequest.remove(downloadRequest);
@@ -179,9 +183,21 @@ public class DownloadManager {
         return taskId;
     }
 
+    private void queryFileInfoFromServer(DownloadRequest downloadRequest) {
+        executeTask(() -> {
+            if (downloadRequest != null) {
+                final String downloadUrl = downloadRequest.getUrl();
+
+                DownloadUtils.asyncQueryFileInfo(downloadUrl, (url, success, headerFieldsMap) -> {
+                    onQueryFileInfoDone(downloadRequest, success, headerFieldsMap);
+                });
+            }
+        });
+    }
+
     private void onQueryFileInfoDone(DownloadRequest downloadRequest, boolean success, Map<String, List<String>> respHeaders) {
         if (downloadRequest != null) {
-            int totalFileSize = -1;
+            int totalFileSize = DownloadRequest.QUERY_FILE_INFO_STATUS_FAIL;
             if (HttpUtils.isSupportRange(respHeaders)) {
                 totalFileSize = HttpUtils.getContentLength(respHeaders);
             }
@@ -197,7 +213,7 @@ public class DownloadManager {
         BaseDownloader downloader = null;
         if (downloadRequest != null) {
             if (downloadRequest.isBackgroundReq() && downloadRequest.isSupportSliceDownload()
-//                    && downloadRequest.getQueriedFileSize() < 2 * 1024 * 1024  //小文件可采用分片下载
+                    && downloadRequest.getQueriedFileSize() >= 2 * 1024 * 1024  //小文件不可采用分片下载
             ) {
                 downloader = new LimitSpeedDownloader(downloadRequest, downloadListener);
             } else {
@@ -519,7 +535,7 @@ public class DownloadManager {
             final String tempFilePath = downloader.getTempFilePath();
             Loger.d(TAG, "-->onDownloadPause(), taskId: " + taskId + ", completeSize: " + completeSize + ", totalSize: " + totalSize);
             ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
-            if(listenerManager!=null){
+            if (listenerManager != null) {
                 listenerManager.loopListenerList(listener -> listener.onDownloadPaused(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
             }
         }
@@ -531,7 +547,7 @@ public class DownloadManager {
             final String tempFilePath = downloader.getTempFilePath();
             final int downloadProgress = totalSize > 0 ? Math.min(100, (int) (completeSize * 100 / totalSize)) : 0;
             ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
-            if(listenerManager!=null){
+            if (listenerManager != null) {
                 listenerManager.loopListenerList(listener -> listener.onDownloadProgress(taskId, url, tempFilePath, completeSize, totalSize, downloadProgress, downloadRequest));
             }
         }
@@ -543,7 +559,7 @@ public class DownloadManager {
             final String tempFilePath = downloader.getTempFilePath();
             Loger.d(TAG, "-->onDownloadError(), taskId: " + taskId + ", url: " + url);
             ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
-            if(listenerManager!=null){
+            if (listenerManager != null) {
                 listenerManager.loopListenerList(listener -> listener.onDownloadError(taskId, url, tempFilePath, completeSize, totalSize, percentProgress, downloadRequest));
             }
             clearTaskInfo(taskId);
@@ -557,7 +573,7 @@ public class DownloadManager {
             final String finalFilePath = downloader.getFinalFilePath();
             Loger.d(TAG, "-->onDownloadFinish(), taskId: " + taskId + ", finalFilePath: " + finalFilePath + ", url: " + url);
             ListenerManager<DownloadListener> listenerManager = mListenersMap.get(taskId);
-            if(listenerManager!=null){
+            if (listenerManager != null) {
                 listenerManager.loopListenerList(listener -> listener.onDownloadComplete(taskId, url, finalFilePath, completeSize, totalSize, downloadRequest));
             }
             clearTaskInfo(taskId);

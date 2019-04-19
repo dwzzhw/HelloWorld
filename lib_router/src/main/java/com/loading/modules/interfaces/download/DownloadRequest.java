@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import java.util.Map;
 
 public class DownloadRequest {
+    public static final int QUERY_FILE_INFO_STATUS_NOT_YET = -2;
+    public static final int QUERY_FILE_INFO_STATUS_FAIL = -1;
     private String taskId;
     private String url;
     private String md5String;
@@ -17,7 +19,7 @@ public class DownloadRequest {
     private boolean isBackgroundReq;
     private boolean mSupportSliceDownload;         //是否支持分片下载，默认都支持，在检测到不支持时，通过该标记来重置下载方式
     private DownloadListener mDownloadListener;    //该请求所绑定的监听器
-    private long mQueriedFileSize;                 //从后台所查询到的文件大小
+    private long mQueriedFileSize = QUERY_FILE_INFO_STATUS_NOT_YET;                 //从后台所查询到的文件大小
 
     public static DownloadRequest newInstance(String taskId, String url) {
         return new DownloadRequest(taskId, url, null, 0, null, true, false, false);
