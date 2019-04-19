@@ -43,6 +43,7 @@ import com.loading.modules.interfaces.upload.data.UploadParams;
 import com.loading.modules.interfaces.upload.data.UploadPicPojo;
 import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 import com.tencent.qqsports.commentbar.submode.FacePanelFragment;
+import com.tencent.qqsports.commentbar.view.FacePanelPreviewView;
 import com.tencent.qqsports.commentbar.submode.IPicPanelListener;
 import com.tencent.qqsports.commentbar.submode.MultiPicPanelFragment;
 import com.tencent.qqsports.commentbar.submode.PanelModeBaseFragment;
@@ -118,6 +119,8 @@ public class CommentPanel extends MDDialogFragment
     private MultiPicPanelFragment mMultiPicPanel = null;
     private SinglePicPanelFragment mSinglePicPanel = null;
 
+    private FacePanelPreviewView mFacePanelPreviewView;
+
     public static CommentPanel newInstance(int barMode, int maxPicCnt) {
         return newInstance(barMode, maxPicCnt, 0, false, false, CommentConstants.MODE_NONE, UploadParams.UPLOAD_CHANNEL_COMMENT);
     }
@@ -177,6 +180,7 @@ public class CommentPanel extends MDDialogFragment
         }
         mTopDivider = mRootView.findViewById(R.id.top_divider);
         mMiddleDivider = mRootView.findViewById(R.id.middle_divider);
+        mFacePanelPreviewView = mRootView.findViewById(R.id.face_panel_preview_view);
 
         initControlBar();
         addSingPicFragment();
@@ -465,6 +469,11 @@ public class CommentPanel extends MDDialogFragment
                     FragmentHelper.addWithoutAnim(getChildFragmentManager(), R.id.panel_container, facePanel, fragmentTag);
                     facePanel.setEditText(mPanelContainer, getEditTextView());
                     facePanel.setFinishClickListener(mFinishBtnClickListener);
+                    if (mFacePanelPreviewView != null) {
+                        //Init preview size
+                        mFacePanelPreviewView.setVisibility(View.INVISIBLE);
+                    }
+                    facePanel.setFaceItemLongPressListener(mFacePanelPreviewView);
                     detailPanel = facePanel;
                     break;
                 case CommentConstants.MODE_PIC:

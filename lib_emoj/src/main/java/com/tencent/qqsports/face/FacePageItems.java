@@ -37,7 +37,7 @@ public class FacePageItems {
         return mPackageInfo != null ? mPackageInfo.getGridItemVerticalSpacing() : 0;
     }
 
-    public int getPanelLineCnt() {
+    public int getPanelRowCnt() {
         return mPackageInfo != null ? mPackageInfo.getRowCnt() : 0;
     }
 

@@ -31,14 +31,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ResourceAsColor")
-public class FacePanelFragment extends PanelModeBaseFragment implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class FacePanelFragment extends PanelModeBaseFragment implements ViewPager.OnPageChangeListener, View.OnClickListener, IFacePanelListener {
     private static final String TAG = FacePanelFragment.class.getSimpleName();
     private ViewPagerEX mPanelViewPager;
     private CirclePageIndicator mIndicator;
     private LinearLayout mPackageIndicatorContainer;
     private ViewPagerProxy mViewPagerProxy; //用于ViewPage的页码转换
+    private FacePagerAdapter mViewPagerAdapter;
 
     private List<BaseFacePackage> mFacePackageList;
+    private IFaceItemLongPressListener mFaceItemLongPressListener;
+    private boolean isEditTextViewNotEmpty = false; //监听输入框内容是否发生了变化，以此更改退格按钮的状态
 
     public static FacePanelFragment newInstance(int panelTargetHeight) {
         FacePanelFragment facePanel = new FacePanelFragment();
@@ -110,8 +113,8 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
             }
         }
 
-        FacePagerAdapter facePageAdapter = new FacePagerAdapter(getContext(), facePageList, mGridViewItemClickListener);
-        mPanelViewPager.setAdapter(facePageAdapter);
+        mViewPagerAdapter = new FacePagerAdapter(getContext(), facePageList, mGridViewItemClickListener, mFaceItemLongPressListener, this);
+        mPanelViewPager.setAdapter(mViewPagerAdapter);
         initViewPagerProxy();
         mPanelViewPager.addOnPageChangeListener(mViewPagerProxy);
         mIndicator.setViewPager(mViewPagerProxy);
@@ -166,6 +169,25 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
     }
 
     @Override
+    public void updateFinishBtnEnableStatus() {
+        super.updateFinishBtnEnableStatus();
+        boolean existTxtContent = isExistTxtContent();
+        Loger.d(TAG, "-->updateFinishBtnEnableStatus(), existTxtContent=" + existTxtContent + ", former not empty status=" + isEditTextViewNotEmpty);
+        if (isEditTextViewNotEmpty != existTxtContent) {
+            mViewPagerAdapter.notifyDataSetChanged();
+            isEditTextViewNotEmpty = existTxtContent;
+        }
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        if (mFaceItemLongPressListener != null) {
+            mFaceItemLongPressListener.exitLongPressState();
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         if (v instanceof FacePackageIndicatorView) {
             FacePackageIndicatorView packageIndicatorView = (FacePackageIndicatorView) v;
@@ -175,6 +197,10 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
                 mPanelViewPager.setCurrentItem(packageIndicatorView.getPackageStartIndexInViewPager());
             }
         }
+    }
+
+    public void setFaceItemLongPressListener(IFaceItemLongPressListener faceItemLongPressListener) {
+        this.mFaceItemLongPressListener = faceItemLongPressListener;
     }
 
     private void insertContentAtCursor(SpannableStringBuilder spannableStringBuilder, EditText editText) {
@@ -239,5 +265,10 @@ public class FacePanelFragment extends PanelModeBaseFragment implements ViewPage
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    @Override
+    public boolean needEnableDeleteBtn() {
+        return isExistTxtContent();
     }
 }

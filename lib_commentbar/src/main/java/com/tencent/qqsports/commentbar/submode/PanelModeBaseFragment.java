@@ -64,7 +64,7 @@ public abstract class PanelModeBaseFragment extends CommentBaseFragment {
         }
         if (commentPanel != null && mFinishBtn != null && commentPanel.isSingleLineControlBarMode()) {
             boolean existPic = commentPanel.getSelectedMediaCnt() > 0;
-            boolean existTxtContent = mEditText != null && mEditText.getText() != null && !TextUtils.isEmpty(mEditText.getText().toString());
+            boolean existTxtContent = isExistTxtContent();
             boolean enableFinishBtn = existPic || existTxtContent;
 
 //            Loger.d(TAG, "-->updateFinishBtnEnableStatus(), existPic=" + existPic + ", existTxtContent=" + existTxtContent);
@@ -73,6 +73,10 @@ public abstract class PanelModeBaseFragment extends CommentBaseFragment {
             mFinishBtn.setOnClickListener(enableFinishBtn ? mFinishBtnListener : null);
             mFinishBtn.setEnabled(enableFinishBtn);
         }
+    }
+
+    protected boolean isExistTxtContent(){
+       return mEditText != null && mEditText.getText() != null && !TextUtils.isEmpty(mEditText.getText().toString());
     }
 
     public void show() {

@@ -31,4 +31,11 @@
         android:layout_above="@id/panel_container"
         android:clickable="true"/>
 
+    <!--需要相对于父布局的左上角放置-->
+    <com.tencent.qqsports.commentbar.view.FacePanelPreviewView
+        android:id="@+id/face_panel_preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
 </com.loading.common.widget.ime.InputMethodEventView>

@@ -61,6 +61,13 @@
             android:layout_marginRight="12dp"
             android:layout_marginTop="15dp"
             android:visibility="gone"/>
+
+        <!--需要相对于父布局的左上角放置-->
+        <com.tencent.qqsports.commentbar.view.FacePanelPreviewView
+            android:id="@+id/face_panel_preview_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </com.loading.common.widget.ime.InputMethodEventView>
