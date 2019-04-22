@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib_flutter/channel/native_channel_manager.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
 import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
@@ -9,6 +10,7 @@ import 'package:lib_flutter/tinysports/news/view/news_detail_video_view.dart';
 import 'package:lib_flutter/utils/date_util.dart';
 
 class NewsNormalDetailPage extends SportsBaseStatelessPage {
+  NativeChannelManager nativeChannelManager;
   final NewsDetailInfo newsDetailInfo;
 
   NewsNormalDetailPage(this.newsDetailInfo);
@@ -24,7 +26,18 @@ class NewsNormalDetailPage extends SportsBaseStatelessPage {
         padding: EdgeInsets.all(12),
         child: _getNewsDetailListView(),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: showCommentPanel,
+        child: Icon(Icons.edit),
+      ),
     );
+  }
+
+  void showCommentPanel() {
+    if (nativeChannelManager == null) {
+      nativeChannelManager = NativeChannelManager();
+    }
+    nativeChannelManager.showNativeCommentPanel();
   }
 
   Widget _getNewsDetailListView() {
@@ -87,7 +100,8 @@ class NewsNormalDetailPage extends SportsBaseStatelessPage {
         if (subTitle != '') {
           subTitle += '    ';
         }
-        subTitle += DateUtil.getDateMonthDayHourMinPart(newsDetailInfo.pub_time);
+        subTitle +=
+            DateUtil.getDateMonthDayHourMinPart(newsDetailInfo.pub_time);
       }
     }
     return subTitle;

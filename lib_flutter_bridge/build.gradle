@@ -25,6 +25,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':lib_common')
+    implementation project(':lib_router')
     implementation deps.design
 
     implementation(project(':flutter'))
