@@ -5,10 +5,6 @@ import android.text.TextUtils;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by hzhang on 10/10/16.
- */
-
 public class CommentUserInfo implements Serializable {
     private static final long serialVersionUID = 7039432253024282224L;
     public static final String COMMENT_OWNER_SEX_UNKNOWN = "";

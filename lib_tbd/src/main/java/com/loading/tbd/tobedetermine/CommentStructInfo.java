@@ -3,8 +3,6 @@ package com.loading.tobedetermine;
 import java.io.Serializable;
 
 /**
- * Created by yudongjin on 2017/11/17.
- * <p>
  * 大家聊中附加的数据结构，通用
  */
 

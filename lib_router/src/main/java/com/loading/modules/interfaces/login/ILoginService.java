@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by yudongjin on 2018/1/4.
  * the login module interface
  */
 @Repeater

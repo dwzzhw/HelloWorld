@@ -18,10 +18,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Stack;
 
-/**
- * Created by yudongjin on 2018/1/22.
- * the app activity manager
- */
 @SuppressWarnings("unused")
 public class CActivityManager implements Application.ActivityLifecycleCallbacks {
     private final static String TAG = "ActivityManager";

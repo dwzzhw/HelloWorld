@@ -4,10 +4,6 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-/**
- * Created by yudongjin on 2018/1/22.
- */
-
 public interface IActivityLifecycleCallback {
     default void onActivityCreated(Activity activity, Bundle savedInstanceState) {
     }

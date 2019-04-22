@@ -2,10 +2,6 @@ package com.loading.common.function;
 
 import com.loading.common.utils.CommonUtil;
 
-/**
- * Created by yudongjin on 2017/11/29.
- */
-
 @FunctionalInterface
 public interface Consumer<T> {
 

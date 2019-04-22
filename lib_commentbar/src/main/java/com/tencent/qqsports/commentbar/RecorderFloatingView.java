@@ -6,12 +6,7 @@ import android.widget.RelativeLayout;
 
 import com.loading.common.utils.PermissionUtils;
 
-/**
- * 按住说话录制控件
- *
- * @author yudongjin
- */
-public class RecorderFloatingView extends RelativeLayout implements // todo yudongjin
+public class RecorderFloatingView extends RelativeLayout implements
 //        ApolloVoiceManager.ApolloVoiceListener,
         PermissionUtils.PermissionCallback {
     public RecorderFloatingView(Context context) {

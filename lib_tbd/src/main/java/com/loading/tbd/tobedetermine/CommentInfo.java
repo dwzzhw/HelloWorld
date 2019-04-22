@@ -13,9 +13,6 @@ import com.loading.modules.interfaces.upload.data.UploadPicPojo;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by hzhang on 10/10/16.
- */
 public class CommentInfo implements Serializable, Comparable<CommentInfo> {
     private static final long serialVersionUID = -8658001221019499168L;
     public static final String FADE_PAYLOAD = "fade";
@@ -32,11 +29,11 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
     public String id; // 评论Id
     public String time; // 评论发表时间
     public String content; // 评论内容
-    public CommentUserInfo userinfo; // 评论用户信息
+    public com.loading.tobedetermine.CommentUserInfo userinfo; // 评论用户信息
     private String systemCommentType;
     public UploadPicPojo.UpPicInfo picInfo; // 评论图片信息
     public AdInfo adInfo;
-    private CommentStructInfo structData;
+    private com.loading.tobedetermine.CommentStructInfo structData;
     public String standSelf; //立场
 
     private TxtPropItem txtPropInfo;
@@ -51,7 +48,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
     }
 
     public CommentInfo(String userName, String content) {
-        userinfo = new CommentUserInfo();
+        userinfo = new com.loading.tobedetermine.CommentUserInfo();
         userinfo.nick = userName;
         this.content = content;
     }
@@ -83,11 +80,11 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         return userinfo != null && !CommonUtil.isEmpty(userinfo.badge);
     }
 
-    public List<CommentUserInfo.Badge> getBadges() {
+    public List<com.loading.tobedetermine.CommentUserInfo.Badge> getBadges() {
         return userinfo != null ? userinfo.badge : null;
     }
 
-    public void setBadges(List<CommentUserInfo.Badge> badges) {
+    public void setBadges(List<com.loading.tobedetermine.CommentUserInfo.Badge> badges) {
         if (userinfo != null) {
             userinfo.badge = badges;
         }
@@ -200,7 +197,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         this.content = content;
     }
 
-    public CommentUserInfo getUserinfo() {
+    public com.loading.tobedetermine.CommentUserInfo getUserinfo() {
         return userinfo;
     }
 
@@ -220,7 +217,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         return userinfo == null ? "" : userinfo.getUidex();
     }
 
-    public void setUserinfo(CommentUserInfo userinfo) {
+    public void setUserinfo(com.loading.tobedetermine.CommentUserInfo userinfo) {
         this.userinfo = userinfo;
     }
 
@@ -228,7 +225,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
         this.picInfo = picInfo;
     }
 
-    public CommentStructInfo getStructData() {
+    public com.loading.tobedetermine.CommentStructInfo getStructData() {
         return structData;
     }
 
@@ -250,7 +247,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
 
     public void setPropsIcon(String icon) {
         if (structData == null) {
-            structData = new CommentStructInfo();
+            structData = new com.loading.tobedetermine.CommentStructInfo();
         }
         structData.setPropsIcon(icon);
     }
@@ -367,7 +364,7 @@ public class CommentInfo implements Serializable, Comparable<CommentInfo> {
             commentInfo.content = welcomeMsg;
             commentInfo.systemCommentType = String.valueOf(MSG_TYPE_MC);
             commentInfo.id = null;
-            commentInfo.userinfo = new CommentUserInfo();
+            commentInfo.userinfo = new com.loading.tobedetermine.CommentUserInfo();
             commentInfo.userinfo.nick = "";
             commentInfo.isWelcome = true;
             return commentInfo;

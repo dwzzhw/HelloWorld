@@ -31,8 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by yudongjin on 2016/4/5.
- * <p>
  * Class for permission management.
  */
 @SuppressWarnings("unused")
