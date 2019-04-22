@@ -33,6 +33,8 @@ import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.widget.TipsToast;
 import com.loading.common.widget.dialog.MDDialogFragment;
 import com.loading.modules.data.MediaEntity;
+import com.loading.modules.interfaces.commentpanel.CommentInterface;
+import com.loading.modules.interfaces.commentpanel.data.CommentConstants;
 import com.loading.modules.interfaces.login.LoginModuleMgr;
 import com.loading.modules.interfaces.photoselector.IPSListener;
 import com.loading.modules.interfaces.photoselector.PhotoSelectorModuleMgr;

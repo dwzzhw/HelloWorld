@@ -27,6 +27,8 @@ import com.loading.common.utils.SystemUtil;
 import com.loading.common.utils.ViewUtils;
 import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.commentpanel.CommentInterface;
+import com.loading.modules.interfaces.commentpanel.data.CommentConstants;
 import com.loading.modules.interfaces.login.LoginModuleMgr;
 import com.loading.modules.interfaces.upload.data.UploadParams;
 import com.tencent.qqsports.commentbar.utils.CommentDraftHelper;

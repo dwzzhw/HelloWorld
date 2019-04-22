@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.loading.common.utils.CommonUtil;
 import com.loading.modules.data.MediaEntity;
 import com.loading.modules.interfaces.commentpanel.data.DraftItem;
-import com.tencent.qqsports.commentbar.CommentInterface;
+import com.loading.modules.interfaces.commentpanel.CommentInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;

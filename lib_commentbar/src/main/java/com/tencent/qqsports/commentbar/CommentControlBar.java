@@ -40,6 +40,7 @@ import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.utils.ViewUtils;
 import com.loading.common.widget.ImageSpanEx;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.commentpanel.data.CommentConstants;
 import com.loading.modules.interfaces.face.FaceModuleMgr;
 import com.loading.modules.interfaces.login.LoginModuleMgr;
 

@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar;
+package com.loading.modules.interfaces.commentpanel.data;
 
 public class CommentConstants {
     public static final int MODE_NONE = 0;

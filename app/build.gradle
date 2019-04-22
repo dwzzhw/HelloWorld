@@ -33,7 +33,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':robustgson_2.8')
-    implementation project(':lib_commentbar')
     implementation project(':lib_common')
     implementation project(':lib_flutter_bridge')
     implementation project(':lib_router')

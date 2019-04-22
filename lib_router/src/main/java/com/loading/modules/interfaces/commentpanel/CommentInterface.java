@@ -1,4 +1,4 @@
-package com.tencent.qqsports.commentbar;
+package com.loading.modules.interfaces.commentpanel;
 
 import com.loading.modules.data.MediaEntity;
 import com.loading.modules.interfaces.upload.data.UploadPicPojo;

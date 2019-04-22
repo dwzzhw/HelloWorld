@@ -10,11 +10,15 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewStub;
 
 import com.example.loading.helloworld.MyTestParcel2;
 import com.example.loading.helloworld.R;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
+import com.loading.modules.interfaces.commentpanel.CommentPanelModuleMgr;
+import com.loading.modules.interfaces.commentpanel.data.CommentConstants;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -26,11 +30,21 @@ import java.io.InputStream;
 public class SportsTestActivity extends BaseActivity {
     private static final String TAG = "SportsTestActivity";
     private boolean destroyFlag = false;
+    private ViewStub mCommentEntranceBarViewStub;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sports_test);
+        initView();
+    }
+
+    private void initView() {
+        View commentBar = findViewById(R.id.comment_entrance_bar);
+        mCommentEntranceBarViewStub = findViewById(R.id.comment_entrance_bar_stub);
+        Loger.d(TAG, "-->initView(), commentBar=" + commentBar + ", comment bar stub=" + mCommentEntranceBarViewStub);
+
+        CommentPanelModuleMgr.initEntranceView(mCommentEntranceBarViewStub, CommentConstants.MODE_EMOJO | CommentConstants.MODE_SINGLE_PIC);
     }
 
     @Override
@@ -62,6 +76,14 @@ public class SportsTestActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onBtnClicked(View view) {
+        Loger.d(TAG, "-->onBtnClicked()");
+        if (view.getId() == R.id.show_comment_panel_btn) {
+//            doINetTest();
+            showCommentPanel();
+        }
+    }
+
     private void openKbsMatchDetailPage() {
         Intent intent = new Intent();
 //        Uri uri = Uri.parse("qqsports://kbsqqsports?type=11&matchId=23:819743");
@@ -69,6 +91,11 @@ public class SportsTestActivity extends BaseActivity {
         intent.setData(uri);
         Loger.i(TAG, "-->openKbsMatchDetailPage(), uri=" + uri);
         startActivity(intent);
+    }
+
+    private void showCommentPanel() {
+        Loger.d(TAG, "-->showCommentPanel()");
+        CommentPanelModuleMgr.showCommentPanel(this, CommentConstants.MODE_EMOJO | CommentConstants.MODE_SINGLE_PIC, null);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

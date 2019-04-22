@@ -18,7 +18,7 @@ import com.loading.modules.interfaces.download.DownloadRequest;
 import java.util.List;
 
 public class SocketClientActivity extends FragmentActivity {
-    private static final String TAG = "SocketClientActivity_dwz";
+    private static final String TAG = "SocketClientActivity";
     // 定义界面上的两个文本框
     EditText input;
     TextView show;
