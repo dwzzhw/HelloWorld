@@ -7,9 +7,9 @@ import com.loading.modules.ModuleManager;
 import com.loading.modules.interfaces.commentpanel.ICommentPanelService;
 import com.loading.modules.interfaces.download.IDownloadService;
 import com.loading.modules.interfaces.face.IFaceService;
-import com.tencent.qqsports.commentbar.CommentPanelManager;
-import com.tencent.qqsports.download.DownloadModuleService;
-import com.tencent.qqsports.face.FaceManager;
+import com.loading.comp.commentbar.CommentPanelManager;
+import com.loading.comp.download.DownloadModuleService;
+import com.loading.comp.face.FaceManager;
 
 public class ShellApplication extends Application {
     private static final String TAG = "ShellApplication";

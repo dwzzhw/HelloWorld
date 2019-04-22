@@ -19,7 +19,7 @@ import java.io.File;
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess", "unused"})
 public class CacheManager {
     private static final String TAG = CacheManager.class.getSimpleName();
-    public static final String FILE_PROVIDER_AUTHORITY = "com.tencent.qqsports.fileProvider";
+    public static final String FILE_PROVIDER_AUTHORITY = "com.loading.comp.fileProvider";
     private static final int MAX_CACHE = 15 * 1024 * 1024;
 
     private static final String CRASH_LOG_DIR = "crashLog";
@@ -28,7 +28,7 @@ public class CacheManager {
     //NOTE: the APK_CACHE_DIR is related to file_paths.xml resource.
     private static final String APK_CACHE_DIR = "apkCache";
 
-    private static final String PHOTO_DOWNLOAD_PATH = "Tencent/腾讯体育";
+    private static final String PHOTO_DOWNLOAD_PATH = "Loading/HelloWorld";
     private final static String VIDEO_CACHE_ROOT_DIR = "videoCache";
     private final static String IMAGE_CACHE_ROOT_DIR = "imageCache";
     private final static String APOLLO_VOICE_CACHE_DIR = "voiceCache";

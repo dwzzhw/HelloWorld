@@ -19,7 +19,7 @@
             android:orientation="horizontal"/>
     </HorizontalScrollView>
 
-    <com.tencent.qqsports.commentbar.view.AddMediaItemView
+    <com.loading.comp.commentbar.view.AddMediaItemView
         android:id="@+id/default_item_view"
         android:layout_width="@dimen/comment_sub_panel_add_pic_item_width"
         android:layout_height="@dimen/comment_sub_panel_add_pic_item_height"

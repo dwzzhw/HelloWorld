@@ -25,7 +25,7 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <com.tencent.qqsports.commentbar.view.CommonSupportView
+            <com.loading.comp.commentbar.view.CommonSupportView
                 android:id="@+id/support_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

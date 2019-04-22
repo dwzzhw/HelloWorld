@@ -15,7 +15,7 @@ import java.io.OutputStream;
 
 @SuppressWarnings("unused")
 public class FilePathUtil {
-    //SD上本应用私有的文件路径，/sdcard/Android/data/com.tencent.qqsports/files, 不需要额外的访问权限，但是卸载应用时会被系统自动清理
+    //SD上本应用私有的文件路径，/sdcard/Android/data/com.loading.appshell/files, 不需要额外的访问权限，但是卸载应用时会被系统自动清理
     //SD卡根目录下的某个路径，访问需要对应的权限
     private static final String TAG = "FilePathUtil";
 

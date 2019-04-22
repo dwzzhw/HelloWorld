@@ -138,7 +138,6 @@ public class SportsTestActivity extends BaseActivity {
         return intent;
 
 //        Intent intent = new Intent();
-//        String oldShortcutUri = "#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;launchFlags=0x10200000;package=com.tencent.qqsports;component=com.tencent.qqsports/.ui.SplashActivity;end";
 //        try {
 //            Intent altShortcutIntent = Intent.parseUri(oldShortcutUri, 0);
 //            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, altShortcutIntent);

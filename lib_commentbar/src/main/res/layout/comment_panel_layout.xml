@@ -26,7 +26,7 @@
             android:layout_height="1px"
             android:background="@color/comment_divider"/>
 
-        <com.tencent.qqsports.commentbar.CommentControlBar
+        <com.loading.comp.commentbar.CommentControlBar
             android:id="@+id/control_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:visibility="gone"/>
 
         <!--需要相对于父布局的左上角放置-->
-        <com.tencent.qqsports.commentbar.view.FacePanelPreviewView
+        <com.loading.comp.commentbar.view.FacePanelPreviewView
             android:id="@+id/face_panel_preview_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

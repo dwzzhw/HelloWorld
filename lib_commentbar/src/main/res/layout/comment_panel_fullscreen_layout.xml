@@ -24,7 +24,7 @@
         <!--app:fullScreenMode="true"/>-->
 
     <!--android:layout_toLeftOf="@id/prop_control_bar"-->
-    <com.tencent.qqsports.commentbar.CommentControlBar
+    <com.loading.comp.commentbar.CommentControlBar
         android:id="@+id/control_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:clickable="true"/>
 
     <!--需要相对于父布局的左上角放置-->
-    <com.tencent.qqsports.commentbar.view.FacePanelPreviewView
+    <com.loading.comp.commentbar.view.FacePanelPreviewView
         android:id="@+id/face_panel_preview_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-<com.tencent.qqsports.commentbar.CommentEntranceBar
+<com.loading.comp.commentbar.CommentEntranceBar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:qqsports="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
