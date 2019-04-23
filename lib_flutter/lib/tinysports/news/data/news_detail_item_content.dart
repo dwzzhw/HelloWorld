@@ -91,6 +91,9 @@ abstract class NewsDetailItemContentBase {
       case TYPE_VIDEO:
         itemContent = NewsDetailItemVideoContent.fromJson(srcJson);
         break;
+      default:
+        itemContent = NewsDetailItemUnSupportContent.fromJson(srcJson);
+        break;
     }
     return itemContent;
   }
@@ -117,6 +120,26 @@ class NewsDetailItemTxtContent extends NewsDetailItemContentBase {
       _$NewsDetailItemTxtContentFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$NewsDetailItemTxtContentToJson(this);
+
+  @override
+  String getTypeStr() {
+    return type;
+  }
+}
+
+
+@JsonSerializable()
+class NewsDetailItemUnSupportContent extends NewsDetailItemContentBase {
+  String type;
+
+  NewsDetailItemUnSupportContent(
+      this.type,
+      );
+
+  factory NewsDetailItemUnSupportContent.fromJson(Map<String, dynamic> srcJson) =>
+      _$NewsDetailItemUnSupportContentFromJson(srcJson);
+
+  Map<String, dynamic> toJson() => _$NewsDetailItemUnSupportContentToJson(this);
 
   @override
   String getTypeStr() {
