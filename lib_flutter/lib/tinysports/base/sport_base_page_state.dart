@@ -13,7 +13,9 @@ abstract class SportsBasePageState<T extends StatefulWidget> extends State<T> {
     });
   }
 
-  String getLogTAG();
+  String getLogTAG(){
+    return '$runtimeType';
+  }
 
   @override
   Widget build(BuildContext context) {

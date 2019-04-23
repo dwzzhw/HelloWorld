@@ -639,7 +639,9 @@ public class CommentPanel extends MDDialogFragment
     }
 
     protected boolean canSendComment() {
-        return checkLoginStatus();
+        //dwz test, ignore login status at present
+        return true;
+//        return checkLoginStatus();
     }
 
     protected View.OnClickListener mFinishBtnClickListener = (view) -> {

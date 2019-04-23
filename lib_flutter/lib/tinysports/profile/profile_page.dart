@@ -124,9 +124,4 @@ class ProfilePageState extends SportsBasePageState<ProfilePage> {
     }
     return itemWidget;
   }
-
-  @override
-  String getLogTAG() {
-    return 'ProfilePage';
-  }
 }

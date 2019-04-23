@@ -6,8 +6,11 @@ import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.widget.TipsToast;
+import com.loading.modules.interfaces.commentpanel.CommentInterface;
 import com.loading.modules.interfaces.commentpanel.CommentPanelModuleMgr;
 import com.loading.modules.interfaces.commentpanel.data.CommentConstants;
+import com.loading.modules.interfaces.upload.data.UploadPicPojo;
+import com.loading.modules.interfaces.upload.data.UploadVideoPojo;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -74,7 +77,22 @@ public class FlutterChannelManager {
                 respMsg = "Android will show comment panel";
 
                 CommentPanelModuleMgr.showCommentPanel(mContainerActivity,
-                        CommentConstants.MODE_EMOJO | CommentConstants.MODE_SINGLE_PIC, null);
+                        CommentConstants.MODE_EMOJO | CommentConstants.MODE_SINGLE_PIC, new CommentInterface.CommentPanelListener() {
+                            @Override
+                            public void onSendComment(String content, UploadPicPojo.UpPicRespData upPicRespData, UploadVideoPojo uploadVideoPojo, Object txtPropItem) {
+                                callFlutterMethod(METHOD_N2F_SEND_COMMENT, content);
+                            }
+
+                            @Override
+                            public void onPanelShow() {
+
+                            }
+
+                            @Override
+                            public void onPanelHide(boolean needReset) {
+
+                            }
+                        });
             } else if (METHOD_F2N_SAY_HELLO.equals(methodCall.method)) {
                 result = true;
                 methodMatch = true;

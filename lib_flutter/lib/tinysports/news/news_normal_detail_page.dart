@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lib_flutter/channel/native_channel_manager.dart';
 import 'package:lib_flutter/http/base_data_model.dart';
 import 'package:lib_flutter/tinysports/base/data/comment_item.dart';
+import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
 import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
 import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
 import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
 import 'package:lib_flutter/tinysports/comment/data/comment_list_content_info.dart';
@@ -14,6 +14,7 @@ import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
 import 'package:lib_flutter/tinysports/news/view/news_detail_image_view.dart';
 import 'package:lib_flutter/tinysports/news/view/news_detail_text_view.dart';
 import 'package:lib_flutter/tinysports/news/view/news_detail_video_view.dart';
+import 'package:lib_flutter/utils/Loger.dart';
 import 'package:lib_flutter/utils/common_utils.dart';
 import 'package:lib_flutter/utils/date_util.dart';
 
@@ -27,7 +28,8 @@ class NewsNormalDetailPage extends SportsBasePage {
       NewsNormalDetailPageState(newsDetailInfo);
 }
 
-class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
+class NewsNormalDetailPageState
+    extends SportsBasePageState<NewsNormalDetailPage> {
   static const int NEWS_ITEM_TYPE_TXT = 1;
   static const int NEWS_ITEM_TYPE_IMG = 2;
   static const int NEWS_ITEM_TYPE_VIDEO = 3;
@@ -48,7 +50,8 @@ class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
     commentListModel = CommentListInfoModel(
         newsDetailInfo?.targetId,
         fetchCommentDataFromModel,
-        (BaseDataModel dataModel, int code, String errorMsg, int dataType) {});
+            (BaseDataModel dataModel, int code, String errorMsg,
+            int dataType) {});
     commentListModel.loadData();
   }
 
@@ -135,9 +138,45 @@ class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
 
   void showCommentPanel() {
     if (nativeChannelManager == null) {
-      nativeChannelManager = NativeChannelManager();
+      nativeChannelManager =
+          NativeChannelManager(nativeMethodHandler: _nativeMethodHandler,
+              filter: _nativeMethodFilter);
     }
     nativeChannelManager.showNativeCommentPanel();
+  }
+
+  bool _nativeMethodFilter(String methodName, dynamic arguments) {
+    return NativeChannelManager.METHOD_N2F_SEND_COMMENT == methodName;
+  }
+
+  dynamic _nativeMethodHandler(String methodName, dynamic arguments) {
+    llog(
+        '-->_nativeMethodHandler(), methodName=$methodName, arguments=$arguments');
+    bool result = false;
+    if (NativeChannelManager.METHOD_N2F_SEND_COMMENT == methodName &&
+        arguments is String) {
+      insertMyCommentInfo(arguments);
+      result = true;
+    }
+    return result;
+  }
+
+  void insertMyCommentInfo(String contentStr) {
+    if (!CommonUtils.isListEmpty(viewDataList)) {
+      int targetPos = 0;
+      for (; targetPos < viewDataList.length; targetPos++) {
+        ViewTypeDataContainer dataContainer = viewDataList[targetPos];
+        if (dataContainer.viewType ==
+            CommonViewManager.VIEW_TYPE_COMMENT_HOST_ITEM) {
+          break;
+        }
+      }
+      CommentItem myCommentItem = CommentItem.mockMyCommentItem(contentStr);
+      setState(() {
+        viewDataList.insert(targetPos, ViewTypeDataContainer(
+            CommonViewManager.VIEW_TYPE_COMMENT_HOST_ITEM, myCommentItem));
+      });
+    }
   }
 
   Widget _getNewsDetailListView() {
@@ -148,23 +187,6 @@ class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
         ),
       );
     } else {
-      List<NewsDetailItemContentBase> headerList = List();
-      if (newsDetailInfo.title != null) {
-        NewsDetailItemTxtContent titleContent = NewsDetailItemTxtContent(
-            NewsDetailItemContentBase.TYPE_TEXT.toString(),
-            newsDetailInfo.title);
-        titleContent.localStyle = NewsDetailItemTxtContent.LOCAL_STYLE_TITLE;
-        headerList.add(titleContent);
-      }
-      String subTitleStr = getSubTitleStr();
-      if (subTitleStr != null && subTitleStr.length > 0) {
-        NewsDetailItemTxtContent subTitleContent = NewsDetailItemTxtContent(
-            NewsDetailItemContentBase.TYPE_TEXT.toString(), subTitleStr);
-        subTitleContent.localStyle =
-            NewsDetailItemTxtContent.LOCAL_STYLE_SUB_TITLE;
-        headerList.add(subTitleContent);
-      }
-
       return ListView.builder(
           itemCount: viewDataList.length,
           itemBuilder: (BuildContext context, int position) {
@@ -192,6 +214,7 @@ class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
         break;
     }
     if (resultView == null) {
+      llog('-->create log view');
       resultView = CommonViewManager.getCommonView(
           itemContent.viewType, itemContent.data);
     }
@@ -213,5 +236,10 @@ class NewsNormalDetailPageState extends State<NewsNormalDetailPage> {
       }
     }
     return subTitle;
+  }
+
+  @override
+  String getLogTAG() {
+    return 'dwz_123_auto_tag_$runtimeType';
   }
 }

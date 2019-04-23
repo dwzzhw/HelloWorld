@@ -42,4 +42,27 @@ class CommentItem extends Object {
       _$CommentItemFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$CommentItemToJson(this);
+
+  static CommentItem mockMyCommentItem(String contentStr) {
+    Userinfo userInfo = Userinfo(
+        '',
+        '本机用户',
+        'http://q2.qlogo.cn/g?b=qq&k=UFm7k74RiaPn5pEKx34rpgA&s=100&t=1438693048',
+        '1',
+        null,
+        null,
+        null,
+        null);
+    return new CommentItem(
+        null,
+        '1',
+        null,
+        null,
+        DateTime.now().millisecondsSinceEpoch.toString(),
+        contentStr,
+        '0',
+        '0',
+        '0',
+        userInfo);
+  }
 }
