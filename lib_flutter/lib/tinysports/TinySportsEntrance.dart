@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/TinySportsRouteManager.dart';
+import '../tinysports/TinySportsRouteManager.dart';
 
 class TinySportsEntrance extends StatelessWidget {
   @override

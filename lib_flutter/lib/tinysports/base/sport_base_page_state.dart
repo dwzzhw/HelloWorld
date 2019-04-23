@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../utils/Loger.dart';
 
 abstract class SportsBasePageState<T extends StatefulWidget> extends State<T> {
   bool isSuccess = true;

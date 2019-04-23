@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/comment_item.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
-import 'package:lib_flutter/tinysports/base/view/comment_item_view.dart';
-import 'package:lib_flutter/tinysports/base/view/common_group_header_view.dart';
-import 'package:lib_flutter/tinysports/base/view/news_list_item_view.dart';
-import 'package:lib_flutter/tinysports/base/view/schedule_item_view.dart';
+import '../../../tinysports/base/data/comment_item.dart';
+import '../../../tinysports/base/data/news_item.dart';
+import '../../../tinysports/base/data/schedule_info.dart';
+import '../../../tinysports/base/view/comment_item_view.dart';
+import '../../../tinysports/base/view/common_group_header_view.dart';
+import '../../../tinysports/base/view/news_list_item_view.dart';
+import '../../../tinysports/base/view/schedule_item_view.dart';
 
 class CommonViewManager {
   static const String TAG = 'CommonViewManager';

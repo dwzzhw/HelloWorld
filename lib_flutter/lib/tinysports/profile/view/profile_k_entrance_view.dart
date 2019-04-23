@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
-import 'package:lib_flutter/tinysports/profile/view/profile_item_entrance_view.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+
+import '../../../utils/Loger.dart';
+import '../data/profile_page_info.dart';
+import 'profile_item_entrance_view.dart';
 
 class ProfileKEntranceView extends StatelessWidget {
   final String TAG = 'ProfileKEntranceView';

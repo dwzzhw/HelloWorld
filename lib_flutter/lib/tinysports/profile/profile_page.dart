@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
-import 'package:lib_flutter/tinysports/profile/model/profile_page_model.dart';
-import 'package:lib_flutter/tinysports/profile/view/profile_k_entrance_view.dart';
-import 'package:lib_flutter/tinysports/profile/view/profile_user_info_view.dart';
-import 'package:lib_flutter/tinysports/profile/view/profile_v_entrance_view.dart';
-import 'package:lib_flutter/tinysports/profile/view/profile_wallet_view.dart';
+import '../../http/base_data_model.dart';
+import '../../tinysports/base/sport_base_page_state.dart';
+import '../../tinysports/base/sports_base_page.dart';
+import '../../tinysports/profile/data/profile_page_info.dart';
+import '../../tinysports/profile/model/profile_page_model.dart';
+import '../../tinysports/profile/view/profile_k_entrance_view.dart';
+import '../../tinysports/profile/view/profile_user_info_view.dart';
+import '../../tinysports/profile/view/profile_v_entrance_view.dart';
+import '../../tinysports/profile/view/profile_wallet_view.dart';
 
 class ProfilePage extends SportsBasePage {
   final bool needAppBar;

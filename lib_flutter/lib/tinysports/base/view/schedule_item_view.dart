@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/TinySportsRouteManager.dart';
-import 'package:lib_flutter/tinysports/base/data/match_info.dart';
-import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../../../tinysports/TinySportsRouteManager.dart';
+import '../../../tinysports/base/data/match_info.dart';
+import '../../../tinysports/base/data/schedule_info.dart';
+import '../../../utils/Loger.dart';
+import '../../../utils/date_util.dart';
 
 class ScheduleItemView extends StatefulWidget {
   final ScheduleInfo scheduleInfo;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../../../../tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
+import '../../../../utils/common_utils.dart';
+import '../../../../utils/date_util.dart';
 
 class ImgTxtCommentatorItemView extends StatelessWidget {
   final ImgTxtItemDetail itemData;

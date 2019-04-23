@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
+import '../../../tinysports/profile/data/profile_page_info.dart';
 
 class ProfileUserInfoView extends StatefulWidget {
   final UserInfo userInfo;

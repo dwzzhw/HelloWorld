@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/base/data/video_item.dart';
+import '../../../tinysports/base/data/news_item.dart';
+import '../../../tinysports/base/data/video_item.dart';
 
 part 'match_detail_related_info.g.dart';
 

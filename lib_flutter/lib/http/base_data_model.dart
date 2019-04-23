@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:lib_flutter/http/http_controller.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/cache_manager.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../http/http_controller.dart';
+import '../http/net_request_listener.dart';
+import '../utils/Loger.dart';
+import '../utils/cache_manager.dart';
+import '../utils/date_util.dart';
 
 abstract class BaseDataModel<T> extends Object {
   static const String TAG = "BaseDataModel";

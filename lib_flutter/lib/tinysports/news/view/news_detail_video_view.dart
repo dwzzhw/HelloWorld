@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/image_item.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../../tinysports/base/data/image_item.dart';
+import '../../../tinysports/news/data/news_detail_item_content.dart';
+import '../../../utils/Loger.dart';
 
 class NewsDetailVideoView extends StatelessWidget {
   static const TAG = 'NewsDetailVideoView';

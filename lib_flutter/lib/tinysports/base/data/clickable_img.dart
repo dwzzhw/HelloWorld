@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/jump_data.dart';
+import '../../../tinysports/base/data/jump_data.dart';
 
 part 'clickable_img.g.dart';
 

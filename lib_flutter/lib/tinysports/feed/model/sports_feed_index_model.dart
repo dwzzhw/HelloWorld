@@ -1,6 +1,6 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/feed/data/feedindex.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/net_request_listener.dart';
+import '../../../tinysports/feed/data/feedindex.dart';
 
 class SportsFeedIndexModel extends BaseDataModel<FeedIndexData> {
   String columnId;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
-import 'package:lib_flutter/tinysports/feed/model/feed_list_ids_detail_model.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
+import '../../tinysports/base/data/news_item.dart';
+import '../../tinysports/base/sport_base_page_state.dart';
+import '../../tinysports/base/sports_base_page.dart';
+import '../../tinysports/base/view/common_view_manager.dart';
+import '../../tinysports/feed/model/feed_list_ids_detail_model.dart';
+import '../../utils/common_utils.dart';
 
 class SportsHomeFeedListPage extends SportsBasePage {
   final bool needAppBar;

@@ -1,7 +1,7 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/data/img_txt_ids_info.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
+import '../../../../http/base_data_model.dart';
+import '../../../../http/net_request_listener.dart';
+import '../../../../tinysports/match/imgtxt/data/img_txt_ids_info.dart';
+import '../../../../tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
 
 class ImgTxtDetailModel extends BaseDataModel<Map<String, ImgTxtItemDetail>> {
   String mid;

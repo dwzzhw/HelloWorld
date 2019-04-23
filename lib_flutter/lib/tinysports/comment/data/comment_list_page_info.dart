@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/comment/data/comment_list_content_info.dart';
+import '../../../tinysports/comment/data/comment_list_content_info.dart';
 
 part 'comment_list_page_info.g.dart';
 

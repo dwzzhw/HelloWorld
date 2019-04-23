@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/image_item.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_content.dart';
+import '../../../tinysports/base/data/image_item.dart';
+import '../../../tinysports/news/data/news_detail_item_subject_content.dart';
 
 part 'news_detail_item_content.g.dart';
 

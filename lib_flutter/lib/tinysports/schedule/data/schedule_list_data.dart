@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/schedule_info.dart';
+import '../../../tinysports/base/data/schedule_info.dart';
 
 part 'schedule_list_data.g.dart';
 

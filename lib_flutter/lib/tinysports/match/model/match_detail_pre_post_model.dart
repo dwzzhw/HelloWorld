@@ -1,10 +1,10 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/multi_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/comment/data/comment_list_page_info.dart';
-import 'package:lib_flutter/tinysports/comment/model/comment_list_info_model.dart';
-import 'package:lib_flutter/tinysports/match/data/match_detail_related_info.dart';
-import 'package:lib_flutter/tinysports/match/model/match_detail_related_info_model.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/multi_data_model.dart';
+import '../../../http/net_request_listener.dart';
+import '../../../tinysports/comment/data/comment_list_page_info.dart';
+import '../../../tinysports/comment/model/comment_list_info_model.dart';
+import '../../../tinysports/match/data/match_detail_related_info.dart';
+import '../../../tinysports/match/model/match_detail_related_info_model.dart';
 
 class MatchDetailPrePostModel extends MultiDataModel {
   String mid;

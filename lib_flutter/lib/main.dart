@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/demo/DemosEntrance.dart';
-import 'package:lib_flutter/tinysports/TinySportsEntrance.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import 'demo/DemosEntrance.dart';
+import 'tinysports/TinySportsEntrance.dart';
+import 'utils/Loger.dart';
 
 void main() {
 //  DartGrammarTest().doFutureTest();

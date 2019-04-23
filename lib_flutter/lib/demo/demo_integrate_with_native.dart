@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lib_flutter/channel/native_channel_manager.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../channel/native_channel_manager.dart';
+import '../utils/Loger.dart';
 
 class DemoIntegrateWithNative extends StatefulWidget {
   static final routeName = 'integrate';

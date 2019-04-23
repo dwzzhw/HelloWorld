@@ -1,8 +1,8 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/idx_detail_base_data_model.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/feed/model/sports_feed_index_model.dart';
-import 'package:lib_flutter/tinysports/feed/model/sports_feed_list_model.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/idx_detail_base_data_model.dart';
+import '../../../tinysports/base/data/news_item.dart';
+import '../../../tinysports/feed/model/sports_feed_index_model.dart';
+import '../../../tinysports/feed/model/sports_feed_list_model.dart';
 
 class FeedListIdsDetailModel extends IdxDetailBaseDataModel<NewsItem> {
   String columnId;

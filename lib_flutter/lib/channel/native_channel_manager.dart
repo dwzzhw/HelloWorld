@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 
 typedef dynamic HandleNativeMethodCall(String methodName, dynamic arguments);
 typedef bool FilterNativeMethodCall(String methodName, dynamic arguments);

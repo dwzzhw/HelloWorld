@@ -1,7 +1,7 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
+import '../http/base_data_model.dart';
+import '../http/net_request_listener.dart';
+import '../utils/Loger.dart';
+import '../utils/common_utils.dart';
 
 class MultiDataModel {
   static const int REQ_STATUS_LOADING = 0;

@@ -1,5 +1,5 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/multi_data_model.dart';
+import '../http/base_data_model.dart';
+import '../http/multi_data_model.dart';
 
 typedef void OnDataCompleteFunc<T>(BaseDataModel<T> dataModel, int dataType);
 typedef void OnDataErrorFunc(

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
-import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
-import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_content.dart';
-import 'package:lib_flutter/tinysports/news/view/news_special_page_text_view.dart';
-import 'package:lib_flutter/tinysports/news/view/news_special_page_top_pic_view.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../../tinysports/base/data/news_item.dart';
+import '../../tinysports/base/sports_base_stateless_page.dart';
+import '../../tinysports/base/view/app_bar_back_button.dart';
+import '../../tinysports/base/view/common_view_manager.dart';
+import '../../tinysports/news/data/news_detail_info.dart';
+import '../../tinysports/news/data/news_detail_item_content.dart';
+import '../../tinysports/news/data/news_detail_item_subject_content.dart';
+import '../../tinysports/news/view/news_special_page_text_view.dart';
+import '../../tinysports/news/view/news_special_page_top_pic_view.dart';
+import '../../utils/common_utils.dart';
+import '../../utils/date_util.dart';
 
 ///资讯专题页
 class NewsSpecialDetailPage extends SportsBaseStatelessPage {

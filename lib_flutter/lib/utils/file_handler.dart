@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileHandler {

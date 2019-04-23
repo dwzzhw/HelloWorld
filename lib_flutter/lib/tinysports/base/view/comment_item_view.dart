@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/comment_item.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../../../tinysports/base/data/comment_item.dart';
+import '../../../utils/date_util.dart';
 
 class CommentItemView extends StatelessWidget {
   final CommentItem commentItem;

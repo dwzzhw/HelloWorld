@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/tinysports/base/data/column_info.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/feed/model/column_info_list_model.dart';
-import 'package:lib_flutter/tinysports/feed/sports_home_feed_list_page.dart';
+import '../../http/base_data_model.dart';
+import '../../tinysports/base/data/column_info.dart';
+import '../../tinysports/base/sports_base_page.dart';
+import '../../tinysports/feed/model/column_info_list_model.dart';
+import '../../tinysports/feed/sports_home_feed_list_page.dart';
 
 ///主页上的"首页"页卡
 class SportsHomePage extends SportsBasePage {

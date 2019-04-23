@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 
 class DemoListItemClickApp extends StatelessWidget {
   static final routeName = 'list_item_click';

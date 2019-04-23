@@ -1,6 +1,6 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/profile/data/profile_page_info.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/net_request_listener.dart';
+import '../../../tinysports/profile/data/profile_page_info.dart';
 
 class ProfilePageModel extends BaseDataModel<ProfilePageInfo> {
   ProfilePageModel(OnDataCompleteFunc<ProfilePageInfo> onCompleteFunction,

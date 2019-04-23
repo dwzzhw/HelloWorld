@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/file_handler.dart';
+import '../utils/Loger.dart';
+import '../utils/file_handler.dart';
 
 class CacheManager {
   static const String TAG = 'CacheManager';

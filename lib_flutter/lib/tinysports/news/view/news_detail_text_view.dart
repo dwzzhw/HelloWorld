@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
+import '../../../tinysports/news/data/news_detail_item_content.dart';
 
 class NewsDetailTextView extends StatelessWidget {
   final NewsDetailItemTxtContent itemContent;

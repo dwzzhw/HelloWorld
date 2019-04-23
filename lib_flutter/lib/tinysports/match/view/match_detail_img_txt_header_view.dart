@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/match_info.dart';
-import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
-import 'package:lib_flutter/utils/date_util.dart';
+import '../../../tinysports/base/data/match_info.dart';
+import '../../../tinysports/match/data/match_detail_info.dart';
+import '../../../utils/Loger.dart';
+import '../../../utils/common_utils.dart';
+import '../../../utils/date_util.dart';
 
 class MatchDetailImgTxtHeaderView extends StatelessWidget {
   static const String TAG = 'MatchDetailImgTxtHeaderView';

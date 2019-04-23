@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_subject_content.dart';
+import '../../../tinysports/news/data/news_detail_item_subject_content.dart';
 
 class NewsSpecialPageTextView extends StatelessWidget {
   final int viewType;

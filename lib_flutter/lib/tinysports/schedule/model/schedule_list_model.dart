@@ -1,7 +1,7 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/schedule/data/schedule_list_data.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/net_request_listener.dart';
+import '../../../tinysports/schedule/data/schedule_list_data.dart';
+import '../../../utils/Loger.dart';
 
 class ScheduleListModel extends BaseDataModel<ScheduleListData> {
   ScheduleListModel(OnDataCompleteFunc<ScheduleListData> onCompleteFunction,

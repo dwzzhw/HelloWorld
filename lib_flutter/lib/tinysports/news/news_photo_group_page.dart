@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/data/image_item.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_stateless_page.dart';
-import 'package:lib_flutter/tinysports/base/view/app_bar_back_button.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_info.dart';
-import 'package:lib_flutter/tinysports/news/data/news_detail_item_content.dart';
+import '../../tinysports/base/data/image_item.dart';
+import '../../tinysports/base/sports_base_stateless_page.dart';
+import '../../tinysports/base/view/app_bar_back_button.dart';
+import '../../tinysports/news/data/news_detail_info.dart';
+import '../../tinysports/news/data/news_detail_item_content.dart';
 
 class NewsPhotoGroupPage extends SportsBaseStatelessPage {
   final NewsDetailInfo newsDetailInfo;

@@ -1,7 +1,7 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/http_controller.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../http/base_data_model.dart';
+import '../http/http_controller.dart';
+import '../http/net_request_listener.dart';
+import '../utils/Loger.dart';
 
 abstract class PostDataModel<T> extends BaseDataModel<T> {
   static String TAG = "PostDataModel";

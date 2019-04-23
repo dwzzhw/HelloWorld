@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DemoReadWriteFile extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/main/view/main_navigator_item_view.dart';
+import '../../../tinysports/main/view/main_navigator_item_view.dart';
 
 class MainNavigatorBar extends StatelessWidget {
   final List<int> itemTypeList;

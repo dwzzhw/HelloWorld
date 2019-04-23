@@ -1,6 +1,6 @@
 import 'package:css_colors/css_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DemoAddItemToList extends StatefulWidget {

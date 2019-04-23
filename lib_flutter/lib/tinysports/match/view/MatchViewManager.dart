@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/base/view/common_view_manager.dart';
+import '../../../tinysports/base/view/common_view_manager.dart';
 
 class MatchViewManager {
   static Widget getMatchView(ViewTypeDataContainer viewInfoContainer) {

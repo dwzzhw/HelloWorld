@@ -1,6 +1,6 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
+import '../http/base_data_model.dart';
+import '../utils/Loger.dart';
+import '../utils/common_utils.dart';
 
 abstract class IdxDetailBaseDataModel<T> {
   static const String TAG = 'IdxDetailBaseDataModel';

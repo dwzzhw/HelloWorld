@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
+import '../../../../tinysports/match/imgtxt/data/img_txt_item_detail_info.dart';
 
 class ImgTxtEventItemView extends StatelessWidget {
   final ImgTxtItemDetail itemData;

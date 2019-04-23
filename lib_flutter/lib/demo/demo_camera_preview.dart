@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 

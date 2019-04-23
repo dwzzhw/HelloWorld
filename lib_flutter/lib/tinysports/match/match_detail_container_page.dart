@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/tinysports/base/data/match_info.dart';
-import 'package:lib_flutter/tinysports/base/sport_base_page_state.dart';
-import 'package:lib_flutter/tinysports/base/sports_base_page.dart';
-import 'package:lib_flutter/tinysports/base/view/video_player_view.dart';
-import 'package:lib_flutter/tinysports/match/data/match_detail_info.dart';
-import 'package:lib_flutter/tinysports/match/data/match_detail_sub_tab_info.dart';
-import 'package:lib_flutter/tinysports/match/imgtxt/match_detail_img_txt_page.dart';
-import 'package:lib_flutter/tinysports/match/match_detail_prepost_sliver_page.dart';
-import 'package:lib_flutter/tinysports/match/model/match_detail_info_model.dart';
-import 'package:lib_flutter/tinysports/match/view/match_detail_img_txt_header_view.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../http/base_data_model.dart';
+import '../../tinysports/base/data/match_info.dart';
+import '../../tinysports/base/sport_base_page_state.dart';
+import '../../tinysports/base/sports_base_page.dart';
+import '../../tinysports/base/view/video_player_view.dart';
+import '../../tinysports/match/data/match_detail_info.dart';
+import '../../tinysports/match/data/match_detail_sub_tab_info.dart';
+import '../../tinysports/match/imgtxt/match_detail_img_txt_page.dart';
+import '../../tinysports/match/match_detail_prepost_sliver_page.dart';
+import '../../tinysports/match/model/match_detail_info_model.dart';
+import '../../tinysports/match/view/match_detail_img_txt_header_view.dart';
+import '../../utils/Loger.dart';
 
 class MatchDetailContainerPage extends SportsBasePage {
   final String mid;

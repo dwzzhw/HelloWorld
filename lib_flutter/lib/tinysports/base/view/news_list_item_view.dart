@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/TinySportsRouteManager.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
+import '../../../tinysports/TinySportsRouteManager.dart';
+import '../../../tinysports/base/data/news_item.dart';
+import '../../../utils/Loger.dart';
+import '../../../utils/common_utils.dart';
 
 class NewsListItemView extends StatelessWidget {
   static const String TAG = 'NewsListItemView';

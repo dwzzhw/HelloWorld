@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/match_info.dart';
+import '../../../tinysports/base/data/match_info.dart';
 
 part 'schedule_info.g.dart';
 @JsonSerializable()

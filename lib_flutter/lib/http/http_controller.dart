@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 
 class HttpController {
   static const String TAG = 'HttpController';

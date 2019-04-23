@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 
 Future<List<Photo>> fetchPhotos(http.Client client) async {
   final response =

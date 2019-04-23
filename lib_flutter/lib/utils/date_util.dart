@@ -1,4 +1,4 @@
-import 'package:lib_flutter/utils/date_format.dart';
+import '../utils/date_format.dart';
 
 class DateUtil {
   static const int HOUR_IN_MILL_SECONDS = 60 * 60 * 1000;

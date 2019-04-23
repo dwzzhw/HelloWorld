@@ -1,4 +1,4 @@
-import 'package:lib_flutter/utils/Loger.dart';
+import '../utils/Loger.dart';
 
 class DartGrammarTest {
   Future doFutureTest() {

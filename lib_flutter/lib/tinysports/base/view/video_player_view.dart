@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/utils/Loger.dart';
-import 'package:lib_flutter/utils/common_utils.dart';
+import '../../../utils/Loger.dart';
+import '../../../utils/common_utils.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerView extends StatefulWidget {

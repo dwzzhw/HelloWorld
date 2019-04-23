@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../../utils/Loger.dart';
 
 class SportsFeedIndexRespPO {
   int code;

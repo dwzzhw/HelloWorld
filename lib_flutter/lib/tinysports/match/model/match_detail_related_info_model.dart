@@ -1,6 +1,6 @@
-import 'package:lib_flutter/http/base_data_model.dart';
-import 'package:lib_flutter/http/net_request_listener.dart';
-import 'package:lib_flutter/tinysports/match/data/match_detail_related_info.dart';
+import '../../../http/base_data_model.dart';
+import '../../../http/net_request_listener.dart';
+import '../../../tinysports/match/data/match_detail_related_info.dart';
 
 class MatchDetailRelatedInfoModel
     extends BaseDataModel<MatchDetailRelatedInfo> {

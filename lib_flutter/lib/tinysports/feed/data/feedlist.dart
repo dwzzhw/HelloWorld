@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:lib_flutter/tinysports/base/data/news_item.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../../tinysports/base/data/news_item.dart';
+import '../../../utils/Loger.dart';
 
 part 'feedlist.g.dart';
 

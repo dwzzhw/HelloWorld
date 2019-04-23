@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../../../utils/Loger.dart';
 
 typedef void OnNavigatorItemClicked(int itemType, bool isSelected);
 

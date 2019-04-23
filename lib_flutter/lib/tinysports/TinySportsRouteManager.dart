@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lib_flutter/tinysports/feed/sports_home_page.dart';
-import 'package:lib_flutter/tinysports/match/match_detail_container_page.dart';
-import 'package:lib_flutter/tinysports/match/match_detail_page.dart';
-import 'package:lib_flutter/tinysports/news/news_container_page.dart';
-import 'package:lib_flutter/tinysports/ui/sports_main_page.dart';
-import 'package:lib_flutter/utils/Loger.dart';
+import '../tinysports/feed/sports_home_page.dart';
+import '../tinysports/match/match_detail_container_page.dart';
+import '../tinysports/match/match_detail_page.dart';
+import '../tinysports/news/news_container_page.dart';
+import '../tinysports/ui/sports_main_page.dart';
+import '../utils/Loger.dart';
 
 class TinySportsRouteManager {
   List<SportsPageItem> sportPageList;
