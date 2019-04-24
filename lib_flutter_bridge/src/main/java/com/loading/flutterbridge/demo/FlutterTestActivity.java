@@ -46,7 +46,7 @@ public class FlutterTestActivity extends FragmentActivity {
 
         if (view.getId() == R.id.btn_add_flutter_view) {
             String routeName = mRouteNameView.getText().toString();
-            if (!TextUtils.isEmpty(routeName)) {
+            if (!TextUtils.isEmpty(routeName) && !"666".equals(routeName)) {
                 FlutterContainerActivity.startActivity(this, routeName);
             } else {
                 addFlutterView();

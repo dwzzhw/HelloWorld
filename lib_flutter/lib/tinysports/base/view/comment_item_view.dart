@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../tinysports/base/data/comment_item.dart';
+import '../../../utils/Loger.dart';
 import '../../../utils/date_util.dart';
 
 class CommentItemView extends StatelessWidget {
+  static const String TAG = 'CommentItemView';
   final CommentItem commentItem;
 
   CommentItemView(this.commentItem);
@@ -72,8 +74,14 @@ class CommentItemView extends StatelessWidget {
   }
 
   String getDateTimeStr() {
-    return DateUtil.getFormattedStrFromDateObj(
-        DateTime.fromMillisecondsSinceEpoch(int.tryParse(commentItem.time)),
+    String result = DateUtil.getFormattedStrFromDateObj(
+        DateTime.fromMillisecondsSinceEpoch(int.tryParse(commentItem.time)*1000),
         DateUtil.FORMAT_STR_MONTH_DAY_HOUR_MINUTE);
+//    Loger.d(
+//        TAG,
+//        '-->getDateTimeStr(), init time=${commentItem.time}, '
+//        'parsed date time=${DateTime.fromMillisecondsSinceEpoch(int.tryParse(commentItem.time)*1000)},'
+//        'result str=$result');
+    return result;
   }
 }
