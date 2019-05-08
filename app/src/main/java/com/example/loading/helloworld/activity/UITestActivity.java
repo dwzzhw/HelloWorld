@@ -91,6 +91,8 @@ public class UITestActivity extends BaseActivity {
             openViewDrawingOrderPage();
         } else if (viewId == R.id.btn_memory_monitor_test) {
             startMemoryService();
+        } else if (viewId == R.id.btn_constraint_layout_test) {
+            startConstraintLayoutTest();
         }
     }
 
@@ -106,6 +108,12 @@ public class UITestActivity extends BaseActivity {
 
     private void openViewDrawingOrderPage() {
         Intent intent = new Intent(this, ViewDrawingOrderTestActivity.class);
+        startActivity(intent);
+    }
+
+    private void startConstraintLayoutTest() {
+        Log.i(TAG, "startConstraintLayoutTest()");
+        Intent intent = new Intent(this, ConstraintLayoutTestActivity.class);
         startActivity(intent);
     }
 

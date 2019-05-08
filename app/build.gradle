@@ -28,6 +28,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
@@ -37,6 +41,7 @@ dependencies {
     implementation project(':lib_flutter_bridge')
     implementation project(':lib_router')
     implementation deps.design
+    implementation deps.constraint
     implementation(deps.lottie) {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'

@@ -52,16 +52,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_lottie_test"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:onClick="onBtnClicked"
         android:text="View Draw Order Test"/>
+
+    <Button
+        android:id="@+id/btn_constraint_layout_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_view_draw_order_test"
+        android:layout_marginTop="2dp"
+        android:onClick="onBtnClicked"
+        android:text="Constraint Layout Test"/>
 
     <Button
         android:id="@+id/btn_memory_monitor_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_view_draw_order_test"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/btn_constraint_layout_test"
+        android:layout_marginTop="2dp"
         android:onClick="onBtnClicked"
         android:text="Memory Monitor Test"/>
 

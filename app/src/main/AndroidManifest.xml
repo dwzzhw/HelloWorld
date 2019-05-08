@@ -68,6 +68,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".activity.ConstraintLayoutTestActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name=".activity.MiscTestActivity"

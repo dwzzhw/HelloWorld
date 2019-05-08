@@ -1,0 +1,83 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.loading.helloworld.data.Student" />
+
+        <variable
+            name="StuInfo"
+            type="Student" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ConstraintLayout Center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/bbs_board"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:background="#2200ff00"
+            android:text="BBS board, Circle to center, radius: 150, angle:315"
+            app:layout_constraintCircle="@id/title"
+            app:layout_constraintCircleAngle="315"
+            app:layout_constraintCircleRadius="150dp"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/misc_test_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:onClick="onBtnClicked"
+            android:text="Test 01 longllllllllllllll"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintLeft_toRightOf="@id/title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/stu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{StuInfo.name, default=Stu_Name}"
+            app:layout_constraintBottom_toTopOf="@+id/misc_test_01"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/stu_serial_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{StuInfo.serialNum}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/stu_name" />
+
+        <TextView
+            android:id="@+id/stu_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{String.valueOf(StuInfo.score)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/stu_serial_num" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
