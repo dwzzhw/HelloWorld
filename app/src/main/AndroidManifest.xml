@@ -79,6 +79,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".activity.misc.RxJavaTestActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            />
 
         <service android:name=".MemoryMonitorService"/>
 

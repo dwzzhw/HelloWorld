@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.Spannable;
@@ -33,7 +34,8 @@ import com.loading.common.utils.Loger;
 import com.loading.common.utils.CommonUtil;
 
 public class UITestActivity extends BaseActivity {
-    private static final String TAG = "UITestActivity";
+    //    private static final String TAG = "UITestActivity";
+    private static final String TAG = "ActivitySwitch_A";
     private EditText testTextView = null;
     private TextView titleTextView = null;
     private CountDownCircleBar mCountingBar = null;
@@ -42,6 +44,7 @@ public class UITestActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Loger.d(TAG, "-->onCreate(): ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ui_test);
 
@@ -112,7 +115,7 @@ public class UITestActivity extends BaseActivity {
     }
 
     private void startConstraintLayoutTest() {
-        Log.i(TAG, "startConstraintLayoutTest()");
+        Loger.d(TAG, "startConstraintLayoutTest()");
         Intent intent = new Intent(this, ConstraintLayoutTestActivity.class);
         startActivity(intent);
     }
@@ -134,6 +137,7 @@ public class UITestActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
+        Loger.d(TAG, "-->onResume(): ");
         super.onResume();
         mCountingBar.startCounting(10);
 
@@ -262,5 +266,47 @@ public class UITestActivity extends BaseActivity {
 //            e.printStackTrace();
 //        }
 //        Log.d(TAG, "long sleep end");
+    }
+
+    @Override
+    protected void onStart() {
+        Loger.d(TAG, "-->onStart(): ");
+        super.onStart();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Loger.d(TAG, "-->onSaveInstanceState(): ");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Loger.d(TAG, "-->onRestoreInstanceState(): ");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Loger.d(TAG, "-->onNewIntent(): ");
+        super.onNewIntent(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        Loger.d(TAG, "-->onPause(): ");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Loger.d(TAG, "-->onStop(): ");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Loger.d(TAG, "-->onDestroy(): ");
+        super.onDestroy();
     }
 }

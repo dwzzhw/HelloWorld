@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sports Test Page" />
+        android:text="RxJava Test Page" />
 
     <TextView
         android:id="@+id/bbs_board"
@@ -21,20 +21,11 @@
         android:layout_below="@id/title" />
 
     <Button
-        android:id="@+id/misc_test_01"
+        android:id="@+id/btn_test_01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bbs_board"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
         android:text="Test 01" />
-
-    <Button
-        android:id="@+id/btn_rxjava"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/misc_test_01"
-        android:layout_marginTop="10dp"
-        android:onClick="onBtnClicked"
-        android:text="RxJava Test" />
 </RelativeLayout>

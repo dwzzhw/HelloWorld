@@ -1,5 +1,6 @@
 package com.example.loading.helloworld.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loading.helloworld.R;
+import com.example.loading.helloworld.activity.misc.RxJavaTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
@@ -47,6 +49,8 @@ public class MiscTestActivity extends BaseActivity {
         if (view.getId() == R.id.misc_test_01) {
 //            doINetTest();
             doEmojoFaceTest();
+        } else if (view.getId() == R.id.btn_rxjava) {
+            enterRxJavaPage();
         }
     }
 
@@ -203,5 +207,10 @@ public class MiscTestActivity extends BaseActivity {
                 bbsBoardView.setText(FaceModuleMgr.convertToSpannableStr(testStr, bbsBoardView));
             }
         }, 2000);
+    }
+
+    private void enterRxJavaPage() {
+        Intent intent = new Intent(this, RxJavaTestActivity.class);
+        startActivity(intent);
     }
 }
