@@ -1,5 +1,6 @@
 package com.example.loading.helloworld.activity.misc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.loading.helloworld.R;
+import com.example.loading.helloworld.activity.MiscTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
 import com.loading.common.widget.TipsToast;
@@ -51,6 +53,7 @@ public class RxJavaTestActivity extends BaseActivity {
         public void onClick(View v) {
             Log.i(TAG, "Title view is clicked");
             TipsToast.getInstance().showTipsText("Title is clicked");
+            startMiscActivity();
         }
     };
 
@@ -59,6 +62,11 @@ public class RxJavaTestActivity extends BaseActivity {
         if (view.getId() == R.id.btn_test_01) {
             doTest01();
         }
+    }
+
+    private void startMiscActivity() {
+        Intent intent = new Intent(this, MiscTestActivity.class);
+        startActivity(intent);
     }
 
     private void initObservableObj() {
@@ -177,7 +185,7 @@ public class RxJavaTestActivity extends BaseActivity {
     private void doTest01() {
         bbsBoardView.setText("doTest01 button is clicked.");
         Observable.zip(mObservable01.subscribeOn(Schedulers.io()), mObservable02.subscribeOn(Schedulers.computation()), new BiFunction<String, String, String>() {
-//        Observable.zip(mObservable01, mObservable02, new BiFunction<String, String, String>() {
+            //        Observable.zip(mObservable01, mObservable02, new BiFunction<String, String, String>() {
             @Override
             public String apply(String s, String s2) {
                 return "zip result=" + s + "__" + s2;

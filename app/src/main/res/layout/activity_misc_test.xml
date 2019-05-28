@@ -27,7 +27,8 @@
         android:layout_below="@id/bbs_board"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="Test 01" />
+        android:text="Test 01"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_rxjava"
@@ -36,5 +37,16 @@
         android:layout_below="@id/misc_test_01"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
-        android:text="RxJava Test" />
+        android:text="RxJava Test"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_rxjava"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="String Test"
+        android:textAllCaps="false" />
 </RelativeLayout>

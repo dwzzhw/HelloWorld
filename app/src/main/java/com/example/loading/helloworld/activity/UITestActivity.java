@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -27,6 +28,8 @@ import com.example.loading.helloworld.MemoryMonitorService;
 import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.SurfaceViewTestActivity;
 import com.example.loading.helloworld.ViewDrawingOrderTestActivity;
+import com.example.loading.helloworld.activity.fragment.MyFragmentA;
+import com.example.loading.helloworld.activity.fragment.MyFragmentB;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
 import com.loading.common.component.BaseActivity;
@@ -96,6 +99,8 @@ public class UITestActivity extends BaseActivity {
             startMemoryService();
         } else if (viewId == R.id.btn_constraint_layout_test) {
             startConstraintLayoutTest();
+        } else if (viewId == R.id.btn_lifecycle) {
+            doFragmentLifeCycleTest();
         }
     }
 
@@ -118,6 +123,21 @@ public class UITestActivity extends BaseActivity {
         Loger.d(TAG, "startConstraintLayoutTest()");
         Intent intent = new Intent(this, ConstraintLayoutTestActivity.class);
         startActivity(intent);
+    }
+
+    private int fragmentCnt = 0;
+
+    private void doFragmentLifeCycleTest() {
+        Loger.d(TAG, "-->doFragmentLifeCycleTest(), fragmentCnt=" + fragmentCnt);
+        if (fragmentCnt == 0) {
+            fragmentCnt++;
+            Fragment fragmentA = new MyFragmentA();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragmentA).commit();
+        } else if (fragmentCnt == 1) {
+            fragmentCnt++;
+            Fragment fragmentB = new MyFragmentB();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentB).commit();
+        }
     }
 
     private void startMemoryService() {

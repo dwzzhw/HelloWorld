@@ -1,10 +1,18 @@
 package com.example.loading.helloworld.activity;
 
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
+import android.app.IntentService;
+import android.app.job.JobService;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,10 +24,18 @@ import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.interfaces.face.FaceModuleMgr;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class MiscTestActivity extends BaseActivity {
     private static final String TAG = "MiscTestActivity";
@@ -51,6 +67,8 @@ public class MiscTestActivity extends BaseActivity {
             doEmojoFaceTest();
         } else if (view.getId() == R.id.btn_rxjava) {
             enterRxJavaPage();
+        } else if (view.getId() == R.id.btn_string) {
+            doStringTest();
         }
     }
 
@@ -209,8 +227,51 @@ public class MiscTestActivity extends BaseActivity {
         }, 2000);
     }
 
+    private void doStringTest() {
+        Loger.d(TAG, "-->doStringTest()");
+        String s0 = "Hello" + "World";
+        String s1 = "HelloWorld";
+        String s2 = "Hello" + new String("World");
+        String s3 = new String("Hello") + "World";
+        String s4 = new String("HelloWorld");
+        Loger.d(TAG, "-->doStringTest: s0==s1?" + (s1 == s0) + ",s1==s2?" + (s1 == s2) + ", s2=s3?" + (s2 == s3) + ", s3=s4?" + (s3 == s4));
+
+    }
+
     private void enterRxJavaPage() {
         Intent intent = new Intent(this, RxJavaTestActivity.class);
         startActivity(intent);
+
+        FutureTask task = new FutureTask(new Callable() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        });
+        new Thread(task).run();
+
+        Object o;
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+//                new ThreadPoolExecutor();
+
+        WeakReference w;
+        SoftReference s;
+        PhantomReference p;
+
+        int f = Intent.FLAG_ACTIVITY_SINGLE_TOP;
+        IntentService i;
+        Handler h;
+        View v;
+        AsyncTask a;
+        LocalBroadcastManager lbm;
+        JobService jobService;
+        ValueAnimator.ofObject(new TypeEvaluator() {
+            @Override
+            public Object evaluate(float fraction, Object startValue, Object endValue) {
+                return null;
+            }
+        }, null);
+        AnimationUtils.loadAnimation(this, 0);
     }
 }
