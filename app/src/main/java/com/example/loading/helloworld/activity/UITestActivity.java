@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -33,8 +32,8 @@ import com.example.loading.helloworld.activity.fragment.MyFragmentB;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
 import com.loading.common.component.BaseActivity;
-import com.loading.common.utils.Loger;
 import com.loading.common.utils.CommonUtil;
+import com.loading.common.utils.Loger;
 
 public class UITestActivity extends BaseActivity {
     //    private static final String TAG = "UITestActivity";
@@ -101,6 +100,8 @@ public class UITestActivity extends BaseActivity {
             startConstraintLayoutTest();
         } else if (viewId == R.id.btn_lifecycle) {
             doFragmentLifeCycleTest();
+        } else if (viewId == R.id.recycler_view_test) {
+            doRecyclerViewTest();
         }
     }
 
@@ -138,6 +139,12 @@ public class UITestActivity extends BaseActivity {
             Fragment fragmentB = new MyFragmentB();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragmentB).commit();
         }
+    }
+
+    private void doRecyclerViewTest() {
+        Loger.d(TAG, "-->doRecyclerViewTest()");
+        Intent intent = new Intent(this, RecyclerViewTestActivity.class);
+        startActivity(intent);
     }
 
     private void startMemoryService() {
