@@ -86,7 +86,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.SortTestActivity"
+            android:name=".activity.misc.SortTestActivity"
             android:configChanges="orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>

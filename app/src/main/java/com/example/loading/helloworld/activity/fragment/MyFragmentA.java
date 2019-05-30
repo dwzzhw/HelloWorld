@@ -55,6 +55,12 @@ public class MyFragmentA extends Fragment {
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Loger.d(TAG, "-->setUserVisibleHint(), isVisibleToUser=" + isVisibleToUser);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         Loger.d(TAG, "-->onResume()");

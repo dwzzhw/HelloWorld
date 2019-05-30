@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.RxJavaTestActivity;
+import com.example.loading.helloworld.activity.misc.SortTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
