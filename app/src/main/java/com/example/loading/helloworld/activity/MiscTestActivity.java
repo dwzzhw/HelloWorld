@@ -35,7 +35,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class MiscTestActivity extends BaseActivity {
     private static final String TAG = "MiscTestActivity";
@@ -69,6 +68,8 @@ public class MiscTestActivity extends BaseActivity {
             enterRxJavaPage();
         } else if (view.getId() == R.id.btn_string) {
             doStringTest();
+        } else if (view.getId() == R.id.btn_order) {
+            enterOrderTestPage();
         }
     }
 
@@ -236,6 +237,11 @@ public class MiscTestActivity extends BaseActivity {
         String s4 = new String("HelloWorld");
         Loger.d(TAG, "-->doStringTest: s0==s1?" + (s1 == s0) + ",s1==s2?" + (s1 == s2) + ", s2=s3?" + (s2 == s3) + ", s3=s4?" + (s3 == s4));
 
+    }
+
+    private void enterOrderTestPage() {
+        Intent intent = new Intent(this, SortTestActivity.class);
+        startActivity(intent);
     }
 
     private void enterRxJavaPage() {

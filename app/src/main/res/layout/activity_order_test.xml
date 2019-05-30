@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="20dp"
+              android:paddingTop="20dp"
+              tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Test Page"/>
+
+    <EditText
+        android:id="@+id/input_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:hint="input int list like: 8,7,6,5,4,3,2,1 "/>
+
+    <TextView
+        android:id="@+id/output_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="Ordered result:"/>
+
+    <Button
+        android:id="@+id/btn_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onBtnClicked"
+        android:text="Bubble"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_merge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onBtnClicked"
+        android:text="Merge"
+        android:textAllCaps="false"/>
+
+</LinearLayout>
