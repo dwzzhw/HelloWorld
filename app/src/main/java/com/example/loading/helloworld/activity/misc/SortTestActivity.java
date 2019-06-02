@@ -216,16 +216,6 @@ public class SortTestActivity extends BaseActivity {
             swapOrder(arr, 0, j);
             adjustHeap(arr, 0, j);
         }
-
-        for (int gap = len / 2; gap > 0; gap = gap / 2) {
-            for (int i = gap; i < len; i++) {
-                int j = i;
-                while (j >= gap && arr[j] < arr[j - gap]) {
-                    swapOrder(arr, j, j - gap);
-                    j -= gap;
-                }
-            }
-        }
         long costTime = System.nanoTime() - startTime;
         Loger.d(TAG, "-->doHeapSort(), cost time=" + costTime + " ns");
         return costTime;
@@ -237,7 +227,7 @@ public class SortTestActivity extends BaseActivity {
             if (j + 1 < len && arr[j] < arr[j + 1]) {
                 j++;
             }
-            if (arr[i] < arr[j]) {
+            if (arr[j] > temp) {
                 arr[i] = arr[j];
                 i = j;
             } else {

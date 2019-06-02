@@ -10,6 +10,7 @@ import com.loading.modules.interfaces.face.IFaceService;
 import com.loading.comp.commentbar.CommentPanelManager;
 import com.loading.comp.download.DownloadModuleService;
 import com.loading.comp.face.FaceManager;
+import com.squareup.leakcanary.LeakCanary;
 
 public class ShellApplication extends Application {
     private static final String TAG = "ShellApplication";
@@ -20,6 +21,7 @@ public class ShellApplication extends Application {
         CApplication.onAppCreate(this);
 
         initDynamicModules();
+        LeakCanary.install(this);
     }
 
     private void initDynamicModules() {
