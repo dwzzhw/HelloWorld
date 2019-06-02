@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.RxJavaTestActivity;
 import com.example.loading.helloworld.activity.misc.SortTestActivity;
+import com.example.loading.helloworld.ipc.BookManagerActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
@@ -71,6 +72,8 @@ public class MiscTestActivity extends BaseActivity {
             doStringTest();
         } else if (view.getId() == R.id.btn_order) {
             enterOrderTestPage();
+        } else if (view.getId() == R.id.btn_ipc) {
+            enterIpcTestPage();
         }
     }
 
@@ -245,6 +248,11 @@ public class MiscTestActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    private void enterIpcTestPage() {
+        Intent intent = new Intent(this, BookManagerActivity.class);
+        startActivity(intent);
+    }
+
     private void enterRxJavaPage() {
         Intent intent = new Intent(this, RxJavaTestActivity.class);
         startActivity(intent);
@@ -256,29 +264,5 @@ public class MiscTestActivity extends BaseActivity {
             }
         });
         new Thread(task).run();
-
-        Object o;
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-//                new ThreadPoolExecutor();
-
-        WeakReference w;
-        SoftReference s;
-        PhantomReference p;
-
-        int f = Intent.FLAG_ACTIVITY_SINGLE_TOP;
-        IntentService i;
-        Handler h;
-        View v;
-        AsyncTask a;
-        LocalBroadcastManager lbm;
-        JobService jobService;
-        ValueAnimator.ofObject(new TypeEvaluator() {
-            @Override
-            public Object evaluate(float fraction, Object startValue, Object endValue) {
-                return null;
-            }
-        }, null);
-        AnimationUtils.loadAnimation(this, 0);
     }
 }
