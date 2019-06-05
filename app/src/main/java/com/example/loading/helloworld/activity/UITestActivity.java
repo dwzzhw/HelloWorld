@@ -20,6 +20,7 @@ import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.loading.helloworld.CountDownCircleBar;
@@ -40,6 +41,7 @@ public class UITestActivity extends BaseActivity {
     private static final String TAG = "ActivitySwitch_A";
     private EditText testTextView = null;
     private TextView titleTextView = null;
+    private ImageView mImageView;
     private CountDownCircleBar mCountingBar = null;
 
     int cnt = 0;
@@ -64,6 +66,7 @@ public class UITestActivity extends BaseActivity {
 //        });
         testTextView = (EditText) findViewById(R.id.text_test);
         titleTextView = (TextView) findViewById(R.id.title);
+        mImageView = findViewById(R.id.img_view);
         titleTextView.setOnClickListener(mTitleClickListener);
 
         mCountingBar.setOnClickListener(mClickListener);
@@ -167,7 +170,7 @@ public class UITestActivity extends BaseActivity {
         Loger.d(TAG, "-->onResume(): ");
         super.onResume();
         mCountingBar.startCounting(10);
-
+        loadRoundCornerBitmapWith565();
 
 //        mCountingBar.postDelayed(new Runnable() {
 //            @Override
@@ -295,10 +298,43 @@ public class UITestActivity extends BaseActivity {
 //        Log.d(TAG, "long sleep end");
     }
 
+    private void loadRoundCornerBitmapWith565() {
+        BitmapFactory.Options optionsA565 = new BitmapFactory.Options();
+        optionsA565.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        BitmapFactory.Options options565 = new BitmapFactory.Options();
+        options565.inPreferredConfig = Bitmap.Config.RGB_565;
+
+        BitmapFactory.Options options888 = new BitmapFactory.Options();
+//        options888.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        Bitmap roundCornerBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher, optionsA565);
+        mImageView.setImageBitmap(roundCornerBitmap);
+
+        Bitmap bitmap565 = BitmapFactory.decodeResource(getResources(), R.drawable.medium_img, options565);
+        Bitmap bitmap888 = BitmapFactory.decodeResource(getResources(), R.drawable.medium_img, options888);
+//        Bitmap bitmap565 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher, options565);
+//        Bitmap bitmap888 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher, options888);
+        Loger.d(TAG, "-->loadRoundCornerBitmapWith565(), [w,h]=[" + bitmap565.getWidth() + ", " + bitmap565.getHeight()
+                + "] 565 byte cnt=" + bitmap565.getByteCount()
+                + ", allocated cnt=" + bitmap565.getAllocationByteCount());
+        Loger.d(TAG, "-->loadRoundCornerBitmapWith565(), [w,h]=[" + bitmap888.getWidth() + ", " + bitmap888.getHeight() +
+                "] 8888 byte cnt=" + bitmap888.getByteCount()
+                + ", allocated cnt=" + bitmap888.getAllocationByteCount());
+        Loger.d(TAG, "-->loadRoundCornerBitmapWith565(), [w,h]=[" + roundCornerBitmap.getWidth() + ", " + roundCornerBitmap.getHeight()
+                + "], alpha byte cnt=" + roundCornerBitmap.getByteCount()
+                + ", allocated cnt=" + roundCornerBitmap.getAllocationByteCount());
+    }
+
     @Override
     protected void onStart() {
         Loger.d(TAG, "-->onStart(): ");
         super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        Loger.d(TAG, "-->onRestart(): ");
+        super.onRestart();
     }
 
     @Override
