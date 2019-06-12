@@ -1,18 +1,10 @@
 package com.example.loading.helloworld.activity;
 
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
-import android.app.IntentService;
-import android.app.job.JobService;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +18,11 @@ import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.modules.interfaces.face.FaceModuleMgr;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 public class MiscTestActivity extends BaseActivity {
@@ -57,7 +44,8 @@ public class MiscTestActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Log.i(TAG, "Title view is clicked");
-            doINetTest();
+//            doINetTest();
+            doTryCatchTest();
         }
     };
 
@@ -91,6 +79,34 @@ public class MiscTestActivity extends BaseActivity {
                     }
                 }
         );
+    }
+
+    private void doTryCatchTest() {
+        Loger.d(TAG, "-->doTryCatchTest(), result=" + getTryCatchResult());
+
+        int a = 10;
+        Integer b = 10;
+        Integer c = new Integer(10);
+        Loger.d(TAG, "-->Integer test(), int10==Integer10?" + (a == b)
+                + ",\n AutoInteger(10)==new Integer10?" + (b == c)
+                + ", \nint10==new Integer10?" + (a == c));
+    }
+
+    private String getTryCatchResult() {
+        String result = "Init";
+        try {
+            result += " try ";
+            Loger.d(TAG, "-->before try return");
+            return result = result + " return1 ";
+        } catch (Exception e) {
+            result += " catch";
+            return result = result + " return2 ";
+        } finally {
+            result += " finally";
+            Loger.d(TAG, "-->before finally return");
+            return result = result + " return3 ";
+        }
+
     }
 
     private void doBinarySearch() {
