@@ -21,7 +21,7 @@ public class ShellApplication extends Application {
         CApplication.onAppCreate(this);
 
         initDynamicModules();
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
     }
 
     private void initDynamicModules() {
