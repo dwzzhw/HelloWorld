@@ -2,15 +2,20 @@ package com.example.loading.helloworld.activity;
 
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.app.ActivityManager;
 import android.app.IntentService;
 import android.app.job.JobService;
+import android.content.Context;
 import android.content.Intent;
+import android.opengl.GLSurfaceView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
@@ -24,6 +29,7 @@ import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.UiThreadUtil;
+import com.loading.common.widget.TipsToast;
 import com.loading.modules.interfaces.face.FaceModuleMgr;
 
 import java.lang.ref.PhantomReference;
@@ -31,8 +37,11 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.PriorityQueue;
+import java.util.Stack;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -58,6 +67,8 @@ public class MiscTestActivity extends BaseActivity {
         public void onClick(View v) {
             Log.i(TAG, "Title view is clicked");
             doINetTest();
+            printMemoryInfo();
+            doMiscTest();
         }
     };
 
@@ -265,4 +276,30 @@ public class MiscTestActivity extends BaseActivity {
         });
         new Thread(task).run();
     }
+
+    private void printMemoryInfo() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        int memoryClass = activityManager.getMemoryClass();
+
+        long maxMemoryFromRun = Runtime.getRuntime().maxMemory();
+        long totalMemoryFromRun = Runtime.getRuntime().totalMemory();
+        long freeMemoryFromRun = Runtime.getRuntime().freeMemory();
+        Loger.d(TAG, "-->printMemoryInfo(), memory class=" + memoryClass
+                + ", runtime memory max=" + maxMemoryFromRun
+                + ", total=" + totalMemoryFromRun
+                + ", free=" + freeMemoryFromRun);
+        TipsToast.getInstance().showTipsText("memory class=" + memoryClass
+                + ", runtime memory max=" + maxMemoryFromRun / 1024 / 1024);
+    }
+
+    private void doMiscTest() {
+        Loger.d(TAG, "-->doMiscTest(), ");
+
+        int a = (1 << 31);
+        int b = Math.abs(a);
+        TipsToast.getInstance().showTipsText("Math.abs(" + a + ") is " + b);
+        Loger.d(TAG, "-->doMiscTest(), a=" + a + ", b=" + b);
+
+    }
+
 }
