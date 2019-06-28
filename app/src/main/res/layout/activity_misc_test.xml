@@ -68,4 +68,13 @@
         android:onClick="onBtnClicked"
         android:text="IPC Test"
         android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_kotlin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Kotlin Test"
+        android:textAllCaps="false"/>
 </LinearLayout>

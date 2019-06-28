@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //apply plugin: 'com.android.application'
 
 buildscript {
@@ -47,6 +49,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 class MyGroovyPlugin implements Plugin<Project> {
@@ -63,3 +66,6 @@ class MyGroovyPlugin implements Plugin<Project> {
 }
 
 apply plugin: MyGroovyPlugin
+repositories {
+    mavenCentral()
+}

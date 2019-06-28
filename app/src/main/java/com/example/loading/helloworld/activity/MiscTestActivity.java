@@ -14,6 +14,7 @@ import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.RxJavaTestActivity;
 import com.example.loading.helloworld.activity.misc.SortTestActivity;
 import com.example.loading.helloworld.ipc.BookManagerActivity;
+import com.example.loading.helloworld.mykotlin.ui.HelloKotlinActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
@@ -67,6 +68,8 @@ public class MiscTestActivity extends BaseActivity {
             enterOrderTestPage();
         } else if (view.getId() == R.id.btn_ipc) {
             enterIpcTestPage();
+        } else if (view.getId() == R.id.btn_kotlin) {
+            enterKotlinTestPage();
         }
     }
 
@@ -272,6 +275,12 @@ public class MiscTestActivity extends BaseActivity {
     private void enterIpcTestPage() {
         Intent intent = new Intent(this, BookManagerActivity.class);
         startActivity(intent);
+    }
+
+    private void enterKotlinTestPage() {
+        HelloKotlinActivity.Companion.startActivity(this);
+//        Intent intent = new Intent(this, HelloKotlinActivity.class);
+//        startActivity(intent);
     }
 
     private void enterRxJavaPage() {
