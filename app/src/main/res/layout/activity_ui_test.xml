@@ -78,10 +78,20 @@
         android:textAllCaps="false"/>
 
     <Button
-        android:id="@+id/btn_lifecycle"
+        android:id="@+id/btn_coordinator_layout_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_constraint_layout_test"
+        android:layout_marginTop="2dp"
+        android:onClick="onBtnClicked"
+        android:text="Coordinator Layout Test"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_lifecycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_coordinator_layout_test"
         android:layout_marginTop="2dp"
         android:onClick="onBtnClicked"
         android:text="Fragment lifecycle Test"

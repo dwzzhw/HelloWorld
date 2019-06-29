@@ -31,6 +31,7 @@ import com.example.loading.helloworld.ViewDrawingOrderTestActivity;
 import com.example.loading.helloworld.activity.fragment.MyFragmentA;
 import com.example.loading.helloworld.activity.fragment.MyFragmentB;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
+import com.example.loading.helloworld.mykotlin.ui.CoordinatorLayoutActivity;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.CommonUtil;
@@ -105,6 +106,8 @@ public class UITestActivity extends BaseActivity {
             doFragmentLifeCycleTest();
         } else if (viewId == R.id.recycler_view_test) {
             doRecyclerViewTest();
+        } else if (viewId == R.id.btn_coordinator_layout_test) {
+            startCoordinatorLayoutTest();
         }
     }
 
@@ -127,6 +130,11 @@ public class UITestActivity extends BaseActivity {
         Loger.d(TAG, "startConstraintLayoutTest()");
         Intent intent = new Intent(this, ConstraintLayoutTestActivity.class);
         startActivity(intent);
+    }
+
+    private void startCoordinatorLayoutTest() {
+        Loger.d(TAG, "startCoordinatorLayoutTest()");
+        CoordinatorLayoutActivity.Companion.startActivity(this);
     }
 
     private int fragmentCnt = 0;

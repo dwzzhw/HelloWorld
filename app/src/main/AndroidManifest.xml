@@ -97,6 +97,11 @@
             android:name=".mykotlin.ui.HelloKotlinActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
+        
+        <activity
+            android:name=".mykotlin.ui.CoordinatorLayoutActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
         <service android:name=".MemoryMonitorService" />
 
