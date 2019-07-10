@@ -32,7 +32,7 @@ buildscript {
         maven {
             url 'https://maven.google.com'
         }
-        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
+//        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
     }
@@ -54,7 +54,7 @@ allprojects {
         maven {
             url 'https://maven.google.com'
         }
-        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
+//        maven { url 'http://mirrors.163.com/maven/repository/maven-public/' }
         jcenter()
         google()
     }
