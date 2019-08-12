@@ -13,7 +13,7 @@ import com.example.loading.helloworld.activity.UITestActivity;
 import com.example.loading.helloworld.download.SocketClientActivity;
 import com.example.loading.helloworld.download.SocketServerActivity;
 import com.loading.common.utils.Loger;
-import com.loading.flutterbridge.demo.FlutterTestActivity;
+//import com.loading.flutterbridge.demo.FlutterTestActivity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -67,7 +67,8 @@ public class MainActivity extends Activity {
         } else if (viewId == R.id.btn_misc_test) {
             targetClass = MiscTestActivity.class;
         } else if (viewId == R.id.bnt_open_flutter_page) {
-            targetClass = FlutterTestActivity.class;
+            //dwz test, disable flutter
+//            targetClass = FlutterTestActivity.class;
         }
         if (targetClass != null) {
             Log.d(TAG, "onBtnClicked: target class=" + targetClass);

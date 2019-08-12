@@ -13,7 +13,7 @@ buildscript {
         classpath 'com.loading.build.test.plugin:mygroovy:1.0.0'
     }
 }
-apply plugin: 'plugin.test'
+//apply plugin: 'plugin.test'
 
 android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
@@ -40,7 +40,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':robustgson_2.8')
     implementation project(':lib_common')
-    implementation project(':lib_flutter_bridge')
+    //dwz test, disable flutter
+//    implementation project(':lib_flutter_bridge')
     implementation project(':lib_router')
     implementation deps.design
     implementation deps.constraint
@@ -56,7 +57,7 @@ class MyGroovyPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.task('aInnerPluginTask') << {
+        project.task('aInnerPluginTask') {
             println 'hello, world 123!'
 
             def file = new File("abc")
@@ -66,6 +67,7 @@ class MyGroovyPlugin implements Plugin<Project> {
 }
 
 apply plugin: MyGroovyPlugin
+
 repositories {
     mavenCentral()
 }

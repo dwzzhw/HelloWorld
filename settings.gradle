@@ -1,6 +1,7 @@
 include ':app_shell'
 include ':app'
-include ':lib_flutter_bridge'
+//dwz tset
+//include ':lib_flutter_bridge'
 include ':robustgson_2.8'
 include ':mygroovy'
 
@@ -13,8 +14,9 @@ include ':lib_common'
 include ':lib_router'
 include ':lib_compiler'
 
-setBinding(new Binding([gradle: this]))                                 // new
-evaluate(new File(                                                      // new
-        ".",                                               // new
-        'lib_flutter/.android/include_flutter.groovy'                          // new
-))
+//dwz test, disable flutter
+//setBinding(new Binding([gradle: this]))                                 // new
+//evaluate(new File(                                                      // new
+//        ".",                                               // new
+//        'lib_flutter/.android/include_flutter.groovy'                          // new
+//))
