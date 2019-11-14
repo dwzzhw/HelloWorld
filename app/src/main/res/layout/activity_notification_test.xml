@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="Notification related Test Page" />
+
+    <Button
+        android:id="@+id/show_common_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Normal" />
+
+    <Button
+        android:id="@+id/show_large_pic_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_common_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Large Pic" />
+
+    <Button
+        android:id="@+id/show_progress_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_large_pic_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Progress" />
+
+    <Button
+        android:id="@+id/show_full_screen_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_progress_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="FullScreen" />
+
+    <Button
+        android:id="@+id/show_small_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_full_screen_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Small Custom" />
+
+    <Button
+        android:id="@+id/show_large_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_small_custom_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Large Custom" />
+
+    <Button
+        android:id="@+id/show_both_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_large_custom_notification"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Both Custom" />
+</RelativeLayout>

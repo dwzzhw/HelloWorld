@@ -108,6 +108,8 @@ public class UITestActivity extends BaseActivity {
             doRecyclerViewTest();
         } else if (viewId == R.id.btn_coordinator_layout_test) {
             startCoordinatorLayoutTest();
+        } else if (viewId == R.id.notification_test) {
+            startNotificationTestPage();
         }
     }
 
@@ -129,6 +131,12 @@ public class UITestActivity extends BaseActivity {
     private void startConstraintLayoutTest() {
         Loger.d(TAG, "startConstraintLayoutTest()");
         Intent intent = new Intent(this, ConstraintLayoutTestActivity.class);
+        startActivity(intent);
+    }
+
+    private void startNotificationTestPage() {
+        Loger.d(TAG, "startNotificationTestPage()");
+        Intent intent = new Intent(this, NotificationTestActivity.class);
         startActivity(intent);
     }
 

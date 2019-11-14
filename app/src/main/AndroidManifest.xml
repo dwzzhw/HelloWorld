@@ -77,6 +77,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".activity.NotificationTestActivity"
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activity.MiscTestActivity"
             android:configChanges="orientation"
             android:launchMode="singleTask"
@@ -97,7 +103,7 @@
             android:name=".mykotlin.ui.HelloKotlinActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        
+
         <activity
             android:name=".mykotlin.ui.CoordinatorLayoutActivity"
             android:configChanges="orientation"
