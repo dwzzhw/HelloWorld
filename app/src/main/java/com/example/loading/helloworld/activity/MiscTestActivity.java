@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.RxJavaTestActivity;
 import com.example.loading.helloworld.activity.misc.SortTestActivity;
+import com.example.loading.helloworld.activity.misc.StorageTester;
 import com.example.loading.helloworld.ipc.BookManagerActivity;
 import com.example.loading.helloworld.mykotlin.ui.HelloKotlinActivity;
 import com.loading.common.component.BaseActivity;
@@ -70,6 +71,8 @@ public class MiscTestActivity extends BaseActivity {
             enterIpcTestPage();
         } else if (view.getId() == R.id.btn_kotlin) {
             enterKotlinTestPage();
+        } else if (view.getId() == R.id.btn_storage) {
+            doStorageTest();
         }
     }
 
@@ -281,6 +284,11 @@ public class MiscTestActivity extends BaseActivity {
         HelloKotlinActivity.Companion.startActivity(this);
 //        Intent intent = new Intent(this, HelloKotlinActivity.class);
 //        startActivity(intent);
+    }
+
+    private void doStorageTest() {
+        Loger.d(TAG, "-->doStorageTest()");
+        new StorageTester().getExternalSDCardPath(this);
     }
 
     private void enterRxJavaPage() {
