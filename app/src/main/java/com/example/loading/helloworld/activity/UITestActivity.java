@@ -110,6 +110,8 @@ public class UITestActivity extends BaseActivity {
             startCoordinatorLayoutTest();
         } else if (viewId == R.id.notification_test) {
             startNotificationTestPage();
+        }else if (viewId == R.id.webview_test) {
+            startWebViewTestPage();
         }
     }
 
@@ -137,6 +139,12 @@ public class UITestActivity extends BaseActivity {
     private void startNotificationTestPage() {
         Loger.d(TAG, "startNotificationTestPage()");
         Intent intent = new Intent(this, NotificationTestActivity.class);
+        startActivity(intent);
+    }
+
+    private void startWebViewTestPage() {
+        Loger.d(TAG, "startWebViewTestPage()");
+        Intent intent = new Intent(this, WebViewTestActivity.class);
         startActivity(intent);
     }
 
