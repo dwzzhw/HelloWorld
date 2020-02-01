@@ -21,7 +21,9 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -61,6 +63,8 @@ public class RxJavaTestActivity extends BaseActivity {
         Loger.d(TAG, "-->onBtnClicked()");
         if (view.getId() == R.id.btn_test_01) {
             doTest01();
+        } else if (view.getId() == R.id.btn_filter) {
+            doFilterTest();
         }
     }
 
@@ -203,5 +207,47 @@ public class RxJavaTestActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
 //                .observeOn(Schedulers.computation())
                 .subscribe(mObserver01);
+    }
+
+    private void doFilterTest() {
+        Loger.d(TAG, "-->doFilterTest(): ");
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+            }
+        }).filter(i -> i != 2).flatMap(new Function<Integer, ObservableSource<Integer>>() {
+            @Override
+            public ObservableSource<Integer> apply(Integer integer) throws Exception {
+                return Observable.just(integer * 10);
+            }
+        }).filter(new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) throws Exception {
+                return integer != 10;
+            }
+        }).doOnNext(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Loger.d(TAG, "doOnNext()-->accept(): value=" + integer);
+            }
+        }).filter(new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) throws Exception {
+                return integer != 30;
+            }
+        }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Loger.d(TAG, "Consumer.onNext()-->accept(): value=" + integer);
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Loger.d(TAG, "Consumer.onError()-->accept(): throwable=" + throwable);
+            }
+        });
     }
 }

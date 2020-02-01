@@ -28,4 +28,15 @@
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
         android:text="Test 01" />
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_test_01"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:textAllCaps="false"
+        android:text="Filter Test" />
+
 </RelativeLayout>
