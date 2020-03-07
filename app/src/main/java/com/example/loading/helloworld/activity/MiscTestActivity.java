@@ -3,6 +3,7 @@ package com.example.loading.helloworld.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -30,6 +31,8 @@ import java.util.LinkedHashSet;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
+import miui.browser.core.ShareMemoryController;
+
 public class MiscTestActivity extends BaseActivity {
     private static final String TAG = "MiscTestActivity";
     private TextView titleTextView = null;
@@ -53,6 +56,8 @@ public class MiscTestActivity extends BaseActivity {
             doMiscTest();
 //            doINetTest();
             doTryCatchTest();
+            doReflectArrayTest();
+            doShareMemoryTest();
         }
     };
 
@@ -73,6 +78,8 @@ public class MiscTestActivity extends BaseActivity {
             enterKotlinTestPage();
         } else if (view.getId() == R.id.btn_storage) {
             doStorageTest();
+        } else if (view.getId() == R.id.btn_mibrowser) {
+            startMiBrowser();
         }
     }
 
@@ -329,4 +336,67 @@ public class MiscTestActivity extends BaseActivity {
 
     }
 
+    private void doReflectArrayTest() {
+        try {
+            Class intArray = Class.forName("[I");
+            Class strArray = Class.forName("[Ljava.lang.String;");
+            Class activityArray = Class.forName("[Landroid.app.Activity;");
+            Loger.d(TAG, "-->doMiscTest(), intArray class=" + intArray + ", comp type=" + intArray.getComponentType()
+                    + ", strArray class=" + strArray + ", comp type=" + strArray.getComponentType()
+                    + ", activityArray class=" + activityArray + ", comp type=" + activityArray.getComponentType());
+        } catch (ClassNotFoundException e) {
+            Loger.w(TAG, "-->fail parse array, ", e);
+            e.printStackTrace();
+        }
+    }
+
+    private void doShareMemoryTest() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10000; i++) {
+                    String key = ShareMemoryController.writeData(MiscTestActivity.this, new MyCard(2 * i));
+                    MyCard result = ShareMemoryController.readData(MiscTestActivity.this, key);
+                    Loger.d(TAG, "-->doShareMemoryTest(), index=" + i + ", result=" + result.mIndex);
+                    if (2 * i != result.mIndex) {
+                        Loger.w(TAG, "-->doShareMemoryTest(), found error, index=" + i + ", result=" + result.mIndex);
+                    }
+                }
+            }
+        }).start();
+
+        for (int i = 0; i < 10000; i++) {
+            String key = ShareMemoryController.writeData(this, new MyCard(i));
+            MyCard result = ShareMemoryController.readData(this, key);
+            Loger.d(TAG, "-->doShareMemoryTest(), index=" + i + ", result=" + result.mIndex);
+            if (i != result.mIndex) {
+                Loger.w(TAG, "-->doShareMemoryTest(), found error, index=" + i + ", result=" + result.mIndex);
+            }
+        }
+    }
+
+    private void startMiBrowser() {
+        Loger.d(TAG, "-->startMiBrowser: ");
+//        String url1 = "mibrowser://home?web_url=https%3A%2F%2Fm.ifeng.com%2FmiArticle%3Fch%3Dref_xmllq_hz1%26version%3D2%26aid%3Ducms_7uCj51705PY%26mibusinessId%3Dnewhome%26mibusinessId%3Dxiangkan%26env%3Dproduction%26docid%3Dfenghuang_ucms_7uCj51705PY%26cp%3Dcn-fenghuang%26itemtype%3Dnews%26miref%3Dnewsout_quicksearchbox_news%26_miui_bottom_bar%3Dcomment%26_miui_fullscreen%3D1%26s%3Dmb";
+//        String url2 = "mibrowser://infoflow?first_launch_web=true&web_url=https%3A%2F%2Fm.ifeng.com%2FmiArticle%3Fch%3Dref_xmllq_hz1%26version%3D2%26aid%3Ducms_7uCj51705PY%26mibusinessId%3Dnewhome%26mibusinessId%3Dxiangkan%26env%3Dproduction%26docid%3Dfenghuang_ucms_7uCj51705PY%26cp%3Dcn-fenghuang%26itemtype%3Dnews%26miref%3Dnewsout_quicksearchbox_news%26_miui_bottom_bar%3Dcomment%26_miui_fullscreen%3D1%26s%3Dmb%26infotype%3D1";
+//        String url3 = "https://m.ifeng.com/miArticle?ch=ref_xmllq_hz1&version=2&aid=ucms_7uCj51705PY&mibusinessId=newhome&mibusinessId=xiangkan&env=production&docid=fenghuang_ucms_7uCj51705PY&cp=cn-fenghuang&itemtype=news&miref=newsout_quicksearchbox_news&_miui_bottom_bar=comment&_miui_fullscreen=1&s=mb";
+        String url4 = "https://m.ifeng.com/miArticle?ch=ref_xmllq_hz1&version=2&aid=ucms_7uCj51705PY"
+                +"&docid=fenghuang_ucms_7uCj51705PY&cp=cn-fenghuang&itemtype=news"
+//                +"&mibusinessId=newhome&mibusinessId=xiangkan&env=production"
+//                +"&miref=newsout_quicksearchbox_news&_miui_bottom_bar=comment&_miui_fullscreen=1&s=mb"
+                ;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url4));
+        intent.setPackage("com.android.browser.debug");
+        startActivity(intent);
+    }
+
+    private static class MyCard {
+        public int mIndex;
+
+        public MyCard(int index) {
+            mIndex = index;
+        }
+    }
 }

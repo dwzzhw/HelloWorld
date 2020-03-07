@@ -86,4 +86,13 @@
         android:onClick="onBtnClicked"
         android:text="Storage Test"
         android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_mibrowser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Start Mi Browser"
+        android:textAllCaps="false"/>
 </LinearLayout>

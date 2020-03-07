@@ -51,6 +51,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.0.5"
 }
 
 class MyGroovyPlugin implements Plugin<Project> {
