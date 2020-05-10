@@ -146,11 +146,22 @@
                 android:text="Web View Test"
                 android:textAllCaps="false" />
 
+
+            <Button
+                android:id="@+id/base_comp_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/webview_test"
+                android:layout_marginTop="2dp"
+                android:onClick="onBtnClicked"
+                android:text="Base View Test"
+                android:textAllCaps="false" />
+
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@+id/webview_test"
+                android:layout_below="@+id/base_comp_test"
                 android:layout_marginTop="20dp"
                 android:background="#22ff0000" />
 

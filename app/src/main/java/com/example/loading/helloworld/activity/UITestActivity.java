@@ -30,6 +30,7 @@ import com.example.loading.helloworld.SurfaceViewTestActivity;
 import com.example.loading.helloworld.ViewDrawingOrderTestActivity;
 import com.example.loading.helloworld.activity.fragment.MyFragmentA;
 import com.example.loading.helloworld.activity.fragment.MyFragmentB;
+import com.example.loading.helloworld.activity.ui.BaseUIComponentTestActivity;
 import com.example.loading.helloworld.lottie.LottieTestActivity;
 import com.example.loading.helloworld.mykotlin.ui.CoordinatorLayoutActivity;
 import com.example.loading.helloworld.view.CustomizedTextDrawable;
@@ -112,6 +113,8 @@ public class UITestActivity extends BaseActivity {
             startNotificationTestPage();
         }else if (viewId == R.id.webview_test) {
             startWebViewTestPage();
+        }else if (viewId == R.id.base_comp_test) {
+            startBaseViewTestPage();
         }
     }
 
@@ -145,6 +148,12 @@ public class UITestActivity extends BaseActivity {
     private void startWebViewTestPage() {
         Loger.d(TAG, "startWebViewTestPage()");
         Intent intent = new Intent(this, WebViewTestActivity.class);
+        startActivity(intent);
+    }
+
+    private void startBaseViewTestPage() {
+        Loger.d(TAG, "startBaseViewTestPage()");
+        Intent intent = new Intent(this, BaseUIComponentTestActivity.class);
         startActivity(intent);
     }
 

@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Base UI Comp Test Page" />
+
+    <Button
+        android:id="@+id/btn_long_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="20dp"
+        android:onClick="onBtnClicked"
+        android:text="Long Text"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_middle_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/btn_long_content"
+        android:onClick="onBtnClicked"
+        android:text="Medium Text"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_short_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/btn_middle_content"
+        android:onClick="onBtnClicked"
+        android:text="Short Text"
+        android:textAllCaps="false" />
+
+    <TextView xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/photo_content_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="#80111111"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:lineSpacingMultiplier="1.1"
+        android:maxHeight="125dp"
+        android:padding="6dp"
+        android:textColor="@color/app_fg_color"
+        android:textSize="14dp"
+        android:visibility="visible"
+        tools:text="Hello world" />
+</RelativeLayout>
