@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,8 @@ public class MiscTestActivity extends BaseActivity {
     private static final String TAG = "MiscTestActivity";
     private TextView titleTextView = null;
     private TextView bbsBoardView;
+    private CheckBox mMibrowserDebugSwitch;
+    private EditText mMibrowserUrl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class MiscTestActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title);
         titleTextView.setOnClickListener(mTitleClickListener);
         bbsBoardView = findViewById(R.id.bbs_board);
+        mMibrowserDebugSwitch = findViewById(R.id.mibrowser_debug);
+        mMibrowserUrl = findViewById(R.id.mibrowser_url);
     }
 
     private View.OnClickListener mTitleClickListener = new View.OnClickListener() {
@@ -424,6 +430,9 @@ public class MiscTestActivity extends BaseActivity {
 
     private void startMiBrowser() {
         Loger.d(TAG, "-->startMiBrowser: ");
+        boolean useDebugPackage = mMibrowserDebugSwitch.isChecked();
+        String url = mMibrowserUrl.getText().toString();
+
 //        String url1 = "mibrowser://home?web_url=https%3A%2F%2Fm.ifeng.com%2FmiArticle%3Fch%3Dref_xmllq_hz1%26version%3D2%26aid%3Ducms_7uCj51705PY%26mibusinessId%3Dnewhome%26mibusinessId%3Dxiangkan%26env%3Dproduction%26docid%3Dfenghuang_ucms_7uCj51705PY%26cp%3Dcn-fenghuang%26itemtype%3Dnews%26miref%3Dnewsout_quicksearchbox_news%26_miui_bottom_bar%3Dcomment%26_miui_fullscreen%3D1%26s%3Dmb";
 //        String url2 = "mibrowser://infoflow?first_launch_web=true&web_url=https%3A%2F%2Fm.ifeng.com%2FmiArticle%3Fch%3Dref_xmllq_hz1%26version%3D2%26aid%3Ducms_7uCj51705PY%26mibusinessId%3Dnewhome%26mibusinessId%3Dxiangkan%26env%3Dproduction%26docid%3Dfenghuang_ucms_7uCj51705PY%26cp%3Dcn-fenghuang%26itemtype%3Dnews%26miref%3Dnewsout_quicksearchbox_news%26_miui_bottom_bar%3Dcomment%26_miui_fullscreen%3D1%26s%3Dmb%26infotype%3D1";
 //        String url3 = "https://m.ifeng.com/miArticle?ch=ref_xmllq_hz1&version=2&aid=ucms_7uCj51705PY&mibusinessId=newhome&mibusinessId=xiangkan&env=production&docid=fenghuang_ucms_7uCj51705PY&cp=cn-fenghuang&itemtype=news&miref=newsout_quicksearchbox_news&_miui_bottom_bar=comment&_miui_fullscreen=1&s=mb";
@@ -434,7 +443,7 @@ public class MiscTestActivity extends BaseActivity {
         ;
 
         String url4 = "mibrowser://infoflow?channel=game&miref=12345";  //游戏频道
-        String url5 = "mibrowser://infoflow?channel=videos";  //视频频道
+        String url5 = "mibrowser://infoflow?channel=shortVideo";  //小视频频道
         String url51 = "mibrowser://infoflow?channel=rec&miref=xiaoai";  //视频频道
         String url6 = "mibrowser://video";   //底部视频tab
         String url7 = "mibrowser://video/videoHome_boba";   //底部视频tab，  播吧页卡
@@ -453,8 +462,14 @@ public class MiscTestActivity extends BaseActivity {
         String url19 = "mibrowser://infoflow?web_url=https%3A%2F%2Fapp.myzaker.com%2Fnews%2Farticle.php%3Ff%3Dxiaomi%26pk%3D5e9eabec1bc8e02849000182%26version%3D2%26mibusinessId%3Dxiangkan%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dzaker_5e9eabec1bc8e02849000182%26cp%3Dcn-zaker-browser%26itemtype%3Dnews&first_launch_web=true&channel=%E6%8E%A8%E8%8D%90#miui_back_info=0&_miui_fullscreen=1&utm_source=xmpush&utm_campaign=2020-04-22 18:55#4YYb1qIN#%E6%9C%80%E6%96%B0%E6%94%BE%E5%81%87%E9%80%9A%E7%9F%A5%EF%BC%81%E4%B8%8A%E7%8F%AD%E6%97%B6%E9%97%B4%E6%9C%89%E5%8F%98%E5%8C%96%EF%BC%81";
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url18));
-//        intent.setPackage("com.android.browser.debug");
+        String targetUrl = url;
+        if (TextUtils.isEmpty(targetUrl)) {
+            targetUrl = url15;
+        }
+        intent.setData(Uri.parse(targetUrl));
+        if (useDebugPackage) {
+            intent.setPackage("com.android.browser.debug");
+        }
 
         PackageManager packageManager = getPackageManager();
         ResolveInfo resolveInfo = packageManager.resolveActivity(intent, 0);
