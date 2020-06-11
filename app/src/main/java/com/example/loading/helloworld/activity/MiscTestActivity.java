@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.InetAddress;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -94,6 +95,8 @@ public class MiscTestActivity extends BaseActivity {
             doStorageTest();
         } else if (view.getId() == R.id.btn_mibrowser) {
             startMiBrowser();
+        } else if (view.getId() == R.id.btn_check_intent) {
+            checkDeepLink();
         }
     }
 
@@ -509,5 +512,38 @@ public class MiscTestActivity extends BaseActivity {
 
 
         startActivity(intent);
+    }
+
+    private void checkDeepLink() {
+        String deepLinkUrl = mMibrowserUrl.getText().toString();
+
+//        deepLinkUrl = "intent:#Intent;action=miui.intent.action.GARBAGE_CLEANUP;end";
+
+        boolean exist = false;
+        final Intent intent;
+        try {
+            intent = Intent.parseUri(deepLinkUrl, Intent.URI_INTENT_SCHEME);
+        } catch (URISyntaxException ex) {
+            Loger.w(TAG, "Bad URI " + deepLinkUrl + ": " + ex.getMessage());
+            return;
+        }
+
+//        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//        intent.setComponent(null);
+        Intent selector = intent.getSelector();
+        if (selector != null) {
+            selector.addCategory(Intent.CATEGORY_BROWSABLE);
+            selector.setComponent(null);
+        }
+
+        PackageManager packageManager = getPackageManager();
+        ResolveInfo info = packageManager.resolveActivity(intent, 0);
+        Loger.d(TAG, "-->checkDeepLink(), url=" + deepLinkUrl + ", info=" + info);
+        TipsToast.getInstance().showTipsText("result=" + (info != null));
+
+        if(info!=null){
+            startActivity(intent);
+        }
     }
 }

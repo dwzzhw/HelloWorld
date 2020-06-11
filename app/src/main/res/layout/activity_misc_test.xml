@@ -129,6 +129,18 @@
             android:text="Start Mi Browser"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btn_check_intent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mibrowser_url"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/btn_mibrowser"
+            android:onClick="onBtnClicked"
+            android:text="Check Intent"
+            android:textAllCaps="false" />
+
     </RelativeLayout>
 
 </RelativeLayout>
