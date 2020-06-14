@@ -1,5 +1,6 @@
 package com.example.loading.helloworld.activity;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import com.example.loading.helloworld.mykotlin.ui.HelloKotlinActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
+import com.loading.common.utils.PermissionUtils;
 import com.loading.common.utils.UiThreadUtil;
 import com.loading.common.widget.TipsToast;
 import com.loading.modules.interfaces.face.FaceModuleMgr;
@@ -97,6 +99,10 @@ public class MiscTestActivity extends BaseActivity {
             startMiBrowser();
         } else if (view.getId() == R.id.btn_check_intent) {
             checkDeepLink();
+        } else if (view.getId() == R.id.btn_export_log) {
+            exportLog();
+        } else if (view.getId() == R.id.btn_gen_log) {
+            genLog();
         }
     }
 
@@ -542,8 +548,40 @@ public class MiscTestActivity extends BaseActivity {
         Loger.d(TAG, "-->checkDeepLink(), url=" + deepLinkUrl + ", info=" + info);
         TipsToast.getInstance().showTipsText("result=" + (info != null));
 
-        if(info!=null){
+        if (info != null) {
             startActivity(intent);
+        }
+    }
+
+    public void exportLog() {
+        Loger.d(TAG, "-->exportLog()");
+
+        if (!PermissionUtils.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            PermissionUtils.requestPermissionWithTips(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, "需要外卡权限以存储日志",
+                    granted -> {
+                        if (granted) {
+                            Loger.writeLogToFile();
+                        } else {
+                            Loger.d(TAG, "No granted storage permission.");
+                        }
+                    });
+        } else {
+            Loger.writeLogToFile();
+        }
+
+
+    }
+
+    private static int sGlobalIndex = 0;
+
+    public void genLog() {
+        for (int i = 0; i < 103; i++) {
+            Loger.d(TAG, "mock log _ " + sGlobalIndex++);
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

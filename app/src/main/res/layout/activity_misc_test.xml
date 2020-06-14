@@ -140,7 +140,27 @@
             android:onClick="onBtnClicked"
             android:text="Check Intent"
             android:textAllCaps="false" />
-
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_export_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mibrowser_container"
+        android:layout_marginTop="10dp"
+        android:onClick="onBtnClicked"
+        android:text="Export Log"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_gen_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mibrowser_container"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/btn_export_log"
+        android:onClick="onBtnClicked"
+        android:text="Gen Log"
+        android:textAllCaps="false" />
 </RelativeLayout>
