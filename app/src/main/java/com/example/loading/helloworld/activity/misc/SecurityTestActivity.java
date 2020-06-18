@@ -81,8 +81,13 @@ public class SecurityTestActivity extends BaseActivity {
 
     private void startBase64Decode() {
         String inputContent = mInputArea.getText().toString();
-        String outPut = new String(Base64.decode(inputContent.getBytes(), Base64.NO_WRAP));
-        mOutputArea.setText(outPut);
+        try {
+            String outPut = new String(Base64.decode(inputContent.getBytes(), Base64.NO_WRAP));
+            mOutputArea.setText(outPut);
+        } catch (Exception e) {
+            mOutputArea.setText(e.toString());
+        }
+
     }
 
     private void clear() {
