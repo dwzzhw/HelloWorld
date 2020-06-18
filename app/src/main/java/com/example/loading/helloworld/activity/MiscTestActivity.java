@@ -473,7 +473,7 @@ public class MiscTestActivity extends BaseActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String targetUrl = url;
         if (TextUtils.isEmpty(targetUrl)) {
-            targetUrl = url15;
+            targetUrl = url19;
         }
         intent.setData(Uri.parse(targetUrl));
         if (useDebugPackage) {
@@ -524,6 +524,7 @@ public class MiscTestActivity extends BaseActivity {
         String deepLinkUrl = mMibrowserUrl.getText().toString();
 
 //        deepLinkUrl = "intent:#Intent;action=miui.intent.action.GARBAGE_CLEANUP;end";
+//        deepLinkUrl = "intent:#Intent;package=com.android.browser;end";
 
         boolean exist = false;
         final Intent intent;

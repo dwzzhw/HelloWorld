@@ -10,14 +10,16 @@ import android.widget.Toast;
 import com.example.loading.helloworld.activity.MiscTestActivity;
 import com.example.loading.helloworld.activity.SportsTestActivity;
 import com.example.loading.helloworld.activity.UITestActivity;
+import com.example.loading.helloworld.activity.ui.BrowserTestActivity;
 import com.example.loading.helloworld.download.SocketClientActivity;
 import com.example.loading.helloworld.download.SocketServerActivity;
 import com.loading.common.utils.Loger;
-//import com.loading.flutterbridge.demo.FlutterTestActivity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+//import com.loading.flutterbridge.demo.FlutterTestActivity;
 
 
 public class MainActivity extends Activity {
@@ -66,6 +68,8 @@ public class MainActivity extends Activity {
             targetClass = UITestActivity.class;
         } else if (viewId == R.id.btn_misc_test) {
             targetClass = MiscTestActivity.class;
+        } else if (viewId == R.id.bnt_browser_test) {
+            targetClass = BrowserTestActivity.class;
         } else if (viewId == R.id.bnt_open_flutter_page) {
             //dwz test, disable flutter
 //            targetClass = FlutterTestActivity.class;

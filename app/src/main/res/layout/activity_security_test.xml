@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="Security related Test Page" />
+
+    <EditText
+        android:id="@+id/input_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/title"
+        android:gravity="top"
+        android:hint="Input target string here"
+        android:scrollbars="vertical" />
+
+    <EditText
+        android:id="@+id/key_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_content"
+        android:hint="pwd" />
+
+    <Button
+        android:id="@+id/aes_encrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/key_content"
+        android:onClick="onBtnClicked"
+        android:text="AES ENC" />
+
+    <Button
+        android:id="@+id/aes_decrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/input_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/aes_encrypt"
+        android:onClick="onBtnClicked"
+        android:text="AES DEC" />
+
+    <Button
+        android:id="@+id/base64_encrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/key_content"
+        android:onClick="onBtnClicked"
+        android:text="Base64 ENC" />
+
+    <Button
+        android:id="@+id/base64_decrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/key_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/base64_encrypt"
+        android:onClick="onBtnClicked"
+        android:text="Base64 DEC" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/key_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/base64_decrypt"
+        android:onClick="onBtnClicked"
+        android:text="Clear" />
+
+    <TextView
+        android:id="@+id/output_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/base64_encrypt"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:hint="Result string will appear here"
+        android:scrollbars="vertical"
+        android:textIsSelectable="true" />
+
+</RelativeLayout>

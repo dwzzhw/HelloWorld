@@ -45,6 +45,18 @@ public class Loger {
         }
     }
 
+    public static void d(String tag, Object... msgList) {
+        if (isDebug) {
+            if (msgList != null && msgList.length > 0) {
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < msgList.length; i++) {
+                    builder.append(msgList[i]);
+                }
+                Log.d(tag, builder.toString());
+            }
+        }
+    }
+
     public static void i(String tag, String log) {
         if (isDebug) {
             android.util.Log.i(LOGTAG, getLogMsg(tag, log));
