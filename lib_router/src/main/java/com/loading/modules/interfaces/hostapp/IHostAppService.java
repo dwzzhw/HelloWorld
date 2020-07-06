@@ -2,8 +2,7 @@ package com.loading.modules.interfaces.hostapp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.view.View;
+import androidx.fragment.app.FragmentManager;
 
 import com.loading.modules.IModuleInterface;
 import com.loading.modules.annotation.Repeater;

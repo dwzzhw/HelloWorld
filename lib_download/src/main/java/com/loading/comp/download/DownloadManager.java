@@ -1,8 +1,8 @@
 package com.loading.comp.download;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.IntentFilter;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.loading.common.component.CApplication;

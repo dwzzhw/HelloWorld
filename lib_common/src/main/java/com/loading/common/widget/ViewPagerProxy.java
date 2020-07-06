@@ -1,6 +1,6 @@
 package com.loading.common.widget;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 代理Viewpager，目前仅用于页码 {@link CirclePageIndicator}

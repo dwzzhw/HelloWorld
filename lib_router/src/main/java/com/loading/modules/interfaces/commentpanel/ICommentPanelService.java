@@ -1,6 +1,6 @@
 package com.loading.modules.interfaces.commentpanel;
 
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.view.ViewStub;
 
 import com.loading.modules.IModuleInterface;

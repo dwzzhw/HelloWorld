@@ -99,54 +99,12 @@
         android:text="Storage Test"
         android:textAllCaps="false" />
 
-    <RelativeLayout
-        android:id="@+id/mibrowser_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_ipc"
-        android:layout_marginTop="10dp">
-
-        <CheckBox
-            android:id="@+id/mibrowser_debug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/mibrowser_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/mibrowser_debug"
-            android:hint="Check to start debug package" />
-
-        <Button
-            android:id="@+id/btn_mibrowser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mibrowser_url"
-            android:layout_marginTop="5dp"
-            android:onClick="onBtnClicked"
-            android:text="Start Mi Browser"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btn_check_intent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/mibrowser_url"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@id/btn_mibrowser"
-            android:onClick="onBtnClicked"
-            android:text="Check Intent"
-            android:textAllCaps="false" />
-    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_export_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mibrowser_container"
+        android:layout_below="@id/btn_storage"
         android:layout_marginTop="10dp"
         android:onClick="onBtnClicked"
         android:text="Export Log"
@@ -156,7 +114,7 @@
         android:id="@+id/btn_gen_log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mibrowser_container"
+        android:layout_below="@id/btn_storage"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/btn_export_log"

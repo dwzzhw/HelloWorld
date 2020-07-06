@@ -12,7 +12,7 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -79,5 +79,5 @@
             app:layout_constraintRight_toLeftOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/stu_serial_num" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

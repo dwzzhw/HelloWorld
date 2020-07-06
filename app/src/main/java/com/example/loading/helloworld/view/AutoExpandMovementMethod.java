@@ -1,6 +1,6 @@
 package com.example.loading.helloworld.view;
 
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.text.Layout;
 import android.text.NoCopySpan;
 import android.text.Spannable;

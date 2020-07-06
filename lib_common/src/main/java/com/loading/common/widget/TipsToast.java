@@ -1,7 +1,7 @@
 package com.loading.common.widget;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

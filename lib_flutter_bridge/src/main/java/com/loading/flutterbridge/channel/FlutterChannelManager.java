@@ -1,6 +1,6 @@
 package com.loading.flutterbridge.channel;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;

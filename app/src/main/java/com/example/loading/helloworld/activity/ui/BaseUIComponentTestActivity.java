@@ -1,8 +1,8 @@
 package com.example.loading.helloworld.activity.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.method.ScrollingMovementMethod;
+import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 
