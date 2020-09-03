@@ -15,14 +15,15 @@
 
     <application tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.loading.helloworld.MainActivity"
             android:exported="true"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name">
+            android:label="HelloWorld">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
             <intent-filter>
@@ -161,6 +162,235 @@
         <service
             android:name=".ipc.BookManagerService"
             android:process=":remote" />
+
+        <!--        <activity-->
+        <!--            android:name="com.tencent.mtt.QQBrowserTestActivity"-->
+        <!--            android:configChanges="orientation"-->
+        <!--            android:exported="true"-->
+        <!--            android:launchMode="singleTask"-->
+        <!--            android:screenOrientation="portrait">-->
+
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.DEFAULT" />-->
+        <!--            </intent-filter>-->
+
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.tencent.QQBrowser.action.sdk.document" />-->
+        <!--                <category android:name="android.intent.category.BROWSABLE" />-->
+        <!--                <data android:scheme="content" />-->
+
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
+
+
+        <activity
+            android:name="com.tencent.mtt.QQBrowserTestActivity"
+            android:label="HelloQQ"
+            android:resizeableActivity="false">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="content" />
+
+                <data android:scheme="file" />
+
+                <data android:host="*" />
+
+                <data android:pathPattern=".*\.ppt" />
+
+                <data android:pathPattern=".*\.pptx" />
+                <data android:pathPattern=".*\.pdf" />
+
+                <data android:pathPattern=".*\.doc" />
+
+                <data android:pathPattern=".*\.docx" />
+
+                <data android:pathPattern=".*\.xls" />
+
+                <data android:pathPattern=".*\.xlsx" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:scheme="file" />
+
+                <data
+                    android:host="*"
+                    android:mimeType="*/*"
+                    android:scheme="content" />
+            </intent-filter>
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/pdf" />
+                <data android:mimeType="application/ppt" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name="com.loading.pdf_reader"
+            android:resizeableActivity="false"
+            android:targetActivity="com.tencent.mtt.QQBrowserTestActivity">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="*" />
+
+                <data android:scheme="file" />
+
+                <data android:scheme="content" />
+
+                <data android:pathPattern=".*\.pdf" />
+
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name="com.tencent.mtt.external.reader.thirdcall.ThirdCallDispatchActivity"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.tencent.mtt.external.reader.dispatch">
+            <intent-filter>
+                <action android:name="com.tencent.QQBrowser.action.sdk.document" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.tencent.QQBrowser.action.sdk.folder" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name="com.tencent.mtt.external.reader.thirdcall.ThirdCallDispatchActivityAlias"
+            android:excludeFromRecents="true"
+            android:label="HelloThird1"
+            android:targetActivity="com.tencent.mtt.external.reader.thirdcall.ThirdCallDispatchActivity"
+            android:taskAffinity="com.tencent.mtt.external.reader.dispatch">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+
+                <action android:name="com.tencent.QQBrowser.action.sdk.document" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+
+                <data android:scheme="https" />
+
+                <data android:scheme="content" />
+
+                <data android:scheme="file" />
+
+                <data android:mimeType="mtt/html" />
+
+                <data android:mimeType="mtt/htm" />
+
+                <data android:mimeType="mtt/mht" />
+
+                <data android:mimeType="mtt/xml" />
+
+                <data android:mimeType="mtt/mp4" />
+
+                <data android:mimeType="mtt/mkv" />
+
+                <data android:mimeType="mtt/avi" />
+
+                <data android:mimeType="mtt/asf" />
+
+                <data android:mimeType="mtt/f4v" />
+
+                <data android:mimeType="mtt/flv" />
+
+                <data android:mimeType="mtt/mpeg" />
+
+                <data android:mimeType="mtt/mpg" />
+
+                <data android:mimeType="mtt/mov" />
+
+                <data android:mimeType="mtt/m3u8" />
+
+                <data android:mimeType="mtt/rm" />
+
+                <data android:mimeType="mtt/rmvb" />
+
+                <data android:mimeType="mtt/ts" />
+
+                <data android:mimeType="mtt/webm" />
+
+                <data android:mimeType="mtt/wmv" />
+
+                <data android:mimeType="mtt/3gp" />
+
+                <data android:mimeType="mtt/3gpp" />
+
+                <data android:mimeType="mtt/ogv" />
+
+                <data android:mimeType="mtt/vdat" />
+
+                <data android:mimeType="video/*" />
+
+                <data android:mimeType="application/mp4" />
+
+                <data android:mimeType="*/rmvb" />
+
+                <data android:mimeType="*/avi" />
+
+                <data android:mimeType="*/mkv" />
+
+                <data android:mimeType="application/mpeg*" />
+
+                <data android:mimeType="application/vnd.rn-realmedia*" />
+
+                <data android:mimeType="application/3gpp*" />
+
+                <data android:mimeType="application/vnd.3gp*" />
+
+                <data android:mimeType="application/pdf" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

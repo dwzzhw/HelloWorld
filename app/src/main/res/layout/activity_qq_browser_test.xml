@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="I am QQ Browser"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:text="FilePath: "
+        android:textSize="24dp" />
+
+    <!--    <RelativeLayout-->
+    <!--        android:id="@+id/mibrowser_container"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/title"-->
+    <!--        android:layout_marginTop="10dp">-->
+
+    <!--        <CheckBox-->
+    <!--            android:id="@+id/mibrowser_debug"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/mibrowser_url"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:layout_toRightOf="@id/mibrowser_debug"-->
+    <!--            android:hint="Check to start debug package" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btn_mibrowser"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@id/mibrowser_url"-->
+    <!--            android:layout_marginTop="5dp"-->
+    <!--            android:onClick="onBtnClicked"-->
+    <!--            android:text="Start Mi Browser"-->
+    <!--            android:textAllCaps="false" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btn_check_intent"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@id/mibrowser_url"-->
+    <!--            android:layout_marginLeft="10dp"-->
+    <!--            android:layout_marginTop="5dp"-->
+    <!--            android:layout_toRightOf="@id/btn_mibrowser"-->
+    <!--            android:onClick="onBtnClicked"-->
+    <!--            android:text="Check Intent"-->
+    <!--            android:textAllCaps="false" />-->
+    <!--    </RelativeLayout>-->
+
+</RelativeLayout>

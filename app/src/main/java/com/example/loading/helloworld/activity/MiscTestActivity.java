@@ -8,11 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +38,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.regex.Pattern;
@@ -97,6 +95,8 @@ public class MiscTestActivity extends BaseActivity {
             exportLog();
         } else if (view.getId() == R.id.btn_gen_log) {
             genLog();
+        } else if (view.getId() == R.id.btn_pdf) {
+            openPdf();
         }
     }
 
@@ -391,10 +391,10 @@ public class MiscTestActivity extends BaseActivity {
         Loger.d(TAG, "-->doMiscTest(), host=" + host + ", pattern=" + hostPatStr + ", match=" + pattern.matcher(host).matches());
     }
 
-    public static void testStringFormat(){
+    public static void testStringFormat() {
         String format = "%_hello1 %s";
         String result = String.format(format, "World");
-        LogUtil.d(TAG, "-->testStringFormat(), result="+result);
+        LogUtil.d(TAG, "-->testStringFormat(), result=" + result);
     }
 
     private void doReflectArrayTest() {
@@ -438,7 +438,6 @@ public class MiscTestActivity extends BaseActivity {
     }
 
 
-
     private static class MyCard {
         public int mIndex;
 
@@ -477,5 +476,28 @@ public class MiscTestActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void openPdf() {
+        if (LogUtil.enable()) {
+            LogUtil.d(TAG, "-->openPdf(): ");
+        }
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+//        intent.setPackage("com.UCMobile");
+        intent.setData(Uri.parse("content://com.tencent.mm.external.fileprovider/external/Android/data/com.tencent.mm/MicroMsg/7b2777cde732fa815edd625212f226b2/favorite/0/3b6eae56c67115cc2115672e267e25bb.pdf"));
+
+        PackageManager packageManager = getPackageManager();
+
+        List<ResolveInfo> resolveInfoList = packageManager.queryIntentActivities(intent, 0);
+
+        if (LogUtil.enable()) {
+            LogUtil.d(TAG, "-->openPdf(): resolveInfo=" + resolveInfoList);
+        }
+
+
+        startActivity(intent);
+
     }
 }

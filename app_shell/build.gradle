@@ -4,8 +4,9 @@ android {
     compileSdkVersion rootProject.ext.global_compileSdkVersion
 
     defaultConfig {
-        applicationId "com.loading.appshell"
-
+//        applicationId "com.loading.appshell"
+        applicationId "com.tencent.mtt"
+//
         minSdkVersion rootProject.ext.global_minSdkVersion
         targetSdkVersion rootProject.ext.global_targetSdkVersion
         versionCode rootProject.ext.global_versionCode

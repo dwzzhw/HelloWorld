@@ -23,7 +23,6 @@
         android:text="Encrypt"
         android:textAllCaps="false" />
 
-
     <RelativeLayout
         android:id="@+id/mibrowser_container"
         android:layout_width="match_parent"
@@ -67,4 +66,13 @@
             android:textAllCaps="false" />
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/btn_qqbrowser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mibrowser_container"
+        android:layout_marginTop="5dp"
+        android:onClick="onBtnClicked"
+        android:text="Start QQ Browser"
+        android:textAllCaps="false" />
 </RelativeLayout>

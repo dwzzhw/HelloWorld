@@ -121,4 +121,16 @@
         android:onClick="onBtnClicked"
         android:text="Gen Log"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_storage"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/btn_gen_log"
+        android:onClick="onBtnClicked"
+        android:text="Open PDF"
+        android:textAllCaps="false" />
 </RelativeLayout>

@@ -16,6 +16,7 @@ import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.SecurityTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
+import com.tencent.mtt.QQBrowserTestActivity;
 
 public class BrowserTestActivity extends BaseActivity {
     private static final String TAG = "BrowserTestActivity";
@@ -36,10 +37,12 @@ public class BrowserTestActivity extends BaseActivity {
         int viewId = view.getId();
         if (viewId == R.id.encrypt_page) {
             startEncryptPage();
-        } else if (view.getId() == R.id.btn_mibrowser) {
+        } else if (viewId == R.id.btn_mibrowser) {
             startMiBrowser();
-        } else if (view.getId() == R.id.btn_check_intent) {
+        } else if (viewId == R.id.btn_check_intent) {
             checkDeepLink();
+        } else if (viewId == R.id.btn_qqbrowser) {
+            startQQBrowser();
         }
     }
 
@@ -178,4 +181,11 @@ public class BrowserTestActivity extends BaseActivity {
         startActivity(intent);
     }
 
+    private void startQQBrowser() {
+        String url = "";
+        Intent intent = new Intent(this, QQBrowserTestActivity.class);
+
+
+        startActivity(intent);
+    }
 }
