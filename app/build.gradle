@@ -34,6 +34,13 @@ android {
     dataBinding{
         enabled = true
     }
+
+//    android.applicationVariants.all { variant ->
+//        def fileName = "Browser_${variant.productFlavors[0].name}-${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime() }.apk"
+//        variant.outputs.all {
+//            outputFileName = fileName
+//        }
+//    }
 }
 
 dependencies {

@@ -24,6 +24,7 @@ import com.example.loading.helloworld.activity.misc.SortTestActivity;
 import com.example.loading.helloworld.activity.misc.StorageTester;
 import com.example.loading.helloworld.ipc.BookManagerActivity;
 import com.example.loading.helloworld.mykotlin.ui.HelloKotlinActivity;
+import com.example.loading.libjava.utils.LogUtil;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.AsyncOperationUtil;
 import com.loading.common.utils.Loger;
@@ -71,6 +72,7 @@ public class MiscTestActivity extends BaseActivity {
             doTryCatchTest();
             doReflectArrayTest();
 //            doShareMemoryTest();
+            testStringFormat();
         }
     };
 
@@ -387,6 +389,12 @@ public class MiscTestActivity extends BaseActivity {
         }
 
         Loger.d(TAG, "-->doMiscTest(), host=" + host + ", pattern=" + hostPatStr + ", match=" + pattern.matcher(host).matches());
+    }
+
+    public static void testStringFormat(){
+        String format = "%_hello1 %s";
+        String result = String.format(format, "World");
+        LogUtil.d(TAG, "-->testStringFormat(), result="+result);
     }
 
     private void doReflectArrayTest() {

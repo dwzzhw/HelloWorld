@@ -11,6 +11,8 @@ public class MyClass {
         System.out.println("Hello Java Lib!");
 
         testAesEncrypt();
+//        testStringFormat();
+        testStringSplit();
     }
 
     public static void testAesEncrypt() {
@@ -29,6 +31,21 @@ public class MyClass {
         if (LogUtil.enable()) {
             LogUtil.d(TAG, "-->testAesEncrypt(): decryptedStr=", decryptedStr);
         }
+    }
+
+    public static void testStringFormat(){
+        String format = "%_hello1 %s";
+        String result = String.format(format, "World");
+        LogUtil.d(TAG, "-->testStringFormat(), result="+result);
+    }
+
+    public static void testStringSplit(){
+        String initStr = "[Optimize]: 优化guide-launch包代码规范及结构\n\nMIUI-1759861";
+        String[] items = initStr.split("\n");
+        if(LogUtil.enable()){
+            LogUtil.d(TAG, "-->testStringSplit(): items size="+items.length);
+        }
+
     }
 
 }
