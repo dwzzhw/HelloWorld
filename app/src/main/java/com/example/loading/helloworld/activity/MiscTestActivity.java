@@ -485,8 +485,8 @@ public class MiscTestActivity extends BaseActivity {
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-//        intent.setPackage("com.UCMobile");
-        intent.setData(Uri.parse("content://com.tencent.mm.external.fileprovider/external/Android/data/com.tencent.mm/MicroMsg/7b2777cde732fa815edd625212f226b2/favorite/0/3b6eae56c67115cc2115672e267e25bb.pdf"));
+        intent.setData(Uri.parse("content://com.tencent.mm.external.fileprovider/external/Android/data/com.tencent.mm/" +
+                "MicroMsg/7b2777cde732fa815edd625212f226b2/favorite/0/3b6eae56c67115cc2115672e267e25bb.pdf"));
 
         PackageManager packageManager = getPackageManager();
 

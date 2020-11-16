@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +17,7 @@ import com.example.loading.helloworld.R;
 import com.example.loading.helloworld.activity.misc.SecurityTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
+import com.loading.common.utils.SecurityUtil;
 import com.tencent.mtt.QQBrowserTestActivity;
 
 public class BrowserTestActivity extends BaseActivity {
@@ -43,6 +45,8 @@ public class BrowserTestActivity extends BaseActivity {
             checkDeepLink();
         } else if (viewId == R.id.btn_qqbrowser) {
             startQQBrowser();
+        } else if (viewId == R.id.btn_check_sign_md5) {
+            checkPackageSignature();
         }
     }
 
@@ -83,12 +87,17 @@ public class BrowserTestActivity extends BaseActivity {
         String url18 = "mibrowser://infoflow?web_url=https%3A%2F%2Fyiyouliao.com%2Fapi-server%2Frss%2Fxiaomi%2Fitem%2Fuser%2FIU01G7L6BCX4XEC.html%3Fversion%3D2%26mibusinessId%3Dxiangkan%26env%3Dtest%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dlocalpush%26docid%3Dnetease_IU01G7L6BCX4XEC%26cp%3Dcn-netease-youliao%26itemtype%3Dnews&miui_back_info=0&_miui_fullscreen=1&utm_source=localpush&first_launch_web=true";
         String url19 = "mibrowser://infoflow?web_url=https%3A%2F%2Fapp.myzaker.com%2Fnews%2Farticle.php%3Ff%3Dxiaomi%26pk%3D5e9eabec1bc8e02849000182%26version%3D2%26mibusinessId%3Dxiangkan%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dzaker_5e9eabec1bc8e02849000182%26cp%3Dcn-zaker-browser%26itemtype%3Dnews&first_launch_web=true&channel=%E6%8E%A8%E8%8D%90#miui_back_info=0&_miui_fullscreen=1&utm_source=xmpush&utm_campaign=2020-04-22 18:55#4YYb1qIN#%E6%9C%80%E6%96%B0%E6%94%BE%E5%81%87%E9%80%9A%E7%9F%A5%EF%BC%81%E4%B8%8A%E7%8F%AD%E6%97%B6%E9%97%B4%E6%9C%89%E5%8F%98%E5%8C%96%EF%BC%81";
 //        String url20 = "content://com.ss.android.lark.kami.common.fileprovider/external_files/Lark/download/2020.06一线运营报表 - 手机 .xlsm";
+//
 //        String url20 = "content://com.ss.android.lark.kami.common.fileprovider/external_files/Lark/download/2020.06.xlsm";
+        String url22 = "mibrowser://infoflow?web_url=mailto:nobody@google.com";
+//        String url21 = "mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fhot.browser.miui.com%2Frec%2Fcontent%2Fbjnews_160449023915284%3FcontentId%3Dbjnews_160449023915284%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dbjnews_160449023915284%26cp%3Dcn-bjnews%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1";
+        String url21 = "mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_1686546714_6486a91a020018xd6.html%26en_dataid%3D2c01ed59eef9db710ce9e92d62cd790722770cb2282e7f343f27cae5a724f64d%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_dae0eddbaec93625bba4beb2e54f1929%26cp%3Dcn-sina%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1";
+
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String targetUrl = url;
         if (TextUtils.isEmpty(targetUrl)) {
-            targetUrl = url19;
+            targetUrl = url22;
         }
         intent.setData(Uri.parse(targetUrl));
 //        intent.setDataAndType(Uri.parse(targetUrl), "text/plain");
@@ -186,6 +195,45 @@ public class BrowserTestActivity extends BaseActivity {
         Intent intent = new Intent(this, QQBrowserTestActivity.class);
 
 
-        startActivity(intent);
+//        startActivity(intent);
+
+
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fhot.browser.miui.com%2Fv7%2F%23page%3Dinline-video-detail%26id%3Dnetease_VI00RANDQVMRC79%26cp%3Dcn-netease-youliao-browser%26docid%3Dnetease_VI00RANDQVMRC79%26itemtype%3Dinline_video%26video_url%3Dhttps%253A%252F%252Fvideo-nos.yiyouliao.com%252Ficvtd-shd-20201103-b74f9ee7bda6fcd5c6646d44bcf9fb55.mp4%253Ftime%253D1604478533%2526signature%253DED2EA17868E4992A22EFEE3C0E279339%2526yiyouliao_channel%253Dxiaomisv_video%26originCpId%3DVI00RANDQVMRC79%26_miui_bottom_bar%3Dcomment%26infotype%3D2%26_miui_fullscreen%3D1%26a%3Da%3Fmiref%3Dnewsin_push_model%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dnetease_VI00RANDQVMRC79%26cp%3Dcn-netease-youliao%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_1686546714_6486a91a020018xd6.html%26en_dataid%3D2c01ed59eef9db710ce9e92d62cd790722770cb2282e7f343f27cae5a724f64d%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_dae0eddbaec93625bba4beb2e54f1929%26cp%3Dcn-sina%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1\\");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fhot.browser.miui.com%2Frec%2Fcontent%2Frenminwang_ZXB-ORIGIN-5213513%3FcontentId%3Drenminwang_ZXB-ORIGIN-5213513%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Drenminwang_ZXB-ORIGIN-5213513%26cp%3Dcn-renminwang%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_1664221137_6331ffd102000rklz.html%26en_dataid%3Dbb63b46aab5ebf19e6ee85dfd02707b6fbe32c4009c855c06c466408901550c4%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_34b0c89710c835cba2d1ff94d2d067f0%26cp%3Dcn-sina%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_2803301701_a716fd45020017ft0.html%26en_dataid%3Dde92bb9670c4cd51ad5ff43db405e2b85aa39c814b1ffc77fa6a3e50cf003399%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_73b752784e4c3894a2990e925e15a11b%26cp%3Dcn-sina%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fnews.sina.cn%252F2020-11-03%252Fdetail-iiznctkc9306402.d.html%26en_dataid%3Dd7881228aff8a80e325dc14ba596c26555e5c59bdb1eb2f13a64d0da2de62ea1%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_5c9c8ccb2ca735f6ac75d4d8d0a74616%26cp%3Dcn-sina%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Frss-api.yiyouliao.com%2Fapi-server%2Frss%2Fxiaomi%2Fitem%2FII001HO9D5PH6MI.html%3Fversion%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dnetease_II001HO9D5PH6MI%26cp%3Dcn-netease-youliao%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fhot.browser.miui.com%2Frec%2Fcontent%2Fbjnews_160449023915284%3FcontentId%3Dbjnews_160449023915284%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dbjnews_160449023915284%26cp%3Dcn-bjnews%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+
+        Uri data = Uri.parse("mibrowser://infoflow?web_url=mailto:nobody@google.com");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Frss-api.yiyouliao.com%2Fapi-server%2Frss%2Fxiaomi%2Fitem%2FII001HO9D5PH6MI.html%3Fversion%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dnetease_II001HO9D5PH6MI%26cp%3Dcn-netease-youliao%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fnews.sina.cn%252F2020-11-03%252Fdetail-iiznctkc9306402.d.html%26en_dataid%3Dd7881228aff8a80e325dc14ba596c26555e5c59bdb1eb2f13a64d0da2de62ea1%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_5c9c8ccb2ca735f6ac75d4d8d0a74616%26cp%3Dcn-sina%26itemtype%3Dnews&first_launch_web=true&channel=rec#miui_back_info=0&_miui_fullscreen=1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url=https%3A%2F%2Fhot.browser.miui.com%2Frec%2Fcontent%2Frenminwang_85f867ff5e79675a%3FcontentId%3Drenminwang_85f867ff5e79675a%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dlocalpush%26docid%3Dae630fa7d6bd4233a0716348bb5a7898%26cp%3Dcn-browser-push%26itemtype%3Dnews&miui_back_info=0&_miui_fullscreen=1&utm_source=localpush&first_launch_web=true");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fhot.browser.miui.com%2Fv7%2F%23page%3Dinline-video-detail%26id%3Dnetease_VI00RANDQVMRC79%26cp%3Dcn-netease-youliao-browser%26docid%3Dnetease_VI00RANDQVMRC79%26itemtype%3Dinline_video%26video_url%3Dhttps%253A%252F%252Fvideo-nos.yiyouliao.com%252Ficvtd-shd-20201103-b74f9ee7bda6fcd5c6646d44bcf9fb55.mp4%253Ftime%253D1604478533%2526signature%253DED2EA17868E4992A22EFEE3C0E279339%2526yiyouliao_channel%253Dxiaomisv_video%26originCpId%3DVI00RANDQVMRC79%26_miui_bottom_bar%3Dcomment%26infotype%3D2%26_miui_fullscreen%3D1%26a%3Da%3Fmiref%3Dnewsin_push_model%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dnetease_VI00RANDQVMRC79%26cp%3Dcn-netease-youliao%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1");
+//        Uri data = Uri.parse("mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_1686546714_6486a91a020018xd6.html%26en_dataid%3D2c01ed59eef9db710ce9e92d62cd790722770cb2282e7f343f27cae5a724f64d%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_dae0eddbaec93625bba4beb2e54f1929%26cp%3Dcn-sina%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1");
+        boolean isOpaque = data.isOpaque();
+        String web_url = isOpaque ? "" : data.getQueryParameter("web_url");
+        String miRef = null;
+        if (!TextUtils.isEmpty(web_url)) {
+            Uri url2 = Uri.parse(web_url);
+            miRef = url2.getQueryParameter("miref");
+        }
+        Loger.d(TAG, "-->startQQBrowser: miRef=" + miRef + ", web_url=" + web_url);
+    }
+
+    private void checkPackageSignature() {
+        EditText inputView = findViewById(R.id.target_package_name);
+        TextView resultView = findViewById(R.id.md5_board);
+
+        String targetPackageName = inputView.getText().toString();
+        if (TextUtils.isEmpty(targetPackageName)) {
+            targetPackageName = "com.android.browser";
+        }
+
+        String signMd5 = SecurityUtil.getPackageSignMd5Str(this, targetPackageName);
+        Loger.d(TAG, "-->checkPackageSignature(), packageName=" + targetPackageName + ",signature md5=" + signMd5);
+        resultView.setText(targetPackageName + ": " + signMd5);
     }
 }
