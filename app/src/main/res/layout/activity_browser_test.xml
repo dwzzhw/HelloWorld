@@ -77,10 +77,42 @@
         android:textAllCaps="false" />
 
     <RelativeLayout
-        android:id="@+id/security_area"
+        android:id="@+id/search_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_qqbrowser"
+        android:layout_marginTop="5dp">
+
+        <CheckBox
+            android:id="@+id/mibrowser_debug_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/query_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/mibrowser_debug_search"
+            android:hint="Input query content" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/query_content"
+            android:layout_marginTop="5dp"
+            android:onClick="onBtnClicked"
+            android:text="Search Now"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/security_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_area"
         android:layout_marginTop="5dp">
 
         <Button

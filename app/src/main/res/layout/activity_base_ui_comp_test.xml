@@ -6,6 +6,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:clipChildren="false"
     tools:context=".MainActivity">
 
     <TextView
@@ -47,6 +48,35 @@
         android:onClick="onBtnClicked"
         android:text="Short Text"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_color_drawable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_short_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onBtnClicked"
+        android:text="Color Drawable"
+        android:textAllCaps="false" />
+
+    <FrameLayout
+        android:id="@+id/drawable_container"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn_short_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#22ff0000"
+        android:layout_toRightOf="@id/btn_color_drawable">
+
+        <ImageView
+            android:layout_gravity="bottom"
+            android:id="@+id/color_image"
+            android:layout_width="50dp"
+            android:background="#00ff00"
+            android:layout_height="100dp" />
+    </FrameLayout>
 
     <TextView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/photo_content_text"

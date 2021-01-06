@@ -18,7 +18,10 @@ import com.example.loading.helloworld.activity.misc.SecurityTestActivity;
 import com.loading.common.component.BaseActivity;
 import com.loading.common.utils.Loger;
 import com.loading.common.utils.SecurityUtil;
+import com.loading.common.widget.TipsToast;
 import com.tencent.mtt.QQBrowserTestActivity;
+
+import java.net.URISyntaxException;
 
 public class BrowserTestActivity extends BaseActivity {
     private static final String TAG = "BrowserTestActivity";
@@ -47,6 +50,8 @@ public class BrowserTestActivity extends BaseActivity {
             startQQBrowser();
         } else if (viewId == R.id.btn_check_sign_md5) {
             checkPackageSignature();
+        } else if (viewId == R.id.btn_search) {
+            triggerSearch();
         }
     }
 
@@ -93,11 +98,10 @@ public class BrowserTestActivity extends BaseActivity {
 //        String url21 = "mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fhot.browser.miui.com%2Frec%2Fcontent%2Fbjnews_160449023915284%3FcontentId%3Dbjnews_160449023915284%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dbjnews_160449023915284%26cp%3Dcn-bjnews%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1";
         String url21 = "mibrowser://infoflow?web_url\u003dhttps%3A%2F%2Fpartners.sina.cn%2Fhtml%2Fxiaomi%2Fbrowser%2Farticle%3Fwm%3D3993%26docUrl%3Dhttp%253A%252F%252Fk.sina.cn%252Farticle_1686546714_6486a91a020018xd6.html%26en_dataid%3D2c01ed59eef9db710ce9e92d62cd790722770cb2282e7f343f27cae5a724f64d%26version%3D2%26mibusinessId%3Dmiuibrowser%26env%3Dproduction%26miref%3Dnewsin_push_model%26infotype%3D1%26_miui_fullscreen%3D1%26utm_source%3Dxmpush%26mifloat%3Dnewscat%26docid%3Dsina_dae0eddbaec93625bba4beb2e54f1929%26cp%3Dcn-sina%26itemtype%3Dnews\u0026first_launch_web\u003dtrue\u0026channel\u003drec#miui_back_info\u003d0\u0026_miui_fullscreen\u003d1";
 
-
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String targetUrl = url;
         if (TextUtils.isEmpty(targetUrl)) {
-            targetUrl = url22;
+            targetUrl = url15;
         }
         intent.setData(Uri.parse(targetUrl));
 //        intent.setDataAndType(Uri.parse(targetUrl), "text/plain");
@@ -139,7 +143,7 @@ public class BrowserTestActivity extends BaseActivity {
 //        deepLinkUrl = "intent:#Intent;package=com.android.browser;end";
 
         boolean exist = false;
-        final Intent intent;
+        Intent intent = null;
 //        try {
 //            intent = Intent.parseUri(deepLinkUrl, Intent.URI_INTENT_SCHEME);
 
@@ -149,12 +153,21 @@ public class BrowserTestActivity extends BaseActivity {
         if (TextUtils.isEmpty(deepLinkUrl)) {
             deepLinkUrl = "https://app.myzaker.com/news/article.php?f=xiaomi&pk=5e708d11b15ec06db90baa52&cp=123&docid=123&itemtype=news";
             deepLinkUrl = "https://reader.browser.duokan.com/v2/#page=user&source=newhome&miback=true";
+            deepLinkUrl = "intent:#Intent;action=android.intent.action.WEB_SEARCH;package=com.android.browser;S.query=hello;end";
         }
 //        String novelUrl = "https://www.baidu.com";
-        intent = new Intent(Intent.ACTION_VIEW);
-        intent.setPackage("com.android.browser");
+        if (deepLinkUrl.contains("#Intent")) {
+            try {
+                intent = Intent.parseUri(deepLinkUrl, 0);
+            } catch (URISyntaxException e) {
+            }
+        }
+        if (intent == null) {
+            intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setPackage("com.android.browser");
 //            intent.setAction("com.duokan.shop.mibrowser.actions.SHOW_STORE");
-        intent.setData(Uri.parse(deepLinkUrl));
+            intent.setData(Uri.parse(deepLinkUrl));
+        }
         startActivity(intent);
 
 //        } catch (URISyntaxException ex) {
@@ -235,5 +248,30 @@ public class BrowserTestActivity extends BaseActivity {
         String signMd5 = SecurityUtil.getPackageSignMd5Str(this, targetPackageName);
         Loger.d(TAG, "-->checkPackageSignature(), packageName=" + targetPackageName + ",signature md5=" + signMd5);
         resultView.setText(targetPackageName + ": " + signMd5);
+    }
+
+    private void triggerSearch() {
+        EditText inputView = findViewById(R.id.query_content);
+        CheckBox debugFlagView = findViewById(R.id.mibrowser_debug_search);
+        String queryContent = inputView.getText().toString();
+        boolean useDebugPackage = debugFlagView.isChecked();
+
+        Loger.d(TAG, "-->triggerSearch: content=" + queryContent);
+        if (!TextUtils.isEmpty(queryContent)) {
+            Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+            intent.putExtra("query", queryContent);
+            if (useDebugPackage) {
+                intent.setPackage("com.android.browser.debug");
+            }
+
+            PackageManager packageManager = getPackageManager();
+            ResolveInfo resolveInfo = packageManager.resolveActivity(intent, 0);
+            Loger.d(TAG, "-->triggerSearch(): resolveInfo=" + resolveInfo);
+
+            startActivity(intent);
+        } else {
+            TipsToast.getInstance().showTipsText("搜索内容为空");
+        }
+
     }
 }

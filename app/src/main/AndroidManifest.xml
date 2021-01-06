@@ -252,30 +252,30 @@
             </intent-filter>
         </activity>
 
-        <activity-alias
-            android:name="com.loading.pdf_reader"
-            android:resizeableActivity="false"
-            android:targetActivity="com.tencent.mtt.QQBrowserTestActivity">
+<!--        <activity-alias-->
+<!--            android:name="com.loading.pdf_reader"-->
+<!--            android:resizeableActivity="false"-->
+<!--            android:targetActivity="com.tencent.mtt.QQBrowserTestActivity">-->
 
-            <intent-filter>
+<!--            <intent-filter>-->
 
-                <action android:name="android.intent.action.VIEW" />
+<!--                <action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
 
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data android:host="*" />
+<!--                <data android:host="*" />-->
 
-                <data android:scheme="file" />
+<!--                <data android:scheme="file" />-->
 
-                <data android:scheme="content" />
+<!--                <data android:scheme="content" />-->
 
-                <data android:pathPattern=".*\.pdf" />
+<!--                <data android:pathPattern=".*\.pdf" />-->
 
-                <data android:mimeType="application/pdf" />
-            </intent-filter>
-        </activity-alias>
+<!--                <data android:mimeType="application/pdf" />-->
+<!--            </intent-filter>-->
+<!--        </activity-alias>-->
 
         <activity
             android:name="com.tencent.mtt.external.reader.thirdcall.ThirdCallDispatchActivity"
